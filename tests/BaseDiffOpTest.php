@@ -33,6 +33,18 @@ namespace Diff\Test;
  */
 abstract class BaseDiffOpTest extends \AbstractTestCase {
 
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testIsAtomic( \Diff\IDiffOp $diffOp ) {
+		$this->assertInternalType( 'boolean', $diffOp->isAtomic() );
+	}
 
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testGetType( \Diff\IDiffOp $diffOp ) {
+		$this->assertInternalType( 'string', $diffOp->getType() );
+	}
 
 }
