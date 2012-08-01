@@ -41,7 +41,8 @@ abstract class DiffOp implements IDiffOp {
 			throw new Exception( 'Invalid diff type provided.' );
 		}
 
-		return call_user_func_array( array( $typeMap[$type], '__construct' ), $array );
+		$reflector = new \ReflectionClass( $typeMap[$type] );
+		return $reflector->newInstanceArgs( $array );
 	}
 
 	/**

@@ -32,7 +32,7 @@ use Diff\DiffOpChange as DiffOpChange;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class DiffOpChangeTest extends DiffOpTest {
+class DiffOpChangeTest extends BaseDiffOpTest {
 
 	/**
 	 * @see AbstractTestCase::getClass

@@ -23,6 +23,6 @@ return array(
 	'Diff\MapDiff' => 'includes/MapDiff.php',
 
 	'AbstractTestCase' => 'tests/AbstractTestCase.php',
-	'Diff\Test\DiffOpTest' => 'tests/DiffOpTest.php',
+	'Diff\Test\BaseDiffOpTest' => 'tests/BaseDiffOpTest.php',
 	'Diff\Test\GenericArrayObjectTest' => 'tests/GenericArrayObjectTest.php',
 );

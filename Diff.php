@@ -52,6 +52,7 @@ namespace {
 			'DiffOpAdd',
 			'DiffOpChange',
 			'DiffOpRemove',
+			'DiffOp',
 			'Diff',
 			'ListDiff',
 			'MapDiff',

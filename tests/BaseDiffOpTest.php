@@ -1,10 +1,9 @@
 <?php
 
 namespace Diff\Test;
-use Diff\DiffOpRemove as DiffOpRemove;
 
 /**
- * Tests for the Diff\DiffOpRemove class.
+ * Base test class for the Diff\DiffOp deriving classes.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,34 +31,8 @@ use Diff\DiffOpRemove as DiffOpRemove;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class DiffOpRemoveTest extends BaseDiffOpTest {
+abstract class BaseDiffOpTest extends \AbstractTestCase {
 
-	/**
-	 * @see AbstractTestCase::getClass
-	 *
-	 * @since 0.1
-	 *
-	 * @return string
-	 */
-	public function getClass() {
-		return '\Diff\DiffOpRemove';
-	}
 
-	/**
-	 * @see AbstractTestCase::constructorProvider
-	 *
-	 * @since 0.1
-	 *
-	 * @return array
-	 */
-	public function constructorProvider() {
-		return array(
-			array( true, 'foo' ),
-			array( true, array() ),
-			array( true, true ),
-			array( true, 42 ),
-			array( false ),
-		);
-	}
 
 }

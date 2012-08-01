@@ -32,8 +32,31 @@ use Diff\DiffOp as DiffOp;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class DiffOpTest extends \AbstractTestCase {
+class DiffOpTest extends \MediaWikiTestCase {
 
+	public function newFromArrayProvider() {
+		return array(
+			array( 'add', 'foo' ),
+			array( 'remove', 'bar' ),
+			array( 'change', 'foo', 'bar' ),
+			array( 'add', 42 ),
+			array( 'remove', true ),
+			array( 'change', array(), null ),
+			array( 'list', array() ),
+			array( 'map', array() ),
+		);
+	}
 
+	/**
+	 * @dataProvider newFromArrayProvider
+	 */
+	public function testNewFromArray() {
+		$array = func_get_args();
+
+		$diffOp = DiffOp::newFromArray( $array );
+
+		$this->assertInstanceOf( '\Diff\IDiffOp', $diffOp );
+		$this->assertEquals( array_shift( $array ), $diffOp->getType() );
+	}
 
 }

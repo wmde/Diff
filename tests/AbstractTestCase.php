@@ -107,6 +107,9 @@ abstract class AbstractTestCase extends MediaWikiTestCase {
 			if ( is_string( $valid ) ) {
 				$this->assertEquals( $valid, get_class( $pokemons ) );
 			}
+			else {
+				$this->assertFalse( $valid );
+			}
 		}
 	}
 
