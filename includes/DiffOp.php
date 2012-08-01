@@ -45,15 +45,4 @@ abstract class DiffOp implements IDiffOp {
 		return $reflector->newInstanceArgs( $array );
 	}
 
-	/**
-	 * @since 0.1
-	 *
-	 * @param string $type
-	 *
-	 * @return IDiffOp
-	 */
-	public static function newFromType( $type ) {
-		return static::newFromArray( array( $type, array() ) );
-	}
-
 }
