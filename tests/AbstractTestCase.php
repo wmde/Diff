@@ -52,7 +52,7 @@ abstract class AbstractTestCase extends MediaWikiTestCase {
 	 *
 	 * @since 0.1
 	 *
-	 * @return \SMWDataItem
+	 * @return mixed
 	 */
 	public function newInstance() {
 		$reflector = new \ReflectionClass( $this->getClass() );
@@ -64,7 +64,7 @@ abstract class AbstractTestCase extends MediaWikiTestCase {
 	/**
 	 * @since 0.1
 	 *
-	 * @return array
+	 * @return array [instance, constructor args]
 	 */
 	public function instanceProvider() {
 		$phpFails = array( $this, 'newInstance' );
@@ -74,7 +74,7 @@ abstract class AbstractTestCase extends MediaWikiTestCase {
 				$isValid = array_shift( $args ) === true;
 
 				if ( $isValid ) {
-					return array( call_user_func_array( $phpFails, $args ) );
+					return array( call_user_func_array( $phpFails, $args ), $args );
 				}
 				else {
 					return false;

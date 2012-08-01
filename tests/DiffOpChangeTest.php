@@ -68,4 +68,12 @@ class DiffOpChangeTest extends BaseDiffOpTest {
 		);
 	}
 
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testGetNewValue( DiffOpChange $diffOp, array $constructorArgs ) {
+		$this->assertEquals( $constructorArgs[0], $diffOp->getOldValue() );
+		$this->assertEquals( $constructorArgs[1], $diffOp->getNewValue() );
+	}
+
 }

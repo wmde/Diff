@@ -62,4 +62,11 @@ class DiffOpRemoveTest extends BaseDiffOpTest {
 		);
 	}
 
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testGetNewValue( DiffOpRemove $diffOp, array $constructorArgs ) {
+		$this->assertEquals( $constructorArgs[0], $diffOp->getOldValue() );
+	}
+
 }
