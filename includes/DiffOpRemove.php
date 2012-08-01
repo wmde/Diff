@@ -18,14 +18,33 @@ class DiffOpRemove extends DiffOp {
 
 	protected $oldValue;
 
+	/**
+	 * @see IDiffOp::getType
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
 	public function getType() {
 		return 'remove';
 	}
 
+	/**
+	 * Constructor.
+	 *
+	 * @since 0.1
+	 *
+	 * @param mixed $oldValue
+	 */
 	public function __construct( $oldValue ) {
 		$this->oldValue = $oldValue;
 	}
 
+	/**
+	 * @since 0.1
+	 *
+	 * @return mixed
+	 */
 	public function getOldValue() {
 		return $this->oldValue;
 	}

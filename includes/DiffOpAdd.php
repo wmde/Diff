@@ -18,14 +18,33 @@ class DiffOpAdd extends DiffOp {
 
 	protected $newValue;
 
+	/**
+	 * @see IDiffOp::getType
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
 	public function getType() {
 		return 'add';
 	}
 
+	/**
+	 * Constructor.
+	 *
+	 * @since 0.1
+	 *
+	 * @param mixed $newValue
+	 */
 	public function __construct( $newValue ) {
 		$this->newValue = $newValue;
 	}
 
+	/**
+	 * @since 0.1
+	 *
+	 * @return mixed
+	 */
 	public function getNewValue() {
 		return $this->newValue;
 	}

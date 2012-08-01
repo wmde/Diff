@@ -19,19 +19,44 @@ class DiffOpChange extends DiffOp {
 	protected $newValue;
 	protected $oldValue;
 
+	/**
+	 * @see IDiffOp::getType
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
 	public function getType() {
 		return 'change';
 	}
 
+	/**
+	 * Constructor.
+	 *
+	 * @since 0.1
+	 *
+	 * @param mixed $oldValue
+	 * @param mixed $newValue
+	 */
 	public function __construct( $oldValue, $newValue ) {
 		$this->oldValue = $oldValue;
 		$this->newValue = $newValue;
 	}
 
+	/**
+	 * @since 0.1
+	 *
+	 * @return mixed
+	 */
 	public function getOldValue() {
 		return $this->oldValue;
 	}
 
+	/**
+	 * @since 0.1
+	 *
+	 * @return mixed
+	 */
 	public function getNewValue() {
 		return $this->newValue;
 	}
