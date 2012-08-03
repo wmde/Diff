@@ -267,7 +267,7 @@ class Diff extends GenericArrayObject implements IDiff {
 	 * @return IDiff
 	 */
 	public function getApplicableDiff( array $currentObject ) {
-		$undoDiff = static::newEmpty();
+		$undoDiff = static::newEmpty( $this->parentKey );
 		static::addReversibleOperations( $undoDiff, $this, $currentObject );
 		return $undoDiff;
 	}
@@ -288,32 +288,38 @@ class Diff extends GenericArrayObject implements IDiff {
 		 * @var IDiffOp $diffOp
 		 */
 		foreach ( $originDiff as $key => $diffOp ) {
-			if ( $originDiff->getType() === 'list' || array_key_exists( $key, $currentObject ) ) {
+			if ( $originDiff->getType() === 'list' || array_key_exists( $key, $currentObject ) || $diffOp->getType() === 'add' ) {
 				if ( $diffOp->isAtomic() ) {
 					if ( $originDiff->getType() === 'list' ) {
 						$isRemove = $diffOp->getType() === 'remove';
 						$value = $isRemove ? $diffOp->getOldValue() : $diffOp->getNewValue();
 
-						if ( $isRemove === in_array( $value, $currentObject ) ) {
-							$diff->addOperations( array( $diffOp ) );
+						if ( !$isRemove ||
+							( $isRemove && in_array( $value, $currentObject ) )
+						) {
+							$diff[] = $diffOp;
 						}
 					}
 					else {
 						$canApplyOp =
 							( $diffOp->getType() === 'add' && !array_key_exists( $key, $currentObject ) )
-								|| ( array_key_exists( $key, $currentObject ) && $currentObject[$key] === $diffOp->getNewValue() );
+								|| (
+									$diffOp->getType() !== 'add'
+									&& array_key_exists( $key, $currentObject )
+									&& $currentObject[$key] === $diffOp->getOldValue()
+								);
 
 						if ( $canApplyOp ) {
-							$diff->addOperations( array( $key => $diffOp ) );
+							$diff[$key] = $diffOp;
 						}
 					}
 				}
 				else {
-					$childDiff = $originDiff->getType() === 'map' ? MapDiff::newEmpty( $key ) : ListDiff::newEmpty( $key );
+					$childDiff = $diffOp->getType() === 'map' ? MapDiff::newEmpty( $key ) : ListDiff::newEmpty( $key );
 					$this->addReversibleOperations( $childDiff, $diffOp, $currentObject[$key] );
 
 					if ( !$childDiff->isEmpty() ) {
-						$diff->addOperations( array( $key => $childDiff ) );
+						$diff[$key] = $childDiff;
 					}
 				}
 			}

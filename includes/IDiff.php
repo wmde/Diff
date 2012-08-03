@@ -13,7 +13,7 @@ namespace Diff;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface IDiff extends IDiffOp {
+interface IDiff extends IDiffOp, Appendable, \ArrayAccess, \Traversable, \Serializable, \Countable {
 
 	/**
 	 * Returns a new empty diff.
@@ -54,6 +54,8 @@ interface IDiff extends IDiffOp {
 
 	/**
 	 * Adds the provided operations to the diff.
+	 * The operations are appended, so their associated keys
+	 * in the provided array get lost.
 	 *
 	 * @since 0.1
 	 *

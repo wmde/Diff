@@ -11,6 +11,7 @@
  * @licence GNU GPL v2+
  */
 return array(
+	'Diff\Appendable' => 'includes/Appendable.php',
 	'Diff\Diff' => 'includes/Diff.php',
 	'Diff\DiffOp' => 'includes/DiffOp.php',
 	'Diff\DiffOpAdd' => 'includes/DiffOpAdd.php',

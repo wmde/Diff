@@ -2,6 +2,9 @@
 
 namespace Diff\Test;
 use Diff\Diff as Diff;
+use Diff\IDiff as IDiff;
+use Diff\MapDiff as MapDiff;
+use Diff\ListDiff as ListDiff;
 use Diff\DiffOpAdd as DiffOpAdd;
 use Diff\DiffOpRemove as DiffOpRemove;
 use Diff\DiffOpChange as DiffOpChange;
@@ -29,7 +32,9 @@ use Diff\DiffOpChange as DiffOpChange;
  *
  * @ingroup Diff
  * @ingroup Test
+ *
  * @group Diff
+ * @group DiffTest
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -95,7 +100,7 @@ class DiffTest extends GenericArrayObjectTest {
 	public function instanceProvider() {
 		$instances = array();
 
-		foreach ( $this->stuffProvider() as $args ) {
+		foreach ( $this->elementInstancesProvider() as $args ) {
 			$diffOps = $args[0];
 			$instances[] = new Diff( $diffOps );
 		}
@@ -105,6 +110,148 @@ class DiffTest extends GenericArrayObjectTest {
 
 	public function getInstanceClass() {
 		return '\Diff\Diff';
+	}
+
+	public function getApplicableDiffProvider() {
+		// Diff, current object, expected
+		$argLists = array();
+
+		$diff = Diff::newEmpty( 42 );
+		$currentObject = array();
+		$expected = clone $diff;
+
+		$argLists[] = array( $diff, $currentObject, $expected );
+
+		$diff = MapDiff::newEmpty();
+		$currentObject = array( 'foo' => 0, 'bar' => 1 );
+		$expected = clone $diff;
+
+		$argLists[] = array( $diff, $currentObject, $expected );
+
+		$diff = new MapDiff( array(
+			'foo' => new DiffOpChange( 0, 42 ),
+			'bar' => new DiffOpChange( 1, 9001 ),
+		) );
+		$currentObject = array( 'foo' => 0, 'bar' => 1 );
+		$expected = clone $diff;
+
+		$argLists[] = array( $diff, $currentObject, $expected );
+
+		$diff = new MapDiff( array(
+			'foo' => new DiffOpChange( 0, 42 ),
+			'bar' => new DiffOpChange( 1, 9001 ),
+		) );
+		$currentObject = array();
+		$expected = MapDiff::newEmpty();
+
+		$argLists[] = array( $diff, $currentObject, $expected );
+
+		$diff = new MapDiff( array(
+			'foo' => new DiffOpChange( 0, 42 ),
+			'bar' => new DiffOpChange( 1, 9001 ),
+		) );
+		$currentObject = array( 'foo' => 'something else', 'bar' => 1, 'baz' => 'o_O' );
+		$expected = new MapDiff( array(
+			'bar' => new DiffOpChange( 1, 9001 ),
+		) );
+
+		$argLists[] = array( $diff, $currentObject, $expected );
+
+		$diff = new MapDiff( array(
+			'bar' => new DiffOpRemove( 9001 ),
+		) );
+		$currentObject = array();
+		$expected = MapDiff::newEmpty();
+
+		$argLists[] = array( $diff, $currentObject, $expected );
+
+		$diff = new MapDiff( array(
+			'foo' => new DiffOpAdd( 42 ),
+			'bar' => new DiffOpRemove( 9001 ),
+		) );
+		$currentObject = array( 'foo' => 'bar' );
+		$expected = MapDiff::newEmpty();
+
+		$argLists[] = array( $diff, $currentObject, $expected );
+
+		$diff = new MapDiff( array(
+			'foo' => new DiffOpAdd( 42 ),
+			'bar' => new DiffOpRemove( 9001 ),
+		) );
+		$currentObject = array( 'foo' => 42, 'bar' => 9001 );
+		$expected = new MapDiff( array(
+			'bar' => new DiffOpRemove( 9001 ),
+		) );
+
+		$argLists[] = array( $diff, $currentObject, $expected );
+
+		$diff = new MapDiff( array(
+			'foo' => new DiffOpAdd( 42 ),
+			'bar' => new DiffOpRemove( 9001 ),
+		) );
+		$currentObject = array();
+		$expected = new MapDiff( array(
+			'foo' => new DiffOpAdd( 42 ),
+		) );
+
+		$argLists[] = array( $diff, $currentObject, $expected );
+
+		$diff = new ListDiff( array(
+			new DiffOpAdd( 42 ),
+			new DiffOpRemove( 9001 ),
+		) );
+		$currentObject = array();
+		$expected = new MapDiff( array(
+			new DiffOpAdd( 42 ),
+		) );
+
+		$argLists[] = array( $diff, $currentObject, $expected );
+
+		$diff = new ListDiff( array(
+			new DiffOpAdd( 42 ),
+			new DiffOpRemove( 9001 ),
+		) );
+		$currentObject = array( 1, 42, 9001 );
+		$expected = new MapDiff( array(
+			new DiffOpAdd( 42 ),
+			new DiffOpRemove( 9001 ),
+		) );
+
+		$argLists[] = array( $diff, $currentObject, $expected );
+
+		$diff = new MapDiff( array(
+			'foo' => new MapDiff( array( 'bar' => new DiffOpChange( 0, 1 ) ) ),
+			'le-non-existing-element' => new MapDiff( array( 'bar' => new DiffOpChange( 0, 1 ) ) ),
+			'spam' => new ListDiff( array( new DiffOpAdd( 42 ), new DiffOpAdd( 23 ), new DiffOpRemove( 'ohi' ), new DiffOpRemove( 'doom' ) ) ),
+			new DiffOpAdd( 9001 ),
+		) );
+		$currentObject = array(
+			'foo' => array( 'bar' => 0, 'baz' => 'O_o' ),
+			'spam' => array( 23, 'ohi' )
+		);
+		$expected = new MapDiff( array(
+			'foo' => new MapDiff( array( 'bar' => new DiffOpChange( 0, 1 ) ) ),
+			'spam' => new ListDiff( array( new DiffOpAdd( 42 ), new DiffOpAdd( 23 ), new DiffOpRemove( 'ohi' ) ) ),
+			new DiffOpAdd( 9001 ),
+		) );
+
+		$argLists[] = array( $diff, $currentObject, $expected );
+
+		return $argLists;
+	}
+
+	/**
+	 * @dataProvider getApplicableDiffProvider
+	 *
+	 * @param \Diff\IDiff $diff
+	 * @param array $currentObject
+	 * @param \Diff\IDiff $expected
+	 */
+	public function testGetApplicableDiff( IDiff $diff, array $currentObject, IDiff $expected ) {
+		$actual = $diff->getApplicableDiff( $currentObject );
+
+		$this->assertEquals( $expected->getOperations(), $actual->getOperations() );
+		$this->assertEquals( $expected->getParentKey(), $actual->getParentKey() );
 	}
 
 }
