@@ -301,7 +301,7 @@ class Diff extends GenericArrayObject implements IDiff {
 					else {
 						$canApplyOp =
 							( $diffOp->getType() === 'add' && !array_key_exists( $key, $currentObject ) )
-								|| ( array_key_exists( $key, $currentObject ) && $currentObject[$key] === $diffOp->getOldValue() );
+								|| ( array_key_exists( $key, $currentObject ) && $currentObject[$key] === $diffOp->getNewValue() );
 
 						if ( $canApplyOp ) {
 							$diff->addOperations( array( $key => $diffOp ) );
