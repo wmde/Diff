@@ -48,6 +48,7 @@ namespace {
 	 * @return boolean
 	 */
 	$wgHooks['UnitTestsList'][]	= function( array &$files ) {
+		// @codeCoverageIgnoreStart
 		$testFiles = array(
 			'DiffOpAdd',
 			'DiffOpChange',
@@ -63,6 +64,7 @@ namespace {
 		}
 
 		return true;
+		// @codeCoverageIgnoreEnd
 	};
 
 	unset( $dir );
