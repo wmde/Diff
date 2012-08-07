@@ -94,7 +94,7 @@ class DiffTest extends GenericArrayObjectTest {
 	/**
 	 * @dataProvider elementInstancesProvider
 	 */
-	public function testGetRelovals( array $operations ) {
+	public function testGetRemovals( array $operations ) {
 		$diff = new MapDiff( $operations );
 
 		$removals = array();

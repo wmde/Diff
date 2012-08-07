@@ -6,6 +6,7 @@ use Diff\ListDiff as ListDiff;
 use Diff\DiffOpRemove as DiffOpRemove;
 use Diff\DiffOpAdd as DiffOpAdd;
 use Diff\DiffOpChange as DiffOpChange;
+use Diff\IDiffOp as IDiffOp;
 
 /**
  * Tests for the Diff\MapDiff class.
@@ -186,6 +187,55 @@ class MapDiffTest extends \MediaWikiTestCase {
 			$actual === array(),
 			$diff->isEmpty()
 		);
+	}
+
+	public function elementInstancesProvider() {
+		return array(
+			array( array(
+			) ),
+			array( array(
+				new DiffOpAdd( 'ohi' )
+			) ),
+			array( array(
+				new DiffOpRemove( 'ohi' )
+			) ),
+			array( array(
+				new DiffOpAdd( 'ohi' ),
+				new DiffOpRemove( 'there' )
+			) ),
+			array( array(
+			) ),
+			array( array(
+				new DiffOpAdd( 'ohi' ),
+				new DiffOpRemove( 'there' ),
+				new DiffOpChange( 'ohi', 'there' )
+			) ),
+			array( array(
+				'1' => new DiffOpAdd( 'ohi' ),
+				'33' => new DiffOpRemove( 'there' ),
+				'7' => new DiffOpChange( 'ohi', 'there' )
+			) ),
+		);
+	}
+
+	/**
+	 * @dataProvider elementInstancesProvider
+	 */
+	public function testGetAdditions( array $operations ) {
+		$diff = new MapDiff( $operations );
+
+		$changes = array();
+
+		/**
+		 * @var IDiffOp $operation
+		 */
+		foreach ( $operations as $operation ) {
+			if ( $operation->getType() == 'change' ) {
+				$changes[] = $operation;
+			}
+		}
+
+		$this->assertArrayEquals( $changes, $diff->getChanges() );
 	}
 
 }
