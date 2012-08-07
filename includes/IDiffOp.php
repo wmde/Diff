@@ -16,7 +16,7 @@ namespace Diff;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface IDiffOp {
+interface IDiffOp extends \Serializable {
 
 	/**
 	 * Returns a string identifier for the operation type.

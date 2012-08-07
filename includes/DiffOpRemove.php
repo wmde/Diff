@@ -49,11 +49,26 @@ class DiffOpRemove extends DiffOp {
 		return $this->oldValue;
 	}
 
-	public function toArray() {
-		return array(
-			$this->getType(),
-			$this->oldValue,
-		);
+	/**
+	 * @see \Serializable::serialize()
+	 *
+	 * @since 0.1
+	 *
+	 * @return string|null
+	 */
+	public function serialize() {
+		return serialize( $this->oldValue );
+	}
+
+	/**
+	 * @see \Serializable::unserialize()
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $serialization
+	 */
+	public function unserialize( $serialization ) {
+		$this->oldValue = unserialize( $serialization );
 	}
 
 	/**

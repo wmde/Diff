@@ -1,10 +1,10 @@
 <?php
 
 namespace Diff\Test;
-use Diff\DiffOp as DiffOp;
+use \Diff\IDiffOp as IDiffOp;
 
 /**
- * Tests for the Diff\DiffOp class.
+ * Base test class for the Diff\DiffOp deriving classes.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,31 +32,27 @@ use Diff\DiffOp as DiffOp;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class DiffOpTest extends \MediaWikiTestCase {
+abstract class DiffOpTest extends \AbstractTestCase {
 
-	public function newFromArrayProvider() {
-		return array(
-			array( 'add', 'foo' ),
-			array( 'remove', 'bar' ),
-			array( 'change', 'foo', 'bar' ),
-			array( 'add', 42 ),
-			array( 'remove', true ),
-			array( 'change', array(), null ),
-			array( 'list', array() ),
-			array( 'map', array() ),
-		);
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testIsAtomic( IDiffOp $diffOp ) {
+		$this->assertInternalType( 'boolean', $diffOp->isAtomic() );
 	}
 
 	/**
-	 * @dataProvider newFromArrayProvider
+	 * @dataProvider instanceProvider
 	 */
-	public function testNewFromArray() {
-		$array = func_get_args();
+	public function testGetType( IDiffOp $diffOp ) {
+		$this->assertInternalType( 'string', $diffOp->getType() );
+	}
 
-		$diffOp = DiffOp::newFromArray( $array );
-
-		$this->assertInstanceOf( '\Diff\IDiffOp', $diffOp );
-		$this->assertEquals( array_shift( $array ), $diffOp->getType() );
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testSerialization( IDiffOp $diffOp ) {
+		$this->assertEquals( $diffOp, unserialize( serialize( $diffOp ) ) );
 	}
 
 }

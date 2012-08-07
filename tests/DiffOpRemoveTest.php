@@ -32,7 +32,7 @@ use Diff\DiffOpRemove as DiffOpRemove;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class DiffOpRemoveTest extends BaseDiffOpTest {
+class DiffOpRemoveTest extends DiffOpTest {
 
 	/**
 	 * @see AbstractTestCase::getClass

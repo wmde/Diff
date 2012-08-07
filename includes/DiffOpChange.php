@@ -61,12 +61,26 @@ class DiffOpChange extends DiffOp {
 		return $this->newValue;
 	}
 
-	public function toArray() {
-		return array(
-			$this->getType(),
-			$this->newValue,
-			$this->oldValue,
-		);
+	/**
+	 * @see \Serializable::serialize()
+	 *
+	 * @since 0.1
+	 *
+	 * @return string|null
+	 */
+	public function serialize() {
+		return serialize( array( $this->newValue, $this->oldValue ) );
+	}
+
+	/**
+	 * @see \Serializable::unserialize()
+	 *
+	 * @since 0.1
+	 *
+	 * @param string $serialization
+	 */
+	public function unserialize( $serialization ) {
+		list( $this->newValue, $this->oldValue ) = unserialize( $serialization );
 	}
 
 	/**

@@ -32,7 +32,7 @@ use Diff\DiffOpAdd as DiffOpAdd;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class DiffOpAddTest extends BaseDiffOpTest {
+class DiffOpAddTest extends DiffOpTest {
 
 	/**
 	 * @see AbstractTestCase::getClass
