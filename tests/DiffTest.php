@@ -3,6 +3,7 @@
 namespace Diff\Test;
 use Diff\Diff as Diff;
 use Diff\IDiff as IDiff;
+use Diff\IDiffOp as IDiffOp;
 use Diff\MapDiff as MapDiff;
 use Diff\ListDiff as ListDiff;
 use Diff\DiffOpAdd as DiffOpAdd;
@@ -68,6 +69,97 @@ class DiffTest extends GenericArrayObjectTest {
 				'7' => new DiffOpChange( 'ohi', 'there' )
 			) ),
 		);
+	}
+
+	/**
+	 * @dataProvider elementInstancesProvider
+	 */
+	public function testGetAdditions( array $operations ) {
+		$diff = new MapDiff( $operations );
+
+		$additions = array();
+
+		/**
+		 * @var IDiffOp $operation
+		 */
+		foreach ( $operations as $operation ) {
+			if ( $operation->getType() == 'add' ) {
+				$additions[] = $operation;
+			}
+		}
+
+		$this->assertArrayEquals( $additions, $diff->getAdditions() );
+	}
+
+	/**
+	 * @dataProvider elementInstancesProvider
+	 */
+	public function testGetRelovals( array $operations ) {
+		$diff = new MapDiff( $operations );
+
+		$removals = array();
+
+		/**
+		 * @var IDiffOp $operation
+		 */
+		foreach ( $operations as $operation ) {
+			if ( $operation->getType() == 'remove' ) {
+				$removals[] = $operation;
+			}
+		}
+
+		$this->assertArrayEquals( $removals, $diff->getRemovals() );
+	}
+
+	public function testGetType() {
+		$this->assertInternalType( 'string', Diff::newEmpty()->getType() );
+	}
+
+	public function testPreSetElement() {
+		$pokemons = null;
+
+		$diff = ListDiff::newEmpty();
+
+		try {
+			$diff[] = new DiffOpChange( 0 ,1 );
+		}
+		catch( \Exception $pokemons ) {}
+
+		$this->assertInstanceOf( '\Exception', $pokemons );
+	}
+
+	public function hasParentKeyProvider() {
+		return array(
+			array( 'foo' ),
+			array( 42 ),
+			array( null ),
+			array(),
+		);
+	}
+
+	/**
+	 * @dataProvider hasParentKeyProvider
+	 */
+	public function testHasParentKey() {
+		$args = func_get_args();
+
+		$diff = array_key_exists( 0, $args ) ? Diff::newEmpty( $args[0] ) : Diff::newEmpty();
+
+		$this->assertEquals(
+			array_key_exists( 0, $args ) && $args[0] !== null,
+			$diff->hasParentKey()
+		);
+	}
+
+	/**
+	 * @dataProvider elementInstancesProvider
+	 */
+	public function testAddOperations( array $operations ) {
+		$diff = Diff::newEmpty();
+
+		$diff->addOperations( $operations );
+
+		$this->assertArrayEquals( $operations, $diff->getOperations() );
 	}
 
 	/**

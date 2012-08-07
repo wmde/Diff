@@ -105,9 +105,6 @@ class MapDiff extends Diff {
 			elseif ( $hasNew ) {
 				$diffSet[$key] = new DiffOpAdd( $newSet[$key] );
 			}
-			else {
-				throw new Exception( 'Cannot create a diff op for two empty values.' );
-			}
 		}
 
 		return $diffSet;
