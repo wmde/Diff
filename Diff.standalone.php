@@ -26,11 +26,11 @@ namespace Diff {
 		static $classes = false;
 
 		if ( $classes === false ) {
-			$classes = include( dirname( __FILE__ ) . '/' . 'Diff.classes.php' );
+			$classes = include( __DIR__ . '/' . 'Diff.classes.php' );
 		}
 
 		if ( array_key_exists( $className, $classes ) ) {
-			include_once dirname( __FILE__ ) . '/' . $classes[$className];
+			include_once __DIR__ . '/' . $classes[$className];
 		}
 	} );
 

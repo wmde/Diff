@@ -26,7 +26,7 @@ namespace {
 		die( 'Not an entry point.' );
 	}
 
-	$dir = dirname( __FILE__ ) . '/';
+	$dir = __DIR__ . '/';
 
 	$wgExtensionCredits['other'][] = include( $dir . 'Diff.credits.php' );
 
@@ -59,7 +59,7 @@ namespace {
 		);
 
 		foreach ( $testFiles as $file ) {
-			$files[] = dirname( __FILE__ ) . '/tests/' . $file . 'Test.php';
+			$files[] = __DIR__ . '/tests/' . $file . 'Test.php';
 		}
 
 		return true;
