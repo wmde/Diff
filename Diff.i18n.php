@@ -25,6 +25,13 @@ $messages['qqq'] = array(
 	'diff-desc' => 'Diff library for structured data',
 );
 
+/** Belarusian (Taraškievica orthography) (‪беларуская (тарашкевіца)‬)
+ * @author Wizardist
+ */
+$messages['be-tarask'] = array(
+	'diff-desc' => 'Бібліятэка для параўнаньня структураваных зьвестак',
+);
+
 /** German (Deutsch)
  * @author Kghbln
  */
@@ -37,6 +44,13 @@ $messages['de'] = array(
  */
 $messages['dsb'] = array(
 	'diff-desc' => 'Biblioteka rozdźělow za strukturěrowane daty',
+);
+
+/** Hebrew (עברית)
+ * @author Amire80
+ */
+$messages['he'] = array(
+	'diff-desc' => 'הספריית השוואה לנתונים מבניים',
 );
 
 /** Upper Sorbian (hornjoserbsce)
