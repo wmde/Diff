@@ -9,6 +9,7 @@
  * @ingroup Diff
  *
  * @licence GNU GPL v2+
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 return array(
 	'Diff\Appendable' => 'includes/Appendable.php',
