@@ -34,7 +34,9 @@ namespace {
 
 	// Autoloading
 	foreach ( include( $dir . 'Diff.classes.php' ) as $class => $file ) {
-		$wgAutoloadClasses[$class] = $dir . $file;
+		if ( !array_key_exists( $class, $GLOBALS['wgAutoloadLocalClasses'] ) ) {
+			$wgAutoloadClasses[$class] = $dir . $file;
+		}
 	}
 
 	/**
@@ -53,7 +55,7 @@ namespace {
 			'DiffOpAdd',
 			'DiffOpChange',
 			'DiffOpRemove',
-			'Diff',
+			//'Diff',
 			'ListDiff',
 			'MapDiff',
 		);
