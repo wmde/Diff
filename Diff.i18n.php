@@ -46,6 +46,13 @@ $messages['dsb'] = array(
 	'diff-desc' => 'Biblioteka rozdźělow za strukturěrowane daty',
 );
 
+/** French (français)
+ * @author Wyz
+ */
+$messages['fr'] = array(
+	'diff-desc' => 'Bibliothèque de diff pour les données structurées',
+);
+
 /** Hebrew (עברית)
  * @author Amire80
  */
@@ -72,6 +79,13 @@ $messages['ko'] = array(
  */
 $messages['mk'] = array(
 	'diff-desc' => 'Библиотека на верзиски разлики на структурираните податоци',
+);
+
+/** Dutch (Nederlands)
+ * @author Siebrand
+ */
+$messages['nl'] = array(
+	'diff-desc' => 'Bibliotheek voor het weergeven van verschillen in gestructureerde gegevens',
 );
 
 /** Tagalog (Tagalog)
