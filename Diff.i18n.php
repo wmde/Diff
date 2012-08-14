@@ -67,6 +67,13 @@ $messages['hsb'] = array(
 	'diff-desc' => 'Biblioteka rozdźělow za strukturowane daty',
 );
 
+/** Italian (italiano)
+ * @author Darth Kule
+ */
+$messages['it'] = array(
+	'diff-desc' => 'Libreria di diff per dati strutturati',
+);
+
 /** Korean (한국어)
  * @author 아라
  */
@@ -86,6 +93,13 @@ $messages['mk'] = array(
  */
 $messages['nl'] = array(
 	'diff-desc' => 'Bibliotheek voor het weergeven van verschillen in gestructureerde gegevens',
+);
+
+/** Brazilian Portuguese (português do Brasil)
+ * @author Jaideraf
+ */
+$messages['pt-br'] = array(
+	'diff-desc' => 'Biblioteca Diff para dados estruturados',
 );
 
 /** Tagalog (Tagalog)
