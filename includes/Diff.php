@@ -18,7 +18,7 @@ use \Diff\Exception as Exception;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class Diff extends GenericArrayObject implements IDiff {
+class Diff extends \GenericArrayObject implements IDiff {
 
 	/**
 	 * Creates and returns an empty Diff.

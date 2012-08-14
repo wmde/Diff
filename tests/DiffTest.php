@@ -40,7 +40,7 @@ use Diff\DiffOpChange as DiffOpChange;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class DiffTest extends GenericArrayObjectTest {
+class DiffTest extends \GenericArrayObjectTest {
 
 	public function elementInstancesProvider() {
 		return array(

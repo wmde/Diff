@@ -1,7 +1,5 @@
 <?php
 
-namespace Diff;
-
 /**
  * Extends ArrayObject and does two things:
  *
