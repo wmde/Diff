@@ -53,6 +53,13 @@ $messages['fr'] = array(
 	'diff-desc' => 'Bibliothèque de diff pour les données structurées',
 );
 
+/** Galician (galego)
+ * @author Toliño
+ */
+$messages['gl'] = array(
+	'diff-desc' => 'Biblioteca de diferenzas para datos estruturados',
+);
+
 /** Hebrew (עברית)
  * @author Amire80
  */
