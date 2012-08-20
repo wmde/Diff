@@ -88,6 +88,13 @@ $messages['ko'] = array(
 	'diff-desc' => '구조화한 데이터에 대한 차이점 라이브러리',
 );
 
+/** Luxembourgish (Lëtzebuergesch)
+ * @author Robby
+ */
+$messages['lb'] = array(
+	'diff-desc' => 'Diff-Library fir strukturéiert Daten',
+);
+
 /** Macedonian (македонски)
  * @author Bjankuloski06
  */
