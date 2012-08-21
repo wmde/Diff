@@ -17,6 +17,8 @@
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ *
+ * @codeCoverageIgnoreStart
  */
 abstract class GenericArrayObject extends \ArrayObject {
 
@@ -229,3 +231,4 @@ abstract class GenericArrayObject extends \ArrayObject {
 	}
 
 }
+// @codeCoverageIgnoreEnd
