@@ -46,6 +46,13 @@ $messages['dsb'] = array(
 	'diff-desc' => 'Biblioteka rozdźělow za strukturěrowane daty',
 );
 
+/** Spanish (español)
+ * @author Armando-Martin
+ */
+$messages['es'] = array(
+	'diff-desc' => 'Biblioteca de diferencias para datos estructurados',
+);
+
 /** French (français)
  * @author Wyz
  */
