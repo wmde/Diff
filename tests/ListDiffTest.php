@@ -31,7 +31,27 @@ use Diff\ListDiff as ListDiff;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ListDiffTest extends \MediaWikiTestCase {
+class ListDiffTest extends DiffOpTest {
+
+	/**
+	 * @see AbstractTestCase::getClass
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public function getClass() {
+		return '\Diff\ListDiff';
+	}
+
+	/**
+	 * @see AbstractTestCase::constructorProvider
+	 *
+	 * @since 0.1
+	 */
+	public function constructorProvider() {
+		return array();
+	}
 
 	public function newFromArraysProvider() {
 		return array(

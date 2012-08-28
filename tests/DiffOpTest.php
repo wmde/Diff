@@ -55,4 +55,22 @@ abstract class DiffOpTest extends \AbstractTestCase {
 		$this->assertEquals( $diffOp, unserialize( serialize( $diffOp ) ) );
 	}
 
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testCount( IDiffOp $diffOp ) {
+		if ( $diffOp->isAtomic() ) {
+			$this->assertEquals( 1, count( $diffOp ) );
+		}
+		else {
+			$count = 0;
+
+			foreach ( $diffOp as $childOp ) {
+				$count += $childOp->count();
+			}
+
+			$this->assertEquals( $count, count( $diffOp ) );
+		}
+	}
+
 }

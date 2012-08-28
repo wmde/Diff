@@ -13,7 +13,7 @@ namespace Diff;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface IDiff extends IDiffOp, Appendable, \ArrayAccess, \Traversable, \Countable {
+interface IDiff extends IDiffOp, Appendable, \ArrayAccess, \Traversable {
 
 	/**
 	 * Returns a new empty diff.
