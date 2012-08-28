@@ -36,7 +36,27 @@ use Diff\IDiffOp as IDiffOp;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class MapDiffTest extends \MediaWikiTestCase {
+class MapDiffTest extends DiffOpTest {
+
+	/**
+	 * @see AbstractTestCase::getClass
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public function getClass() {
+		return '\Diff\MapDiff';
+	}
+
+	/**
+	 * @see AbstractTestCase::constructorProvider
+	 *
+	 * @since 0.1
+	 */
+	public function constructorProvider() {
+		return array();
+	}
 
 	public function recursionProvider() {
 		return array_merge( $this->newFromArraysProvider(), array(

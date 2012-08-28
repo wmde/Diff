@@ -16,4 +16,15 @@ namespace Diff;
  */
 abstract class DiffOp implements IDiffOp {
 
+	/**
+	 * @see Countable::count
+	 *
+	 * @since 0.1
+	 *
+	 * @return integer
+	 */
+	public function count() {
+		return 1;
+	}
+
 }

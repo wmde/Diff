@@ -7,8 +7,10 @@ use \Diff\Exception as Exception;
  * Base class for diffs. Diffs are collections of IDiffOp objects,
  * and are themselves IDiffOp objects as well.
  *
- * TODO: since this is an ArrayIterator, people can just add stuff using $diff[] = $diffOp.
+ * FIXME: since this is an ArrayIterator, people can just add stuff using $diff[] = $diffOp.
  * The $typePointers is not currently getting updates in this case.
+ *
+ * FIXME: current implementation forces ListDiff to override and nullify, which is bad.
  *
  * @since 0.1
  *
@@ -346,6 +348,26 @@ class Diff extends \GenericArrayObject implements IDiff {
 	 */
 	public function getType() {
 		return 'diff';
+	}
+
+	/**
+	 * @see Countable::count
+	 *
+	 * @since 0.1
+	 *
+	 * @return integer
+	 */
+	public function count() {
+		$count = 0;
+
+		/**
+		 * @var IDiffOp $diffOp
+		 */
+		foreach ( $this as $diffOp ) {
+			$count += count( $diffOp );
+		}
+
+		return $count;
 	}
 
 }
