@@ -123,11 +123,19 @@ $messages['nl'] = array(
 	'diff-desc' => 'Bibliotheek voor het weergeven van verschillen in gestructureerde gegevens',
 );
 
+/** Polish (polski)
+ * @author Lazowik
+ */
+$messages['pl'] = array(
+	'diff-desc' => 'Biblioteka porównywania danych strukturalnych',
+);
+
 /** Piedmontese (Piemontèis)
+ * @author Borichèt
  * @author Dragonòt
  */
 $messages['pms'] = array(
-	'diff-desc' => 'Librerìa diff për dat struturà',
+	'diff-desc' => 'Biblioteca ëd diff për ij dat struturà',
 );
 
 /** Brazilian Portuguese (português do Brasil)
