@@ -25,6 +25,13 @@ $messages['qqq'] = array(
 	'diff-desc' => 'Diff library for structured data',
 );
 
+/** Asturian (asturianu)
+ * @author Xuacu
+ */
+$messages['ast'] = array(
+	'diff-desc' => 'Biblioteca de diferencies pa datos estructuraos',
+);
+
 /** Belarusian (Taraškievica orthography) (‪беларуская (тарашкевіца)‬)
  * @author Wizardist
  */
