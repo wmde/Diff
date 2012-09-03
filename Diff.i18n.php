@@ -131,6 +131,7 @@ $messages['nl'] = array(
 );
 
 /** Polish (polski)
+ * @author BeginaFelicysym
  * @author Lazowik
  */
 $messages['pl'] = array(
