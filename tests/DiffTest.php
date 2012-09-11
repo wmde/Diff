@@ -194,7 +194,7 @@ class DiffTest extends \GenericArrayObjectTest {
 
 		foreach ( $this->elementInstancesProvider() as $args ) {
 			$diffOps = $args[0];
-			$instances[] = new Diff( $diffOps );
+			$instances[] = array( new Diff( $diffOps ) );
 		}
 
 		return $instances;
