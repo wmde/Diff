@@ -109,6 +109,13 @@ $messages['ko'] = array(
 	'diff-desc' => '구조화한 데이터에 대한 차이점 라이브러리',
 );
 
+/** Colognian (Ripoarisch)
+ * @author Purodha
+ */
+$messages['ksh'] = array(
+	'diff-desc' => 'En Projrammbiblijoteek för Ongerscheide en Daate met Schtroktuur ze fenge.',
+);
+
 /** Luxembourgish (Lëtzebuergesch)
  * @author Robby
  */
