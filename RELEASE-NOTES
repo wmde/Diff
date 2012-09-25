@@ -6,8 +6,12 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 
 
 === Version 0.1 ===
-(dev)
+2012-9-25
 
 Initial release with these features:
 
-* ...
+* Classes to represent diffs or collections of diff operations: Diff, MapDiff, ListDiff
+* Classes to represent diff operations: Diff, MapDiff, ListDiff, DiffOpAdd, DiffOpChange, DiffOpRemove
+* Methods to compute list and maps diffs
+* Support for recursive diffs of arbitrary depth
+* Works as MediaWiki extension or as standalone library
