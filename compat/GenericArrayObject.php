@@ -48,13 +48,11 @@ abstract class GenericArrayObject extends \ArrayObject {
 	 * @return integer
 	 */
 	protected function getNewOffset() {
-		while ( true ) {
-			if ( !$this->offsetExists( $this->indexOffset ) ) {
-				return $this->indexOffset;
-			}
-
+		while ( $this->offsetExists( $this->indexOffset ) ) {
 			$this->indexOffset++;
 		}
+
+		return $this->indexOffset;
 	}
 
 	/**
