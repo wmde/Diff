@@ -32,7 +32,7 @@ $messages['ast'] = array(
 	'diff-desc' => 'Biblioteca de diferencies pa datos estructuraos',
 );
 
-/** Belarusian (Taraškievica orthography) (‪беларуская (тарашкевіца)‬)
+/** Belarusian (Taraškievica orthography) (беларуская (тарашкевіца)‎)
  * @author Wizardist
  */
 $messages['be-tarask'] = array(
