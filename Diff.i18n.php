@@ -78,7 +78,7 @@ $messages['gl'] = array(
  * @author Amire80
  */
 $messages['he'] = array(
-	'diff-desc' => 'הספריית השוואה לנתונים מבניים',
+	'diff-desc' => 'ספרייה להשוואת נתונים מבניים',
 );
 
 /** Upper Sorbian (hornjoserbsce)
