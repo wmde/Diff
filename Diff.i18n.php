@@ -60,6 +60,13 @@ $messages['es'] = array(
 	'diff-desc' => 'Biblioteca de diferencias para datos estructurados',
 );
 
+/** Persian (فارسی)
+ * @author Reza1615
+ */
+$messages['fa'] = array(
+	'diff-desc' => 'کتابخانهٔ تفاوت برای داده‌های ساختاریافته',
+);
+
 /** French (français)
  * @author Wyz
  */
