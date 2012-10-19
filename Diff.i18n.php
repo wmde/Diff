@@ -39,6 +39,13 @@ $messages['be-tarask'] = array(
 	'diff-desc' => 'Бібліятэка для параўнаньня структураваных зьвестак',
 );
 
+/** Danish (dansk)
+ * @author Kaare
+ */
+$messages['da'] = array(
+	'diff-desc' => 'Diff-bibliotek til strukturerede data',
+);
+
 /** German (Deutsch)
  * @author Kghbln
  */
