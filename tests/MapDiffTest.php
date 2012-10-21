@@ -132,8 +132,20 @@ class MapDiffTest extends DiffOpTest {
 			}
 		}
 
-		asort( $expected );
-		$diff->asort();
+		$sorter = function( $a, $b ) {
+			$aa = serialize( $a );
+			$bb = serialize( $b );
+
+			if ( $aa == $bb ) {
+				return 0;
+			}
+			else {
+				return $aa > $bb ? -1 : 1;
+			}
+		};
+
+		uasort( $expected, $sorter );
+		$diff->uasort( $sorter );
 		$actual = $diff->getArrayCopy();
 
 		$this->assertEquals( $expected, $actual );
