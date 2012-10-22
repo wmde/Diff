@@ -145,6 +145,13 @@ $messages['mk'] = array(
 	'diff-desc' => 'Библиотека на верзиски разлики на структурираните податоци',
 );
 
+/** Malay (Bahasa Melayu)
+ * @author Anakmalaysia
+ */
+$messages['ms'] = array(
+	'diff-desc' => 'Perpustakaan halaman perbezaan (diff) untuk data berstruktur',
+);
+
 /** Dutch (Nederlands)
  * @author Siebrand
  */
