@@ -20,7 +20,8 @@ $messages['en'] = array(
 	'diff-desc' => 'Diff library for structured data',
 );
 
-/** Message documentation (Message documentation) */
+/** Message documentation (Message documentation)
+ */
 $messages['qqq'] = array(
 	'diff-desc' => 'Diff library for structured data',
 );
@@ -180,4 +181,3 @@ $messages['pt-br'] = array(
 $messages['tl'] = array(
 	'diff-desc' => 'Aklatan ng pagkakaiba para sa datong may kayarian',
 );
-
