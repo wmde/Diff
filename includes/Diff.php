@@ -286,7 +286,10 @@ class Diff extends \GenericArrayObject implements IDiff {
 	 * @return IDiff
 	 */
 	protected function addReversibleOperations( IDiff &$diff, IDiff $originDiff, array $currentObject ) {
-		wfProfileIn( __METHOD__ );
+		if ( function_exists( 'wfProfileIn' ) ) {
+			wfProfileIn( __METHOD__ );
+		}
+
 		/**
 		 * @var IDiffOp $diffOp
 		 */
@@ -327,7 +330,10 @@ class Diff extends \GenericArrayObject implements IDiff {
 				}
 			}
 		}
-		wfProfileOut( __METHOD__ );
+
+		if ( function_exists( 'wfProfileOut' ) ) {
+			wfProfileOut( __METHOD__ );
+		}
 	}
 
 	/**

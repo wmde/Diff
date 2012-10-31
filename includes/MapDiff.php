@@ -66,7 +66,10 @@ class MapDiff extends Diff {
 	 * )
 	 */
 	public static function doDiff( array $oldValues, array $newValues, $recursively = false ) {
-		wfProfileIn( __METHOD__ );
+		if ( function_exists( 'wfProfileIn' ) ) {
+			wfProfileIn( __METHOD__ );
+		}
+
 		$newSet = static::array_diff_assoc( $newValues, $oldValues );
 		$oldSet = static::array_diff_assoc( $oldValues, $newValues );
 
@@ -108,7 +111,10 @@ class MapDiff extends Diff {
 			}
 		}
 
-		wfProfileOut( __METHOD__ );
+		if ( function_exists( 'wfProfileOut' ) ) {
+			wfProfileOut( __METHOD__ );
+		}
+
 		return $diffSet;
 	}
 

@@ -5,6 +5,13 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 
 
 
+=== Version 0.2 ===
+2012-11-01
+
+* Fixed tests to work with PHP 5.4 and above
+* Added translations
+* Added some profiling calls
+
 === Version 0.1 ===
 2012-9-25
 
