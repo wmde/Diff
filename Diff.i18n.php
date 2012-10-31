@@ -188,3 +188,10 @@ $messages['pt-br'] = array(
 $messages['tl'] = array(
 	'diff-desc' => 'Aklatan ng pagkakaiba para sa datong may kayarian',
 );
+
+/** Vietnamese (Tiếng Việt)
+ * @author Minh Nguyen
+ */
+$messages['vi'] = array(
+	'diff-desc' => 'Thư viện so sánh dữ liệu có cấu trúc',
+);
