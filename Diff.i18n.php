@@ -189,6 +189,13 @@ $messages['tl'] = array(
 	'diff-desc' => 'Aklatan ng pagkakaiba para sa datong may kayarian',
 );
 
+/** Ukrainian (українська)
+ * @author Base
+ */
+$messages['uk'] = array(
+	'diff-desc' => 'Бібліотека для порівняння структурованих даних',
+);
+
 /** Vietnamese (Tiếng Việt)
  * @author Minh Nguyen
  */
