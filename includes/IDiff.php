@@ -16,15 +16,6 @@ namespace Diff;
 interface IDiff extends IDiffOp, Appendable, \ArrayAccess, \Traversable {
 
 	/**
-	 * Returns a new empty diff.
-	 *
-	 * @since 0.1
-	 *
-	 * @return IDiff
-	 */
-	public static function newEmpty();
-
-	/**
 	 * Constructor.
 	 *
 	 * @since 0.1
