@@ -5,6 +5,12 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 
 
 
+=== Version 0.3 ===
+(dev)
+
+* Improved type hinting
+* Removed static method from IDiff interface since this is not allowed in strict mode
+
 === Version 0.2 ===
 2012-11-01
 
