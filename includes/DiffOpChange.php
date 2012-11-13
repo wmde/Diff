@@ -62,7 +62,7 @@ class DiffOpChange extends DiffOp {
 	}
 
 	/**
-	 * @see \Serializable::serialize()
+	 * @see Serializable::serialize
 	 *
 	 * @since 0.1
 	 *
@@ -73,7 +73,7 @@ class DiffOpChange extends DiffOp {
 	}
 
 	/**
-	 * @see \Serializable::unserialize()
+	 * @see Serializable::unserialize
 	 *
 	 * @since 0.1
 	 *

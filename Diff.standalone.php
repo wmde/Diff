@@ -1,7 +1,8 @@
 <?php
 
 /**
- * Standalone entrypoint for the diff library contained in the Diff MediaWiki extension.
+ * Standalone setup for the diff library contained in the Diff MediaWiki extension.
+ * The library should be included via the main entry point, Diff.php.
  *
  * Documentation:	 		https://www.mediawiki.org/wiki/Extension:Diff
  * Support					https://www.mediawiki.org/wiki/Extension_talk:Diff

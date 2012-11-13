@@ -10,6 +10,8 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 
 * Improved type hinting
 * Removed static method from IDiff interface since this is not allowed in strict mode
+* Added constructor tests for MapDiff and ListDiff
+* Improved entry point and setup code. Diff.php is now the main entry point for both MW extension and standalone library
 
 === Version 0.2 ===
 2012-11-01
