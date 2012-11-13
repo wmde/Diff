@@ -1,12 +1,12 @@
 <?php
 
 namespace Diff\Test;
-use Diff\MapDiff as MapDiff;
-use Diff\ListDiff as ListDiff;
-use Diff\DiffOpRemove as DiffOpRemove;
-use Diff\DiffOpAdd as DiffOpAdd;
-use Diff\DiffOpChange as DiffOpChange;
-use Diff\IDiffOp as IDiffOp;
+use Diff\MapDiff;
+use Diff\ListDiff;
+use Diff\DiffOpRemove;
+use Diff\DiffOpAdd;
+use Diff\DiffOpChange;
+use Diff\IDiffOp;
 
 /**
  * Tests for the Diff\MapDiff class.
@@ -55,7 +55,47 @@ class MapDiffTest extends DiffOpTest {
 	 * @since 0.1
 	 */
 	public function constructorProvider() {
-		return array();
+		$operationLists = array();
+
+		$operationLists[] = array();
+
+		$operationLists[] = array(
+			new DiffOpAdd( 42 ),
+		);
+
+		$operationLists[] = array(
+			new DiffOpAdd( 42 ),
+			new DiffOpChange( 9000, 9001 ),
+		);
+
+		$operationLists[] = array(
+			new DiffOpAdd( 42 ),
+			new DiffOpRemove( 1 ),
+			new DiffOpChange( 9000, 9001 ),
+			new DiffOpChange( 5, 1 ),
+			new ListDiff( array(
+				new DiffOpAdd( 42 ),
+				new DiffOpRemove( 1 ),
+			) ),
+			new MapDiff( array(
+				new DiffOpAdd( 42 ),
+				new DiffOpRemove( 1 ),
+				new DiffOpChange( 9000, 9001 ),
+			) ),
+		);
+
+		$argLists = array();
+
+		foreach ( $operationLists as $operationList ) {
+			$argLists[] = array( true, $operationList );
+			$argLists[] = array( true, $operationList, 'foobar' );
+		}
+
+		$argLists[] = array( false, 42 );
+		$argLists[] = array( false, new DiffOpAdd( 42 ) );
+		$argLists[] = array( false, '~=[,,_,,]:3' );
+
+		return $argLists;
 	}
 
 	public function recursionProvider() {

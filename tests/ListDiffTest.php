@@ -1,7 +1,9 @@
 <?php
 
 namespace Diff\Test;
-use Diff\ListDiff as ListDiff;
+use Diff\ListDiff;
+use Diff\DiffOpRemove;
+use Diff\DiffOpAdd;
 
 /**
  * Tests for the Diff\ListDiff class.
@@ -50,7 +52,39 @@ class ListDiffTest extends DiffOpTest {
 	 * @since 0.1
 	 */
 	public function constructorProvider() {
-		return array();
+		$operationLists = array();
+
+		$operationLists[] = array();
+
+		$operationLists[] = array(
+			new DiffOpAdd( 42 ),
+		);
+
+		$operationLists[] = array(
+			new DiffOpAdd( 42 ),
+			new DiffOpRemove( 1 ),
+		);
+
+		$operationLists[] = array(
+			new DiffOpRemove( 'spam' ),
+			new DiffOpAdd( 42 ),
+			new DiffOpAdd( 42 ),
+			new DiffOpAdd( 9001 ),
+			new DiffOpRemove( 1 ),
+		);
+
+		$argLists = array();
+
+		foreach ( $operationLists as $operationList ) {
+			$argLists[] = array( true, $operationList );
+			$argLists[] = array( true, $operationList, 'foobar' );
+		}
+
+		$argLists[] = array( false, 42 );
+		$argLists[] = array( false, new DiffOpAdd( 42 ) );
+		$argLists[] = array( false, '~=[,,_,,]:3' );
+
+		return $argLists;
 	}
 
 	public function newFromArraysProvider() {

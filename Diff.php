@@ -20,58 +20,52 @@
  * @defgroup Diff Diff
  */
 
-namespace {
-
-	if ( !defined( 'MEDIAWIKI' ) ) {
-		die( 'Not an entry point.' );
-	}
-
-	$dir = __DIR__ . '/';
-
-	$wgExtensionCredits['other'][] = include( $dir . 'Diff.credits.php' );
-
-	$wgExtensionMessagesFiles['DiffExtension'] = $dir . 'Diff.i18n.php';
-
-	// Autoloading
-	foreach ( include( $dir . 'Diff.classes.php' ) as $class => $file ) {
-		if ( !array_key_exists( $class, $GLOBALS['wgAutoloadLocalClasses'] ) ) {
-			$wgAutoloadClasses[$class] = $dir . $file;
-		}
-	}
-
-	/**
-	 * Hook to add PHPUnit test cases.
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/UnitTestsList
-	 *
-	 * @since 0.1
-	 *
-	 * @param array $files
-	 *
-	 * @return boolean
-	 */
-	$wgHooks['UnitTestsList'][]	= function( array &$files ) {
-		// @codeCoverageIgnoreStart
-		$testFiles = array(
-			'DiffOpAdd',
-			'DiffOpChange',
-			'DiffOpRemove',
-			//'Diff',
-			'ListDiff',
-			'MapDiff',
-		);
-
-		foreach ( $testFiles as $file ) {
-			$files[] = __DIR__ . '/tests/' . $file . 'Test.php';
-		}
-
-		return true;
-		// @codeCoverageIgnoreEnd
-	};
-
-	unset( $dir );
-
+if ( !defined( 'MEDIAWIKI' ) ) {
+	die( 'Not an entry point.' );
 }
 
-namespace Diff {
-	class Exception extends \MWException {}
+$dir = __DIR__ . '/';
+
+$wgExtensionCredits['other'][] = include( $dir . 'Diff.credits.php' );
+
+$wgExtensionMessagesFiles['DiffExtension'] = $dir . 'Diff.i18n.php';
+
+// Autoloading
+foreach ( include( $dir . 'Diff.classes.php' ) as $class => $file ) {
+	if ( !array_key_exists( $class, $GLOBALS['wgAutoloadLocalClasses'] ) ) {
+		$wgAutoloadClasses[$class] = $dir . $file;
+	}
 }
+
+/**
+ * Hook to add PHPUnit test cases.
+ * @see https://www.mediawiki.org/wiki/Manual:Hooks/UnitTestsList
+ *
+ * @since 0.1
+ *
+ * @param array $files
+ *
+ * @return boolean
+ */
+$wgHooks['UnitTestsList'][]	= function( array &$files ) {
+	// @codeCoverageIgnoreStart
+	$testFiles = array(
+		'DiffOpAdd',
+		'DiffOpChange',
+		'DiffOpRemove',
+		//'Diff',
+		'ListDiff',
+		'MapDiff',
+	);
+
+	foreach ( $testFiles as $file ) {
+		$files[] = __DIR__ . '/tests/' . $file . 'Test.php';
+	}
+
+	return true;
+	// @codeCoverageIgnoreEnd
+};
+
+class_alias( '\MWException', 'Diff\Exception' );
+
+unset( $dir );

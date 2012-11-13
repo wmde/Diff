@@ -55,7 +55,7 @@ class MapDiff extends Diff {
 	 * @param array $newValues The second array
 	 * @param boolean $recursively If elements that are arrays should also be diffed.
 	 *
-	 * @throws \Diff\Exception
+	 * @throws Exception
 	 * @return array
 	 * Each key existing in either array will exist in the result and have an array as value.
 	 * This value is an array with two keys: old and new.
