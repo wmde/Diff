@@ -90,7 +90,7 @@ class Diff extends \GenericArrayObject implements IDiff {
 	 *
 	 * @since 0.1
 	 *
-	 * @return array of IDiffOp
+	 * @return IDiffOp[]
 	 */
 	public function getOperations() {
 		return $this->getArrayCopy();
@@ -101,7 +101,7 @@ class Diff extends \GenericArrayObject implements IDiff {
 	 *
 	 * @param string $type
 	 *
-	 * @return array of DiffOp
+	 * @return DiffOp[]
 	 */
 	public function getTypeOperations( $type ) {
 		return array_intersect_key(
@@ -115,7 +115,7 @@ class Diff extends \GenericArrayObject implements IDiff {
 	 *
 	 * @since 0.1
 	 *
-	 * @param $operations array of IDiffOp
+	 * @param IDiffOp[] $operations
 	 */
 	public function addOperations( array $operations ) {
 		foreach ( $operations as $operation ) {
@@ -210,7 +210,7 @@ class Diff extends \GenericArrayObject implements IDiff {
 	 *
 	 * @since 0.1
 	 *
-	 * @return array of DiffOpAdd
+	 * @return DiffOpAdd[]
 	 */
 	public function getAdditions() {
 		return $this->getTypeOperations( 'add' );
@@ -221,7 +221,7 @@ class Diff extends \GenericArrayObject implements IDiff {
 	 *
 	 * @since 0.1
 	 *
-	 * @return array of DiffOpRemove
+	 * @return DiffOpRemove[]
 	 */
 	public function getRemovals() {
 		return $this->getTypeOperations( 'remove' );

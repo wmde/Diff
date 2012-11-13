@@ -66,6 +66,8 @@ class DiffOpAdd extends DiffOp {
 	 * @since 0.1
 	 *
 	 * @param string $serialization
+	 *
+	 * @return DiffOpAdd
 	 */
 	public function unserialize( $serialization ) {
 		$this->newValue = unserialize( $serialization );

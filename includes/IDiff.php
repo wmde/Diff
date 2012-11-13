@@ -29,7 +29,7 @@ interface IDiff extends IDiffOp, Appendable, \ArrayAccess, \Traversable {
 	 *
 	 * @since 0.1
 	 *
-	 * @param $operations array of IDiffOp
+	 * @param IDiffOp[] $operations
 	 * @patam string|integer|null $parentKey
 	 */
 	public function __construct( array $operations, $parentKey = null );
@@ -39,7 +39,7 @@ interface IDiff extends IDiffOp, Appendable, \ArrayAccess, \Traversable {
 	 *
 	 * @since 0.1
 	 *
-	 * @return array of IDiffOp
+	 * @return IDiffOp[]
 	 */
 	public function getOperations();
 
@@ -59,7 +59,7 @@ interface IDiff extends IDiffOp, Appendable, \ArrayAccess, \Traversable {
 	 *
 	 * @since 0.1
 	 *
-	 * @param $operations array of IDiffOp
+	 * @param IDiffOp[] $operations
 	 */
 	public function addOperations( array $operations );
 
