@@ -310,7 +310,7 @@ class MapDiffTest extends DiffOpTest {
 		$this->assertArrayEquals( $changes, $diff->getChanges() );
 	}
 
-	public function testFoo() {
+	public function testElementsInRecuriveDiff() {
 		$old = array(
 			'en' => array( 'en-foo', 'en-bar' ),
 			'de' => array( 'de-0', 'de-1' ),
@@ -353,6 +353,21 @@ class MapDiffTest extends DiffOpTest {
 		$remove = $listDiff->getRemovals();
 		$remove = array_shift( $remove );
 		$this->assertEquals( 'en-bar', $remove->getOldValue() );
+	}
+
+	public function testEmptyElementsInRecursiveDiff() {
+		$old = array(
+			'en' => array( 'a' => 'en-foo', 'b' => 'en-bar' ),
+		);
+
+		$new = array(
+			'en' => array( 'a' => 'en-foo', 'b' => 'en-bar' ),
+		);
+
+		$diff = MapDiff::newFromArrays( $old, $new, true );
+
+		$this->assertTrue( $diff->isEmpty() );
+		$this->assertTrue( $diff->getOperations() === array() );
 	}
 
 }
