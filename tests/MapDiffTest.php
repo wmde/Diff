@@ -310,5 +310,50 @@ class MapDiffTest extends DiffOpTest {
 		$this->assertArrayEquals( $changes, $diff->getChanges() );
 	}
 
+	public function testFoo() {
+		$old = array(
+			'en' => array( 'en-foo', 'en-bar' ),
+			'de' => array( 'de-0', 'de-1' ),
+			'onoez' => array( '~=[,,_,,]:3' ),
+			'a' => 'b',
+		);
+
+		$new = array(
+			'en' => array( 'en-foo', 'en-baz' ),
+			'nl' => array( 'nl-0', 'nl-1' ),
+			'onoez' => array( '~=[,,_,,]:3' ),
+			'a' => 'b',
+		);
+
+		$diff = MapDiff::newFromArrays( $old, $new, true );
+
+		$this->assertTrue( $diff->offsetExists( 'en' ) );
+		$this->assertTrue( $diff->offsetExists( 'de' ) );
+		$this->assertTrue( $diff->offsetExists( 'nl' ) );
+		$this->assertFalse( $diff->offsetExists( 'onoez' ) );
+		$this->assertFalse( $diff->offsetExists( 'a' ) );
+
+		$this->assertInstanceOf( '\Diff\ListDiff', $diff['de'] );
+		$this->assertInstanceOf( '\Diff\ListDiff', $diff['nl'] );
+		$this->assertInstanceOf( '\Diff\ListDiff', $diff['en'] );
+
+		$this->assertEquals( 2, count( $diff['de'] ) );
+		$this->assertEquals( 2, count( $diff['nl'] ) );
+		$this->assertEquals( 2, count( $diff['en'] ) );
+
+		/**
+		 * @var ListDiff $listDiff
+		 */
+		$listDiff = $diff['en'];
+
+		$add = $listDiff->getAdditions();
+		$add = array_shift( $add );
+		$this->assertEquals( 'en-baz', $add->getNewValue() );
+
+		$remove = $listDiff->getRemovals();
+		$remove = array_shift( $remove );
+		$this->assertEquals( 'en-bar', $remove->getOldValue() );
+	}
+
 }
 	
