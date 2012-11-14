@@ -346,5 +346,32 @@ class DiffTest extends \GenericArrayObjectTest {
 		$this->assertEquals( $expected->getParentKey(), $actual->getParentKey() );
 	}
 
+	public function testNewEmpty() {
+		$diff = Diff::newEmpty();
+
+		$this->assertTrue( $diff->isEmpty() );
+		$this->assertEquals( null, $diff->getParentKey() );
+
+		$diff = Diff::newEmpty( '~=[,,_,,]:3' );
+
+		$this->assertTrue( $diff->isEmpty() );
+		$this->assertEquals( '~=[,,_,,]:3', $diff->getParentKey() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testGetOperations( Diff $diff ) {
+		$ops = $diff->getOperations();
+
+		$this->assertInternalType( 'array', $ops );
+
+		foreach ( $ops as $diffOp ) {
+			$this->assertInstanceOf( '\Diff\IDiffOp', $diffOp );
+		}
+
+		$this->assertArrayEquals( $ops, $diff->getOperations() );
+	}
+
 }
 	
