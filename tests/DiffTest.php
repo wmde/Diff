@@ -373,5 +373,23 @@ class DiffTest extends \GenericArrayObjectTest {
 		$this->assertArrayEquals( $ops, $diff->getOperations() );
 	}
 
+	public function testRemoveEmptyOperations() {
+		$diff = new Diff( array() );
+
+		$diff['foo'] = new DiffOpAdd( 1 );
+		$diff['bar'] = new MapDiff( array( new DiffOpAdd( 1 ) ) );
+		$diff['baz'] = new ListDiff( array( new DiffOpAdd( 1 ) ) );
+		$diff['bah'] = new ListDiff( array() );
+		$diff['spam'] = new MapDiff( array() );
+
+		$diff->removeEmptyOperations();
+
+		$this->assertTrue( $diff->offsetExists( 'foo' ) );
+		$this->assertTrue( $diff->offsetExists( 'bar' ) );
+		$this->assertTrue( $diff->offsetExists( 'baz' ) );
+		$this->assertFalse( $diff->offsetExists( 'bah' ) );
+		$this->assertFalse( $diff->offsetExists( 'spam' ) );
+	}
+
 }
 	

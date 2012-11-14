@@ -66,7 +66,7 @@ class Diff extends \GenericArrayObject implements IDiff {
 	 *
 	 * @since 0.1
 	 *
-	 * @param array $operations Operations in array format
+	 * @param IDiffOp[] $operations
 	 * @param string|integer|null $parentKey
 	 */
 	public function __construct( array $operations, $parentKey = null ) {
@@ -359,6 +359,11 @@ class Diff extends \GenericArrayObject implements IDiff {
 	}
 
 	/**
+	 * Counts the number of atomic operations in the diff.
+	 * This means the size of a diff with as elements only empty diffs will be 0.
+	 * Or that the size of a diff with one atomic operation and one diff that itself
+	 * holds two atomic operations will be 3.
+	 *
 	 * @see Countable::count
 	 *
 	 * @since 0.1
@@ -376,6 +381,19 @@ class Diff extends \GenericArrayObject implements IDiff {
 		}
 
 		return $count;
+	}
+
+	/**
+	 * @see IDiff::removeEmptyOperations
+	 *
+	 * @since 0.3
+	 */
+	public function removeEmptyOperations() {
+		foreach ( $this->getArrayCopy() as $key => $operation ) {
+			if ( $operation instanceof \Diff\IDiff && $operation->isEmpty() ) {
+				unset( $this[$key] );
+			}
+		}
 	}
 
 }
