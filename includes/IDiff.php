@@ -21,7 +21,7 @@ interface IDiff extends IDiffOp, Appendable, \ArrayAccess, \Traversable {
 	 * @since 0.1
 	 *
 	 * @param IDiffOp[] $operations
-	 * @patam string|integer|null $parentKey
+	 * @param string|integer|null $parentKey
 	 */
 	public function __construct( array $operations, $parentKey = null );
 
@@ -82,5 +82,12 @@ interface IDiff extends IDiffOp, Appendable, \ArrayAccess, \Traversable {
 	 * @return IDiff
 	 */
 	public function getApplicableDiff( array $currentObject );
+
+	/**
+	 * Removes empty IDiff DiffOps from the diff.
+	 *
+	 * @since 0.3
+	 */
+	public function removeEmptyOperations();
 
 }

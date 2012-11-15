@@ -66,7 +66,7 @@ class Diff extends \GenericArrayObject implements IDiff {
 	 *
 	 * @since 0.1
 	 *
-	 * @param array $operations Operations in array format
+	 * @param IDiffOp[] $operations
 	 * @param string|integer|null $parentKey
 	 */
 	public function __construct( array $operations, $parentKey = null ) {
@@ -294,22 +294,36 @@ class Diff extends \GenericArrayObject implements IDiff {
 		 * @var IDiffOp $diffOp
 		 */
 		foreach ( $originDiff as $key => $diffOp ) {
-			if ( $originDiff->getType() === 'list' || array_key_exists( $key, $currentObject ) || $diffOp->getType() === 'add' ) {
+			if (
+				// If the diff is a list, we do not need to check the keys
+				$originDiff->getType() === 'list'
+
+				// If it's not a list but the key is present, we're also fine
+				|| array_key_exists( $key, $currentObject )
+
+				// The key does not need to be present for new elements
+				|| $diffOp->getType() === 'add'
+
+				// Neither does it need to be present for list diffs that only have additions
+				|| ( $diffOp->getType() === 'list' && $diffOp->getRemovals() === array() ) ) {
+
 				if ( $diffOp->isAtomic() ) {
 					if ( $originDiff->getType() === 'list' ) {
 						$isRemove = $diffOp->getType() === 'remove';
-						$value = $isRemove ? $diffOp->getOldValue() : $diffOp->getNewValue();
 
 						if ( !$isRemove ||
-							( $isRemove && in_array( $value, $currentObject ) )
+							( $isRemove && in_array( $diffOp->getOldValue(), $currentObject ) )
 						) {
 							$diff[] = $diffOp;
 						}
 					}
 					else {
 						$canApplyOp =
-							( $diffOp->getType() === 'add' && !array_key_exists( $key, $currentObject ) )
-								|| (
+								( // An add operation for an element not yet present
+									$diffOp->getType() === 'add'
+									&& !array_key_exists( $key, $currentObject )
+								)
+								|| ( // A change or remove operation for a present element with correct source value
 									$diffOp->getType() !== 'add'
 									&& array_key_exists( $key, $currentObject )
 									&& $currentObject[$key] === $diffOp->getOldValue()
@@ -322,6 +336,12 @@ class Diff extends \GenericArrayObject implements IDiff {
 				}
 				else {
 					$childDiff = $diffOp->getType() === 'map' ? MapDiff::newEmpty( $key ) : ListDiff::newEmpty( $key );
+
+					// If the key was not yet present for a list diff with only additions, we need to add a new element
+					if ( $diffOp->getType() === 'list' && $diffOp->getRemovals() === array() ) {
+						$currentObject[$key] = array();
+					}
+
 					$this->addReversibleOperations( $childDiff, $diffOp, $currentObject[$key] );
 
 					if ( !$childDiff->isEmpty() ) {
@@ -359,6 +379,11 @@ class Diff extends \GenericArrayObject implements IDiff {
 	}
 
 	/**
+	 * Counts the number of atomic operations in the diff.
+	 * This means the size of a diff with as elements only empty diffs will be 0.
+	 * Or that the size of a diff with one atomic operation and one diff that itself
+	 * holds two atomic operations will be 3.
+	 *
 	 * @see Countable::count
 	 *
 	 * @since 0.1
@@ -376,6 +401,19 @@ class Diff extends \GenericArrayObject implements IDiff {
 		}
 
 		return $count;
+	}
+
+	/**
+	 * @see IDiff::removeEmptyOperations
+	 *
+	 * @since 0.3
+	 */
+	public function removeEmptyOperations() {
+		foreach ( $this->getArrayCopy() as $key => $operation ) {
+			if ( $operation instanceof \Diff\IDiff && $operation->isEmpty() ) {
+				unset( $this[$key] );
+			}
+		}
 	}
 
 }
