@@ -322,8 +322,8 @@ class Diff extends \GenericArrayObject implements IDiff {
 								( // An add operation for an element not yet present
 									$diffOp->getType() === 'add'
 									&& !array_key_exists( $key, $currentObject )
-								)
-								|| ( // A change or remove operation for a present element with correct source value
+								// A change or remove operation for a present element with correct source value
+								) || (
 									$diffOp->getType() !== 'add'
 									&& array_key_exists( $key, $currentObject )
 									&& $currentObject[$key] === $diffOp->getOldValue()

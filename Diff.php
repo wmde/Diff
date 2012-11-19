@@ -21,7 +21,9 @@
  */
 
 call_user_func( function() {
+	// @codeCoverageIgnoreStart
 	$extension = defined( 'MEDIAWIKI' ) ? 'mw' : 'standalone';
 	require_once __DIR__ . '/Diff.' . $extension . '.php';
+	// @codeCoverageIgnoreEnd
 } );
 
