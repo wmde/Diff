@@ -40,6 +40,13 @@ $messages['be-tarask'] = array(
 	'diff-desc' => 'Бібліятэка для параўнаньня структураваных зьвестак',
 );
 
+/** Czech (česky)
+ * @author Mormegil
+ */
+$messages['cs'] = array(
+	'diff-desc' => 'Knihovna pro zjišťování změn ve strukturovaných datech',
+);
+
 /** Danish (dansk)
  * @author Kaare
  */
