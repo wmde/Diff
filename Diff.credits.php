@@ -1,6 +1,6 @@
 <?php
 
-define( 'Diff_VERSION', '0.3 alpha' );
+define( 'Diff_VERSION', '0.3' );
 
 /**
  * Credits file for the Diff library.
