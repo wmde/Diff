@@ -209,3 +209,10 @@ $messages['uk'] = array(
 $messages['vi'] = array(
 	'diff-desc' => 'Thư viện so sánh dữ liệu có cấu trúc',
 );
+
+/** Traditional Chinese (中文（繁體）‎)
+ * @author Justincheng12345
+ */
+$messages['zh-hant'] = array(
+	'diff-desc' => '用於結構化資料的差別庫',
+);
