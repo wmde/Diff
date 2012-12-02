@@ -75,6 +75,13 @@ $messages['es'] = array(
 	'diff-desc' => 'Biblioteca de diferencias para datos estructurados',
 );
 
+/** Basque (euskara)
+ * @author Theklan
+ */
+$messages['eu'] = array(
+	'diff-desc' => 'Diff liburutegia data egituratuetarako',
+);
+
 /** Persian (فارسی)
  * @author Reza1615
  */
