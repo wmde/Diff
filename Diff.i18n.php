@@ -196,6 +196,13 @@ $messages['pt-br'] = array(
 	'diff-desc' => 'Biblioteca Diff para dados estruturados',
 );
 
+/** Swedish (svenska)
+ * @author WikiPhoenix
+ */
+$messages['sv'] = array(
+	'diff-desc' => 'Differansbibliotek för strukturerade data',
+);
+
 /** Tagalog (Tagalog)
  * @author AnakngAraw
  */
