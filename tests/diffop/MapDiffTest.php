@@ -1,12 +1,14 @@
 <?php
 
 namespace Diff\Test;
+use Diff\Diff;
 use Diff\MapDiff;
-use Diff\ListDiff;
 use Diff\DiffOpRemove;
 use Diff\DiffOpAdd;
 use Diff\DiffOpChange;
-use Diff\IDiffOp;
+use Diff\DiffOp;
+use Diff\MapDiffer;
+use Diff\ListDiffer;
 
 /**
  * Tests for the Diff\MapDiff class.
@@ -29,9 +31,10 @@ use Diff\IDiffOp;
  * @file
  * @since 0.1
  *
- * @ingroup Diff
- * @ingroup Test
+ * @ingroup DiffTest
+ *
  * @group Diff
+ * @group DiffOp
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -73,15 +76,15 @@ class MapDiffTest extends DiffOpTest {
 			new DiffOpRemove( 1 ),
 			new DiffOpChange( 9000, 9001 ),
 			new DiffOpChange( 5, 1 ),
-			new ListDiff( array(
+			new Diff( array(
 				new DiffOpAdd( 42 ),
 				new DiffOpRemove( 1 ),
-			) ),
-			new MapDiff( array(
+			), false ),
+			new Diff( array(
 				new DiffOpAdd( 42 ),
 				new DiffOpRemove( 1 ),
 				new DiffOpChange( 9000, 9001 ),
-			) ),
+			), true ),
 		);
 
 		$argLists = array();
@@ -155,19 +158,21 @@ class MapDiffTest extends DiffOpTest {
 	 * @dataProvider recursionProvider
 	 */
 	public function testRecursion( array $from, array $to, $expected ) {
-		$diff = MapDiff::newFromArrays( $from, $to, true );
+		$mapDiffer = new MapDiffer( true );
+		$listDiffer = new ListDiffer();
+
+		$diff = new Diff( $mapDiffer->doDiff( $from, $to ) );
 
 		foreach ( $expected as $key => &$value ) {
-			if ( $value === 'list' ) {
-				$value = ListDiff::newFromArrays(
-					array_key_exists( $key, $from ) ? $from[$key] : array(),
-					array_key_exists( $key, $to ) ? $to[$key] : array()
-				);
-			}
-			elseif ( $value === 'map' ) {
-				$value = MapDiff::newFromArrays(
-					array_key_exists( $key, $from ) ? $from[$key] : array(),
-					array_key_exists( $key, $to ) ? $to[$key] : array()
+			if ( $value === 'list' || $value === 'map' ) {
+				$differ = $value === 'list' ? $listDiffer : $mapDiffer;
+
+				$value = new Diff(
+					$differ->doDiff(
+						array_key_exists( $key, $from ) ? $from[$key] : array(),
+						array_key_exists( $key, $to ) ? $to[$key] : array()
+					),
+					$value === 'map'
 				);
 			}
 		}
@@ -241,11 +246,11 @@ class MapDiffTest extends DiffOpTest {
 	 * @dataProvider newFromArraysProvider
 	 */
 	public function testNewFromArrays( array $from, array $to, array $expected ) {
-		$diff = MapDiff::newFromArrays( $from, $to );
+		$differ = new MapDiffer( true );
+		$diff = new Diff( $differ->doDiff( $from, $to ) );
 
-		$this->assertInstanceOf( '\Diff\MapDiff', $diff );
-		$this->assertInstanceOf( '\Diff\IDiffOp', $diff );
-		$this->assertInstanceOf( '\Diff\IDiff', $diff );
+		$this->assertInstanceOf( '\Diff\DiffOp', $diff );
+		$this->assertInstanceOf( '\Diff\Diff', $diff );
 		$this->assertInstanceOf( '\ArrayObject', $diff );
 
 		// Sort to get rid of differences in order, since no promises about order are made.
@@ -294,12 +299,12 @@ class MapDiffTest extends DiffOpTest {
 	 * @dataProvider elementInstancesProvider
 	 */
 	public function testGetAdditions( array $operations ) {
-		$diff = new MapDiff( $operations );
+		$diff = new Diff( $operations, true );
 
 		$changes = array();
 
 		/**
-		 * @var IDiffOp $operation
+		 * @var DiffOp $operation
 		 */
 		foreach ( $operations as $operation ) {
 			if ( $operation->getType() == 'change' ) {
@@ -325,7 +330,8 @@ class MapDiffTest extends DiffOpTest {
 			'a' => 'b',
 		);
 
-		$diff = MapDiff::newFromArrays( $old, $new, true );
+		$differ = new MapDiffer( true );
+		$diff = new Diff( $differ->doDiff( $old, $new ) );
 
 		$this->assertTrue( $diff->offsetExists( 'en' ) );
 		$this->assertTrue( $diff->offsetExists( 'de' ) );
@@ -333,16 +339,16 @@ class MapDiffTest extends DiffOpTest {
 		$this->assertFalse( $diff->offsetExists( 'onoez' ) );
 		$this->assertFalse( $diff->offsetExists( 'a' ) );
 
-		$this->assertInstanceOf( '\Diff\ListDiff', $diff['de'] );
-		$this->assertInstanceOf( '\Diff\ListDiff', $diff['nl'] );
-		$this->assertInstanceOf( '\Diff\ListDiff', $diff['en'] );
+		$this->assertInstanceOf( '\Diff\Diff', $diff['de'] );
+		$this->assertInstanceOf( '\Diff\Diff', $diff['nl'] );
+		$this->assertInstanceOf( '\Diff\Diff', $diff['en'] );
 
 		$this->assertEquals( 2, count( $diff['de'] ) );
 		$this->assertEquals( 2, count( $diff['nl'] ) );
 		$this->assertEquals( 2, count( $diff['en'] ) );
 
 		/**
-		 * @var ListDiff $listDiff
+		 * @var Diff $listDiff
 		 */
 		$listDiff = $diff['en'];
 
@@ -364,7 +370,8 @@ class MapDiffTest extends DiffOpTest {
 			'en' => array( 'a' => 'en-foo', 'b' => 'en-bar' ),
 		);
 
-		$diff = MapDiff::newFromArrays( $old, $new, true );
+		$differ = new MapDiffer( true );
+		$diff = new Diff( $differ->doDiff( $old, $new ) );
 
 		$this->assertTrue( $diff->isEmpty() );
 		$this->assertTrue( $diff->getOperations() === array() );

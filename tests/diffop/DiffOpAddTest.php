@@ -1,9 +1,10 @@
 <?php
 
-namespace Diff;
+namespace Diff\Test;
+use Diff\DiffOpAdd as DiffOpAdd;
 
 /**
- * Interface for objects that can diff two arrays to an array of DiffOp.
+ * Tests for the Diff\DiffOpAdd class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,27 +21,52 @@ namespace Diff;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.4
- *
  * @file
- * @ingroup Diff
+ * @since 0.1
+ *
+ * @ingroup DiffTest
+ *
+ * @group Diff
+ * @group DiffOp
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Differ {
+class DiffOpAddTest extends DiffOpTest {
 
 	/**
-	 * Takes two arrays, computes the diff, and returns this diff as an array of DiffOp.
+	 * @see AbstractTestCase::getClass
 	 *
 	 * @since 0.1
 	 *
-	 * @param array $oldValues The first array
-	 * @param array $newValues The second array
-	 *
-	 * @throws Exception
-	 * @return DiffOp[]
+	 * @return string
 	 */
-	public function doDiff( array $oldValues, array $newValues );
+	public function getClass() {
+		return '\Diff\DiffOpAdd';
+	}
+
+	/**
+	 * @see AbstractTestCase::constructorProvider
+	 *
+	 * @since 0.1
+	 *
+	 * @return array
+	 */
+	public function constructorProvider() {
+		return array(
+			array( true, 'foo' ),
+			array( true, array() ),
+			array( true, true ),
+			array( true, 42 ),
+			array( false ),
+		);
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testGetNewValue( DiffOpAdd $diffOp, array $constructorArgs ) {
+		$this->assertEquals( $constructorArgs[0], $diffOp->getNewValue() );
+	}
 
 }

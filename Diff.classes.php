@@ -20,13 +20,19 @@ return array(
 	'Diff\ListDiffer' => 'includes/differ/ListDiffer.php',
 	'Diff\MapDiffer' => 'includes/differ/MapDiffer.php',
 
-
+	'Diff\AtomicDiffOp' => 'includes/diffop/AtomicDiffOp.php',
 	'Diff\DiffOp' => 'includes/diffop/DiffOp.php',
+	'Diff\IDiffOp' => 'includes/diffop/DiffOp.php',
 	'Diff\DiffOpAdd' => 'includes/diffop/DiffOpAdd.php',
 	'Diff\DiffOpChange' => 'includes/diffop/DiffOpChange.php',
 	'Diff\DiffOpRemove' => 'includes/diffop/DiffOpRemove.php',
-	'Diff\IDiffOp' => 'includes/diffop/IDiffOp.php',
 
+	'Diff\ListPatcher' => 'includes/patcher/ListPatcher.php',
+	'Diff\MapPatcher' => 'includes/patcher/MapPatcher.php',
+	'Diff\Patcher' => 'includes/patcher/Patcher.php',
+	'Diff\PatcherException' => 'includes/patcher/PatcherException.php',
+	'Diff\PreviewablePatcher' => 'includes/patcher/PreviewablePatcher.php',
+	'Diff\ThrowingPatcher' => 'includes/patcher/ThrowingPatcher.php',
 
 	'Diff\Diff' => 'includes/diffop/diff/Diff.php',
 	'Diff\IDiff' => 'includes/diffop/diff/IDiff.php',
@@ -34,5 +40,5 @@ return array(
 	'Diff\MapDiff' => 'includes/diffop/diff/MapDiff.php',
 
 	'AbstractTestCase' => 'tests/AbstractTestCase.php',
-	'Diff\Test\DiffOpTest' => 'tests/DiffOpTest.php',
+	'Diff\Test\DiffOpTest' => 'tests/diffop/DiffOpTest.php',
 );

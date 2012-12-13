@@ -4,18 +4,41 @@ Extension page on mediawiki.org: https://www.mediawiki.org/wiki/Extension:Diff
 Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/Diff.git;a=blob;f=RELEASE-NOTES
 
 
+=== Version 0.4 ===
+(dev)
+
+; Additions
+
+* Split off diffing code from MapDiff and ListDiff to dedicated Differ classes
+* Added dedicated patcher classes, which are used for the getApplicableDiff functionality
+
+; Deprecations
+
+* Deprecated ListDiff:newFromArrays and MapDiff::newFromArrays
+* Deprecated ListDiff::newEmpty and MapDiff::newEmpty
+* Deprecated Diff::getApplicableDiff
+* Soft deprecated DiffOp interface in favour of DiffOp
+* Soft deprecated Diff interface in favour of Diff
+* Soft deprecated MapDiff and ListDiff in favour of Diff
+
+; Removals
+
+* Removed parentKey functionality from Diff
+* Removed constructor from Diff interface
+* Removed Diff::newEmpty
+
 === Version 0.3 ===
 2012-11-21
 
 * Improved entry point and setup code. Diff.php is now the main entry point for both MW extension and standalone library
 * ListDiffs with only add operations can now be applied on top of bases that do not have their key
-* Added IDiff::removeEmptyOperations
+* Added Diff::removeEmptyOperations
 * Improved type hinting
 * Improved test coverage
 ** Added constructor tests for MapDiff and ListDiff
 ** Added extra tests for Diff and MapDiff
 ** Test coverage is now 100%
-* Removed static method from IDiff interface since this is not allowed in strict mode
+* Removed static method from Diff interface
 
 === Version 0.2 ===
 2012-11-01

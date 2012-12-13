@@ -14,13 +14,13 @@ namespace Diff;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class DiffOpChange extends DiffOp {
+class DiffOpChange extends AtomicDiffOp {
 
 	protected $newValue;
 	protected $oldValue;
 
 	/**
-	 * @see IDiffOp::getType
+	 * @see DiffOp::getType
 	 *
 	 * @since 0.1
 	 *
@@ -83,17 +83,6 @@ class DiffOpChange extends DiffOp {
 	 */
 	public function unserialize( $serialization ) {
 		list( $this->newValue, $this->oldValue ) = unserialize( $serialization );
-	}
-
-	/**
-	 * @see IDiffOp::isAtomic
-	 *
-	 * @since 0.1
-	 *
-	 * @return boolean
-	 */
-	public function isAtomic() {
-		return true;
 	}
 
 }

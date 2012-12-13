@@ -1,9 +1,11 @@
 <?php
 
-namespace Diff;
+namespace Diff\Test;
+use Diff\Patcher;
+use Diff\Diff;
 
 /**
- * Interface for objects that can diff two arrays to an array of DiffOp.
+ * Tests for the Diff\MapPatcher class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,27 +22,36 @@ namespace Diff;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
+ * @file
  * @since 0.4
  *
- * @file
- * @ingroup Diff
+ * @ingroup DiffTest
+ *
+ * @group Diff
+ * @group DiffPatcher
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Differ {
+class MapPatcherTest extends \MediaWikiTestCase {
+
+	public function patchProvider() {
+		// TODO
+		return array();
+	}
 
 	/**
-	 * Takes two arrays, computes the diff, and returns this diff as an array of DiffOp.
+	 * @dataProvider patchProvider
 	 *
-	 * @since 0.1
-	 *
-	 * @param array $oldValues The first array
-	 * @param array $newValues The second array
-	 *
-	 * @throws Exception
-	 * @return DiffOp[]
+	 * @param Patcher $patcher
+	 * @param array $base
+	 * @param Diff $diff
+	 * @param array $expected
 	 */
-	public function doDiff( array $oldValues, array $newValues );
+	public function testPatch( Patcher $patcher, array $base, Diff $diff, array $expected ) {
+		$actual = $patcher->patch( $base, $diff );
+
+		$this->assertArrayEquals( $actual, $expected );
+	}
 
 }

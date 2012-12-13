@@ -24,10 +24,10 @@ use Diff\DiffOpChange as DiffOpChange;
  * @file
  * @since 0.1
  *
- * @ingroup Diff
- * @ingroup Test
+ * @ingroup DiffTest
  *
  * @group Diff
+ * @group DiffOp
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

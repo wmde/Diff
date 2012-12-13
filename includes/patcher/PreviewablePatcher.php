@@ -1,10 +1,12 @@
 <?php
 
-namespace Diff\Test;
-use Diff\DiffOpRemove as DiffOpRemove;
+namespace Diff;
 
 /**
- * Tests for the Diff\DiffOpRemove class.
+ * Interface for patchers that can, given a base and a diff, provide
+ * the difference between the base and the result once the diff is
+ * provided to it. This difference can differ from the diff since
+ * some operations might not be applicable to the base.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,52 +23,28 @@ use Diff\DiffOpRemove as DiffOpRemove;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
+ * @since 0.4
+ *
  * @file
- * @since 0.1
- *
  * @ingroup Diff
- * @ingroup Test
- *
- * @group Diff
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class DiffOpRemoveTest extends DiffOpTest {
+interface PreviewablePatcher extends Patcher {
 
 	/**
-	 * @see AbstractTestCase::getClass
+	 * Returns the operations that can be applied to the base.
+	 * The returned operations are thus the difference between
+	 * the result of @see patch and it's input base value.
 	 *
-	 * @since 0.1
+	 * @since 0.4
 	 *
-	 * @return string
+	 * @param array $base
+	 * @param Diff $diffOps
+	 *
+	 * @return Diff
 	 */
-	public function getClass() {
-		return '\Diff\DiffOpRemove';
-	}
-
-	/**
-	 * @see AbstractTestCase::constructorProvider
-	 *
-	 * @since 0.1
-	 *
-	 * @return array
-	 */
-	public function constructorProvider() {
-		return array(
-			array( true, 'foo' ),
-			array( true, array() ),
-			array( true, true ),
-			array( true, 42 ),
-			array( false ),
-		);
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testGetNewValue( DiffOpRemove $diffOp, array $constructorArgs ) {
-		$this->assertEquals( $constructorArgs[0], $diffOp->getOldValue() );
-	}
+	public function getApplicableDiff( array $base, Diff $diffOps );
 
 }

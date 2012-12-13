@@ -7,8 +7,7 @@ namespace Diff;
  * Since items are not identified by keys, we only deal with the actual values,
  * so can only compute additions and removals.
  *
- * TODO: currently not figured out how duplicate entries should be treated.
- * Using native array_diff behaviour for now, but might not be what we want.
+ * Soft deprecated since 0.4, just use Diff
  *
  * @since 0.1
  *
@@ -20,24 +19,21 @@ namespace Diff;
  */
 class ListDiff extends Diff {
 
-	protected $typePointers = array(
-		'add' => array(),
-		'remove' => array(),
-	);
+	public function __construct( array $operations = array() ) {
+		parent::__construct( $operations, false );
+	}
 
 	/**
 	 * Creates and returns an empty ListDiff.
-	 * @see IDiff::newEmpty
+	 * @see Diff::newEmpty
 	 *
 	 * @since 0.1
 	 * @deprecated since 0.4, just use the constructor
 	 *
-	 * @param $parentKey = null
-	 *
 	 * @return ListDiff
 	 */
-	public static function newEmpty( $parentKey = null ) {
-		return new static( array(), $parentKey );
+	public static function newEmpty() {
+		return new static( array() );
 	}
 
 	/**
@@ -57,7 +53,7 @@ class ListDiff extends Diff {
 	}
 
 	/**
-	 * @see IDiffOp::getType
+	 * @see DiffOp::getType
 	 *
 	 * @since 0.1
 	 *
