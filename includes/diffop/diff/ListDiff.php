@@ -30,6 +30,7 @@ class ListDiff extends Diff {
 	 * @see IDiff::newEmpty
 	 *
 	 * @since 0.1
+	 * @deprecated since 0.4, just use the constructor
 	 *
 	 * @param $parentKey = null
 	 *
@@ -43,6 +44,7 @@ class ListDiff extends Diff {
 	 * Creates a new ListDiff given two arrays.
 	 *
 	 * @since 0.1
+	 * @deprecated since 0.4, use ListDiffer::doDiff instead
 	 *
 	 * @param array $firstList
 	 * @param array $secondList
@@ -50,17 +52,8 @@ class ListDiff extends Diff {
 	 * @return ListDiff
 	 */
 	public static function newFromArrays( array $firstList, array $secondList ) {
-		$operations = array();
-
-		foreach ( array_diff( $secondList, $firstList ) as $addition ) {
-			$operations[] = new DiffOpAdd( $addition );
-		}
-
-		foreach ( array_diff( $firstList, $secondList ) as $removal ) {
-			$operations[] = new DiffOpRemove( $removal );
-		}
-
-		return new static( $operations );
+		$differ = new ListDiffer();
+		return new static( $differ->doDiff( $firstList, $secondList ) );
 	}
 
 	/**
