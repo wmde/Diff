@@ -33,6 +33,13 @@ $messages['ast'] = array(
 	'diff-desc' => 'Biblioteca de diferencies pa datos estructuraos',
 );
 
+/** South Azerbaijani (تورکجه)
+ * @author Mousa
+ */
+$messages['azb'] = array(
+	'diff-desc' => 'قورولوشلو وئریلر اوچون موقاییسه کیتابخاناسی',
+);
+
 /** Belarusian (Taraškievica orthography) (беларуская (тарашкевіца)‎)
  * @author Wizardist
  */
