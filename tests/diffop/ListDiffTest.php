@@ -4,6 +4,8 @@ namespace Diff\Test;
 use Diff\ListDiff;
 use Diff\DiffOpRemove;
 use Diff\DiffOpAdd;
+use Diff\ListDiffer;
+use Diff\Diff;
 
 /**
  * Tests for the Diff\ListDiff class.
@@ -26,9 +28,10 @@ use Diff\DiffOpAdd;
  * @file
  * @since 0.1
  *
- * @ingroup Diff
- * @ingroup Test
+ * @ingroup DiffTest
+ *
  * @group Diff
+ * @group DiffOp
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -143,13 +146,6 @@ class ListDiffTest extends DiffOpTest {
 				array( 0, '0' ),
 				array( false, null ),
 			),
-			// The arrays here are getting ignored for some reason... array_diff is weird...
-//			array(
-//				array( 1, 2, array( 'foo', 'bar' ) ),
-//				array( 1, 3, array( 'spam' ), array() ),
-//				array( 3, array( 'spam' ), array() ),
-//				array( 2, array( 'foo', 'bar' ) ),
-//			),
 		);
 	}
 
@@ -157,11 +153,12 @@ class ListDiffTest extends DiffOpTest {
 	 * @dataProvider newFromArraysProvider
 	 */
 	public function testNewFromArrays( array $from, array $to, array $additions, array $removals ) {
-		$diff = ListDiff::newFromArrays( $from, $to );
+		$differ = new ListDiffer( ListDiffer::MODE_NATIVE );
 
-		$this->assertInstanceOf( '\Diff\ListDiff', $diff );
-		$this->assertInstanceOf( '\Diff\IDiffOp', $diff );
-		$this->assertInstanceOf( '\Diff\IDiff', $diff );
+		$diff = new Diff( $differ->doDiff( $from, $to ), false );
+
+		$this->assertInstanceOf( '\Diff\DiffOp', $diff );
+		$this->assertInstanceOf( '\Diff\Diff', $diff );
 		$this->assertInstanceOf( '\ArrayObject', $diff );
 
 		// array_values because we only care about the values, not promises are made about the keys.

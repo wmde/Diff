@@ -1,10 +1,10 @@
 <?php
 
 namespace Diff\Test;
-use \Diff\IDiffOp as IDiffOp;
+use Diff\DiffOpRemove as DiffOpRemove;
 
 /**
- * Base test class for the Diff\DiffOp deriving classes.
+ * Tests for the Diff\DiffOpRemove class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,53 +24,49 @@ use \Diff\IDiffOp as IDiffOp;
  * @file
  * @since 0.1
  *
- * @ingroup Diff
- * @ingroup Test
+ * @ingroup DiffTest
  *
  * @group Diff
+ * @group DiffOp
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class DiffOpTest extends \AbstractTestCase {
+class DiffOpRemoveTest extends DiffOpTest {
 
 	/**
-	 * @dataProvider instanceProvider
+	 * @see AbstractTestCase::getClass
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
 	 */
-	public function testIsAtomic( IDiffOp $diffOp ) {
-		$this->assertInternalType( 'boolean', $diffOp->isAtomic() );
+	public function getClass() {
+		return '\Diff\DiffOpRemove';
+	}
+
+	/**
+	 * @see AbstractTestCase::constructorProvider
+	 *
+	 * @since 0.1
+	 *
+	 * @return array
+	 */
+	public function constructorProvider() {
+		return array(
+			array( true, 'foo' ),
+			array( true, array() ),
+			array( true, true ),
+			array( true, 42 ),
+			array( false ),
+		);
 	}
 
 	/**
 	 * @dataProvider instanceProvider
 	 */
-	public function testGetType( IDiffOp $diffOp ) {
-		$this->assertInternalType( 'string', $diffOp->getType() );
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testSerialization( IDiffOp $diffOp ) {
-		$this->assertEquals( $diffOp, unserialize( serialize( $diffOp ) ) );
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testCount( IDiffOp $diffOp ) {
-		if ( $diffOp->isAtomic() ) {
-			$this->assertEquals( 1, count( $diffOp ) );
-		}
-		else {
-			$count = 0;
-
-			foreach ( $diffOp as $childOp ) {
-				$count += $childOp->count();
-			}
-
-			$this->assertEquals( $count, count( $diffOp ) );
-		}
+	public function testGetNewValue( DiffOpRemove $diffOp, array $constructorArgs ) {
+		$this->assertEquals( $constructorArgs[0], $diffOp->getOldValue() );
 	}
 
 }

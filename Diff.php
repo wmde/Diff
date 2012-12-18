@@ -20,6 +20,14 @@
  * @defgroup Diff Diff
  */
 
+/**
+ * Tests part of the Diff extension.
+ *
+ * @defgroup DiffTests DiffTest
+ * @ingroup Diff
+ * @ingroup Test
+ */
+
 // @codeCoverageIgnoreStart
 call_user_func( function() {
 	$extension = defined( 'MEDIAWIKI' ) ? 'mw' : 'standalone';

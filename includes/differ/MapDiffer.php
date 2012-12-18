@@ -60,6 +60,8 @@ class MapDiffer implements Differ {
 	}
 
 	/**
+	 * @see Differ::doDiff
+	 *
 	 * Computes the diff between two associate arrays.
 	 *
 	 * @since 0.4
@@ -68,7 +70,7 @@ class MapDiffer implements Differ {
 	 * @param array $newValues The second array
 	 *
 	 * @throws Exception
-	 * @return IDiffOp[]
+	 * @return DiffOp[]
 	 */
 	public function doDiff( array $oldValues, array $newValues ) {
 		if ( function_exists( 'wfProfileIn' ) ) {
@@ -91,10 +93,10 @@ class MapDiffer implements Differ {
 					$new = $hasNew ? $newSet[$key] : array();
 
 					if ( $this->isAssociative( $old ) || $this->isAssociative( $new ) ) {
-						$diff = new MapDiff( $this->doDiff( $old, $new ) );
+						$diff = new Diff( $this->doDiff( $old, $new ), true );
 					}
 					else {
-						$diff = new ListDiff( $this->listDiffer->doDiff( $old, $new ) );
+						$diff = new Diff( $this->listDiffer->doDiff( $old, $new ), false );
 					}
 
 					if ( !$diff->isEmpty() ) {

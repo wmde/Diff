@@ -3,7 +3,9 @@
 namespace Diff;
 
 /**
- * Interface for diffs. Diffs are collections of IDiffOp objects.
+ * Interface for diffs. Diffs are collections of DiffOp objects.
+ *
+ * Softly deprecated (since 0.4), use Diff instead.
  *
  * @since 0.1
  *
@@ -16,21 +18,11 @@ namespace Diff;
 interface IDiff extends IDiffOp, Appendable, \ArrayAccess, \Traversable {
 
 	/**
-	 * Constructor.
-	 *
-	 * @since 0.1
-	 *
-	 * @param IDiffOp[] $operations
-	 * @param string|integer|null $parentKey
-	 */
-	public function __construct( array $operations, $parentKey = null );
-
-	/**
 	 * Returns the operations that make up the diff.
 	 *
 	 * @since 0.1
 	 *
-	 * @return IDiffOp[]
+	 * @return DiffOp[]
 	 */
 	public function getOperations();
 
@@ -50,44 +42,37 @@ interface IDiff extends IDiffOp, Appendable, \ArrayAccess, \Traversable {
 	 *
 	 * @since 0.1
 	 *
-	 * @param IDiffOp[] $operations
+	 * @param DiffOp[] $operations
 	 */
 	public function addOperations( array $operations );
-
-	/**
-	 * Returns the key the IDiffOp has in it's parent diff.
-	 *
-	 * @since 0.1
-	 *
-	 * @return int|null|string
-	 */
-	public function getParentKey();
-
-	/**
-	 * Returns if the IDiffOp has a parent diff key.
-	 *
-	 * @since 0.1
-	 *
-	 * @return boolean
-	 */
-	public function hasParentKey();
 
 	/**
 	 * Filters the diff for operations that can be applied to the provided object.
 	 *
 	 * @since 0.1
+	 * @deprecated since 0.4, use Patcher::getApplicableDiff
 	 *
 	 * @param array $currentObject
 	 *
-	 * @return IDiff
+	 * @return Diff
 	 */
 	public function getApplicableDiff( array $currentObject );
 
 	/**
-	 * Removes empty IDiff DiffOps from the diff.
+	 * Removes empty Diff DiffOps from the diff.
 	 *
 	 * @since 0.3
 	 */
 	public function removeEmptyOperations();
+
+	/**
+	 * Returns if the diff is associative or not.
+	 * Associative diffs are those where the operation keys are relevant.
+	 *
+	 * @since 0.4
+	 *
+	 * @return boolean
+	 */
+	public function isAssociative();
 
 }

@@ -5,8 +5,10 @@ namespace Diff;
 /**
  * Class representing the diff between to (associative) arrays.
  * Since items are identified by keys, it's possible to do meaningful
- * recursive diffs. So the IDiffOp objects contained by this MapDiff can
+ * recursive diffs. So the DiffOp objects contained by this MapDiff can
  * be containers such as MapDiff and ListDiff themselves.
+ *
+ * Soft deprecated since 0.4, just use Diff
  *
  * @since 0.1
  *
@@ -18,18 +20,20 @@ namespace Diff;
  */
 class MapDiff extends Diff {
 
+	public function __construct( array $operations = array() ) {
+		parent::__construct( $operations, true );
+	}
+
 	/**
 	 * Creates and returns an empty MapDiff.
 	 *
 	 * @since 0.1
 	 * @deprecated since 0.4, just use the constructor
 	 *
-	 * @param $parentKey = null
-	 *
 	 * @return MapDiff
 	 */
-	public static function newEmpty( $parentKey = null ) {
-		return new self( array(), $parentKey );
+	public static function newEmpty() {
+		return new self( array() );
 	}
 
 	/**
@@ -60,7 +64,7 @@ class MapDiff extends Diff {
 	 * @param boolean $recursively If elements that are arrays should also be diffed.
 	 *
 	 * @throws Exception
-	 * @return IDiffOp[]
+	 * @return DiffOp[]
 	 */
 	public static function doDiff( array $oldValues, array $newValues, $recursively = false ) {
 		$differ = new MapDiffer( $recursively );
@@ -68,16 +72,7 @@ class MapDiff extends Diff {
 	}
 
 	/**
-	 * @since 0.1
-	 *
-	 * @return array
-	 */
-	public function getChanges() {
-		return $this->getTypeOperations( 'change' );
-	}
-
-	/**
-	 * @see IDiffOp::getType
+	 * @see DiffOp::getType
 	 *
 	 * @since 0.1
 	 *

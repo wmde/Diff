@@ -1,14 +1,13 @@
 <?php
 
 namespace Diff\Test;
-use Diff\Diff as Diff;
-use Diff\IDiff as IDiff;
-use Diff\IDiffOp as IDiffOp;
-use Diff\MapDiff as MapDiff;
-use Diff\ListDiff as ListDiff;
-use Diff\DiffOpAdd as DiffOpAdd;
-use Diff\DiffOpRemove as DiffOpRemove;
-use Diff\DiffOpChange as DiffOpChange;
+use Diff\Diff;
+use Diff\DiffOp;
+use Diff\MapDiff;
+use Diff\ListDiff;
+use Diff\DiffOpAdd;
+use Diff\DiffOpRemove;
+use Diff\DiffOpChange;
 
 /**
  * Tests for the Diff\Diff class.
@@ -31,11 +30,10 @@ use Diff\DiffOpChange as DiffOpChange;
  * @file
  * @since 0.1
  *
- * @ingroup Diff
- * @ingroup Test
+ * @ingroup DiffTest
  *
  * @group Diff
- * @group DiffTest
+ * @group DiffOp
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -80,7 +78,7 @@ class DiffTest extends \GenericArrayObjectTest {
 		$additions = array();
 
 		/**
-		 * @var IDiffOp $operation
+		 * @var DiffOp $operation
 		 */
 		foreach ( $operations as $operation ) {
 			if ( $operation->getType() == 'add' ) {
@@ -100,7 +98,7 @@ class DiffTest extends \GenericArrayObjectTest {
 		$removals = array();
 
 		/**
-		 * @var IDiffOp $operation
+		 * @var DiffOp $operation
 		 */
 		foreach ( $operations as $operation ) {
 			if ( $operation->getType() == 'remove' ) {
@@ -112,50 +110,28 @@ class DiffTest extends \GenericArrayObjectTest {
 	}
 
 	public function testGetType() {
-		$this->assertInternalType( 'string', Diff::newEmpty()->getType() );
+		$diff = new Diff();
+		$this->assertInternalType( 'string', $diff->getType() );
 	}
 
 	public function testPreSetElement() {
 		$pokemons = null;
 
-		$diff = ListDiff::newEmpty();
+		$diff = new Diff( array(), false );
 
 		try {
-			$diff[] = new DiffOpChange( 0 ,1 );
+			$diff[] = new DiffOpChange( 0, 1 );
 		}
 		catch( \Exception $pokemons ) {}
 
 		$this->assertInstanceOf( '\Exception', $pokemons );
 	}
 
-	public function hasParentKeyProvider() {
-		return array(
-			array( 'foo' ),
-			array( 42 ),
-			array( null ),
-			array(),
-		);
-	}
-
-	/**
-	 * @dataProvider hasParentKeyProvider
-	 */
-	public function testHasParentKey() {
-		$args = func_get_args();
-
-		$diff = array_key_exists( 0, $args ) ? Diff::newEmpty( $args[0] ) : Diff::newEmpty();
-
-		$this->assertEquals(
-			array_key_exists( 0, $args ) && $args[0] !== null,
-			$diff->hasParentKey()
-		);
-	}
-
 	/**
 	 * @dataProvider elementInstancesProvider
 	 */
 	public function testAddOperations( array $operations ) {
-		$diff = Diff::newEmpty();
+		$diff = new Diff();
 
 		$diff->addOperations( $operations );
 
@@ -168,13 +144,13 @@ class DiffTest extends \GenericArrayObjectTest {
 	public function testStuff( array $operations ) {
 		$diff = new Diff( $operations );
 
-		$this->assertInstanceOf( '\Diff\IDiff', $diff );
+		$this->assertInstanceOf( '\Diff\Diff', $diff );
 		$this->assertInstanceOf( '\ArrayObject', $diff );
 
 		$types = array();
 
 		foreach ( $diff as $operation ) {
-			$this->assertInstanceOf( '\Diff\IDiffOp', $operation );
+			$this->assertInstanceOf( '\Diff\DiffOp', $operation );
 			if ( !in_array( $operation->getType(), $types ) ) {
 				$types[] = $operation->getType();
 			}
@@ -208,14 +184,14 @@ class DiffTest extends \GenericArrayObjectTest {
 		// Diff, current object, expected
 		$argLists = array();
 
-		$diff = Diff::newEmpty( 42 );
+		$diff = new Diff();
 		$currentObject = array();
 		$expected = clone $diff;
 
 		$argLists[] = array( $diff, $currentObject, $expected, 'Empty diff should remain empty on empty base' );
 
 
-		$diff = MapDiff::newEmpty();
+		$diff = new Diff( array(), true );
 
 		$currentObject = array( 'foo' => 0, 'bar' => 1 );
 
@@ -224,10 +200,10 @@ class DiffTest extends \GenericArrayObjectTest {
 		$argLists[] = array( $diff, $currentObject, $expected, 'Empty diff should remain empty on non-empty base' );
 
 
-		$diff = new MapDiff( array(
+		$diff = new Diff( array(
 			'foo' => new DiffOpChange( 0, 42 ),
 			'bar' => new DiffOpChange( 1, 9001 ),
-		) );
+		), true );
 
 		$currentObject = array( 'foo' => 0, 'bar' => 1 );
 
@@ -242,129 +218,129 @@ class DiffTest extends \GenericArrayObjectTest {
 		) );
 		$currentObject = array();
 
-		$expected = MapDiff::newEmpty();
+		$expected = new Diff( array(), true );
 
 		$argLists[] = array( $diff, $currentObject, $expected, 'Diff with only change ops should be empty on empty base' );
 
 
-		$diff = new MapDiff( array(
+		$diff = new Diff( array(
 			'foo' => new DiffOpChange( 0, 42 ),
 			'bar' => new DiffOpChange( 1, 9001 ),
-		) );
+		), true );
 
 		$currentObject = array( 'foo' => 'something else', 'bar' => 1, 'baz' => 'o_O' );
 
-		$expected = new MapDiff( array(
+		$expected = new Diff( array(
 			'bar' => new DiffOpChange( 1, 9001 ),
-		) );
+		), true );
 
 		$argLists[] = array( $diff, $currentObject, $expected, 'Only change ops present in the base should be retained' );
 
 
-		$diff = new MapDiff( array(
+		$diff = new Diff( array(
 			'bar' => new DiffOpRemove( 9001 ),
-		) );
+		), true );
 
 		$currentObject = array();
 
-		$expected = MapDiff::newEmpty();
+		$expected = new Diff( array(), true );
 
 		$argLists[] = array( $diff, $currentObject, $expected, 'Remove ops should be removed on empty base' );
 
 
-		$diff = new MapDiff( array(
+		$diff = new Diff( array(
 			'foo' => new DiffOpAdd( 42 ),
 			'bar' => new DiffOpRemove( 9001 ),
-		) );
+		), true );
 
 		$currentObject = array( 'foo' => 'bar' );
 
-		$expected = MapDiff::newEmpty();
+		$expected = new Diff( array(), true );
 
 		$argLists[] = array( $diff, $currentObject, $expected, 'Mismatching add ops and remove ops not present in base should be removed' );
 
 
-		$diff = new MapDiff( array(
+		$diff = new Diff( array(
 			'foo' => new DiffOpAdd( 42 ),
 			'bar' => new DiffOpRemove( 9001 ),
-		) );
+		), true );
 
 		$currentObject = array( 'foo' => 42, 'bar' => 9001 );
 
-		$expected = new MapDiff( array(
+		$expected = new Diff( array(
 			'bar' => new DiffOpRemove( 9001 ),
-		) );
+		), true );
 
 		$argLists[] = array( $diff, $currentObject, $expected, 'Remove ops present in base should be retained' );
 
 
-		$diff = new MapDiff( array(
+		$diff = new Diff( array(
 			'foo' => new DiffOpAdd( 42 ),
 			'bar' => new DiffOpRemove( 9001 ),
-		) );
+		), true );
 
 		$currentObject = array();
 
-		$expected = new MapDiff( array(
+		$expected = new Diff( array(
 			'foo' => new DiffOpAdd( 42 ),
-		) );
+		), true );
 
 		$argLists[] = array( $diff, $currentObject, $expected, 'Add ops not present in the base should be retained (MapDiff)' );
 
 
-		$diff = new ListDiff( array(
+		$diff = new Diff( array(
 			new DiffOpAdd( 42 ),
 			new DiffOpRemove( 9001 ),
-		) );
+		), false );
 
 		$currentObject = array();
 
-		$expected = new MapDiff( array(
+		$expected = new Diff( array(
 			new DiffOpAdd( 42 ),
-		) );
+		), true );
 
 		$argLists[] = array( $diff, $currentObject, $expected, 'Add ops not present in the base should be retained (ListDiff)' );
 
 
-		$diff = new ListDiff( array(
+		$diff = new Diff( array(
 			new DiffOpAdd( 42 ),
 			new DiffOpRemove( 9001 ),
-		) );
+		), false );
 
 		$currentObject = array( 1, 42, 9001 );
 
-		$expected = new ListDiff( array(
+		$expected = new Diff( array(
 			new DiffOpAdd( 42 ),
 			new DiffOpRemove( 9001 ),
-		) );
+		), false );
 
 		$argLists[] = array( $diff, $currentObject, $expected, 'Add ops with values present in the base should be retained in ListDiff' );
 
 
-		$diff = new MapDiff( array(
-			'foo' => new MapDiff( array( 'bar' => new DiffOpChange( 0, 1 ) ) ),
-			'le-non-existing-element' => new MapDiff( array( 'bar' => new DiffOpChange( 0, 1 ) ) ),
-			'spam' => new ListDiff( array( new DiffOpAdd( 42 ), new DiffOpAdd( 23 ), new DiffOpRemove( 'ohi' ), new DiffOpRemove( 'doom' ) ) ),
+		$diff = new Diff( array(
+			'foo' => new Diff( array( 'bar' => new DiffOpChange( 0, 1 ) ), true ),
+			'le-non-existing-element' => new Diff( array( 'bar' => new DiffOpChange( 0, 1 ) ), true ),
+			'spam' => new Diff( array( new DiffOpAdd( 42 ) ), false ),
 			new DiffOpAdd( 9001 ),
-		) );
+		), true );
 
 		$currentObject = array(
 			'foo' => array( 'bar' => 0, 'baz' => 'O_o' ),
 			'spam' => array( 23, 'ohi' )
 		);
 
-		$expected = new MapDiff( array(
-			'foo' => new MapDiff( array( 'bar' => new DiffOpChange( 0, 1 ) ) ),
-			'spam' => new ListDiff( array( new DiffOpAdd( 42 ), new DiffOpAdd( 23 ), new DiffOpRemove( 'ohi' ) ) ),
+		$expected = new Diff( array(
+			'foo' => new Diff( array( 'bar' => new DiffOpChange( 0, 1 ) ), true ),
+			'spam' => new Diff( array( new DiffOpAdd( 42 ) ), false ),
 			new DiffOpAdd( 9001 ),
-		) );
+		), true );
 
 		$argLists[] = array( $diff, $currentObject, $expected, 'Recursion should work properly' );
 
 
-		$diff = new MapDiff( array(
-			'en' => new ListDiff( array( new DiffOpAdd( 42 ) ) ),
-		) );
+		$diff = new Diff( array(
+			'en' => new Diff( array( new DiffOpAdd( 42 ) ), false ),
+		), true );
 
 		$currentObject = array();
 
@@ -373,9 +349,9 @@ class DiffTest extends \GenericArrayObjectTest {
 		$argLists[] = array( $diff, $currentObject, $expected, 'list diffs containing only add ops should be retained even when not in the base' );
 
 
-		$diff = new MapDiff( array(
-			'en' => new ListDiff( array( new DiffOpRemove( 42 ) ) ),
-		) );
+		$diff = new Diff( array(
+			'en' => new Diff( array( new DiffOpRemove( 42 ) ), false ),
+		), true );
 
 		$currentObject = array(
 			'en' => array( 42 ),
@@ -391,28 +367,15 @@ class DiffTest extends \GenericArrayObjectTest {
 	/**
 	 * @dataProvider getApplicableDiffProvider
 	 *
-	 * @param \Diff\IDiff $diff
+	 * @param Diff $diff
 	 * @param array $currentObject
-	 * @param \Diff\IDiff $expected
+	 * @param Diff $expected
 	 * @param string|null $message
 	 */
-	public function testGetApplicableDiff( IDiff $diff, array $currentObject, IDiff $expected, $message = null ) {
+	public function testGetApplicableDiff( Diff $diff, array $currentObject, Diff $expected, $message = null ) {
 		$actual = $diff->getApplicableDiff( $currentObject );
 
 		$this->assertEquals( $expected->getOperations(), $actual->getOperations(), $message );
-		$this->assertEquals( $expected->getParentKey(), $actual->getParentKey(), 'Parent keys should match' );
-	}
-
-	public function testNewEmpty() {
-		$diff = Diff::newEmpty();
-
-		$this->assertTrue( $diff->isEmpty() );
-		$this->assertEquals( null, $diff->getParentKey() );
-
-		$diff = Diff::newEmpty( '~=[,,_,,]:3' );
-
-		$this->assertTrue( $diff->isEmpty() );
-		$this->assertEquals( '~=[,,_,,]:3', $diff->getParentKey() );
 	}
 
 	/**
@@ -424,7 +387,7 @@ class DiffTest extends \GenericArrayObjectTest {
 		$this->assertInternalType( 'array', $ops );
 
 		foreach ( $ops as $diffOp ) {
-			$this->assertInstanceOf( '\Diff\IDiffOp', $diffOp );
+			$this->assertInstanceOf( '\Diff\DiffOp', $diffOp );
 		}
 
 		$this->assertArrayEquals( $ops, $diff->getOperations() );
@@ -434,10 +397,10 @@ class DiffTest extends \GenericArrayObjectTest {
 		$diff = new Diff( array() );
 
 		$diff['foo'] = new DiffOpAdd( 1 );
-		$diff['bar'] = new MapDiff( array( new DiffOpAdd( 1 ) ) );
-		$diff['baz'] = new ListDiff( array( new DiffOpAdd( 1 ) ) );
-		$diff['bah'] = new ListDiff( array() );
-		$diff['spam'] = new MapDiff( array() );
+		$diff['bar'] = new Diff( array( new DiffOpAdd( 1 ) ), true );
+		$diff['baz'] = new Diff( array( new DiffOpAdd( 1 ) ), false );
+		$diff['bah'] = new Diff( array(), false );
+		$diff['spam'] = new Diff( array(), true );
 
 		$diff->removeEmptyOperations();
 

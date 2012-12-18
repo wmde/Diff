@@ -1,10 +1,9 @@
 <?php
 
-namespace Diff\Test;
-use Diff\DiffOpAdd as DiffOpAdd;
+namespace Diff;
 
 /**
- * Tests for the Diff\DiffOpAdd class.
+ * Interface for objects that can apply an array of DiffOp on an array.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,52 +20,27 @@ use Diff\DiffOpAdd as DiffOpAdd;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
+ * @since 0.4
+ *
  * @file
- * @since 0.1
- *
  * @ingroup Diff
- * @ingroup Test
- *
- * @group Diff
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class DiffOpAddTest extends DiffOpTest {
+interface Patcher {
 
 	/**
-	 * @see AbstractTestCase::getClass
+	 * Applies the applicable operations from the provided diff to
+	 * the provided base value.
 	 *
-	 * @since 0.1
+	 * @since 0.4
 	 *
-	 * @return string
-	 */
-	public function getClass() {
-		return '\Diff\DiffOpAdd';
-	}
-
-	/**
-	 * @see AbstractTestCase::constructorProvider
-	 *
-	 * @since 0.1
+	 * @param array $base
+	 * @param Diff $diffOps
 	 *
 	 * @return array
 	 */
-	public function constructorProvider() {
-		return array(
-			array( true, 'foo' ),
-			array( true, array() ),
-			array( true, true ),
-			array( true, 42 ),
-			array( false ),
-		);
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testGetNewValue( DiffOpAdd $diffOp, array $constructorArgs ) {
-		$this->assertEquals( $constructorArgs[0], $diffOp->getNewValue() );
-	}
+	public function patch( array $base, Diff $diffOps );
 
 }

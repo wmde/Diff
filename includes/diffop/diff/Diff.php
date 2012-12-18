@@ -1,16 +1,15 @@
 <?php
 
 namespace Diff;
-use \Diff\Exception as Exception;
+use InvalidArgumentException;
 
 /**
- * Base class for diffs. Diffs are collections of IDiffOp objects,
- * and are themselves IDiffOp objects as well.
- *
- * FIXME: since this is an ArrayIterator, people can just add stuff using $diff[] = $diffOp.
- * The $typePointers is not currently getting updates in this case.
+ * Base class for diffs. Diffs are collections of DiffOp objects,
+ * and are themselves DiffOp objects as well.
  *
  * FIXME: current implementation forces ListDiff to override and nullify, which is bad.
+ *
+ * TOOD: when not assoc, only add and remove ops should be permitted
  *
  * @since 0.1
  *
@@ -23,27 +22,11 @@ use \Diff\Exception as Exception;
 class Diff extends \GenericArrayObject implements IDiff {
 
 	/**
-	 * Creates and returns an empty Diff.
-	 * @see IDiff::newEmpty
+	 * @since 0.4
 	 *
-	 * @since 0.1
-	 *
-	 * @param $parentKey = null
-	 *
-	 * @return Diff
+	 * @var boolean|null
 	 */
-	public static function newEmpty( $parentKey = null ) {
-		return new static( array(), $parentKey );
-	}
-
-	/**
-	 * Key the operation has in it's parent diff.
-	 *
-	 * @since 0.1
-	 *
-	 * @var string|integer|null
-	 */
-	protected $parentKey;
+	protected $isAssociative;
 
 	/**
 	 * Pointers to the operations of certain types for quick lookup.
@@ -62,16 +45,27 @@ class Diff extends \GenericArrayObject implements IDiff {
 	);
 
 	/**
-	 * @see IDiff::__construct
+	 * @see Diff::__construct
 	 *
 	 * @since 0.1
 	 *
-	 * @param IDiffOp[] $operations
-	 * @param string|integer|null $parentKey
+	 * @param DiffOp[] $operations
+	 * @param boolean|null $isAssociative
 	 */
-	public function __construct( array $operations, $parentKey = null ) {
+	public function __construct( array $operations = array(), $isAssociative = null ) {
+		foreach ( $operations as  $operation ) {
+			if ( !( $operation instanceof DiffOp ) ) {
+				throw new InvalidArgumentException( 'All elements fed to the Diff constructor should be of type DiffOp' );
+			}
+		}
+
+		if ( $isAssociative !== null && !is_bool( $isAssociative ) ) {
+			throw new InvalidArgumentException( '$isAssociative should be a boolean or null' );
+		}
+
+		$this->isAssociative = $isAssociative;
+
 		parent::__construct( $operations );
-		$this->parentKey = $parentKey;
 	}
 
 	/**
@@ -82,15 +76,15 @@ class Diff extends \GenericArrayObject implements IDiff {
 	 * @return string
 	 */
 	public function getObjectType() {
-		return '\Diff\IDiffOp';
+		return '\Diff\DiffOp';
 	}
 
 	/**
-	 * @see IDiff::getOperations
+	 * @see Diff::getOperations
 	 *
 	 * @since 0.1
 	 *
-	 * @return IDiffOp[]
+	 * @return DiffOp[]
 	 */
 	public function getOperations() {
 		return $this->getArrayCopy();
@@ -111,11 +105,11 @@ class Diff extends \GenericArrayObject implements IDiff {
 	}
 
 	/**
-	 * @see IDiff::addOperations
+	 * @see Diff::addOperations
 	 *
 	 * @since 0.1
 	 *
-	 * @param IDiffOp[] $operations
+	 * @param DiffOp[] $operations
 	 */
 	public function addOperations( array $operations ) {
 		foreach ( $operations as $operation ) {
@@ -136,8 +130,12 @@ class Diff extends \GenericArrayObject implements IDiff {
 	 */
 	protected function preSetElement( $index, $value ) {
 		/**
-		 * @var IDiffOp $value
+		 * @var DiffOp $value
 		 */
+		if ( $this->isAssociative === false && ( $value->getType() !== 'add' && $value->getType() !== 'remove' ) ) {
+			throw new Exception( 'Diff operation with invalid type "' . $value->getType() . '" provided.' );
+		}
+
 		if ( array_key_exists( $value->getType(), $this->typePointers ) ) {
 			$this->typePointers[$value->getType()][] = $index;
 		}
@@ -149,28 +147,6 @@ class Diff extends \GenericArrayObject implements IDiff {
 	}
 
 	/**
-	 * @see IDiff::getParentKey
-	 *
-	 * @since 0.1
-	 *
-	 * @return int|null|string
-	 */
-	public function getParentKey() {
-		return $this->parentKey;
-	}
-
-	/**
-	 * @see IDiff::hasParentKey
-	 *
-	 * @since 0.1
-	 *
-	 * @return boolean
-	 */
-	public function hasParentKey() {
-		return !is_null( $this->parentKey );
-	}
-
-	/**
 	 * @see GenericArrayObject::getSerializationData
 	 *
 	 * @since 0.1
@@ -178,11 +154,13 @@ class Diff extends \GenericArrayObject implements IDiff {
 	 * @return array
 	 */
 	protected function getSerializationData() {
+		$assoc = $this->isAssociative === null ? 'n' : ( $this->isAssociative ? 't' : 'f' );
+
 		return array_merge(
 			parent::getSerializationData(),
 			array(
 				'typePointers' => $this->typePointers,
-				'parentKey' => $this->parentKey,
+				'assoc' => $assoc
 			)
 		);
 	}
@@ -200,7 +178,7 @@ class Diff extends \GenericArrayObject implements IDiff {
 		$serializationData = parent::unserialize( $serialization );
 
 		$this->typePointers = $serializationData['typePointers'];
-		$this->parentKey = $serializationData['parentKey'];
+		$this->isAssociative = $serializationData['assoc'] === 'n' ? null : $serializationData['assoc'] === 't';
 
 		return $serializationData;
 	}
@@ -225,6 +203,15 @@ class Diff extends \GenericArrayObject implements IDiff {
 	 */
 	public function getRemovals() {
 		return $this->getTypeOperations( 'remove' );
+	}
+
+	/**
+	 * @since 0.4
+	 *
+	 * @return DiffOpChange[]
+	 */
+	public function getChanges() {
+		return $this->getTypeOperations( 'change' );
 	}
 
 	/**
@@ -260,104 +247,22 @@ class Diff extends \GenericArrayObject implements IDiff {
 	}
 
 	/**
-	 * @see IDiff::getApplicableDiff
+	 * @see Diff::getApplicableDiff
 	 *
 	 * @since 0.1
+	 * @deprecated since 0.4, use Patcher::getApplicableDiff
 	 *
 	 * @param array $currentObject
 	 *
-	 * @return IDiff
+	 * @return Diff
 	 */
 	public function getApplicableDiff( array $currentObject ) {
-		$undoDiff = static::newEmpty( $this->parentKey );
-		static::addReversibleOperations( $undoDiff, $this, $currentObject );
-		return $undoDiff;
+		$patcher = new MapPatcher( false );
+		return $patcher->getApplicableDiff( $currentObject, $this );
 	}
 
 	/**
-	 * Checks the operations in $originDiff for reversibility and adds those that are reversible to $diff.
-	 *
-	 * @since 0.1
-	 *
-	 * @param IDiff $diff The diff to add the reversible operations to
-	 * @param IDiff $originDiff The diff with the operations we want to check reversibility for
-	 * @param array $currentObject An array with the current structure used to check reversibility
-	 *
-	 * @return IDiff
-	 */
-	protected function addReversibleOperations( IDiff &$diff, IDiff $originDiff, array $currentObject ) {
-		if ( function_exists( 'wfProfileIn' ) ) {
-			wfProfileIn( __METHOD__ );
-		}
-
-		/**
-		 * @var IDiffOp $diffOp
-		 */
-		foreach ( $originDiff as $key => $diffOp ) {
-			if (
-				// If the diff is a list, we do not need to check the keys
-				$originDiff->getType() === 'list'
-
-				// If it's not a list but the key is present, we're also fine
-				|| array_key_exists( $key, $currentObject )
-
-				// The key does not need to be present for new elements
-				|| $diffOp->getType() === 'add'
-
-				// Neither does it need to be present for list diffs that only have additions
-				|| ( $diffOp->getType() === 'list' && $diffOp->getRemovals() === array() ) ) {
-
-				if ( $diffOp->isAtomic() ) {
-					if ( $originDiff->getType() === 'list' ) {
-						$isRemove = $diffOp->getType() === 'remove';
-
-						if ( !$isRemove ||
-							( $isRemove && in_array( $diffOp->getOldValue(), $currentObject ) )
-						) {
-							$diff[] = $diffOp;
-						}
-					}
-					else {
-						$canApplyOp =
-								( // An add operation for an element not yet present
-									$diffOp->getType() === 'add'
-									&& !array_key_exists( $key, $currentObject )
-								// A change or remove operation for a present element with correct source value
-								) || (
-									$diffOp->getType() !== 'add'
-									&& array_key_exists( $key, $currentObject )
-									&& $currentObject[$key] === $diffOp->getOldValue()
-								);
-
-						if ( $canApplyOp ) {
-							$diff[$key] = $diffOp;
-						}
-					}
-				}
-				else {
-					$childDiff = $diffOp->getType() === 'map' ? MapDiff::newEmpty( $key ) : ListDiff::newEmpty( $key );
-
-					// If the key was not yet present for a list diff with only additions, we need to add a new element
-					if ( $diffOp->getType() === 'list' && $diffOp->getRemovals() === array() ) {
-						$currentObject[$key] = array();
-					}
-
-					$this->addReversibleOperations( $childDiff, $diffOp, $currentObject[$key] );
-
-					if ( !$childDiff->isEmpty() ) {
-						$diff[$key] = $childDiff;
-					}
-				}
-			}
-		}
-
-		if ( function_exists( 'wfProfileOut' ) ) {
-			wfProfileOut( __METHOD__ );
-		}
-	}
-
-	/**
-	 * @see IDiffOp::isAtomic
+	 * @see DiffOp::isAtomic
 	 *
 	 * @since 0.1
 	 *
@@ -368,7 +273,7 @@ class Diff extends \GenericArrayObject implements IDiff {
 	}
 
 	/**
-	 * @see IDiffOp::getType
+	 * @see DiffOp::getType
 	 *
 	 * @since 0.1
 	 *
@@ -394,7 +299,7 @@ class Diff extends \GenericArrayObject implements IDiff {
 		$count = 0;
 
 		/**
-		 * @var IDiffOp $diffOp
+		 * @var DiffOp $diffOp
 		 */
 		foreach ( $this as $diffOp ) {
 			$count += count( $diffOp );
@@ -404,16 +309,46 @@ class Diff extends \GenericArrayObject implements IDiff {
 	}
 
 	/**
-	 * @see IDiff::removeEmptyOperations
+	 * @see Diff::removeEmptyOperations
 	 *
 	 * @since 0.3
 	 */
 	public function removeEmptyOperations() {
 		foreach ( $this->getArrayCopy() as $key => $operation ) {
-			if ( $operation instanceof \Diff\IDiff && $operation->isEmpty() ) {
+			if ( $operation instanceof Diff && $operation->isEmpty() ) {
 				unset( $this[$key] );
 			}
 		}
+	}
+
+	/**
+	 * @see Diff::isAssociative
+	 *
+	 * @since 0.4
+	 *
+	 * @return boolean|null
+	 */
+	public function isAssociative() {
+		return $this->isAssociative;
+	}
+
+	/**
+	 * Returns if the diff can be non-associative.
+	 * This means it does not contain any non-add-non-remove operations.
+	 *
+	 * @since 0.4
+	 *
+	 * @return boolean
+	 */
+	public function canBeList() {
+		if ( $this->isAssociative === false ) {
+			return true;
+		}
+
+		return empty( $this->typePointers['change'] )
+			&& empty( $this->typePointers['list'] )
+			&& empty( $this->typePointers['map'] )
+			&& empty( $this->typePointers['diff'] );
 	}
 
 }
