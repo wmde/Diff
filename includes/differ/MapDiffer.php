@@ -135,7 +135,13 @@ class MapDiffer implements Differ {
 	 * @return boolean
 	 */
 	protected function isAssociative( array $array ) {
-		return $array !== array() && array_keys( $array ) !== range( 0, count( $array ) - 1 );
+		foreach ( $array as $key => $value ) {
+			if ( is_string( $key ) ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**
