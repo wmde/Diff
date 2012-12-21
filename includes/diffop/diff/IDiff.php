@@ -69,7 +69,7 @@ interface IDiff extends IDiffOp, Appendable, \ArrayAccess, \Traversable {
 	 * Returns if the diff is associative or not.
 	 * Associative diffs are those where the operation keys are relevant.
 	 *
-	 * @since 0.4
+	 * @since 0.1
 	 *
 	 * @return boolean
 	 */

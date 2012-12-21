@@ -22,7 +22,7 @@ use InvalidArgumentException;
 class Diff extends \GenericArrayObject implements IDiff {
 
 	/**
-	 * @since 0.4
+	 * @since 0.1
 	 *
 	 * @var boolean|null
 	 */
@@ -206,7 +206,7 @@ class Diff extends \GenericArrayObject implements IDiff {
 	}
 
 	/**
-	 * @since 0.4
+	 * @since 0.1
 	 *
 	 * @return DiffOpChange[]
 	 */
@@ -324,7 +324,7 @@ class Diff extends \GenericArrayObject implements IDiff {
 	/**
 	 * @see Diff::isAssociative
 	 *
-	 * @since 0.4
+	 * @since 0.1
 	 *
 	 * @return boolean|null
 	 */
@@ -336,7 +336,7 @@ class Diff extends \GenericArrayObject implements IDiff {
 	 * Returns if the diff can be non-associative.
 	 * This means it does not contain any non-add-non-remove operations.
 	 *
-	 * @since 0.4
+	 * @since 0.1
 	 *
 	 * @return boolean
 	 */

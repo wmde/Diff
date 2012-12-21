@@ -22,7 +22,7 @@ namespace Diff;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.4
+ * @since 0.1
  *
  * @file
  * @ingroup Diff
@@ -33,14 +33,14 @@ namespace Diff;
 abstract class ThrowingPatcher implements PreviewablePatcher {
 
 	/**
-	 * @since 0.4
+	 * @since 0.1
 	 *
 	 * @var boolean
 	 */
 	protected $throwErrors;
 
 	/**
-	 * @since 0.4
+	 * @since 0.1
 	 *
 	 * @param boolean $throwErrors
 	 */
@@ -49,7 +49,7 @@ abstract class ThrowingPatcher implements PreviewablePatcher {
 	}
 
 	/**
-	 * @since 0.4
+	 * @since 0.1
 	 *
 	 * @param string $message
 	 *
@@ -64,7 +64,7 @@ abstract class ThrowingPatcher implements PreviewablePatcher {
 	/**
 	 * Set the patcher to ignore errors.
 	 *
-	 * @since 0.4
+	 * @since 0.1
 	 */
 	public function ignoreErrors() {
 		$this->throwErrors = false;
@@ -73,7 +73,7 @@ abstract class ThrowingPatcher implements PreviewablePatcher {
 	/**
 	 * Set the patcher to throw errors.
 	 *
-	 * @since 0.4
+	 * @since 0.1
 	 */
 	public function throwErrors() {
 		$this->throwErrors = true;
@@ -82,7 +82,7 @@ abstract class ThrowingPatcher implements PreviewablePatcher {
 	/**
 	 * @see PreviewablePatcher::getApplicableDiff
 	 *
-	 * @since 0.4
+	 * @since 0.1
 	 *
 	 * @param array $base
 	 * @param Diff $diff

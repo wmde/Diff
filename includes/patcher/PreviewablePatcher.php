@@ -23,7 +23,7 @@ namespace Diff;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.4
+ * @since 0.1
  *
  * @file
  * @ingroup Diff
@@ -38,7 +38,7 @@ interface PreviewablePatcher extends Patcher {
 	 * The returned operations are thus the difference between
 	 * the result of @see patch and it's input base value.
 	 *
-	 * @since 0.4
+	 * @since 0.1
 	 *
 	 * @param array $base
 	 * @param Diff $diffOps
