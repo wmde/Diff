@@ -124,6 +124,13 @@ $messages['hsb'] = array(
 	'diff-desc' => 'Biblioteka rozdźělow za strukturowane daty',
 );
 
+/** Indonesian (Bahasa Indonesia)
+ * @author Farras
+ */
+$messages['id'] = array(
+	'diff-desc' => 'Pustaka diff untuk data terstruktur',
+);
+
 /** Italian (italiano)
  * @author Darth Kule
  */
