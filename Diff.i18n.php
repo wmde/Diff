@@ -117,6 +117,13 @@ $messages['he'] = array(
 	'diff-desc' => 'ספרייה להשוואת נתונים מבניים',
 );
 
+/** Croatian (hrvatski)
+ * @author SpeedyGonsales
+ */
+$messages['hr'] = array(
+	'diff-desc' => 'Diff biblioteka funkcija za strukturirane podatke',
+);
+
 /** Upper Sorbian (hornjoserbsce)
  * @author Michawiki
  */
