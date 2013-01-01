@@ -217,6 +217,13 @@ $messages['pt-br'] = array(
 	'diff-desc' => 'Biblioteca Diff para dados estruturados',
 );
 
+/** Sinhala (සිංහල)
+ * @author පසිඳු කාවින්ද
+ */
+$messages['si'] = array(
+	'diff-desc' => 'ව්‍යූහගත දත්ත සඳහා Diff පුස්තකාලය',
+);
+
 /** Swedish (svenska)
  * @author WikiPhoenix
  */
