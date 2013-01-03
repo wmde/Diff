@@ -65,11 +65,11 @@ class MapPatcher extends ThrowingPatcher {
 	 * @return array
 	 */
 	public function patch( array $base, Diff $diff ) {
-		if ( $diff->canBeList() ) {
-			$base = $this->listPatcher->patch( $base, $diff );
+		if ( $diff->looksAssociative() ) {
+			$base = $this->getPatchedMap( $base, $diff );
 		}
 		else {
-			$base = $this->getPatchedMap( $base, $diff );
+			$base = $this->listPatcher->patch( $base, $diff );
 		}
 
 		return $base;

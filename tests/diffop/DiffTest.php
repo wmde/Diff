@@ -410,5 +410,180 @@ class DiffTest extends \GenericArrayObjectTest {
 		$this->assertFalse( $diff->offsetExists( 'spam' ) );
 	}
 
+	public function looksAssociativeProvider() {
+		$argLists = array();
+
+		$diff = new Diff();
+
+		$argLists[] = array( $diff, false );
+
+
+		$diff = new Diff( array(), false );
+
+		$argLists[] = array( $diff, false );
+
+
+		$diff = new Diff( array(), true );
+
+		$argLists[] = array( $diff, true );
+
+
+		$diff = new Diff( array( new DiffOpAdd( '' ) ) );
+
+		$argLists[] = array( $diff, false );
+
+
+		$diff = new Diff( array( new DiffOpRemove( '' ) ) );
+
+		$argLists[] = array( $diff, false );
+
+
+		$diff = new Diff( array( new DiffOpRemove( '' ), new DiffOpAdd( '' ) ) );
+
+		$argLists[] = array( $diff, false );
+
+
+		$diff = new Diff( array( new DiffOpRemove( '' ) ), true );
+
+		$argLists[] = array( $diff, true );
+
+
+		$diff = new Diff( array( 'onoez' => new DiffOpChange( '', 'spam' ) ) );
+
+		$argLists[] = array( $diff, true );
+
+
+		$diff = new Diff( array( new Diff() ) );
+
+		$argLists[] = array( $diff, true );
+
+		return $argLists;
+	}
+
+	/**
+	 * @dataProvider looksAssociativeProvider
+	 */
+	public function testLooksAssociative( Diff $diff, $looksAssoc ) {
+		$this->assertEquals( $looksAssoc, $diff->looksAssociative() );
+
+		if ( !$diff->looksAssociative() ) {
+			$this->assertFalse( $diff->hasAssociativeOperations() );
+		}
+	}
+
+	public function isAssociativeProvider() {
+		$argLists = array();
+
+		$diff = new Diff();
+
+		$argLists[] = array( $diff, null );
+
+
+		$diff = new Diff( array(), false );
+
+		$argLists[] = array( $diff, false );
+
+
+		$diff = new Diff( array(), true );
+
+		$argLists[] = array( $diff, true );
+
+
+		$diff = new Diff( array( new DiffOpAdd( '' ) ) );
+
+		$argLists[] = array( $diff, null );
+
+
+		$diff = new Diff( array( new DiffOpRemove( '' ) ), false );
+
+		$argLists[] = array( $diff, false );
+
+
+		$diff = new Diff( array( new DiffOpRemove( '' ), new DiffOpAdd( '' ) ) );
+
+		$argLists[] = array( $diff, null );
+
+
+		$diff = new Diff( array( new DiffOpRemove( '' ) ), true );
+
+		$argLists[] = array( $diff, true );
+
+
+		$diff = new Diff( array( 'onoez' => new DiffOpChange( '', 'spam' ) ) );
+
+		$argLists[] = array( $diff, null );
+
+
+		$diff = new Diff( array( new Diff() ) );
+
+		$argLists[] = array( $diff, null );
+
+		return $argLists;
+	}
+
+	/**
+	 * @dataProvider isAssociativeProvider
+	 */
+	public function testIsAssociative( Diff $diff, $isAssoc ) {
+		$this->assertEquals( $isAssoc, $diff->isAssociative() );
+	}
+
+	public function hasAssociativeOperationsProvider() {
+		$argLists = array();
+
+		$diff = new Diff();
+
+		$argLists[] = array( $diff, false );
+
+
+		$diff = new Diff( array(), false );
+
+		$argLists[] = array( $diff, false );
+
+
+		$diff = new Diff( array(), true );
+
+		$argLists[] = array( $diff, false );
+
+
+		$diff = new Diff( array( new DiffOpAdd( '' ) ) );
+
+		$argLists[] = array( $diff, false );
+
+
+		$diff = new Diff( array( new DiffOpRemove( '' ) ), false );
+
+		$argLists[] = array( $diff, false );
+
+
+		$diff = new Diff( array( new DiffOpRemove( '' ), new DiffOpAdd( '' ) ), true );
+
+		$argLists[] = array( $diff, false );
+
+
+		$diff = new Diff( array( new DiffOpRemove( '' ) ), true );
+
+		$argLists[] = array( $diff, false );
+
+
+		$diff = new Diff( array( 'onoez' => new DiffOpChange( '', 'spam' ) ) );
+
+		$argLists[] = array( $diff, true );
+
+
+		$diff = new Diff( array( new Diff() ) );
+
+		$argLists[] = array( $diff, true );
+
+		return $argLists;
+	}
+
+	/**
+	 * @dataProvider hasAssociativeOperationsProvider
+	 */
+	public function testHasAssociativeOperations( Diff $diff, $hasAssocOps ) {
+		$this->assertEquals( $hasAssocOps, $diff->hasAssociativeOperations() );
+	}
+
 }
 	

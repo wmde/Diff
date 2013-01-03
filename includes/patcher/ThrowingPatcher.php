@@ -101,13 +101,13 @@ abstract class ThrowingPatcher implements PreviewablePatcher {
 
 		$this->throwErrors = $throwErrors;
 
-		$treatAsList = $diff->canBeList();
+		$treatAsMap = $diff->looksAssociative();
 
-		$differ = $treatAsList ? new ListDiffer() : new MapDiffer( true );
+		$differ = $treatAsMap ? new MapDiffer( true ) : new ListDiffer();
 
 		$diffOps = $differ->doDiff( $base, $patched );
 
-		$diff = new Diff( $diffOps, !$treatAsList );
+		$diff = new Diff( $diffOps, $treatAsMap );
 
 		if ( function_exists( 'wfProfileOut' ) ) {
 			wfProfileOut( __METHOD__ );

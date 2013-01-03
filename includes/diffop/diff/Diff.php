@@ -322,7 +322,7 @@ class Diff extends \GenericArrayObject implements IDiff {
 	}
 
 	/**
-	 * @see Diff::isAssociative
+	 * Returns the value of the isAssociative flag.
 	 *
 	 * @since 0.4
 	 *
@@ -333,6 +333,19 @@ class Diff extends \GenericArrayObject implements IDiff {
 	}
 
 	/**
+	 * Returns if the diff looks associative or not.
+	 * This first checks the isAssociative flag and in case its null checks
+	 * if there are any non-add-non-remove operations.
+	 *
+	 * @since 0.4
+	 *
+	 * @return boolean
+	 */
+	public function looksAssociative() {
+		return $this->isAssociative === null ? $this->hasAssociativeOperations() : $this->isAssociative;
+	}
+
+	/**
 	 * Returns if the diff can be non-associative.
 	 * This means it does not contain any non-add-non-remove operations.
 	 *
@@ -340,15 +353,11 @@ class Diff extends \GenericArrayObject implements IDiff {
 	 *
 	 * @return boolean
 	 */
-	public function canBeList() {
-		if ( $this->isAssociative !== null ) {
-			return !$this->isAssociative;
-		}
-
-		return empty( $this->typePointers['change'] )
-			&& empty( $this->typePointers['list'] )
-			&& empty( $this->typePointers['map'] )
-			&& empty( $this->typePointers['diff'] );
+	public function hasAssociativeOperations() {
+		return !empty( $this->typePointers['change'] )
+			|| !empty( $this->typePointers['diff'] )
+			|| !empty( $this->typePointers['map'] )
+			|| !empty( $this->typePointers['list'] );
 	}
 
 }
