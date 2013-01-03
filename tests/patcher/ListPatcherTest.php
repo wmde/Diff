@@ -3,6 +3,8 @@
 namespace Diff\Test;
 use Diff\Patcher;
 use Diff\Diff;
+use Diff\DiffOpRemove;
+use Diff\DiffOpAdd;
 
 /**
  * Tests for the Diff\ListPatcher class.
@@ -62,6 +64,107 @@ class ListPatcherTest extends \MediaWikiTestCase {
 		$actual = $patcher->patch( $base, $diff );
 
 		$this->assertArrayEquals( $actual, $expected );
+	}
+
+	public function getApplicableDiffProvider() {
+		// Diff, current object, expected
+		$argLists = array();
+
+		$diff = new Diff( array(), false );
+		$currentObject = array();
+		$expected = clone $diff;
+
+		$argLists[] = array( $diff, $currentObject, $expected, 'Empty diff should remain empty on empty base' );
+
+
+		$diff = new Diff( array(), false );
+
+		$currentObject = array( 'foo' => 0, 'bar' => 1 );
+
+		$expected = clone $diff;
+
+		$argLists[] = array( $diff, $currentObject, $expected, 'Empty diff should remain empty on non-empty base' );
+
+
+		$diff = new Diff( array(
+			new DiffOpRemove( 9001 ),
+		), false );
+
+		$currentObject = array();
+
+		$expected = new Diff( array(), false );
+
+		$argLists[] = array( $diff, $currentObject, $expected, 'Remove ops should be removed on empty base' );
+
+
+		$diff = new Diff( array(
+			new DiffOpAdd( 42 ),
+			new DiffOpRemove( 9001 ),
+		), false );
+
+		$currentObject = array();
+
+		$expected = new Diff( array(
+			new DiffOpAdd( 42 ),
+		), true );
+
+		$argLists[] = array( $diff, $currentObject, $expected, 'Add ops not present in the base should be retained (ListDiff)' );
+
+
+		$diff = new Diff( array(
+			new DiffOpAdd( 42 ),
+			new DiffOpRemove( 9001 ),
+		), false );
+
+		$currentObject = array( 1, 42, 9001 );
+
+		$expected = new Diff( array(
+			new DiffOpAdd( 42 ),
+			new DiffOpRemove( 9001 ),
+		), false );
+
+		$argLists[] = array( $diff, $currentObject, $expected, 'Add ops with values present in the base should be retained in ListDiff' );
+
+
+		$diff = new Diff( array(
+			'en' => new Diff( array( new DiffOpAdd( 42 ) ), false ),
+		), true );
+
+		$currentObject = array();
+
+		$expected = clone $diff;
+
+		$argLists[] = array( $diff, $currentObject, $expected, 'list diffs containing only add ops should be retained even when not in the base' );
+
+
+		$diff = new Diff( array(
+			'en' => new Diff( array( new DiffOpRemove( 42 ) ), false ),
+		), true );
+
+		$currentObject = array(
+			'en' => array( 42 ),
+		);
+
+		$expected = clone $diff;
+
+		$argLists[] = array( $diff, $currentObject, $expected, 'list diffs containing only remove ops should be retained when present in the base' );
+
+		return $argLists;
+	}
+
+	/**
+	 * @dataProvider getApplicableDiffProvider
+	 *
+	 * @param Diff $diff
+	 * @param array $currentObject
+	 * @param Diff $expected
+	 * @param string|null $message
+	 */
+	public function testGetApplicableDiff( Diff $diff, array $currentObject, Diff $expected, $message = null ) {
+		$patcher = new \Diff\MapPatcher();
+		$actual = $patcher->getApplicableDiff( $currentObject, $diff );
+
+		$this->assertEquals( $expected->getOperations(), $actual->getOperations(), $message );
 	}
 
 }
