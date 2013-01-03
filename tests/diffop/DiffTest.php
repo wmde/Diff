@@ -4,7 +4,6 @@ namespace Diff\Test;
 use Diff\Diff;
 use Diff\DiffOp;
 use Diff\MapDiff;
-use Diff\ListDiff;
 use Diff\DiffOpAdd;
 use Diff\DiffOpRemove;
 use Diff\DiffOpChange;
@@ -73,7 +72,7 @@ class DiffTest extends \GenericArrayObjectTest {
 	 * @dataProvider elementInstancesProvider
 	 */
 	public function testGetAdditions( array $operations ) {
-		$diff = new MapDiff( $operations );
+		$diff = new Diff( $operations, true );
 
 		$additions = array();
 
@@ -93,7 +92,7 @@ class DiffTest extends \GenericArrayObjectTest {
 	 * @dataProvider elementInstancesProvider
 	 */
 	public function testGetRemovals( array $operations ) {
-		$diff = new MapDiff( $operations );
+		$diff = new Diff( $operations, true );
 
 		$removals = array();
 
@@ -212,10 +211,10 @@ class DiffTest extends \GenericArrayObjectTest {
 		$argLists[] = array( $diff, $currentObject, $expected, 'Diff should not be altered on matching base' );
 
 
-		$diff = new MapDiff( array(
+		$diff = new Diff( array(
 			'foo' => new DiffOpChange( 0, 42 ),
 			'bar' => new DiffOpChange( 1, 9001 ),
-		) );
+		), true );
 		$currentObject = array();
 
 		$expected = new Diff( array(), true );

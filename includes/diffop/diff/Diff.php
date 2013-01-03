@@ -324,7 +324,7 @@ class Diff extends \GenericArrayObject implements IDiff {
 	/**
 	 * @see Diff::isAssociative
 	 *
-	 * @since 0.1
+	 * @since 0.4
 	 *
 	 * @return boolean|null
 	 */
@@ -336,13 +336,13 @@ class Diff extends \GenericArrayObject implements IDiff {
 	 * Returns if the diff can be non-associative.
 	 * This means it does not contain any non-add-non-remove operations.
 	 *
-	 * @since 0.1
+	 * @since 0.4
 	 *
 	 * @return boolean
 	 */
 	public function canBeList() {
-		if ( $this->isAssociative === false ) {
-			return true;
+		if ( $this->isAssociative !== null ) {
+			return !$this->isAssociative;
 		}
 
 		return empty( $this->typePointers['change'] )
