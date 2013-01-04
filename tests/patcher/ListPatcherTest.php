@@ -36,8 +36,18 @@ use Diff\Diff;
 class ListPatcherTest extends \MediaWikiTestCase {
 
 	public function patchProvider() {
+		$argLists = array();
+
+		$patcher = new \Diff\ListPatcher();
+		$base = array();
+		$diff = new Diff();
+		$expected = array();
+
+		$argLists[] = array( $patcher, $base, $diff, $expected );
+
 		// TODO
-		return array();
+
+		return $argLists;
 	}
 
 	/**

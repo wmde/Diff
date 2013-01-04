@@ -43,8 +43,6 @@ class ListDifferTest extends \MediaWikiTestCase {
 	protected function getCommonArgLists() {
 		$argLists = array();
 
-		$argLists = array();
-
 		$old = array();
 		$new = array();
 		$expected = array();
