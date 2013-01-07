@@ -1,7 +1,6 @@
 <?php
 
 namespace Diff\Test;
-use Diff\ListDiff;
 use Diff\DiffOpRemove;
 use Diff\DiffOpAdd;
 use Diff\ListDiffer;

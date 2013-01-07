@@ -52,7 +52,10 @@ abstract class DiffOpTest extends \AbstractTestCase {
 	 * @dataProvider instanceProvider
 	 */
 	public function testSerialization( DiffOp $diffOp ) {
-		$this->assertEquals( $diffOp, unserialize( serialize( $diffOp ) ) );
+		$serialization = serialize( $diffOp );
+		$unserialization = unserialize( $serialization );
+		$this->assertEquals( $diffOp, $unserialization );
+		$this->assertEquals( serialize( $diffOp ), serialize( $unserialization ) );
 	}
 
 	/**

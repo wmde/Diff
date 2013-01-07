@@ -387,5 +387,28 @@ class DiffTest extends \GenericArrayObjectTest {
 		$this->assertEquals( $hasAssocOps, $diff->hasAssociativeOperations() );
 	}
 
+	public function testSerializationCompat() {
+//		$expected = new \Diff\MapDiff( array(
+//			new \Diff\DiffOpAdd( 'add' ),
+//			new \Diff\DiffOpRemove( 'rem' ),
+//			new \Diff\DiffOpChange( 'a', 'b' ),
+//			new \Diff\ListDiff( array( new \Diff\DiffOpRemove( 'rem' ) ) )
+//		) );
+
+		$v03serialization = 'C:12:"Diff\MapDiff":569:{a:4:{s:4:"data";a:4:{i:0;C:14:"Diff\DiffOpAdd":10:{s:3:"add";}i:1;C:17:"Diff\DiffOpRemove":10:{s:3:"rem";}i:2;C:17:"Diff\DiffOpChange":30:{a:2:{i:0;s:1:"b";i:1;s:1:"a";}}i:3;C:13:"Diff\ListDiff":170:{a:4:{s:4:"data";a:1:{i:0;C:17:"Diff\DiffOpRemove":10:{s:3:"rem";}}s:5:"index";i:0;s:12:"typePointers";a:2:{s:3:"add";a:0:{}s:6:"remove";a:1:{i:0;i:0;}}s:9:"parentKey";N;}}}s:5:"index";i:0;s:12:"typePointers";a:6:{s:3:"add";a:1:{i:0;i:0;}s:6:"remove";a:1:{i:0;i:1;}s:6:"change";a:1:{i:0;i:2;}s:4:"list";a:1:{i:0;i:3;}s:3:"map";a:0:{}s:4:"diff";a:0:{}}s:9:"parentKey";N;}}';
+
+		/**
+		 * @var Diff $diff
+		 */
+		$diff = unserialize( $v03serialization );
+
+		$this->assertInstanceOf( '\Diff\Diff', $diff );
+		$this->assertTrue( $diff->isAssociative() );
+		$this->assertEquals( 4, count( $diff ) );
+		$this->assertEquals( 1, count( $diff->getAdditions() ) );
+		$this->assertEquals( 1, count( $diff->getRemovals() ) );
+		$this->assertEquals( 1, count( $diff->getChanges() ) );
+	}
+
 }
 	
