@@ -178,7 +178,20 @@ class Diff extends \GenericArrayObject implements IDiff {
 		$serializationData = parent::unserialize( $serialization );
 
 		$this->typePointers = $serializationData['typePointers'];
-		$this->isAssociative = $serializationData['assoc'] === 'n' ? null : $serializationData['assoc'] === 't';
+
+		if ( array_key_exists( 'assoc', $serializationData ) ) {
+			$this->isAssociative = $serializationData['assoc'] === 'n' ? null : $serializationData['assoc'] === 't';
+		} // The below cases are compat with < 0.4.
+		elseif ( $this instanceof MapDiff ) {
+			$this->isAssociative = true;
+		}
+		elseif ( $this instanceof ListDiff ) {
+			$this->isAssociative = false;
+		}
+		else {
+			$this->isAssociative = null;
+		}
+
 
 		return $serializationData;
 	}
