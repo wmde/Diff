@@ -103,8 +103,46 @@ class MapDifferTest extends \MediaWikiTestCase {
 		$argLists[] = array( $old, $new, $expected,
 			'Changing the key of an element should result in a remove and an add op' );
 
-		// TODO: test recursion
-		// TODO: test with alternate ListDiffer
+
+		$old = array( 'a' => array( 'b' => 42 ) );
+		$new = array( 'a' => array( 'b' => 7201010 ) );
+		$expected = array( 'a' => new \Diff\Diff( array( 'b' => new DiffOpChange( 42, 7201010 ) ), true ) );
+
+		$argLists[] = array( $old, $new, $expected,
+			'Recursion should work for nested associative diffs', true );
+
+
+		$old = array( 'a' => array( 42, 9001 ), 1 );
+		$new = array( 'a' => array( 42, 7201010 ), 1 );
+		$expected = array( 'a' => new \Diff\Diff( array( new DiffOpAdd( 7201010 ), new DiffOpRemove( 9001 ) ), false ) );
+
+		$argLists[] = array( $old, $new, $expected,
+			'Recursion should work for nested non-associative diffs', true );
+
+
+		$old = array( array( 42 ), 1 );
+		$new = array( array( 42, 42 ), 1 );
+		$expected = array( new \Diff\Diff( array( new DiffOpAdd( 42 ) ), false ) );
+
+		$argLists[] = array( $old, $new, $expected,
+			'Nested non-associative diffs should behave as the default ListDiffer', true );
+
+
+		$old = array( array( 42 ), 1 );
+		$new = array( array( 42, 42, 1 ), 1 );
+		$expected = array( new \Diff\Diff( array( new DiffOpAdd( 1 ) ), false ) );
+
+		$argLists[] = array( $old, $new, $expected,
+			'Setting a non-default Differ for non-associative diffs should work',
+			true, new \Diff\ListDiffer( \Diff\ListDiffer::MODE_NATIVE ) );
+
+
+		$old = array( 'a' => array( 42 ), 1, array( 'a' => 'b', 5 ), 'bah' => array( 'foo' => 'bar' ) );
+		$new = array( 'a' => array( 42 ), 1, array( 'a' => 'b', 5 ), 'bah' => array( 'foo' => 'baz' ) );
+		$expected = array( 'bah' => new \Diff\Diff( array( 'foo' => new DiffOpChange( 'bar', 'baz' ) ), true ) );
+
+		$argLists[] = array( $old, $new, $expected,
+			'Nested structures with no differences should not result in nested empty diffs (these empty diffs should be omitted)', true );
 
 		return $argLists;
 	}
@@ -112,8 +150,8 @@ class MapDifferTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider toDiffProvider
 	 */
-	public function testDoDiff( $old, $new, $expected, $message = '' ) {
-		$differ = new MapDiffer();
+	public function testDoDiff( $old, $new, $expected, $message = '', $recursively = false, \Diff\Differ $listDiffer = null ) {
+		$differ = new MapDiffer( $recursively, $listDiffer );
 
 		$actual = $differ->doDiff( $old, $new );
 
