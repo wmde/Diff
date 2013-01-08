@@ -5,12 +5,12 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 
 
 === Version 0.4 ===
-(dev)
+2013-01-08
 
 ; Additions
 
 * Split off diffing code from MapDiff and ListDiff to dedicated Differ classes
-* Added dedicated patcher classes, which are used for the getApplicableDiff functionality
+* Added dedicated Patcher classes, which are used for the getApplicableDiff functionality
 
 ; Deprecations
 
@@ -18,7 +18,7 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 * Deprecated ListDiff::newEmpty and MapDiff::newEmpty
 * Deprecated Diff::getApplicableDiff
 * Soft deprecated DiffOp interface in favour of DiffOp
-* Soft deprecated Diff interface in favour of Diff
+* Soft deprecated IDiff interface in favour of Diff
 * Soft deprecated MapDiff and ListDiff in favour of Diff
 
 ; Removals

@@ -17,7 +17,7 @@ $messages = array();
  * @author Jeroen De Dauw
  */
 $messages['en'] = array(
-	'diff-desc' => 'Diff library for structured data',
+	'diff-desc' => 'Library with classes to represent diffs of structured data, as well as service objects to diff objects or patch them',
 );
 
 /** Message documentation (Message documentation)
