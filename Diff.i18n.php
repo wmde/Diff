@@ -63,9 +63,10 @@ $messages['da'] = array(
 
 /** German (Deutsch)
  * @author Kghbln
+ * @author Metalhead64
  */
 $messages['de'] = array(
-	'diff-desc' => 'Stellt eine Diff-Bibliothek für strukturierte Daten bereit',
+	'diff-desc' => 'Bibliothek mit Klassen, um Unterschiede strukturierter Daten darzustellen und Serviceobjekten, um Objekte zu vergleichen oder zu patchen',
 );
 
 /** Lower Sorbian (dolnoserbski)
@@ -97,17 +98,18 @@ $messages['fa'] = array(
 );
 
 /** French (français)
+ * @author Gomoko
  * @author Wyz
  */
 $messages['fr'] = array(
-	'diff-desc' => 'Bibliothèque de diff pour les données structurées',
+	'diff-desc' => 'Bibliothèque avec des classes pour représenter les deltas ou les données structurées, tout comme les objets de service pour faire le delta entre objets ou les mettre à jour',
 );
 
 /** Galician (galego)
  * @author Toliño
  */
 $messages['gl'] = array(
-	'diff-desc' => 'Biblioteca de diferenzas para datos estruturados',
+	'diff-desc' => 'Biblioteca con clases para representar diferenzas de datos estruturados, así como os obxectos de servizo aos obxectos de diferenzas ou parchealos',
 );
 
 /** Hebrew (עברית)
@@ -149,7 +151,7 @@ $messages['it'] = array(
  * @author Shirayuki
  */
 $messages['ja'] = array(
-	'diff-desc' => '構造化されたデータ用の差分ライブラリ',
+	'diff-desc' => '構造化されたデータ用の差分ライブラリ', # Fuzzy
 );
 
 /** Korean (한국어)
@@ -177,7 +179,7 @@ $messages['lb'] = array(
  * @author Bjankuloski06
  */
 $messages['mk'] = array(
-	'diff-desc' => 'Библиотека на верзиски разлики на структурираните податоци',
+	'diff-desc' => 'иблиотека со класи што за претставување на верзиските разлики во структурираните податоци, а воедно и крпење на објектите со оглед на нивните разлики.',
 );
 
 /** Malay (Bahasa Melayu)
@@ -207,7 +209,7 @@ $messages['pl'] = array(
  * @author Dragonòt
  */
 $messages['pms'] = array(
-	'diff-desc' => 'Biblioteca ëd diff për ij dat struturà',
+	'diff-desc' => 'Libreria con class për rapresenté diferense ëd dat struturà, con oget ëd sërvissi a oget diff e sò pachèt',
 );
 
 /** Brazilian Portuguese (português do Brasil)
