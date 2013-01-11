@@ -158,7 +158,7 @@ $messages['ja'] = array(
  * @author 아라
  */
 $messages['ko'] = array(
-	'diff-desc' => '구조화한 데이터에 대한 차이점 라이브러리',
+	'diff-desc' => '구조화한 데이터의 차이점 뿐만 아니라 차이점 개체에 대한 서비스 개체 또는 패치를 대표하는 클래스로 된 라이브러리',
 );
 
 /** Colognian (Ripoarisch)
