@@ -141,10 +141,11 @@ $messages['id'] = array(
 );
 
 /** Italian (italiano)
+ * @author Beta16
  * @author Darth Kule
  */
 $messages['it'] = array(
-	'diff-desc' => 'Libreria di diff per dati strutturati',
+	'diff-desc' => 'Libreria di classi per rappresentare le differenze di dati strutturati, come pure gli oggetti di servizio agli oggetti di confronto o di aggiornamento',
 );
 
 /** Japanese (日本語)
