@@ -41,4 +41,7 @@ interface DiffOp extends \Serializable, \Countable {
 
 }
 
+/**
+ * @deprecated since 0.4
+ */
 interface IDiffOp extends DiffOp {}
