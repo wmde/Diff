@@ -14,7 +14,7 @@ namespace Diff;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class AtomicDiffOp implements IDiffOp {
+abstract class AtomicDiffOp implements DiffOp {
 
 	/**
 	 * @see Countable::count
