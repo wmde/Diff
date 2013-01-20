@@ -220,6 +220,13 @@ $messages['pt-br'] = array(
 	'diff-desc' => 'Biblioteca Diff para dados estruturados',
 );
 
+/** tarandíne (tarandíne)
+ * @author Joetaras
+ */
+$messages['roa-tara'] = array(
+	'diff-desc' => "Libbrerie cu le classe pe rappresendà le differenze 'mbrà le date strutturate, cumme le oggette de servizie ca sò diverse da le oggette o le accunzaminde lore",
+);
+
 /** Sinhala (සිංහල)
  * @author පසිඳු කාවින්ද
  */
