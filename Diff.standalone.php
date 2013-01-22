@@ -35,25 +35,5 @@ namespace Diff {
 		}
 	} );
 
-	// Some example code :)
-	/*
-	$diff = MapDiff::newFromArrays(
-		array(
-			'foo' => 'bar',
-			42,
-			9001,
-			'ohi' => 'there',
-		),
-		array(
-			'foo' => 'baz',
-			42,
-			'spam' => 'zor',
-		)
-	);
-
-	foreach ( $diff as $diffOp ) {
-		var_dump( $diffOp );
-	}
-	*/
 }
 
