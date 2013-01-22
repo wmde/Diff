@@ -47,6 +47,8 @@ class Diff extends \GenericArrayObject implements IDiff {
 	 *
 	 * @param DiffOp[] $operations
 	 * @param boolean|null $isAssociative
+	 *
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct( array $operations = array(), $isAssociative = null ) {
 		foreach ( $operations as  $operation ) {
