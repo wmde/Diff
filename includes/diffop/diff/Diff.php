@@ -256,21 +256,6 @@ class Diff extends \GenericArrayObject implements IDiff {
 	}
 
 	/**
-	 * @see Diff::getApplicableDiff
-	 *
-	 * @since 0.1
-	 * @deprecated since 0.4, use Patcher::getApplicableDiff
-	 *
-	 * @param array $currentObject
-	 *
-	 * @return Diff
-	 */
-	public function getApplicableDiff( array $currentObject ) {
-		$patcher = new MapPatcher( false );
-		return $patcher->getApplicableDiff( $currentObject, $this );
-	}
-
-	/**
 	 * @see DiffOp::isAtomic
 	 *
 	 * @since 0.1
