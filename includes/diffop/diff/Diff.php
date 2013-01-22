@@ -7,8 +7,6 @@ use InvalidArgumentException;
  * Base class for diffs. Diffs are collections of DiffOp objects,
  * and are themselves DiffOp objects as well.
  *
- * TODO: when not assoc, only add and remove ops should be permitted
- *
  * @since 0.1
  *
  * @file
