@@ -20,7 +20,7 @@ namespace Diff;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.1
+ * @since 0.4
  *
  * @file
  * @ingroup Diff
@@ -43,7 +43,7 @@ class ListDiffer implements Differ {
 	const MODE_STRICT = 1;
 
 	/**
-	 * @since 0.1
+	 * @since 0.4
 	 *
 	 * @var int
 	 */
@@ -58,7 +58,7 @@ class ListDiffer implements Differ {
 	 * If the native behaviour is preferred, ListDiffer::MODE_NATIVE
 	 * can be specified.
 	 *
-	 * @since 0.1
+	 * @since 0.4
 	 *
 	 * @param int $diffMode
 	 */
@@ -69,7 +69,7 @@ class ListDiffer implements Differ {
 	/**
 	 * @see Differ::doDiff
 	 *
-	 * @since 0.1
+	 * @since 0.4
 	 *
 	 * @param array $oldValues The first array
 	 * @param array $newValues The second array
@@ -92,7 +92,7 @@ class ListDiffer implements Differ {
 	}
 
 	/**
-	 * @since 0.1
+	 * @since 0.4
 	 *
 	 * @param array $arrayOne
 	 * @param array $arrayTwo
@@ -118,7 +118,7 @@ class ListDiffer implements Differ {
 	 * - Arrays and objects are compared properly: [[1]] and [[2]] are different
 	 * - Only works with two arrays (array_diff can take more)
 	 *
-	 * @since 0.1
+	 * @since 0.4
 	 *
 	 * @param array $arrayOne
 	 * @param array $arrayTwo

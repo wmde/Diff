@@ -20,7 +20,7 @@ namespace Diff;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.1
+ * @since 0.4
  *
  * @file
  * @ingroup Diff
@@ -34,7 +34,7 @@ interface Patcher {
 	 * Applies the applicable operations from the provided diff to
 	 * the provided base value.
 	 *
-	 * @since 0.1
+	 * @since 0.4
 	 *
 	 * @param array $base
 	 * @param Diff $diffOps

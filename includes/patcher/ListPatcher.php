@@ -20,7 +20,7 @@ namespace Diff;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.1
+ * @since 0.4
  *
  * @file
  * @ingroup Diff
@@ -37,7 +37,7 @@ class ListPatcher extends ThrowingPatcher {
 	 * The provided diff needs to be non-associative. In other words, calling
 	 * isAssociative on it should return false.
 	 *
-	 * @since 0.1
+	 * @since 0.4
 	 *
 	 * @param array $base
 	 * @param Diff $diff
@@ -78,7 +78,7 @@ class ListPatcher extends ThrowingPatcher {
 	/**
 	 * @see Patcher::getApplicableDiff
 	 *
-	 * @since 0.1
+	 * @since 0.4
 	 *
 	 * @param array $base
 	 * @param Diff $diff

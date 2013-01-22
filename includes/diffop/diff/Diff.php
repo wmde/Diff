@@ -20,7 +20,7 @@ use InvalidArgumentException;
 class Diff extends \GenericArrayObject implements IDiff {
 
 	/**
-	 * @since 0.1
+	 * @since 0.4
 	 *
 	 * @var boolean|null
 	 */

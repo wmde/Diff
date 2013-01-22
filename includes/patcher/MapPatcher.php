@@ -21,7 +21,7 @@ use RuntimeException;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.1
+ * @since 0.4
  *
  * @file
  * @ingroup Diff
@@ -32,14 +32,14 @@ use RuntimeException;
 class MapPatcher extends ThrowingPatcher {
 
 	/**
-	 * @since 0.1
+	 * @since 0.4
 	 *
 	 * @var Patcher
 	 */
 	protected $listPatcher;
 
 	/**
-	 * @since 0.1
+	 * @since 0.4
 	 *
 	 * @param bool $throwErrors
 	 * @param Patcher|null $listPatcher
@@ -57,7 +57,7 @@ class MapPatcher extends ThrowingPatcher {
 	/**
 	 * @see Patcher::patch
 	 *
-	 * @since 0.1
+	 * @since 0.4
 	 *
 	 * @param array $base
 	 * @param Diff $diff
@@ -83,7 +83,7 @@ class MapPatcher extends ThrowingPatcher {
 	 * returns false, however the likely intended behaviour can be obtained via
 	 * @see getPatchedList
 	 *
-	 * @since 0.1
+	 * @since 0.4
 	 *
 	 * @param array $base
 	 * @param Diff $diff
