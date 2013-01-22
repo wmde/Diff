@@ -21,7 +21,7 @@ namespace Diff;
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  * http://www.gnu.org/copyleft/gpl.html
  *
- * @since 0.1
+ * @since 0.4
  *
  * @file
  * @ingroup Diff
@@ -44,7 +44,7 @@ class MapDiffer implements Differ {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.1
+	 * @since 0.4
 	 *
 	 * @param bool $recursively
 	 * @param Differ $listDiffer
@@ -64,7 +64,7 @@ class MapDiffer implements Differ {
 	 *
 	 * Computes the diff between two associate arrays.
 	 *
-	 * @since 0.1
+	 * @since 0.4
 	 *
 	 * @param array $oldValues The first array
 	 * @param array $newValues The second array
@@ -128,7 +128,7 @@ class MapDiffer implements Differ {
 	/**
 	 * Returns if an array is associative or not.
 	 *
-	 * @since 0.1
+	 * @since 0.4
 	 *
 	 * @param array $array
 	 *
@@ -151,7 +151,7 @@ class MapDiffer implements Differ {
 	 *
 	 * @see http://php.net/manual/en/function.array-diff-assoc.php
 	 *
-	 * @since 0.1
+	 * @since 0.4
 	 *
 	 * @param array $from
 	 * @param array $to

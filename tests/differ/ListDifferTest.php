@@ -25,7 +25,7 @@ use Diff\Differ;
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
- * @since 0.1
+ * @since 0.4
  *
  * @ingroup DiffTest
  *
