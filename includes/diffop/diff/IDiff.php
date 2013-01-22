@@ -47,18 +47,6 @@ interface IDiff extends DiffOp, Appendable, \ArrayAccess, \Traversable {
 	public function addOperations( array $operations );
 
 	/**
-	 * Filters the diff for operations that can be applied to the provided object.
-	 *
-	 * @since 0.1
-	 * @deprecated since 0.4, use Patcher::getApplicableDiff
-	 *
-	 * @param array $currentObject
-	 *
-	 * @return Diff
-	 */
-	public function getApplicableDiff( array $currentObject );
-
-	/**
 	 * Removes empty Diff DiffOps from the diff.
 	 *
 	 * @since 0.3

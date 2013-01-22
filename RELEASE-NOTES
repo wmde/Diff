@@ -4,6 +4,13 @@ Extension page on mediawiki.org: https://www.mediawiki.org/wiki/Extension:Diff
 Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/Diff.git;a=blob;f=RELEASE-NOTES
 
 
+=== Version 0.5 ===
+(dev)
+
+; Removals
+
+* Removed Diff::getApplicableDiff
+
 === Version 0.4 ===
 2013-01-08
 
