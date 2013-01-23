@@ -73,4 +73,18 @@ class DiffOpRemove extends AtomicDiffOp {
 		$this->oldValue = unserialize( $serialization );
 	}
 
+	/**
+	 * @see DiffOp::toArray
+	 *
+	 * @since 0.5
+	 *
+	 * @return array
+	 */
+	public function toArray() {
+		return array(
+			'type' => $this->getType(),
+			'oldvalue' => $this->oldValue,
+		);
+	}
+
 }

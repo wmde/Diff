@@ -69,4 +69,12 @@ class DiffOpRemoveTest extends DiffOpTest {
 		$this->assertEquals( $constructorArgs[0], $diffOp->getOldValue() );
 	}
 
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testToArrayMore( DiffOpRemove $diffOp ) {
+		$array = $diffOp->toArray();
+		$this->assertArrayHasKey( 'oldvalue', $array );
+	}
+
 }

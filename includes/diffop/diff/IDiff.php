@@ -8,6 +8,7 @@ namespace Diff;
  * Softly deprecated (since 0.4), use Diff instead.
  *
  * @since 0.1
+ * @deprecated since 0.5
  *
  * @file
  * @ingroup Diff

@@ -11,6 +11,7 @@ namespace Diff;
  * Soft deprecated since 0.4, just use Diff
  *
  * @since 0.1
+ * @deprecated since 0.5
  *
  * @file
  * @ingroup Diff

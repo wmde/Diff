@@ -76,4 +76,16 @@ abstract class DiffOpTest extends \AbstractTestCase {
 		}
 	}
 
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testToArray( DiffOp $diffOp ) {
+		$array = $diffOp->toArray();
+
+		$this->assertInternalType( 'array', $array );
+		$this->assertArrayHasKey( 'type', $array );
+		$this->assertInternalType( 'string', $array['type'] );
+		$this->assertEquals( $diffOp->getType(), $array['type'] );
+	}
+
 }

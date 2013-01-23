@@ -85,4 +85,19 @@ class DiffOpChange extends AtomicDiffOp {
 		list( $this->newValue, $this->oldValue ) = unserialize( $serialization );
 	}
 
+	/**
+	 * @see DiffOp::toArray
+	 *
+	 * @since 0.5
+	 *
+	 * @return array
+	 */
+	public function toArray() {
+		return array(
+			'type' => $this->getType(),
+			'newvalue' => $this->newValue,
+			'oldvalue' => $this->oldValue,
+		);
+	}
+
 }

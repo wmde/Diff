@@ -39,6 +39,25 @@ interface DiffOp extends \Serializable, \Countable {
 	 */
 	public function isAtomic();
 
+	/**
+	 * Returns the DiffOp in array form.
+	 *
+	 * All element of the array with either be primitives or arrays, with the exception
+	 * of complex values. For instance an add operation containing an object will have this
+	 * object in the resulting array.
+	 *
+	 * This array form is particularly useful for serialization, as you can feed it
+	 * to serialization functions such as json_encode() or serialize(), keeping in mind
+	 * you might need extra handling for complex objects contained in the DiffOp.
+	 *
+	 * Roundtrips with DiffOpFactory::newFromArray.
+	 *
+	 * @since 0.5
+	 *
+	 * @return array
+	 */
+	public function toArray();
+
 }
 
 /**

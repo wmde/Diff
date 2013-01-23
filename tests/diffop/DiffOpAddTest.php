@@ -69,4 +69,12 @@ class DiffOpAddTest extends DiffOpTest {
 		$this->assertEquals( $constructorArgs[0], $diffOp->getNewValue() );
 	}
 
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testToArrayMore( DiffOpAdd $diffOp ) {
+		$array = $diffOp->toArray();
+		$this->assertArrayHasKey( 'newvalue', $array );
+	}
+
 }

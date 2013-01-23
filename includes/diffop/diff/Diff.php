@@ -356,4 +356,26 @@ class Diff extends \GenericArrayObject implements IDiff {
 			|| !empty( $this->typePointers['list'] );
 	}
 
+	/**
+	 * Returns the Diff in array form where nested DiffOps are also turned into their array form.
+	 * @see DiffOp::toArray
+	 *
+	 * @since 0.5
+	 *
+	 * @return array
+	 */
+	public function toArray() {
+		$operations = array();
+
+		foreach ( $this->getOperations() as $diffOp ) {
+			$operations[] = $diffOp->toArray();
+		}
+
+		return array(
+			'type' => $this->getType(),
+			'isassoc' => $this->isAssociative,
+			'operations' => $operations
+		);
+	}
+
 }

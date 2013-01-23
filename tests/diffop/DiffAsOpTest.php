@@ -1,10 +1,10 @@
 <?php
 
 namespace Diff\Test;
-use Diff\DiffOpChange as DiffOpChange;
+use Diff\Diff;
 
 /**
- * Tests for the Diff\DiffOpChange class.
+ * Tests for the Diff\Diff class.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@ use Diff\DiffOpChange as DiffOpChange;
  * http://www.gnu.org/copyleft/gpl.html
  *
  * @file
- * @since 0.1
+ * @since 0.5
  *
  * @ingroup DiffTest
  *
@@ -32,57 +32,58 @@ use Diff\DiffOpChange as DiffOpChange;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class DiffOpChangeTest extends DiffOpTest {
+class DiffAsOpTest extends DiffOpTest {
 
 	/**
 	 * @see AbstractTestCase::getClass
 	 *
-	 * @since 0.1
+	 * @since 0.5
 	 *
 	 * @return string
 	 */
 	public function getClass() {
-		return '\Diff\DiffOpChange';
+		return '\Diff\Diff';
 	}
 
 	/**
 	 * @see AbstractTestCase::constructorProvider
 	 *
-	 * @since 0.1
+	 * @since 0.5
 	 *
 	 * @return array
 	 */
 	public function constructorProvider() {
-		return array(
-			array( true, 'foo', 'bar' ),
-			array( true, array( 9001 ), array( 4, 2 ) ),
-			array( true, true, false ),
-			array( true, true, true ),
-			array( true, 42, 4.2 ),
-			array( true, 42, 42 ),
-			array( true, 'foo', array( 'foo' ) ),
-			array( true, 'foo', null ),
-			array( true, null, null ),
-			array( false, 'foo' ),
-			array( false ),
+		$argLists = array(
+			array( true, array() ),
+			array( true, array( new \Diff\DiffOpAdd( 42 ) ) ),
+			array( true, array( new \Diff\DiffOpRemove( new \Diff\DiffOpAdd( 42 ) ) ) ),
+			array( true, array( new \Diff\Diff( array( new \Diff\DiffOpAdd( 42 ) ) ) ) ),
+			array( true, array( new \Diff\DiffOpAdd( 42 ), new \Diff\DiffOpAdd( 42 ) ) ),
 		);
+
+		$allArgLists = $argLists;
+
+		foreach ( $argLists as $argList ) {
+			foreach ( array( true, false, null ) as $isAssoc ) {
+				$argList[] = $isAssoc;
+				$allArgLists[] = $argList;
+			}
+		}
+
+		return $allArgLists;
 	}
 
 	/**
 	 * @dataProvider instanceProvider
 	 */
-	public function testGetNewValue( DiffOpChange $diffOp, array $constructorArgs ) {
-		$this->assertEquals( $constructorArgs[0], $diffOp->getOldValue() );
-		$this->assertEquals( $constructorArgs[1], $diffOp->getNewValue() );
-	}
-
-	/**
-	 * @dataProvider instanceProvider
-	 */
-	public function testToArrayMore( DiffOpChange $diffOp ) {
+	public function testToArrayMore( Diff $diffOp ) {
 		$array = $diffOp->toArray();
-		$this->assertArrayHasKey( 'newvalue', $array );
-		$this->assertArrayHasKey( 'oldvalue', $array );
+
+		$this->assertArrayHasKey( 'operations', $array );
+		$this->assertInternalType( 'array', $array['operations'] );
+
+		$this->assertArrayHasKey( 'isassoc', $array );
+		$this->assertTypeOrValue( 'boolean', $array['isassoc'], null );
 	}
 
 }
