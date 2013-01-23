@@ -15,6 +15,7 @@ return array(
 	'GenericArrayObject' => 'compat/GenericArrayObject.php',
 
 	'Diff\Appendable' => 'includes/Appendable.php',
+	'Diff\DiffOpFactory' => 'includes/DiffOpFactory.php',
 
 	'Diff\Differ' => 'includes/differ/Differ.php',
 	'Diff\ListDiffer' => 'includes/differ/ListDiffer.php',

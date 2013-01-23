@@ -71,6 +71,8 @@ $wgHooks['UnitTestsList'][]	= function( array &$files ) {
 
 		'patcher/ListPatcher',
 		'patcher/MapPatcher',
+
+		'DiffOpFactory',
 	);
 
 	foreach ( $testFiles as $file ) {

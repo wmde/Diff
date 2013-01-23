@@ -7,6 +7,15 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 === Version 0.5 ===
 (dev)
 
+; Additions
+
+* Added DiffOpFactory
+* Added DiffOp::toArray
+
+; Deprecations
+
+* Hard deprecated ListDiff, MapDiff and IDiff
+
 ; Removals
 
 * Removed Diff::getApplicableDiff
