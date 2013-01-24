@@ -68,8 +68,8 @@ class DiffOpFactory {
 
 			$operations = array();
 
-			foreach ( $diffOp['operations'] as $operation ) {
-				$operations[] = $this->newFromArray( $operation );
+			foreach ( $diffOp['operations'] as $key => $operation ) {
+				$operations[$key] = $this->newFromArray( $operation );
 			}
 
 			return new Diff( $operations, $diffOp['isassoc'] );

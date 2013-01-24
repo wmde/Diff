@@ -59,6 +59,9 @@ class DiffAsOpTest extends DiffOpTest {
 			array( true, array( new \Diff\DiffOpRemove( new \Diff\DiffOpAdd( 42 ) ) ) ),
 			array( true, array( new \Diff\Diff( array( new \Diff\DiffOpAdd( 42 ) ) ) ) ),
 			array( true, array( new \Diff\DiffOpAdd( 42 ), new \Diff\DiffOpAdd( 42 ) ) ),
+			array( true, array( 'a' => new \Diff\DiffOpAdd( 42 ), 'b' => new \Diff\DiffOpAdd( 42 ) ) ),
+			array( true, array( new \Diff\DiffOpAdd( 42 ), 'foo bar baz' => new \Diff\DiffOpAdd( 42 ) ) ),
+			array( true, array( 42 => new \Diff\DiffOpRemove( 42 ), '9001' => new \Diff\DiffOpAdd( 42 ) ) ),
 		);
 
 		$allArgLists = $argLists;

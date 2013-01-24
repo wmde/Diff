@@ -367,8 +367,8 @@ class Diff extends \GenericArrayObject implements IDiff {
 	public function toArray() {
 		$operations = array();
 
-		foreach ( $this->getOperations() as $diffOp ) {
-			$operations[] = $diffOp->toArray();
+		foreach ( $this->getOperations() as $key => $diffOp ) {
+			$operations[$key] = $diffOp->toArray();
 		}
 
 		return array(

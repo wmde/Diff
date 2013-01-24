@@ -42,9 +42,9 @@ class DiffOpFactoryTest extends \MediaWikiTestCase {
 		$diffOps = array();
 
 		$diffOps[] = new DiffOpAdd( 42 );
-		$diffOps[] = new DiffOpAdd( '42' );
-		$diffOps[] = new DiffOpAdd( 4.2 );
-		$diffOps[] = new DiffOpAdd( array( 42, array( 9001 ) ) );
+		$diffOps['foo bar'] = new DiffOpAdd( '42' );
+		$diffOps[9001] = new DiffOpAdd( 4.2 );
+		$diffOps['42'] = new DiffOpAdd( array( 42, array( 9001 ) ) );
 		$diffOps[] = new DiffOpRemove( 42 );
 
 		$atomicDiffOps = $diffOps;
