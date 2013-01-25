@@ -75,26 +75,4 @@ class ListPatcher extends ThrowingPatcher {
 		return $base;
 	}
 
-	/**
-	 * @see Patcher::getApplicableDiff
-	 *
-	 * @since 0.4
-	 *
-	 * @param array $base
-	 * @param Diff $diff
-	 *
-	 * @return Diff
-	 */
-	public function getApplicableDiff( array $base, Diff $diff ) {
-		$throwErrors = $this->throwErrors;
-		$this->throwErrors = false;
-
-		$patched = $this->patch( $base, $diff );
-
-		$this->throwErrors = $throwErrors;
-
-		$differ = new ListDiffer();
-		return new Diff( $differ->doDiff( $base, $patched ) );
-	}
-
 }
