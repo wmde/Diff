@@ -6,6 +6,7 @@ use Diff\DiffOpRemove;
 use Diff\DiffOpAdd;
 use Diff\DiffOpChange;
 use Diff\DiffOp;
+use Diff\DiffOpFactory;
 
 /**
  * Tests for the Diff\DiffOpFactory class.
@@ -63,18 +64,58 @@ class DiffOpFactoryTest extends \MediaWikiTestCase {
 	/**
 	 * @dataProvider diffOpProvider
 	 *
-	 * @param \Diff\DiffOp $diffOp
+	 * @param DiffOp $diffOp
 	 */
 	public function testNewFromArray( DiffOp $diffOp ) {
 		$array = $diffOp->toArray();
 
-		$factory = new \Diff\DiffOpFactory();
+		$factory = new DiffOpFactory();
 
 		$newInstance = $factory->newFromArray( $array );
 
 		// If an equality method is implemented in DiffOp, it should be used here
 		$this->assertEquals( $diffOp, $newInstance );
 		$this->assertEquals( $diffOp->getType(), $newInstance->getType() );
+	}
+
+	public function invalidArrayFromArrayProvider() {
+		$arrays = array();
+
+		$arrays[] = array();
+
+		$arrays[] = array( '~=[,,_,,]:3' );
+
+		$arrays[] = array( '~=[,,_,,]:3' => '~=[,,_,,]:3' );
+
+		$arrays[] = array( 'type' => '~=[,,_,,]:3' );
+
+		$arrays[] = array( 'type' => 'add', 'oldvalue' => 'foo' );
+
+		$arrays[] = array( 'type' => 'remove', 'newvalue' => 'foo' );
+
+		$arrays[] = array( 'type' => 'change', 'newvalue' => 'foo' );
+
+		$arrays[] = array( 'diff' => 'remove', 'newvalue' => 'foo' );
+
+		$arrays[] = array( 'diff' => 'remove', 'operations' => array() );
+
+		$arrays[] = array( 'diff' => 'remove', 'isassoc' => true );
+
+		return $this->arrayWrap( $arrays );
+	}
+
+	/**
+	 * @dataProvider invalidArrayFromArrayProvider
+	 *
+	 * @param array $array
+	 */
+	public function testNewFromArrayInvalid( array $array ) {
+		$aCode = function() use ( $array ) {
+			$factory = new DiffOpFactory();
+			$factory->newFromArray( $array );
+		};
+
+		$this->assertException( $aCode );
 	}
 
 }
