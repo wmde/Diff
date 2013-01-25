@@ -151,6 +151,29 @@ class ListDifferTest extends \MediaWikiTestCase {
 		$argLists[] = array( $old, $new, $expected,
 			'[[2]] to [[2]] should result in an empty diff' );
 
+		// test "soft" object comparison
+		$obj1 = new \stdClass();
+		$obj2 = new \stdClass();
+		$objX = new \stdClass();
+
+		$obj1->test = "Test";
+		$obj2->test = "Test";
+		$objX->xest = "Test";
+
+		$old = array( $obj1 );
+		$new = array( $obj2 );
+		$expected = array( );
+
+		$argLists[] = array( $old, $new, $expected,
+			'Two arrays containing equivalent objects should result in an empty diff' );
+
+		$old = array( $obj1 );
+		$new = array( $objX );
+		$expected = array( new DiffOpRemove( $obj1 ), new DiffOpAdd( $objX )  );
+
+		$argLists[] = array( $old, $new, $expected,
+			'Two arrays containing different objects of the same type should result in an add and a remove op.' );
+
 		return $argLists;
 	}
 
@@ -186,6 +209,8 @@ class ListDifferTest extends \MediaWikiTestCase {
 
 		$argLists[] = array( $old, $new, $expected,
 			'[42] to [42, 42] should result in an empty diff' );
+
+		// TODO: test toString()-based object comparison
 
 		return $argLists;
 	}

@@ -113,7 +113,8 @@ class ListDiffer implements Differ {
 	 *
 	 * Similar to @see array_diff with the following differences:
 	 *
-	 * - Strict comparison: ['42'] and [42] are different
+	 * - Strict comparison for arrays: ['42'] and [42] are different
+	 * - ...but content based comparison for objects.
 	 * - Quantity matters: [42, 42] and [42] are different
 	 * - Arrays and objects are compared properly: [[1]] and [[2]] are different
 	 * - Only works with two arrays (array_diff can take more)
@@ -129,12 +130,14 @@ class ListDiffer implements Differ {
 		$notInTwo = array();
 
 		foreach ( $arrayOne as $element ) {
-			if ( !in_array( $element, $arrayTwo, true ) ) {
+			$strict = !is_object( $element );
+
+			if ( !in_array( $element, $arrayTwo, $strict ) ) {
 				$notInTwo[] = $element;
 				continue;
 			}
 
-			$location = array_search( $element, $arrayTwo, true );
+			$location = array_search( $element, $arrayTwo, $strict );
 			assert( $location !== false );
 
 			unset( $arrayTwo[$location] );
