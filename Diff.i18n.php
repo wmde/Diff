@@ -66,7 +66,7 @@ $messages['da'] = array(
  * @author Metalhead64
  */
 $messages['de'] = array(
-	'diff-desc' => 'Bibliothek mit Klassen, um Unterschiede strukturierter Daten darzustellen und Serviceobjekten, um Objekte zu vergleichen oder zu patchen',
+	'diff-desc' => 'Stellt eine Bibliothek zum Darstellen sowie Dienstobjekte zum Ändern von Unterschieden zwischen strukturierten Daten bereit',
 );
 
 /** Lower Sorbian (dolnoserbski)
@@ -225,6 +225,13 @@ $messages['pt-br'] = array(
  */
 $messages['roa-tara'] = array(
 	'diff-desc' => "Libbrerie cu le classe pe rappresendà le differenze 'mbrà le date strutturate, cumme le oggette de servizie ca sò diverse da le oggette o le accunzaminde lore",
+);
+
+/** Russian (русский)
+ * @author DCamer
+ */
+$messages['ru'] = array(
+	'diff-desc' => 'Библиотеки классов для представления diff-структурированных данных, а также подключение объектов к diff-объектам или их патчам',
 );
 
 /** Sinhala (සිංහල)
