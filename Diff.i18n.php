@@ -30,35 +30,35 @@ $messages['qqq'] = array(
  * @author Xuacu
  */
 $messages['ast'] = array(
-	'diff-desc' => 'Biblioteca de diferencies pa datos estructuraos',
+	'diff-desc' => 'Biblioteca de diferencies pa datos estructuraos', # Fuzzy
 );
 
 /** South Azerbaijani (تورکجه)
  * @author Mousa
  */
 $messages['azb'] = array(
-	'diff-desc' => 'قورولوشلو وئریلر اوچون موقاییسه کیتابخاناسی',
+	'diff-desc' => 'قورولوشلو وئریلر اوچون موقاییسه کیتابخاناسی', # Fuzzy
 );
 
 /** Belarusian (Taraškievica orthography) (беларуская (тарашкевіца)‎)
  * @author Wizardist
  */
 $messages['be-tarask'] = array(
-	'diff-desc' => 'Бібліятэка для параўнаньня структураваных зьвестак',
+	'diff-desc' => 'Бібліятэка для параўнаньня структураваных зьвестак', # Fuzzy
 );
 
 /** Czech (česky)
  * @author Mormegil
  */
 $messages['cs'] = array(
-	'diff-desc' => 'Knihovna pro zjišťování změn ve strukturovaných datech',
+	'diff-desc' => 'Knihovna pro zjišťování změn ve strukturovaných datech', # Fuzzy
 );
 
 /** Danish (dansk)
  * @author Kaare
  */
 $messages['da'] = array(
-	'diff-desc' => 'Diff-bibliotek til strukturerede data',
+	'diff-desc' => 'Diff-bibliotek til strukturerede data', # Fuzzy
 );
 
 /** German (Deutsch)
@@ -73,28 +73,28 @@ $messages['de'] = array(
  * @author Michawiki
  */
 $messages['dsb'] = array(
-	'diff-desc' => 'Biblioteka rozdźělow za strukturěrowane daty',
+	'diff-desc' => 'Biblioteka rozdźělow za strukturěrowane daty', # Fuzzy
 );
 
 /** Spanish (español)
  * @author Armando-Martin
  */
 $messages['es'] = array(
-	'diff-desc' => 'Biblioteca de diferencias para datos estructurados',
+	'diff-desc' => 'Biblioteca de diferencias para datos estructurados', # Fuzzy
 );
 
 /** Basque (euskara)
  * @author Theklan
  */
 $messages['eu'] = array(
-	'diff-desc' => 'Diff liburutegia data egituratuetarako',
+	'diff-desc' => 'Diff liburutegia data egituratuetarako', # Fuzzy
 );
 
 /** Persian (فارسی)
  * @author Reza1615
  */
 $messages['fa'] = array(
-	'diff-desc' => 'کتابخانهٔ تفاوت برای داده‌های ساختاریافته',
+	'diff-desc' => 'کتابخانهٔ تفاوت برای داده‌های ساختاریافته', # Fuzzy
 );
 
 /** French (français)
@@ -116,28 +116,28 @@ $messages['gl'] = array(
  * @author Amire80
  */
 $messages['he'] = array(
-	'diff-desc' => 'ספרייה להשוואת נתונים מבניים',
+	'diff-desc' => 'ספרייה להשוואת נתונים מבניים', # Fuzzy
 );
 
 /** Croatian (hrvatski)
  * @author SpeedyGonsales
  */
 $messages['hr'] = array(
-	'diff-desc' => 'Diff biblioteka funkcija za strukturirane podatke',
+	'diff-desc' => 'Diff biblioteka funkcija za strukturirane podatke', # Fuzzy
 );
 
 /** Upper Sorbian (hornjoserbsce)
  * @author Michawiki
  */
 $messages['hsb'] = array(
-	'diff-desc' => 'Biblioteka rozdźělow za strukturowane daty',
+	'diff-desc' => 'Biblioteka rozdźělow za strukturowane daty', # Fuzzy
 );
 
 /** Indonesian (Bahasa Indonesia)
  * @author Farras
  */
 $messages['id'] = array(
-	'diff-desc' => 'Pustaka diff untuk data terstruktur',
+	'diff-desc' => 'Pustaka diff untuk data terstruktur', # Fuzzy
 );
 
 /** Italian (italiano)
@@ -166,14 +166,14 @@ $messages['ko'] = array(
  * @author Purodha
  */
 $messages['ksh'] = array(
-	'diff-desc' => 'En Projrammbiblijoteek för Ongerscheide en Daate met Schtroktuur ze fenge.',
+	'diff-desc' => 'En Projrammbiblijoteek för Ongerscheide en Daate met Schtroktuur ze fenge.', # Fuzzy
 );
 
 /** Luxembourgish (Lëtzebuergesch)
  * @author Robby
  */
 $messages['lb'] = array(
-	'diff-desc' => 'Diff-Library fir strukturéiert Daten',
+	'diff-desc' => 'Diff-Library fir strukturéiert Daten', # Fuzzy
 );
 
 /** Macedonian (македонски)
@@ -187,7 +187,7 @@ $messages['mk'] = array(
  * @author Anakmalaysia
  */
 $messages['ms'] = array(
-	'diff-desc' => 'Perpustakaan halaman perbezaan (diff) untuk data berstruktur',
+	'diff-desc' => 'Perpustakaan halaman perbezaan (diff) untuk data berstruktur', # Fuzzy
 );
 
 /** Dutch (Nederlands)
@@ -202,7 +202,7 @@ $messages['nl'] = array(
  * @author Lazowik
  */
 $messages['pl'] = array(
-	'diff-desc' => 'Biblioteka porównywania danych strukturalnych',
+	'diff-desc' => 'Biblioteka porównywania danych strukturalnych', # Fuzzy
 );
 
 /** Piedmontese (Piemontèis)
@@ -217,7 +217,7 @@ $messages['pms'] = array(
  * @author Jaideraf
  */
 $messages['pt-br'] = array(
-	'diff-desc' => 'Biblioteca Diff para dados estruturados',
+	'diff-desc' => 'Biblioteca Diff para dados estruturados', # Fuzzy
 );
 
 /** tarandíne (tarandíne)
@@ -238,40 +238,40 @@ $messages['ru'] = array(
  * @author පසිඳු කාවින්ද
  */
 $messages['si'] = array(
-	'diff-desc' => 'ව්‍යූහගත දත්ත සඳහා Diff පුස්තකාලය',
+	'diff-desc' => 'ව්‍යූහගත දත්ත සඳහා Diff පුස්තකාලය', # Fuzzy
 );
 
 /** Swedish (svenska)
  * @author WikiPhoenix
  */
 $messages['sv'] = array(
-	'diff-desc' => 'Differansbibliotek för strukturerade data',
+	'diff-desc' => 'Differansbibliotek för strukturerade data', # Fuzzy
 );
 
 /** Tagalog (Tagalog)
  * @author AnakngAraw
  */
 $messages['tl'] = array(
-	'diff-desc' => 'Aklatan ng pagkakaiba para sa datong may kayarian',
+	'diff-desc' => 'Aklatan ng pagkakaiba para sa datong may kayarian', # Fuzzy
 );
 
 /** Ukrainian (українська)
  * @author Base
  */
 $messages['uk'] = array(
-	'diff-desc' => 'Бібліотека для порівняння структурованих даних',
+	'diff-desc' => 'Бібліотека для порівняння структурованих даних', # Fuzzy
 );
 
 /** Vietnamese (Tiếng Việt)
  * @author Minh Nguyen
  */
 $messages['vi'] = array(
-	'diff-desc' => 'Thư viện so sánh dữ liệu có cấu trúc',
+	'diff-desc' => 'Thư viện so sánh dữ liệu có cấu trúc', # Fuzzy
 );
 
 /** Traditional Chinese (中文（繁體）‎)
  * @author Justincheng12345
  */
 $messages['zh-hant'] = array(
-	'diff-desc' => '用於結構化資料的差別庫',
+	'diff-desc' => '用於結構化資料的差別庫', # Fuzzy
 );
