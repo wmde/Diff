@@ -62,8 +62,8 @@ class DiffOpChangeTest extends DiffOpTest {
 			array( true, 42, 42 ),
 			array( true, 'foo', array( 'foo' ) ),
 			array( true, 'foo', null ),
+			array( true, new DiffOpTestDummy( "ham" ), new DiffOpTestDummy( "spam" ) ),
 			array( true, null, null ),
-			array( false, 'foo' ),
 			array( false ),
 		);
 	}

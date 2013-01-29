@@ -42,4 +42,5 @@ return array(
 
 	'AbstractTestCase' => 'tests/AbstractTestCase.php',
 	'Diff\Test\DiffOpTest' => 'tests/diffop/DiffOpTest.php',
+	'Diff\Test\DiffOpTestDummy' => 'tests/DiffOpTestDummy.php',
 );

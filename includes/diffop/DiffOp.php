@@ -54,9 +54,12 @@ interface DiffOp extends \Serializable, \Countable {
 	 *
 	 * @since 0.5
 	 *
+	 * @param callable|null $valueConverter optional callback used to convert any
+	 *        complex values to arrays.
+	 *
 	 * @return array
 	 */
-	public function toArray();
+	public function toArray( $valueConverter = null );
 
 }
 

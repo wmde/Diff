@@ -14,6 +14,7 @@ use InvalidArgumentException;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class Diff extends \GenericArrayObject implements IDiff {
 
@@ -358,17 +359,21 @@ class Diff extends \GenericArrayObject implements IDiff {
 
 	/**
 	 * Returns the Diff in array form where nested DiffOps are also turned into their array form.
-	 * @see DiffOp::toArray
+	 *
+	 * @see  DiffOp::toArray
 	 *
 	 * @since 0.5
 	 *
+	 * @param callable|null $valueConverter optional callback used to convert any
+	 *        complex values to arrays.
+	 *
 	 * @return array
 	 */
-	public function toArray() {
+	public function toArray( $valueConverter = null ) {
 		$operations = array();
 
 		foreach ( $this->getOperations() as $key => $diffOp ) {
-			$operations[$key] = $diffOp->toArray();
+			$operations[$key] = $diffOp->toArray( $valueConverter );
 		}
 
 		return array(

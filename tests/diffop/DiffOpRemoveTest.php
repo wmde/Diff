@@ -58,6 +58,7 @@ class DiffOpRemoveTest extends DiffOpTest {
 			array( true, array() ),
 			array( true, true ),
 			array( true, 42 ),
+			array( true, new DiffOpTestDummy( "spam" ) ),
 			array( false ),
 		);
 	}

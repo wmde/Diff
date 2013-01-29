@@ -32,6 +32,21 @@ use Diff\Exception;
 class DiffOpFactory {
 
 	/**
+	 * @var callable|null
+	 */
+	protected $valueConverter;
+
+	/**
+	 * Constructor.
+	 *
+	 * @param callable|null $valueConverter optional callback used to convert special
+	 *        array structures into objects used as values in atomic diff ops.
+	 */
+	public function __construct( $valueConverter = null ) {
+		$this->valueConverter = $valueConverter;
+	}
+
+	/**
 	 * Returns an instance of DiffOp constructed from the provided array.
 	 *
 	 * This roundtripes with @see DiffOp::toArray.
@@ -48,18 +63,20 @@ class DiffOpFactory {
 
 		if ( $diffOp['type'] === 'add' ) {
 			$this->assertHasKey( 'newvalue', $diffOp );
-			return new DiffOpAdd( $diffOp['newvalue'] );
+			return new DiffOpAdd( $this->arrayToObject( $diffOp['newvalue'] ) );
 		}
 
 		if ( $diffOp['type'] === 'remove' ) {
 			$this->assertHasKey( 'oldvalue', $diffOp );
-			return new DiffOpRemove( $diffOp['oldvalue'] );
+			return new DiffOpRemove( $this->arrayToObject( $diffOp['oldvalue'] ) );
 		}
 
 		if ( $diffOp['type'] === 'change' ) {
 			$this->assertHasKey( 'newvalue', $diffOp );
 			$this->assertHasKey( 'oldvalue', $diffOp );
-			return new DiffOpChange( $diffOp['oldvalue'], $diffOp['newvalue'] );
+			return new DiffOpChange(
+				$this->arrayToObject( $diffOp['oldvalue'] ),
+				$this->arrayToObject( $diffOp['newvalue'] ) );
 		}
 
 		if ( $diffOp['type'] === 'diff' ) {
@@ -92,4 +109,27 @@ class DiffOpFactory {
 		}
 	}
 
+
+	/**
+	 * Converts an array structure to an object using the value converter callback function
+	 * provided to the constructor, if any.
+	 *
+	 * If the convert callback is null or the value is not an array, the value is returned
+	 * unchanged. The Converter callback is intended for constructing an object from an array,
+	 * but may also just leave the value unchanged if it cannot handle it.
+	 *
+	 * @since 0.5
+	 *
+	 * @param mixed $value The value to convert
+	 *
+	 * @return mixed The $value unchanged, or the return value of calling the
+	 *         value converter callback on $value.
+	 */
+	protected function arrayToObject( $value ) {
+		if ( $this->valueConverter !== null && is_array( $value ) ) {
+			$value = call_user_func( $this->valueConverter, $value );
+		}
+
+		return $value;
+	}
 }

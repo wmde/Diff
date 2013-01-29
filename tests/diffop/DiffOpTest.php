@@ -31,6 +31,7 @@ use \Diff\DiffOp as DiffOp;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 abstract class DiffOpTest extends \AbstractTestCase {
 
@@ -88,4 +89,38 @@ abstract class DiffOpTest extends \AbstractTestCase {
 		$this->assertEquals( $diffOp->getType(), $array['type'] );
 	}
 
+	/**
+	 * @dataProvider instanceProvider
+	 */
+	public function testToArrayWithConversion( DiffOp $diffOp ) {
+		$array = $diffOp->toArray( 'Diff\Test\DiffOpTestDummy::arrayalize' );
+
+		$this->assertNoObjectsRecursive( $array );
+	}
+
+	/**
+	 * Asserts that $data is not an object, and contains no objects.
+	 * This is useful for testing if a conversion from an object to an array
+	 * structure is complete.
+	 *
+	 * @param mixed $data
+	 * @param int   $depth max recursion depth (optional)
+	 */
+	protected function assertNoObjectsRecursive( $data, $depth = PHP_INT_MAX ) {
+		if ( is_object( $data ) ) {
+			$this->fail( "Found object: instance of " . get_class( $data ) );
+		}
+
+		if ( $depth > 0 ) {
+			$depth -= 1;
+
+			if ( is_array( $data ) ) {
+				foreach ( $data as $value ) {
+					$this->assertNoObjectsRecursive( $value, $depth );
+				}
+			}
+		}
+
+		$this->assertTrue( true ); // just a dummy, to supress warnings when there's nothing to check.
+	}
 }

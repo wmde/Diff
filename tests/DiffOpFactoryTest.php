@@ -36,6 +36,7 @@ use Diff\DiffOpFactory;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class DiffOpFactoryTest extends \MediaWikiTestCase {
 
@@ -47,6 +48,7 @@ class DiffOpFactoryTest extends \MediaWikiTestCase {
 		$diffOps[9001] = new DiffOpAdd( 4.2 );
 		$diffOps['42'] = new DiffOpAdd( array( 42, array( 9001 ) ) );
 		$diffOps[] = new DiffOpRemove( 42 );
+		$diffOps[] = new DiffOpAdd( new DiffOpTestDummy( "spam" ) );
 
 		$atomicDiffOps = $diffOps;
 
@@ -67,15 +69,51 @@ class DiffOpFactoryTest extends \MediaWikiTestCase {
 	 * @param DiffOp $diffOp
 	 */
 	public function testNewFromArray( DiffOp $diffOp ) {
-		$array = $diffOp->toArray();
-
 		$factory = new DiffOpFactory();
 
+		// try without conversion callback
+		$array = $diffOp->toArray();
 		$newInstance = $factory->newFromArray( $array );
 
 		// If an equality method is implemented in DiffOp, it should be used here
 		$this->assertEquals( $diffOp, $newInstance );
 		$this->assertEquals( $diffOp->getType(), $newInstance->getType() );
+	}
+
+	/**
+	 * @dataProvider diffOpProvider
+	 *
+	 * @param DiffOp $diffOp
+	 */
+	public function testNewFromArrayWithConversion( DiffOp $diffOp ) {
+		$factory = new DiffOpFactory( 'Diff\Test\DiffOpTestDummy::objectify' );
+
+		// try with conversion callback
+		$array = $diffOp->toArray( 'Diff\Test\DiffOpTestDummy::arrayalize' );
+		$newInstance = $factory->newFromArray( $array );
+
+		// If an equality method is implemented in DiffOp, it should be used here
+		$this->assertEquals( $diffOp, $newInstance );
+		$this->assertEquals( $diffOp->getType(), $newInstance->getType() );
+	}
+
+	public static function dummyToArray( $obj ) {
+		if ( $obj instanceof DiffOpTestDummy ) {
+			return array(
+				'type' => 'Dummy',
+				'text' => $obj->text,
+			);
+		}
+
+		return $obj;
+	}
+
+	public static function arrayToDummy( $array ) {
+		if ( is_array( $array ) && isset( $array['type'] ) && $array['type'] === 'Dummy' ) {
+			return new DiffOpTestDummy( $array['text'] );
+		}
+
+		return $array;
 	}
 
 	public function invalidArrayFromArrayProvider() {

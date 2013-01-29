@@ -78,12 +78,15 @@ class DiffOpAdd extends AtomicDiffOp {
 	 *
 	 * @since 0.5
 	 *
+	 * @param callable|null $valueConverter optional callback used to convert any
+	 *        complex values to arrays.
+	 *
 	 * @return array
 	 */
-	public function toArray() {
+	public function toArray( $valueConverter = null ) {
 		return array(
 			'type' => $this->getType(),
-			'newvalue' => $this->newValue,
+			'newvalue' => $this->objectToArray( $this->newValue, $valueConverter ),
 		);
 	}
 
