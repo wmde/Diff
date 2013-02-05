@@ -1,6 +1,7 @@
 {
     "name": "diff/diff",
     "type": "mediawiki-extension",
+	"version": "0.5-alpha",
     "description": "Library for computing and representing diffs between JSON like data structures",
     "keywords": ["diff"],
     "homepage": "https://www.mediawiki.org/wiki/Extension:Diff",
