@@ -17,6 +17,7 @@ return array(
 	'Diff\Appendable' => 'includes/Appendable.php',
 	'Diff\DiffOpFactory' => 'includes/DiffOpFactory.php',
 
+	'Diff\CallbackListDiffer' => 'includes/differ/CallbackListDiffer.php',
 	'Diff\Differ' => 'includes/differ/Differ.php',
 	'Diff\ListDiffer' => 'includes/differ/ListDiffer.php',
 	'Diff\MapDiffer' => 'includes/differ/MapDiffer.php',

@@ -42,6 +42,13 @@ class MapDiffer implements Differ {
 	protected $listDiffer;
 
 	/**
+	 * @since 0.5
+	 *
+	 * @var callable|null
+	 */
+	protected $comparisonCallback = null;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 0.4
@@ -57,6 +64,18 @@ class MapDiffer implements Differ {
 		}
 
 		$this->listDiffer = $listDiffer;
+	}
+
+	/**
+	 * Sets a callback to use for comparison. The callback should accept two
+	 * arguments.
+	 *
+	 * @since 0.5
+	 *
+	 * @param callable $comparisonCallback
+	 */
+	public function setComparisonCallback( $comparisonCallback ) {
+		$this->comparisonCallback = $comparisonCallback;
 	}
 
 	/**
@@ -162,12 +181,35 @@ class MapDiffer implements Differ {
 		$diff = array();
 
 		foreach ( $from as $key => $value ) {
-			if ( !array_key_exists( $key, $to ) || $to[$key] !== $value ) {
+			if ( !array_key_exists( $key, $to ) || !$this->valuesAreEqual( $to[$key], $value ) ) {
 				$diff[$key] = $value;
 			}
 		}
 
 		return $diff;
+	}
+
+	/**
+	 * @since 0.5
+	 *
+	 * @param mixed $value0
+	 * @param mixed $value1
+	 *
+	 * @return bool
+	 * @throws Exception
+	 */
+	protected function valuesAreEqual( $value0, $value1 ) {
+		if ( $this->comparisonCallback === null ) {
+			return $value0 === $value1;
+		}
+
+		$areEqual = call_user_func_array( $this->comparisonCallback, array( $value0, $value1 ) );
+
+		if ( !is_bool( $areEqual ) ) {
+			throw new Exception( 'Comparison callback returned a non-boolean value' );
+		}
+
+		return $areEqual;
 	}
 
 }

@@ -4,6 +4,8 @@ namespace Diff;
 
 /**
  * Differ that only looks at the values of the arrays (and thus ignores key differences).
+ * Values are compared using the strictDiff method in strict mode (default)
+ * or using array_diff_assoc in native mode.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,12 +35,16 @@ class ListDiffer implements Differ {
 	/**
 	 * Use non-strict comparison and do not care about quantity.
 	 * This makes use of @see array_diff
+	 *
+	 * @since 0.4
 	 */
 	const MODE_NATIVE = 0;
 
 	/**
 	 * Use strict comparison and care about quantity.
-	 * This makes use of @see ListDiffer::arrayDiff
+	 * This makes use of @see ListDiffer::strictDiff
+	 *
+	 * @since 0.4
 	 */
 	const MODE_STRICT = 1;
 
@@ -48,6 +54,13 @@ class ListDiffer implements Differ {
 	 * @var int
 	 */
 	protected $diffMode;
+
+	/**
+	 * @since 0.5
+	 *
+	 * @var callable|null
+	 */
+	protected $comparisonCallback = null;
 
 	/**
 	 * Constructor.
@@ -64,6 +77,18 @@ class ListDiffer implements Differ {
 	 */
 	public function __construct( $diffMode = self::MODE_STRICT ) {
 		$this->diffMode = $diffMode;
+	}
+
+	/**
+	 * Sets a callback to use for comparison. The callback should accept two
+	 * arguments.
+	 *
+	 * @since 0.5
+	 *
+	 * @param callable $comparisonCallback
+	 */
+	public function setComparisonCallback( $comparisonCallback ) {
+		$this->comparisonCallback = $comparisonCallback;
 	}
 
 	/**
@@ -101,7 +126,7 @@ class ListDiffer implements Differ {
 	 */
 	protected function diffArrays( array $arrayOne, array $arrayTwo ) {
 		if ( $this->diffMode === self::MODE_STRICT ) {
-			return $this->arrayDiff( $arrayOne, $arrayTwo );
+			return $this->strictDiff( $arrayOne, $arrayTwo );
 		}
 		else {
 			return array_diff( $arrayOne, $arrayTwo );
@@ -126,19 +151,16 @@ class ListDiffer implements Differ {
 	 *
 	 * @return array
 	 */
-	public function arrayDiff( array $arrayOne, array $arrayTwo ) {
+	protected function strictDiff( array $arrayOne, array $arrayTwo ) {
 		$notInTwo = array();
 
 		foreach ( $arrayOne as $element ) {
-			$strict = !is_object( $element );
+			$location = array_search( $element, $arrayTwo, !is_object( $element ) );
 
-			if ( !in_array( $element, $arrayTwo, $strict ) ) {
+			if ( $location === false ) {
 				$notInTwo[] = $element;
 				continue;
 			}
-
-			$location = array_search( $element, $arrayTwo, $strict );
-			assert( $location !== false );
 
 			unset( $arrayTwo[$location] );
 		}
