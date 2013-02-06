@@ -15,6 +15,13 @@ namespace Diff;
  */
 interface Appendable {
 
+	/**
+	 * Appends a value to the object.
+	 *
+	 * @since 0.1
+	 *
+	 * @param mixed $element
+	 */
 	public function append( $element );
 
 }
