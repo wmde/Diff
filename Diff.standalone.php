@@ -17,7 +17,7 @@
 
 namespace Diff {
 
-	if ( defined( 'MEDIAWIKI' ) ) {
+	if ( !defined( 'Diff_VERSION' ) ) {
 		die( 'Not an entry point for MediaWiki. Use Diff.php' );
 	}
 

@@ -28,7 +28,7 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 
-if ( !defined( 'MEDIAWIKI' ) ) {
+if ( !defined( 'Diff_VERSION' ) ) {
 	die( 'Not an entry point.' );
 }
 
