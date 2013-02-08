@@ -11,6 +11,8 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 
 * Added DiffOpFactory
 * Added DiffOp::toArray
+* Added CallbackListDiffer
+* Added MapDiffer::setComparisonCallback
 
 ; Deprecations
 

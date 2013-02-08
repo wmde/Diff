@@ -58,6 +58,7 @@ foreach ( include( __DIR__ . '/Diff.classes.php' ) as $class => $file ) {
 $wgHooks['UnitTestsList'][]	= function( array &$files ) {
 	// @codeCoverageIgnoreStart
 	$testFiles = array(
+		'differ/CallbackListDiffer',
 		'differ/ListDiffer',
 		'differ/MapDiffer',
 

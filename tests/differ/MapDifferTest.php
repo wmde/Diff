@@ -158,4 +158,43 @@ class MapDifferTest extends \MediaWikiTestCase {
 		$this->assertArrayEquals( $expected, $actual, false, true, $message );
 	}
 
+	public function testCallbackComparisonReturningFalse() {
+		$differ = new MapDiffer();
+
+		$differ->setComparisonCallback( function( $foo, $bar ) {
+			return false;
+		} );
+
+		$actual = $differ->doDiff( array( 1, '2', 3 ), array( 1, '2', 4, 'foo' ) );
+
+		$expected = array(
+			new DiffOpChange( 1, 1 ),
+			new DiffOpChange( '2', '2' ),
+			new DiffOpChange( 3, 4 ),
+			new DiffOpAdd( 'foo' ),
+		);
+
+		$this->assertArrayEquals(
+			$expected, $actual, false, true,
+			'Identical elements should result in change ops when comparison callback always returns false'
+		);
+	}
+
+	public function testCallbackComparisonReturningTrue() {
+		$differ = new MapDiffer();
+
+		$differ->setComparisonCallback( function( $foo, $bar ) {
+			return true;
+		} );
+
+		$actual = $differ->doDiff( array( 1, '2', 'baz' ), array( 1, 'foo', '2' ) );
+
+		$expected = array();
+
+		$this->assertArrayEquals(
+			$expected, $actual, false, true,
+			'No change ops should be created when the arrays have the same length and the comparison callback always returns true'
+		);
+	}
+
 }
