@@ -148,8 +148,9 @@ class DiffTest extends \GenericArrayObjectTest {
 
 		$types = array();
 
+		$this->assertContainsOnlyInstancesOf( '\Diff\DiffOp', $diff );
+
 		foreach ( $diff as $operation ) {
-			$this->assertInstanceOf( '\Diff\DiffOp', $operation );
 			if ( !in_array( $operation->getType(), $types ) ) {
 				$types[] = $operation->getType();
 			}
@@ -186,11 +187,7 @@ class DiffTest extends \GenericArrayObjectTest {
 		$ops = $diff->getOperations();
 
 		$this->assertInternalType( 'array', $ops );
-
-		foreach ( $ops as $diffOp ) {
-			$this->assertInstanceOf( '\Diff\DiffOp', $diffOp );
-		}
-
+		$this->assertContainsOnlyInstancesOf( '\Diff\DiffOp', $ops );
 		$this->assertArrayEquals( $ops, $diff->getOperations() );
 	}
 
