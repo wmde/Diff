@@ -187,7 +187,7 @@ $messages['mk'] = array(
  * @author Anakmalaysia
  */
 $messages['ms'] = array(
-	'diff-desc' => 'Perpustakaan halaman perbezaan (diff) untuk data berstruktur', # Fuzzy
+	'diff-desc' => 'Perpustakaan dengan kelas untuk mewakili perbezaan antara data berstruktur dan juga menservis objek untuk to memperbezakan atau menampung objek',
 );
 
 /** Dutch (Nederlands)
