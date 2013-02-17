@@ -190,6 +190,13 @@ $messages['ms'] = array(
 	'diff-desc' => 'Perpustakaan dengan kelas untuk mewakili perbezaan antara data berstruktur dan juga menservis objek untuk to memperbezakan atau menampung objek',
 );
 
+/** Norwegian Bokmål (norsk bokmål)
+ * @author Jeblad
+ */
+$messages['nb'] = array(
+	'diff-desc' => 'Biblioteket med klasser for å representere diffs av strukturerte data, i tillegg til serviceobjekter for diff og lapping',
+);
+
 /** Dutch (Nederlands)
  * @author Siebrand
  */
