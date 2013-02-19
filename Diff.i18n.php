@@ -26,6 +26,13 @@ $messages['qqq'] = array(
 	'diff-desc' => 'Diff library for structured data',
 );
 
+/** Arabic (العربية)
+ * @author Abanima
+ */
+$messages['ar'] = array(
+	'diff-desc' => 'مكتبة أصناف لتمثيل الفروق في البيانات ذات البنية بالإضافة إلى كائنات خدمية لإظهار الفروق بين الكائنات أو رقعها',
+);
+
 /** Asturian (asturianu)
  * @author Xuacu
  */
