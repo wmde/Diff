@@ -1,7 +1,6 @@
 {
 	"name": "diff/diff",
 	"type": "mediawiki-extension",
-	"version": "0.5-alpha",
 	"description": "Library for computing and representing diffs between JSON like data structures",
 	"keywords": ["diff"],
 	"homepage": "https://www.mediawiki.org/wiki/Extension:Diff",
@@ -22,6 +21,9 @@
 	},
 	"require": {
 		"php": ">=5.3.0"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "*"
 	},
 	"suggest": {
 		"mediawiki/core" : "dev-master"
