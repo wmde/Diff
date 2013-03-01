@@ -157,10 +157,11 @@ $messages['it'] = array(
 );
 
 /** Japanese (日本語)
+ * @author Fryed-peach
  * @author Shirayuki
  */
 $messages['ja'] = array(
-	'diff-desc' => '構造化されたデータ用の差分ライブラリ', # Fuzzy
+	'diff-desc' => '構造化データの差分を表現するクラスや、オブジェクトの差分をとったりパッチを当てたりするためのサービスオブジェクトを含むライブラリ',
 );
 
 /** Korean (한국어)
