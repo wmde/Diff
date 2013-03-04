@@ -68,7 +68,7 @@ class ListDiffer implements Differ {
 	 * Takes an argument that determines the diff mode.
 	 * By default this is ListDiffer::MODE_STRICT, which causes
 	 * computation in @see doDiff to be done via @see arrayDiff.
-	 * If the native behaviour is preferred, ListDiffer::MODE_NATIVE
+	 * If the native behavior is preferred, ListDiffer::MODE_NATIVE
 	 * can be specified.
 	 *
 	 * @since 0.4

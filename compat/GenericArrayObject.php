@@ -181,7 +181,7 @@ abstract class GenericArrayObject extends \ArrayObject {
 	/**
 	 * Returns an array holding all the data that should go into serialization calls.
 	 * This is intended to allow overloading without having to reimplement the
-	 * behaviour of this base class.
+	 * behavior of this base class.
 	 *
 	 * @since 0.1
 	 *

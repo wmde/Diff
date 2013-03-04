@@ -80,7 +80,7 @@ class MapPatcher extends ThrowingPatcher {
 	 * The array is treated as a map, ie keys are held into account.
 	 *
 	 * It is possible to pass in non-associative diffs (those for which isAssociative)
-	 * returns false, however the likely intended behaviour can be obtained via
+	 * returns false, however the likely intended behavior can be obtained via
 	 * @see getPatchedList
 	 *
 	 * @since 0.4
