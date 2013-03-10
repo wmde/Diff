@@ -148,6 +148,13 @@ $messages['id'] = array(
 	'diff-desc' => 'Pustaka diff untuk data terstruktur', # Fuzzy
 );
 
+/** Iloko (Ilokano)
+ * @author Lam-ang
+ */
+$messages['ilo'] = array(
+	'diff-desc' => 'Biblioteka nga adda dagiti klase a mangirepresenta dagiti paggiddiatan iti naestruktura a datos, ken dagiti pay serbisio ti banag iti paggiddiatan a banbanag wenno takupan ida',
+);
+
 /** Italian (italiano)
  * @author Beta16
  * @author Darth Kule
