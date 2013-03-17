@@ -138,7 +138,7 @@ $messages['hr'] = array(
  * @author Michawiki
  */
 $messages['hsb'] = array(
-	'diff-desc' => 'Biblioteka rozdźělow za strukturowane daty', # Fuzzy
+	'diff-desc' => 'Biblioteka z klasami za zwobraznjenje rozdźělow strukturowanych datow kaž tež słužbnych objektow',
 );
 
 /** Indonesian (Bahasa Indonesia)
