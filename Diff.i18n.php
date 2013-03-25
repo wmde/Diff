@@ -292,6 +292,13 @@ $messages['vi'] = array(
 	'diff-desc' => 'Thư viện so sánh dữ liệu có cấu trúc', # Fuzzy
 );
 
+/** Simplified Chinese (中文（简体）‎)
+ * @author Yfdyh000
+ */
+$messages['zh-hans'] = array(
+	'diff-desc' => '以类来描绘结构化数据的差异，以及作为服务对象来比较对象和对它们打补丁（patch）的库。',
+);
+
 /** Traditional Chinese (中文（繁體）‎)
  * @author Justincheng12345
  */
