@@ -37,7 +37,7 @@ $messages['ar'] = array(
  * @author Xuacu
  */
 $messages['ast'] = array(
-	'diff-desc' => 'Biblioteca de diferencies pa datos estructuraos', # Fuzzy
+	'diff-desc' => "Biblioteca con clases pa representar diferencies de datos estructuraos, lo mesmo qu'oxetos de serviciu pa facer diffs d'oxetos o aplica-yos parches",
 );
 
 /** South Azerbaijani (تورکجه)
