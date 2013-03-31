@@ -289,7 +289,7 @@ $messages['uk'] = array(
  * @author Minh Nguyen
  */
 $messages['vi'] = array(
-	'diff-desc' => 'Thư viện so sánh dữ liệu có cấu trúc', # Fuzzy
+	'diff-desc' => 'Thư viện cung cấp các lớp tượng trưng cho khác biệt dữ liệu có cấu trúc, cũng như các đối tượng hỗ trợ để so sánh hay vá đối tượng',
 );
 
 /** Simplified Chinese (中文（简体）‎)
