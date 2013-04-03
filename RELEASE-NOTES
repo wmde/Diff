@@ -7,6 +7,15 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 === Version 0.6 ===
 dev
 
+; Compatibility changes
+
+* The tests can now run independently of MediaWiki
+* The tests now require PHPUnit 3.7 or later
+
+; Additions
+
+* Added phpunit.php runner in the tests directory
+
 ; Removals
 
 * GenericArrayObject has been removed from this package.

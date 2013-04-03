@@ -1,0 +1,98 @@
+<?php
+
+namespace Diff\Tests;
+
+/**
+ * Base class for unit tests in the Diff library.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+ * http://www.gnu.org/copyleft/gpl.html
+ *
+ * @since 0.6
+ *
+ * @file
+ * @ingroup DiffTests
+ *
+ * @licence GNU GPL v2+
+ * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ */
+abstract class DiffTestCase extends \PHPUnit_Framework_TestCase {
+
+	/**
+	 * Utility method taking an array of elements and wrapping
+	 * each element in it's own array. Useful for data providers
+	 * that only return a single argument.
+	 *
+	 * @since 0.6
+	 *
+	 * @param array $elements
+	 *
+	 * @return array
+	 */
+	protected function arrayWrap( array $elements ) {
+		return array_map(
+			function( $element ) {
+				return array( $element );
+			},
+			$elements
+		);
+	}
+
+	/**
+	 * Assert that two arrays are equal. By default this means that both arrays need to hold
+	 * the same set of values. Using additional arguments, order and associated key can also
+	 * be set as relevant.
+	 *
+	 * @since 0.6
+	 *
+	 * @param array $expected
+	 * @param array $actual
+	 * @param boolean $ordered If the order of the values should match
+	 * @param boolean $named If the keys should match
+	 */
+	protected function assertArrayEquals( array $expected, array $actual, $ordered = false, $named = false ) {
+		if ( !$ordered ) {
+			$this->objectAssociativeSort( $expected );
+			$this->objectAssociativeSort( $actual );
+		}
+
+		if ( !$named ) {
+			$expected = array_values( $expected );
+			$actual = array_values( $actual );
+		}
+
+		call_user_func_array(
+			array( $this, 'assertEquals' ),
+			array_merge( array( $expected, $actual ), array_slice( func_get_args(), 4 ) )
+		);
+	}
+
+	/**
+	 * Does an associative sort that works for objects.
+	 *
+	 * @since 0.6
+	 *
+	 * @param array $array
+	 */
+	private function objectAssociativeSort( array &$array ) {
+		uasort(
+			$array,
+			function ( $a, $b ) {
+				return serialize( $a ) > serialize( $b ) ? 1 : -1;
+			}
+		);
+	}
+
+}

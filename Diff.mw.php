@@ -77,7 +77,7 @@ $wgHooks['UnitTestsList'][]	= function( array &$files ) {
 	);
 
 	foreach ( $testFiles as $file ) {
-		$files[] = __DIR__ . '/tests/' . $file . 'Test.php';
+		$files[] = __DIR__ . '/tests/phpunit/' . $file . 'Test.php';
 	}
 
 	return true;

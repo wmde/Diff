@@ -39,7 +39,7 @@ return array(
 	'Diff\ListDiff' => 'includes/diffop/diff/ListDiff.php',
 	'Diff\MapDiff' => 'includes/diffop/diff/MapDiff.php',
 
-	'AbstractTestCase' => 'tests/AbstractTestCase.php',
-	'Diff\Test\DiffOpTest' => 'tests/diffop/DiffOpTest.php',
-	'Diff\Test\DiffOpTestDummy' => 'tests/DiffOpTestDummy.php',
+	'Diff\Tests\DiffOpTest' => 'tests/phpunit/diffop/DiffOpTest.php',
+	'Diff\Tests\DiffOpTestDummy' => 'tests/phpunit/DiffOpTestDummy.php',
+	'Diff\Tests\DiffTestCase' => 'tests/phpunit/DiffTestCase.php',
 );

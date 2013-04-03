@@ -1,6 +1,6 @@
 <?php
 
-namespace Diff\Test;
+namespace Diff\Tests;
 
 /**
  * Dummy class for testing DiffOps.

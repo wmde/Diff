@@ -1,6 +1,7 @@
 <?php
 
-namespace Diff\Test;
+namespace Diff\Tests;
+
 use Diff\MapDiffer;
 use Diff\DiffOpChange;
 use Diff\DiffOpRemove;
@@ -35,7 +36,7 @@ use Diff\DiffOpAdd;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class MapDifferTest extends \MediaWikiTestCase {
+class MapDifferTest extends DiffTestCase {
 
 	public function toDiffProvider() {
 		$argLists = array();

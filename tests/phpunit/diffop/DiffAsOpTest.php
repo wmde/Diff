@@ -1,6 +1,7 @@
 <?php
 
-namespace Diff\Test;
+namespace Diff\Tests;
+
 use Diff\Diff;
 
 /**
@@ -31,12 +32,11 @@ use Diff\Diff;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Daniel Kinzler
  */
 class DiffAsOpTest extends DiffOpTest {
 
 	/**
-	 * @see AbstractTestCase::getClass
+	 * @see DiffOpTest::getClass
 	 *
 	 * @since 0.5
 	 *
@@ -47,7 +47,7 @@ class DiffAsOpTest extends DiffOpTest {
 	}
 
 	/**
-	 * @see AbstractTestCase::constructorProvider
+	 * @see DiffOpTest::constructorProvider
 	 *
 	 * @since 0.5
 	 *
@@ -57,12 +57,13 @@ class DiffAsOpTest extends DiffOpTest {
 		$argLists = array(
 			array( true, array() ),
 			array( true, array( new \Diff\DiffOpAdd( 42 ) ) ),
-			array( true, array( new \Diff\DiffOpRemove( new \Diff\Test\DiffOpTestDummy( "spam" ) ) ) ),
-			array( true, array( new \Diff\Diff( array( new \Diff\DiffOpRemove( new \Diff\Test\DiffOpTestDummy( "spam" ) ) ) ) ) ),
+			array( true, array( new \Diff\DiffOpRemove( new \Diff\Tests\DiffOpTestDummy( "spam" ) ) ) ),
+			array( true, array( new \Diff\Diff( array( new \Diff\DiffOpRemove( new \Diff\Tests\DiffOpTestDummy( "spam" ) ) ) ) ) ),
 			array( true, array( new \Diff\DiffOpAdd( 42 ), new \Diff\DiffOpAdd( 42 ) ) ),
 			array( true, array( 'a' => new \Diff\DiffOpAdd( 42 ), 'b' => new \Diff\DiffOpAdd( 42 ) ) ),
 			array( true, array( new \Diff\DiffOpAdd( 42 ), 'foo bar baz' => new \Diff\DiffOpAdd( 42 ) ) ),
 			array( true, array( 42 => new \Diff\DiffOpRemove( 42 ), '9001' => new \Diff\DiffOpAdd( 42 ) ) ),
+			array( true, array( 42 => new \Diff\DiffOpRemove( new \stdClass() ), '9001' => new \Diff\DiffOpAdd( new \stdClass() ) ) ),
 		);
 
 		$allArgLists = $argLists;
@@ -86,11 +87,12 @@ class DiffAsOpTest extends DiffOpTest {
 		$this->assertArrayHasKey( 'operations', $array );
 		$this->assertInternalType( 'array', $array['operations'] );
 
-		// $array['operations'] must not directly contain objects
-		$this->assertNoObjectsRecursive( $array['operations'], 1 );
-
 		$this->assertArrayHasKey( 'isassoc', $array );
-		$this->assertTypeOrValue( 'boolean', $array['isassoc'], null );
+
+		$this->assertTrue(
+			is_bool( $array['isassoc'] ) || is_null( $array['isassoc'] ),
+			'The isassoc element needs to be a boolean or null'
+		);
 	}
 
 }

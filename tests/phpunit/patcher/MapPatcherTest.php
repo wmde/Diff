@@ -1,6 +1,8 @@
 <?php
 
-namespace Diff\Test;
+namespace Diff\Tests;
+
+use Diff\MapPatcher;
 use Diff\Patcher;
 use Diff\Diff;
 use Diff\DiffOpChange;
@@ -36,12 +38,12 @@ use Diff\DiffOpRemove;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class MapPatcherTest extends \MediaWikiTestCase {
+class MapPatcherTest extends DiffTestCase {
 
 	public function patchProvider() {
 		$argLists = array();
 
-		$patcher = new \Diff\MapPatcher();
+		$patcher = new MapPatcher();
 		$base = array();
 		$diff = new Diff();
 		$expected = array();
@@ -207,7 +209,7 @@ class MapPatcherTest extends \MediaWikiTestCase {
 	 * @param string|null $message
 	 */
 	public function testGetApplicableDiff( Diff $diff, array $currentObject, Diff $expected, $message = null ) {
-		$patcher = new \Diff\MapPatcher();
+		$patcher = new MapPatcher();
 		$actual = $patcher->getApplicableDiff( $currentObject, $diff );
 
 		$this->assertEquals( $expected->getOperations(), $actual->getOperations(), $message );

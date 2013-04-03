@@ -1,6 +1,6 @@
 <?php
 
-namespace Diff\Test;
+namespace Diff\Tests;
 use Diff\DiffOpAdd as DiffOpAdd;
 
 /**
@@ -35,7 +35,7 @@ use Diff\DiffOpAdd as DiffOpAdd;
 class DiffOpAddTest extends DiffOpTest {
 
 	/**
-	 * @see AbstractTestCase::getClass
+	 * @see DiffOpTest::getClass
 	 *
 	 * @since 0.1
 	 *
@@ -46,7 +46,7 @@ class DiffOpAddTest extends DiffOpTest {
 	}
 
 	/**
-	 * @see AbstractTestCase::constructorProvider
+	 * @see DiffOpTest::constructorProvider
 	 *
 	 * @since 0.1
 	 *

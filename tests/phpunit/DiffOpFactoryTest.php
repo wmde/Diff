@@ -1,6 +1,7 @@
 <?php
 
-namespace Diff\Test;
+namespace Diff\Tests;
+
 use Diff\Diff;
 use Diff\DiffOpRemove;
 use Diff\DiffOpAdd;
@@ -38,7 +39,7 @@ use Diff\DiffOpFactory;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-class DiffOpFactoryTest extends \MediaWikiTestCase {
+class DiffOpFactoryTest extends DiffTestCase {
 
 	public function diffOpProvider() {
 		$diffOps = array();
@@ -86,10 +87,10 @@ class DiffOpFactoryTest extends \MediaWikiTestCase {
 	 * @param DiffOp $diffOp
 	 */
 	public function testNewFromArrayWithConversion( DiffOp $diffOp ) {
-		$factory = new DiffOpFactory( 'Diff\Test\DiffOpTestDummy::objectify' );
+		$factory = new DiffOpFactory( 'Diff\Tests\DiffOpTestDummy::objectify' );
 
 		// try with conversion callback
-		$array = $diffOp->toArray( 'Diff\Test\DiffOpTestDummy::arrayalize' );
+		$array = $diffOp->toArray( 'Diff\Tests\DiffOpTestDummy::arrayalize' );
 		$newInstance = $factory->newFromArray( $array );
 
 		// If an equality method is implemented in DiffOp, it should be used here
@@ -148,12 +149,10 @@ class DiffOpFactoryTest extends \MediaWikiTestCase {
 	 * @param array $array
 	 */
 	public function testNewFromArrayInvalid( array $array ) {
-		$aCode = function() use ( $array ) {
-			$factory = new DiffOpFactory();
-			$factory->newFromArray( $array );
-		};
+		$this->setExpectedException( 'InvalidArgumentException' );
 
-		$this->assertException( $aCode );
+		$factory = new DiffOpFactory();
+		$factory->newFromArray( $array );
 	}
 
 }

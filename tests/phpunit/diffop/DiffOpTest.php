@@ -1,7 +1,8 @@
 <?php
 
-namespace Diff\Test;
-use \Diff\DiffOp as DiffOp;
+namespace Diff\Tests;
+
+use Diff\DiffOp;
 
 /**
  * Base test class for the Diff\DiffOp deriving classes.
@@ -33,7 +34,95 @@ use \Diff\DiffOp as DiffOp;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-abstract class DiffOpTest extends \AbstractTestCase {
+abstract class DiffOpTest extends DiffTestCase {
+
+	/**
+	 * Returns the name of the concrete class tested by this test.
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public abstract function getClass();
+
+	/**
+	 * First element can be a boolean indication if the successive values are valid,
+	 * or a string indicating the type of exception that should be thrown (ie not valid either).
+	 *
+	 * @since 0.1
+	 *
+	 * @return array
+	 */
+	public abstract function constructorProvider();
+
+	/**
+	 * Creates and returns a new instance of the concrete class.
+	 *
+	 * @since 0.1
+	 *
+	 * @return mixed
+	 */
+	public function newInstance() {
+		$reflector = new \ReflectionClass( $this->getClass() );
+		$args = func_get_args();
+		$instance = $reflector->newInstanceArgs( $args );
+		return $instance;
+	}
+
+	/**
+	 * @since 0.1
+	 *
+	 * @return array [instance, constructor args]
+	 */
+	public function instanceProvider() {
+		$phpFails = array( $this, 'newInstance' );
+
+		return array_filter( array_map(
+			function( array $args ) use ( $phpFails ) {
+				$isValid = array_shift( $args ) === true;
+
+				if ( $isValid ) {
+					return array( call_user_func_array( $phpFails, $args ), $args );
+				}
+				else {
+					return false;
+				}
+			},
+			$this->constructorProvider()
+		), 'is_array' );
+	}
+
+	/**
+	 * @dataProvider constructorProvider
+	 *
+	 * @since 0.1
+	 */
+	public function testConstructor() {
+		$args = func_get_args();
+
+		$valid = array_shift( $args );
+		$pokemons = null;
+
+		try {
+			$dataItem = call_user_func_array( array( $this, 'newInstance' ), $args );
+			$this->assertInstanceOf( $this->getClass(), $dataItem );
+		}
+		catch ( \Exception $pokemons ) {
+			if ( $valid === true ) {
+				throw $pokemons;
+			}
+
+			if ( is_string( $valid ) ) {
+				$this->assertEquals( $valid, get_class( $pokemons ) );
+			}
+			else {
+				$this->assertFalse( $valid );
+			}
+		}
+	}
+
+
+
 
 	/**
 	 * @dataProvider instanceProvider
@@ -69,6 +158,9 @@ abstract class DiffOpTest extends \AbstractTestCase {
 		else {
 			$count = 0;
 
+			/**
+			 * @var DiffOp $childOp
+			 */
 			foreach ( $diffOp as $childOp ) {
 				$count += $childOp->count();
 			}
@@ -93,34 +185,9 @@ abstract class DiffOpTest extends \AbstractTestCase {
 	 * @dataProvider instanceProvider
 	 */
 	public function testToArrayWithConversion( DiffOp $diffOp ) {
-		$array = $diffOp->toArray( 'Diff\Test\DiffOpTestDummy::arrayalize' );
+		$array = $diffOp->toArray( 'Diff\Tests\DiffOpTestDummy::arrayalize' );
 
-		$this->assertNoObjectsRecursive( $array );
+		$this->assertInternalType( 'array', $array );
 	}
 
-	/**
-	 * Asserts that $data is not an object, and contains no objects.
-	 * This is useful for testing if a conversion from an object to an array
-	 * structure is complete.
-	 *
-	 * @param mixed $data
-	 * @param int   $depth max recursion depth (optional)
-	 */
-	protected function assertNoObjectsRecursive( $data, $depth = PHP_INT_MAX ) {
-		if ( is_object( $data ) ) {
-			$this->fail( "Found object: instance of " . get_class( $data ) );
-		}
-
-		if ( $depth > 0 ) {
-			$depth -= 1;
-
-			if ( is_array( $data ) ) {
-				foreach ( $data as $value ) {
-					$this->assertNoObjectsRecursive( $value, $depth );
-				}
-			}
-		}
-
-		$this->assertTrue( true ); // just a dummy, to supress warnings when there's nothing to check.
-	}
 }

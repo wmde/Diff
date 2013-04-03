@@ -1,6 +1,7 @@
 <?php
 
-namespace Diff\Test;
+namespace Diff\Tests;
+
 use Diff\CallbackListDiffer;
 use Diff\DiffOpAdd;
 use Diff\DiffOpRemove;
@@ -35,7 +36,7 @@ use Diff\Differ;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class CallbackListDifferTest extends \MediaWikiTestCase {
+class CallbackListDifferTest extends DiffTestCase {
 
 	/**
 	 * Returns those that both work for native and strict mode.
