@@ -58,7 +58,7 @@ $messages['be-tarask'] = array(
  * @author Mormegil
  */
 $messages['cs'] = array(
-	'diff-desc' => 'Knihovna pro zjišťování změn ve strukturovaných datech', # Fuzzy
+	'diff-desc' => 'Knihovna s třídami reprezentujícími změny ve strukturovaných datech a pomocné objekty pro zjišťování změn v objektech a promítání změn do nich',
 );
 
 /** Danish (dansk)
