@@ -1,8 +1,8 @@
 <?php
 
 /**
- * MediaWiki setup for the Diff extension.
- * The extension should be included via the main entry point, Diff.php.
+ * MediaWiki setup of the Diff library as a MediaWiki extension.
+ * The library should be included via the main entry point, Diff.php.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
