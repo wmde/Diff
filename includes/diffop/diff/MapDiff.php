@@ -64,7 +64,6 @@ class MapDiff extends Diff {
 	 * @param array $newValues The second array
 	 * @param boolean $recursively If elements that are arrays should also be diffed.
 	 *
-	 * @throws Exception
 	 * @return DiffOp[]
 	 */
 	public static function doDiff( array $oldValues, array $newValues, $recursively = false ) {

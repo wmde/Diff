@@ -21,8 +21,6 @@ namespace Diff {
 		die( 'Not an entry point for MediaWiki. Use Diff.php' );
 	}
 
-	class Exception extends \Exception {}
-
 	spl_autoload_register( function ( $className ) {
 		static $classes = false;
 

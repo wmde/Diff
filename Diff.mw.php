@@ -83,5 +83,3 @@ $wgHooks['UnitTestsList'][]	= function( array &$files ) {
 	return true;
 	// @codeCoverageIgnoreEnd
 };
-
-class_alias( '\MWException', 'Diff\Exception' );

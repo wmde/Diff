@@ -2,6 +2,8 @@
 
 namespace Diff;
 
+use Exception;
+
 /**
  * Differ that only looks at the values of the arrays (and thus ignores key differences).
  * Values are compared via callback.
@@ -59,7 +61,6 @@ class CallbackListDiffer implements Differ {
 	 * @param array $oldValues The first array
 	 * @param array $newValues The second array
 	 *
-	 * @throws Exception
 	 * @return DiffOp[]
 	 */
 	public function doDiff( array $oldValues, array $newValues ) {

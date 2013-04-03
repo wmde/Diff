@@ -1,7 +1,8 @@
 <?php
 
 namespace Diff;
-use Diff\Exception;
+
+use InvalidArgumentException;
 
 /**
  * Factory for constructing DiffOp objects.
@@ -58,7 +59,7 @@ class DiffOpFactory {
 	 * @param array $diffOp
 	 *
 	 * @return DiffOp
-	 * @throws Exception
+	 * @throws InvalidArgumentException
 	 */
 	public function newFromArray( array $diffOp ) {
 		$this->assertHasKey( 'type', $diffOp );
@@ -94,7 +95,7 @@ class DiffOpFactory {
 			return new Diff( $operations, $diffOp['isassoc'] );
 		}
 
-		throw new Exception( 'Invalid array provided. Unknown type' );
+		throw new InvalidArgumentException( 'Invalid array provided. Unknown type' );
 	}
 
 	/**
@@ -103,11 +104,11 @@ class DiffOpFactory {
 	 * @param mixed $key
 	 * @param array $diffOp
 	 *
-	 * @throws Exception
+	 * @throws InvalidArgumentException
 	 */
 	protected function assertHasKey( $key, array $diffOp ) {
 		if ( !array_key_exists( $key, $diffOp ) ) {
-			throw new Exception( 'Invalid array provided. Missing key "' . $key . '"' );
+			throw new InvalidArgumentException( 'Invalid array provided. Missing key "' . $key . '"' );
 		}
 	}
 

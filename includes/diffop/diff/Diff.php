@@ -141,21 +141,21 @@ class Diff extends \ArrayObject implements IDiff {
 	 * @param mixed $value
 	 *
 	 * @return boolean
-	 * @throws Exception
+	 * @throws InvalidArgumentException
 	 */
 	protected function preSetElement( $index, $value ) {
 		/**
 		 * @var DiffOp $value
 		 */
 		if ( $this->isAssociative === false && ( $value->getType() !== 'add' && $value->getType() !== 'remove' ) ) {
-			throw new Exception( 'Diff operation with invalid type "' . $value->getType() . '" provided.' );
+			throw new InvalidArgumentException( 'Diff operation with invalid type "' . $value->getType() . '" provided.' );
 		}
 
 		if ( array_key_exists( $value->getType(), $this->typePointers ) ) {
 			$this->typePointers[$value->getType()][] = $index;
 		}
 		else {
-			throw new Exception( 'Diff operation with invalid type "' . $value->getType() . '" provided.' );
+			throw new InvalidArgumentException( 'Diff operation with invalid type "' . $value->getType() . '" provided.' );
 		}
 
 		return true;
