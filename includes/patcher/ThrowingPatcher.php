@@ -90,10 +90,6 @@ abstract class ThrowingPatcher implements PreviewablePatcher {
 	 * @return Diff
 	 */
 	public function getApplicableDiff( array $base, Diff $diff ) {
-		if ( function_exists( 'wfProfileIn' ) ) {
-			wfProfileIn( __METHOD__ );
-		}
-
 		$throwErrors = $this->throwErrors;
 		$this->throwErrors = false;
 
@@ -108,10 +104,6 @@ abstract class ThrowingPatcher implements PreviewablePatcher {
 		$diffOps = $differ->doDiff( $base, $patched );
 
 		$diff = new Diff( $diffOps, $treatAsMap );
-
-		if ( function_exists( 'wfProfileOut' ) ) {
-			wfProfileOut( __METHOD__ );
-		}
 
 		return $diff;
 	}

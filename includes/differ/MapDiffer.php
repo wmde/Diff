@@ -92,10 +92,6 @@ class MapDiffer implements Differ {
 	 * @return DiffOp[]
 	 */
 	public function doDiff( array $oldValues, array $newValues ) {
-		if ( function_exists( 'wfProfileIn' ) ) {
-			wfProfileIn( __METHOD__ );
-		}
-
 		$newSet = $this->array_diff_assoc( $newValues, $oldValues );
 		$oldSet = $this->array_diff_assoc( $oldValues, $newValues );
 
@@ -135,10 +131,6 @@ class MapDiffer implements Differ {
 			elseif ( $hasNew ) {
 				$diffSet[$key] = new DiffOpAdd( $newSet[$key] );
 			}
-		}
-
-		if ( function_exists( 'wfProfileOut' ) ) {
-			wfProfileOut( __METHOD__ );
 		}
 
 		return $diffSet;
