@@ -1,6 +1,7 @@
 <?php
 
 namespace Diff;
+
 use InvalidArgumentException;
 
 /**
@@ -16,7 +17,7 @@ use InvalidArgumentException;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-class Diff extends \GenericArrayObject implements IDiff {
+class Diff extends \ArrayObject implements IDiff {
 
 	/**
 	 * @since 0.4
@@ -42,6 +43,13 @@ class Diff extends \GenericArrayObject implements IDiff {
 	);
 
 	/**
+	 * @since 0.1
+	 *
+	 * @var integer
+	 */
+	protected $indexOffset = 0;
+
+	/**
 	 * @see Diff::__construct
 	 *
 	 * @since 0.1
@@ -52,29 +60,31 @@ class Diff extends \GenericArrayObject implements IDiff {
 	 * @throws InvalidArgumentException
 	 */
 	public function __construct( array $operations = array(), $isAssociative = null ) {
-		foreach ( $operations as  $operation ) {
-			if ( !( $operation instanceof DiffOp ) ) {
-				throw new InvalidArgumentException( 'All elements fed to the Diff constructor should be of type DiffOp' );
-			}
-		}
-
 		if ( $isAssociative !== null && !is_bool( $isAssociative ) ) {
 			throw new InvalidArgumentException( '$isAssociative should be a boolean or null' );
 		}
 
-		$this->isAssociative = $isAssociative;
+		parent::__construct( array() );
 
-		parent::__construct( $operations );
+		foreach ( $operations as $offset => $operation ) {
+			if ( !( $operation instanceof DiffOp ) ) {
+				throw new InvalidArgumentException( 'All elements fed to the Diff constructor should be of type DiffOp' );
+			}
+
+			$this->offsetSet( $offset, $operation );
+		}
+
+		$this->isAssociative = $isAssociative;
 	}
 
 	/**
-	 * @see GenericArrayObject::getObjectType
+	 * Returns the name of an interface/class that the element should implement/extend.
 	 *
 	 * @since 0.1
 	 *
 	 * @return string
 	 */
-	public function getObjectType() {
+	private function getObjectType() {
 		return '\Diff\DiffOp';
 	}
 
@@ -117,7 +127,13 @@ class Diff extends \GenericArrayObject implements IDiff {
 	}
 
 	/**
-	 * @see GenericArrayObject::preSetElement
+	 * Gets called before a new element is added to the ArrayObject.
+	 *
+	 * At this point the index is always set (ie not null) and the
+	 * value is always of the type returned by @see getObjectType.
+	 *
+	 * Should return a boolean. When false is returned the element
+	 * does not get added to the ArrayObject.
 	 *
 	 * @since 0.1
 	 *
@@ -146,26 +162,7 @@ class Diff extends \GenericArrayObject implements IDiff {
 	}
 
 	/**
-	 * @see GenericArrayObject::getSerializationData
-	 *
-	 * @since 0.1
-	 *
-	 * @return array
-	 */
-	protected function getSerializationData() {
-		$assoc = $this->isAssociative === null ? 'n' : ( $this->isAssociative ? 't' : 'f' );
-
-		return array_merge(
-			parent::getSerializationData(),
-			array(
-				'typePointers' => $this->typePointers,
-				'assoc' => $assoc
-			)
-		);
-	}
-
-	/**
-	 * @see GenericArrayObject::unserialize
+	 * @see Serializable::unserialize
 	 *
 	 * @since 0.1
 	 *
@@ -174,7 +171,15 @@ class Diff extends \GenericArrayObject implements IDiff {
 	 * @return array
 	 */
 	public function unserialize( $serialization ) {
-		$serializationData = parent::unserialize( $serialization );
+		$serializationData = unserialize( $serialization );
+
+		foreach ( $serializationData['data'] as $offset => $value ) {
+			// Just set the element, bypassing checks and offset resolving,
+			// as these elements have already gone through this.
+			parent::offsetSet( $offset, $value );
+		}
+
+		$this->indexOffset = $serializationData['index'];
 
 		$this->typePointers = $serializationData['typePointers'];
 
@@ -381,6 +386,126 @@ class Diff extends \GenericArrayObject implements IDiff {
 			'isassoc' => $this->isAssociative,
 			'operations' => $operations
 		);
+	}
+
+	/**
+	 * Finds a new offset for when appending an element.
+	 * The base class does this, so it would be better to integrate,
+	 * but there does not appear to be any way to do this...
+	 *
+	 * @since 0.1
+	 *
+	 * @return integer
+	 */
+	protected function getNewOffset() {
+		while ( $this->offsetExists( $this->indexOffset ) ) {
+			$this->indexOffset++;
+		}
+
+		return $this->indexOffset;
+	}
+
+	/**
+	 * @see ArrayObject::append
+	 *
+	 * @since 0.1
+	 *
+	 * @param mixed $value
+	 */
+	public function append( $value ) {
+		$this->setElement( null, $value );
+	}
+
+	/**
+	 * @see ArrayObject::offsetSet()
+	 *
+	 * @since 0.1
+	 *
+	 * @param mixed $index
+	 * @param mixed $value
+	 *
+	 * @throws \MWException
+	 */
+	public function offsetSet( $index, $value ) {
+		$this->setElement( $index, $value );
+	}
+
+	/**
+	 * Returns if the provided value has the same type as the elements
+	 * that can be added to this ArrayObject.
+	 *
+	 * @since 0.1
+	 *
+	 * @param mixed $value
+	 *
+	 * @return boolean
+	 */
+	protected function hasValidType( $value ) {
+		$class = $this->getObjectType();
+		return $value instanceof $class;
+	}
+
+	/**
+	 * Method that actually sets the element and holds
+	 * all common code needed for set operations, including
+	 * type checking and offset resolving.
+	 *
+	 * If you want to do additional indexing or have code that
+	 * otherwise needs to be executed whenever an element is added,
+	 * you can overload @see preSetElement.
+	 *
+	 * @since 0.1
+	 *
+	 * @param mixed $index
+	 * @param mixed $value
+	 *
+	 * @throws InvalidArgumentException
+	 */
+	protected function setElement( $index, $value ) {
+		if ( !$this->hasValidType( $value ) ) {
+			throw new InvalidArgumentException(
+				'Can only add ' . $this->getObjectType() . ' implementing objects to ' . get_called_class() . '.'
+			);
+		}
+
+		if ( is_null( $index ) ) {
+			$index = $this->getNewOffset();
+		}
+
+		if ( $this->preSetElement( $index, $value ) ) {
+			parent::offsetSet( $index, $value );
+		}
+	}
+
+	/**
+	 * @see Serializable::serialize
+	 *
+	 * @since 0.1
+	 *
+	 * @return string
+	 */
+	public function serialize() {
+		$assoc = $this->isAssociative === null ? 'n' : ( $this->isAssociative ? 't' : 'f' );
+
+		$data = array(
+			'data' => $this->getArrayCopy(),
+			'index' => $this->indexOffset,
+			'typePointers' => $this->typePointers,
+			'assoc' => $assoc
+		);
+
+		return serialize( $data );
+	}
+
+	/**
+	 * Returns if the ArrayObject has no elements.
+	 *
+	 * @since 0.1
+	 *
+	 * @return boolean
+	 */
+	public function isEmpty() {
+		return $this->count() === 0;
 	}
 
 }

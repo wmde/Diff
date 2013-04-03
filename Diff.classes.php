@@ -12,8 +12,6 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 return array(
-	'GenericArrayObject' => 'compat/GenericArrayObject.php',
-
 	'Diff\Appendable' => 'includes/Appendable.php',
 	'Diff\DiffOpFactory' => 'includes/DiffOpFactory.php',
 

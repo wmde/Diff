@@ -4,6 +4,19 @@ Extension page on mediawiki.org: https://www.mediawiki.org/wiki/Extension:Diff
 Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/Diff.git;a=blob;f=RELEASE-NOTES
 
 
+=== Version 0.6 ===
+dev
+
+; Removals
+
+* GenericArrayObject has been removed from this package.
+  Diff derives from ArrayObject rather than GenericArrayObject.
+  Its interface has not changed expect for the points below.
+* The getObjectType method in Diff (previously defined in GenericArrayObject)
+  is now private rather than public.
+* Adding a non-DiffOp element to a Diff will now result in an InvalidArgumentException
+  rather than a MWException.
+
 === Version 0.5 ===
 2013-02-26
 

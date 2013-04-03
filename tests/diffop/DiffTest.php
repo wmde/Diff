@@ -1,12 +1,15 @@
 <?php
 
 namespace Diff\Test;
+
 use Diff\Diff;
 use Diff\DiffOp;
 use Diff\MapDiff;
 use Diff\DiffOpAdd;
 use Diff\DiffOpRemove;
 use Diff\DiffOpChange;
+use InvalidArgumentException;
+use stdClass;
 
 /**
  * Tests for the Diff\Diff class.
@@ -37,7 +40,7 @@ use Diff\DiffOpChange;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class DiffTest extends \GenericArrayObjectTest {
+class DiffTest extends \PHPUnit_Framework_TestCase {
 
 	public function elementInstancesProvider() {
 		return array(
@@ -150,6 +153,9 @@ class DiffTest extends \GenericArrayObjectTest {
 
 		$this->assertContainsOnlyInstancesOf( '\Diff\DiffOp', $diff );
 
+		/**
+		 * @var DiffOp $operation
+		 */
 		foreach ( $diff as $operation ) {
 			if ( !in_array( $operation->getType(), $types ) ) {
 				$types[] = $operation->getType();
@@ -405,6 +411,249 @@ class DiffTest extends \GenericArrayObjectTest {
 		$this->assertEquals( 1, count( $diff->getAdditions() ) );
 		$this->assertEquals( 1, count( $diff->getRemovals() ) );
 		$this->assertEquals( 1, count( $diff->getChanges() ) );
+	}
+
+	/**
+	 * @since 0.6
+	 *
+	 * @param array $elements
+	 *
+	 * @return Diff
+	 */
+	protected function getNew( array $elements = array() ) {
+		$class = $this->getInstanceClass();
+		return new $class( $elements );
+	}
+
+	/**
+	 * @dataProvider elementInstancesProvider
+	 *
+	 * @since 0.6
+	 *
+	 * @param array $elements
+	 */
+	public function testConstructor( array $elements ) {
+		$arrayObject = $this->getNew( $elements );
+
+		$this->assertEquals( count( $elements ), $arrayObject->count() );
+	}
+
+	/**
+	 * @dataProvider elementInstancesProvider
+	 *
+	 * @since 0.6
+	 *
+	 * @param array $elements
+	 */
+	public function testIsEmpty( array $elements ) {
+		$arrayObject = $this->getNew( $elements );
+
+		$this->assertEquals( $elements === array(), $arrayObject->isEmpty() );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @since 0.6
+	 *
+	 * @param Diff $list
+	 */
+	public function testUnset( Diff $list ) {
+		if ( $list->isEmpty() ) {
+			$this->assertTrue( true ); // We cannot test unset if there are no elements
+		} else {
+			$offset = $list->getIterator()->key();
+			$count = $list->count();
+			$list->offsetUnset( $offset );
+			$this->assertEquals( $count - 1, $list->count() );
+		}
+
+		if ( !$list->isEmpty() ) {
+			$offset = $list->getIterator()->key();
+			$count = $list->count();
+			unset( $list[$offset] );
+			$this->assertEquals( $count - 1, $list->count() );
+		}
+	}
+
+	/**
+	 * @dataProvider elementInstancesProvider
+	 *
+	 * @since 0.6
+	 *
+	 * @param array $elements
+	 */
+	public function testAppend( array $elements ) {
+		$list = $this->getNew();
+
+		$listSize = count( $elements );
+
+		foreach ( $elements as $element ) {
+			$list->append( $element );
+		}
+
+		$this->assertEquals( $listSize, $list->count() );
+
+		$list = $this->getNew();
+
+		foreach ( $elements as $element ) {
+			$list[] = $element;
+		}
+
+		$this->assertEquals( $listSize, $list->count() );
+
+		$this->checkTypeChecks( function ( Diff $list, $element ) {
+			$list->append( $element );
+		} );
+	}
+
+	/**
+	 * @since 0.6
+	 *
+	 * @param callback $function
+	 */
+	protected function checkTypeChecks( $function ) {
+		$excption = null;
+		$list = $this->getNew();
+
+
+		foreach ( array( 42, 'foo', array(), new stdClass(), 4.2 ) as $element ) {
+			$this->assertInvalidArgument( $function, $list, $element );
+		}
+	}
+
+	/**
+	 * Asserts that an InvalidArgumentException gets thrown when calling the provided
+	 * callable. Extra arguments specified to the method are also provided to the callable.
+	 *
+	 * @since 0.6
+	 *
+	 * @param callable $function
+	 */
+	protected function assertInvalidArgument( $function ) {
+		$this->setExpectedException( 'InvalidArgumentException' );
+
+		$arguments = func_get_args();
+		array_shift( $arguments );
+
+		call_user_func_array( $function, $arguments );
+	}
+
+	/**
+	 * @dataProvider elementInstancesProvider
+	 *
+	 * @since 0.6
+	 *
+	 * @param array $elements
+	 */
+	public function testOffsetSet( array $elements ) {
+		if ( $elements === array() ) {
+			$this->assertTrue( true );
+			return;
+		}
+
+		$list = $this->getNew();
+
+		$element = reset( $elements );
+		$list->offsetSet( 42, $element );
+		$this->assertEquals( $element, $list->offsetGet( 42 ) );
+
+		$list = $this->getNew();
+
+		$element = reset( $elements );
+		$list['oHai'] = $element;
+		$this->assertEquals( $element, $list['oHai'] );
+
+		$list = $this->getNew();
+
+		$element = reset( $elements );
+		$list->offsetSet( 9001, $element );
+		$this->assertEquals( $element, $list[9001] );
+
+		$list = $this->getNew();
+
+		$element = reset( $elements );
+		$list->offsetSet( null, $element );
+		$this->assertEquals( $element, $list[0] );
+
+		$list = $this->getNew();
+		$offset = 0;
+
+		foreach ( $elements as $element ) {
+			$list->offsetSet( null, $element );
+			$this->assertEquals( $element, $list[$offset++] );
+		}
+
+		$this->assertEquals( count( $elements ), $list->count() );
+
+		$this->checkTypeChecks( function ( Diff $list, $element ) {
+			$list->offsetSet( mt_rand(), $element );
+		} );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @since 0.6
+	 *
+	 * @param Diff $list
+	 */
+	public function testSerialization( Diff $list ) {
+		$serialization = serialize( $list );
+		$copy = unserialize( $serialization );
+
+		$this->assertEquals( $serialization, serialize( $copy ) );
+		$this->assertEquals( count( $list ), count( $copy ) );
+
+		$list = $list->getArrayCopy();
+		$copy = $copy->getArrayCopy();
+
+		$this->assertArrayEquals( $list, $copy, true, true );
+	}
+
+	/**
+	 * Assert that two arrays are equal. By default this means that both arrays need to hold
+	 * the same set of values. Using additional arguments, order and associated key can also
+	 * be set as relevant.
+	 *
+	 * @since 0.6
+	 *
+	 * @param array $expected
+	 * @param array $actual
+	 * @param boolean $ordered If the order of the values should match
+	 * @param boolean $named If the keys should match
+	 */
+	protected function assertArrayEquals( array $expected, array $actual, $ordered = false, $named = false ) {
+		if ( !$ordered ) {
+			$this->objectAssociativeSort( $expected );
+			$this->objectAssociativeSort( $actual );
+		}
+
+		if ( !$named ) {
+			$expected = array_values( $expected );
+			$actual = array_values( $actual );
+		}
+
+		call_user_func_array(
+			array( $this, 'assertEquals' ),
+			array_merge( array( $expected, $actual ), array_slice( func_get_args(), 4 ) )
+		);
+	}
+
+	/**
+	 * Does an associative sort that works for objects.
+	 *
+	 * @since 0.6
+	 *
+	 * @param array $array
+	 */
+	protected function objectAssociativeSort( array &$array ) {
+		uasort(
+			$array,
+			function ( $a, $b ) {
+				return serialize( $a ) > serialize( $b ) ? 1 : -1;
+			}
+		);
 	}
 
 }
