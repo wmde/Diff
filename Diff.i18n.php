@@ -268,7 +268,7 @@ $messages['si'] = array(
  * @author WikiPhoenix
  */
 $messages['sv'] = array(
-	'diff-desc' => 'Differansbibliotek för strukturerade data', # Fuzzy
+	'diff-desc' => 'Bibliotek med klasser för att representera diffar av strukturerad data, såväl som serviceobjekt för att diffa objekt eller lappa dem',
 );
 
 /** Tagalog (Tagalog)
