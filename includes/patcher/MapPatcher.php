@@ -1,6 +1,7 @@
 <?php
 
 namespace Diff;
+
 use RuntimeException;
 
 /**

@@ -2,12 +2,12 @@
 
 namespace Diff\Tests;
 
+use Diff\Diff;
+use Diff\DiffOpAdd;
+use Diff\DiffOpChange;
+use Diff\DiffOpRemove;
 use Diff\MapPatcher;
 use Diff\Patcher;
-use Diff\Diff;
-use Diff\DiffOpChange;
-use Diff\DiffOpAdd;
-use Diff\DiffOpRemove;
 
 /**
  * Tests for the Diff\MapPatcher class.

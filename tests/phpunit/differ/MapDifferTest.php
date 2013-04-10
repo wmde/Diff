@@ -2,10 +2,10 @@
 
 namespace Diff\Tests;
 
-use Diff\MapDiffer;
+use Diff\DiffOpAdd;
 use Diff\DiffOpChange;
 use Diff\DiffOpRemove;
-use Diff\DiffOpAdd;
+use Diff\MapDiffer;
 
 /**
  * Tests for the Diff\MapDiffer class.

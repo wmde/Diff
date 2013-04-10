@@ -3,13 +3,13 @@
 namespace Diff\Tests;
 
 use Diff\Diff;
-use Diff\MapDiff;
-use Diff\DiffOpRemove;
+use Diff\DiffOp;
 use Diff\DiffOpAdd;
 use Diff\DiffOpChange;
-use Diff\DiffOp;
-use Diff\MapDiffer;
+use Diff\DiffOpRemove;
 use Diff\ListDiffer;
+use Diff\MapDiff;
+use Diff\MapDiffer;
 
 /**
  * Tests for the Diff\MapDiff class.

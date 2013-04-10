@@ -2,11 +2,11 @@
 
 namespace Diff\Tests;
 
+use Diff\Diff;
+use Diff\DiffOpAdd;
+use Diff\DiffOpRemove;
 use Diff\MapPatcher;
 use Diff\Patcher;
-use Diff\Diff;
-use Diff\DiffOpRemove;
-use Diff\DiffOpAdd;
 
 /**
  * Tests for the Diff\ListPatcher class.

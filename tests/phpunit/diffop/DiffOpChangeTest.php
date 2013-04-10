@@ -1,6 +1,7 @@
 <?php
 
 namespace Diff\Tests;
+
 use Diff\DiffOpChange as DiffOpChange;
 
 /**

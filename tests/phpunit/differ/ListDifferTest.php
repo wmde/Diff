@@ -2,10 +2,10 @@
 
 namespace Diff\Tests;
 
-use Diff\ListDiffer;
 use Diff\DiffOpAdd;
 use Diff\DiffOpRemove;
 use Diff\Differ;
+use Diff\ListDiffer;
 
 /**
  * Tests for the Diff\ListDiffer class.

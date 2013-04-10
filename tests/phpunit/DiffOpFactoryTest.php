@@ -3,11 +3,11 @@
 namespace Diff\Tests;
 
 use Diff\Diff;
-use Diff\DiffOpRemove;
+use Diff\DiffOp;
 use Diff\DiffOpAdd;
 use Diff\DiffOpChange;
-use Diff\DiffOp;
 use Diff\DiffOpFactory;
+use Diff\DiffOpRemove;
 
 /**
  * Tests for the Diff\DiffOpFactory class.

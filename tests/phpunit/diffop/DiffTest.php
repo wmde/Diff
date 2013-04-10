@@ -4,10 +4,10 @@ namespace Diff\Tests;
 
 use Diff\Diff;
 use Diff\DiffOp;
-use Diff\MapDiff;
 use Diff\DiffOpAdd;
-use Diff\DiffOpRemove;
 use Diff\DiffOpChange;
+use Diff\DiffOpRemove;
+use Diff\MapDiff;
 use stdClass;
 
 /**
