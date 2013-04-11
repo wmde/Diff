@@ -9,8 +9,8 @@ Latest version of the install file: https://gerrit.wikimedia.org/r/gitweb?p=medi
 Diff requires:
 
 * PHP 5.3 or above
-* If used as MediaWiki extension: MediaWiki 1.16 or later
-** PHPUnit tests can require the latest MediaWiki
+* (For running the PHPUnit tests: PHPUnit 3.7 or later)
+* (If used as MediaWiki extension: MediaWiki 1.16 or later)
 
 == Download ==
 
