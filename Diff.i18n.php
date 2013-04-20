@@ -124,7 +124,7 @@ $messages['gl'] = array(
  * @author Amire80
  */
 $messages['he'] = array(
-	'diff-desc' => 'ספרייה להשוואת נתונים מבניים', # Fuzzy
+	'diff-desc' => 'ספרייה עם מחלקות לייצוג השוואות של נתונים מבניים, ולהביא עצמים לעצמי השוואה או להחל עליהם טלאים',
 );
 
 /** Croatian (hrvatski)
