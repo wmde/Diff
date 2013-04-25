@@ -2,6 +2,8 @@
 
 namespace Diff;
 
+use Exception;
+
 /**
  * Differ that does an associative diff between two arrays,
  * with the option to do this recursively.
