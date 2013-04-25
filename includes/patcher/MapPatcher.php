@@ -2,6 +2,8 @@
 
 namespace Diff;
 
+use Diff\Comparer\StrictComparer;
+use Diff\Comparer\ValueComparer;
 use RuntimeException;
 
 /**
@@ -40,10 +42,17 @@ class MapPatcher extends ThrowingPatcher {
 	protected $listPatcher;
 
 	/**
+	 * @since 0.6
+	 *
+	 * @var ValueComparer|null
+	 */
+	protected $comparer = null;
+
+	/**
 	 * @since 0.4
 	 *
 	 * @param bool $throwErrors
-	 * @param Patcher|null $listPatcher
+	 * @param Patcher|null $listPatcher The patcher that will be used for lists in the value
 	 */
 	public function __construct( $throwErrors = false, Patcher $listPatcher = null ) {
 		parent::__construct( $throwErrors );
@@ -53,6 +62,17 @@ class MapPatcher extends ThrowingPatcher {
 		}
 
 		$this->listPatcher = $listPatcher;
+	}
+
+	/**
+	 * Sets the value comparer that should be used to determine if values are equal.
+	 *
+	 * @since 0.6
+	 *
+	 * @param ValueComparer $comparer
+	 */
+	public function setValueComparer( ValueComparer $comparer ) {
+		$this->comparer = $comparer;
 	}
 
 	/**
@@ -132,7 +152,7 @@ class MapPatcher extends ThrowingPatcher {
 					continue;
 				}
 
-				if ( $base[$key] !== $diffOp->getOldValue() ) {
+				if ( !$this->valuesAreEqual( $base[$key], $diffOp->getOldValue() ) ) {
 					$this->handleError( 'Tried changing a map value from an invalid source value' );
 					continue;
 				}
@@ -145,6 +165,14 @@ class MapPatcher extends ThrowingPatcher {
 		}
 
 		return $base;
+	}
+
+	protected function valuesAreEqual( $firstValue, $secondValue ) {
+		if ( $this->comparer === null ) {
+			$this->comparer = new StrictComparer();
+		}
+
+		return $this->comparer->valuesAreEqual( $firstValue, $secondValue );
 	}
 
 }

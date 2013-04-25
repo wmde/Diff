@@ -15,6 +15,10 @@ return array(
 	'Diff\Appendable' => 'includes/Appendable.php',
 	'Diff\DiffOpFactory' => 'includes/DiffOpFactory.php',
 
+	'Diff\Comparer\CallbackComparer' => 'includes/Comparer/CallbackComparer.php',
+	'Diff\Comparer\StrictComparer' => 'includes/Comparer/StrictComparer.php',
+	'Diff\Comparer\ValueComparer' => 'includes/Comparer/ValueComparer.php',
+
 	'Diff\CallbackListDiffer' => 'includes/differ/CallbackListDiffer.php',
 	'Diff\Differ' => 'includes/differ/Differ.php',
 	'Diff\ListDiffer' => 'includes/differ/ListDiffer.php',

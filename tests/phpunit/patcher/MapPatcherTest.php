@@ -2,6 +2,8 @@
 
 namespace Diff\Tests;
 
+use Diff\Comparer\CallbackComparer;
+use Diff\Comparer\StrictComparer;
 use Diff\Diff;
 use Diff\DiffOpAdd;
 use Diff\DiffOpChange;
@@ -213,6 +215,55 @@ class MapPatcherTest extends DiffTestCase {
 		$actual = $patcher->getApplicableDiff( $currentObject, $diff );
 
 		$this->assertEquals( $expected->getOperations(), $actual->getOperations(), $message );
+	}
+
+	public function testSetValueComparerToAlwaysFalse() {
+		$patcher = new MapPatcher();
+
+		$patcher->setValueComparer( new CallbackComparer( function( $firstValue, $secondValue ) {
+			return false;
+		} ) );
+
+		$baseMap = array(
+			'foo' => 42,
+			'bar' => 9001,
+		);
+
+		$patch = new Diff( array(
+			'foo' => new DiffOpChange( 42, 1337 ),
+			'bar' => new DiffOpChange( 9001, 1337 ),
+		) );
+
+		$patchedMap = $patcher->patch( $baseMap, $patch );
+
+		$this->assertEquals( $baseMap, $patchedMap );
+	}
+
+	public function testSetValueComparerToAlwaysTrue() {
+		$patcher = new MapPatcher();
+
+		$patcher->setValueComparer( new CallbackComparer( function( $firstValue, $secondValue ) {
+			return true;
+		} ) );
+
+		$baseMap = array(
+			'foo' => 42,
+			'bar' => 9001,
+		);
+
+		$patch = new Diff( array(
+			'foo' => new DiffOpChange( 3, 1337 ),
+			'bar' => new DiffOpChange( 3, 1337 ),
+		) );
+
+		$expectedMap = array(
+			'foo' => 1337,
+			'bar' => 1337,
+		);
+
+		$patchedMap = $patcher->patch( $baseMap, $patch );
+
+		$this->assertEquals( $expectedMap, $patchedMap );
 	}
 
 }
