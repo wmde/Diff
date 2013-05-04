@@ -233,7 +233,7 @@ $messages['pl'] = array(
  * @author Dragonòt
  */
 $messages['pms'] = array(
-	'diff-desc' => 'Libreria con class për rapresenté diferense ëd dat struturà, con oget ëd sërvissi a oget diff e sò pachèt',
+	'diff-desc' => "Librarìa con dle classe për rapresenté le diferense ëd dat struturà, coma j'oget ëd sërvissi për fé le diferense antra oget o agiorneje",
 );
 
 /** Brazilian Portuguese (português do Brasil)
