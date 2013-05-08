@@ -28,7 +28,7 @@
  * @ingroup Test
  */
 
-define( 'Diff_VERSION', '0.6 alpha' );
+define( 'Diff_VERSION', '0.6' );
 
 // @codeCoverageIgnoreStart
 call_user_func( function() {
