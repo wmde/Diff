@@ -12,7 +12,7 @@ use Diff\MapPatcher;
 use Diff\Patcher;
 
 /**
- * Tests for the Diff\MapPatcher class.
+ * @covers Diff\MapPatcher
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

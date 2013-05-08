@@ -8,7 +8,7 @@ use Diff\DiffOpRemove;
 use Diff\MapDiffer;
 
 /**
- * Tests for the Diff\MapDiffer class.
+ * @covers Diff\MapDiffer
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

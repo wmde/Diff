@@ -5,7 +5,7 @@ namespace Diff\Tests;
 use Diff\DiffOpChange;
 
 /**
- * Tests for the Diff\DiffOpChange class.
+ * @covers Diff\DiffOpChange
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

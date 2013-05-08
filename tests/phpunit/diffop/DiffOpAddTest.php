@@ -5,7 +5,7 @@ namespace Diff\Tests;
 use Diff\DiffOpAdd;
 
 /**
- * Tests for the Diff\DiffOpAdd class.
+ * @covers Diff\DiffOpAdd
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
