@@ -65,13 +65,14 @@ $wgHooks['UnitTestsList'][]	= function( array &$files ) {
 		'differ/ListDiffer',
 		'differ/MapDiffer',
 
-		'diffop/DiffAsOp',
 		'diffop/DiffOpAdd',
 		'diffop/DiffOpChange',
 		'diffop/DiffOpRemove',
-		'diffop/Diff',
-		'diffop/ListDiff',
-		'diffop/MapDiff',
+
+		'diffop/diff/DiffAsOp',
+		'diffop/diff/Diff',
+		'diffop/diff/ListDiff',
+		'diffop/diff/MapDiff',
 
 		'patcher/ListPatcher',
 		'patcher/MapPatcher',
