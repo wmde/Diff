@@ -17,6 +17,7 @@ dev
 * Added phpunit.php runner in the tests directory
 * Added Diff\Comparer\ValueComparer interface with CallbackComparer and StrictComparer implementations
 * Added MapPatcher::setValueComparer to facilitate patching maps containing objects
+* Added PHPUnit configuration file using the new tests/bootstrap.php
 
 ; Removals
 
