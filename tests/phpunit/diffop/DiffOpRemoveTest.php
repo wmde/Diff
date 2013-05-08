@@ -2,7 +2,7 @@
 
 namespace Diff\Tests;
 
-use Diff\DiffOpRemove as DiffOpRemove;
+use Diff\DiffOpRemove;
 
 /**
  * Tests for the Diff\DiffOpRemove class.

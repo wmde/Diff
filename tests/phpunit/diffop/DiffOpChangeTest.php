@@ -2,7 +2,7 @@
 
 namespace Diff\Tests;
 
-use Diff\DiffOpChange as DiffOpChange;
+use Diff\DiffOpChange;
 
 /**
  * Tests for the Diff\DiffOpChange class.

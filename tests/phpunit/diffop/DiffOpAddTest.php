@@ -2,7 +2,7 @@
 
 namespace Diff\Tests;
 
-use Diff\DiffOpAdd as DiffOpAdd;
+use Diff\DiffOpAdd;
 
 /**
  * Tests for the Diff\DiffOpAdd class.
