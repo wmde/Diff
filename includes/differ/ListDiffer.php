@@ -2,10 +2,14 @@
 
 namespace Diff;
 
+use Diff\ArrayComparer\StrictArrayComparer;
+
 /**
  * Differ that only looks at the values of the arrays (and thus ignores key differences).
  * Values are compared using the strictDiff method in strict mode (default)
  * or using array_diff_assoc in native mode.
+ *
+ * TODO: use a ArrayComparer as strategy rather then the current flags and callback
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -136,14 +140,6 @@ class ListDiffer implements Differ {
 	/**
 	 * Returns an array containing all the entries from arrayOne that are not present in arrayTwo.
 	 *
-	 * Similar to @see array_diff with the following differences:
-	 *
-	 * - Strict comparison for arrays: ['42'] and [42] are different
-	 * - Quantity matters: [42, 42] and [42] are different
-	 * - Arrays and objects are compared properly: [[1]] and [[2]] are different
-	 * - Naive support for objects by using non-strict comparison
-	 * - Only works with two arrays (array_diff can take more)
-	 *
 	 * @since 0.4
 	 *
 	 * @param array $arrayOne
@@ -152,20 +148,9 @@ class ListDiffer implements Differ {
 	 * @return array
 	 */
 	protected function strictDiff( array $arrayOne, array $arrayTwo ) {
-		$notInTwo = array();
+		$differ = new StrictArrayComparer();
 
-		foreach ( $arrayOne as $element ) {
-			$location = array_search( $element, $arrayTwo, !is_object( $element ) );
-
-			if ( $location === false ) {
-				$notInTwo[] = $element;
-				continue;
-			}
-
-			unset( $arrayTwo[$location] );
-		}
-
-		return $notInTwo;
+		return $differ->diffArrays( $arrayOne, $arrayTwo );
 	}
 
 }

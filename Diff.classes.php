@@ -15,6 +15,11 @@ return array(
 	'Diff\Appendable' => 'includes/Appendable.php',
 	'Diff\DiffOpFactory' => 'includes/DiffOpFactory.php',
 
+	'Diff\ArrayComparer\ArrayComparer' => 'includes/ArrayComparer/ArrayComparer.php',
+	'Diff\ArrayComparer\NativeArrayComparer' => 'includes/ArrayComparer/NativeArrayComparer.php',
+	'Diff\ArrayComparer\StrategicArrayComparer' => 'includes/ArrayComparer/StrategicArrayComparer.php',
+	'Diff\ArrayComparer\StrictArrayComparer' => 'includes/ArrayComparer/StrictArrayComparer.php',
+
 	'Diff\Comparer\CallbackComparer' => 'includes/Comparer/CallbackComparer.php',
 	'Diff\Comparer\StrictComparer' => 'includes/Comparer/StrictComparer.php',
 	'Diff\Comparer\ValueComparer' => 'includes/Comparer/ValueComparer.php',
