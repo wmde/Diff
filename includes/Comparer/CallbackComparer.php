@@ -3,7 +3,7 @@
 namespace Diff\Comparer;
 
 /**
- * Adapter around a comparision callback that implements the ValueComparer
+ * Adapter around a comparison callback that implements the ValueComparer
  * interface.
  *
  * This program is free software; you can redistribute it and/or modify
