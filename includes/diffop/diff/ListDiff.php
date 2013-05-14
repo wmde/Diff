@@ -38,22 +38,6 @@ class ListDiff extends Diff {
 	}
 
 	/**
-	 * Creates a new ListDiff given two arrays.
-	 *
-	 * @since 0.1
-	 * @deprecated since 0.4, use ListDiffer::doDiff instead
-	 *
-	 * @param array $firstList
-	 * @param array $secondList
-	 *
-	 * @return ListDiff
-	 */
-	public static function newFromArrays( array $firstList, array $secondList ) {
-		$differ = new ListDiffer();
-		return new static( $differ->doDiff( $firstList, $secondList ) );
-	}
-
-	/**
 	 * @see DiffOp::getType
 	 *
 	 * @since 0.1

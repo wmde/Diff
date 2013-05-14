@@ -4,6 +4,13 @@ Extension page on mediawiki.org: https://www.mediawiki.org/wiki/Extension:Diff
 Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/Diff.git;a=blob;f=RELEASE-NOTES
 
 
+=== Version 0.7 ===
+(dev)
+
+; Removals
+
+* Removed static methods from ListDiff and MapDiff (all deprecated since 0.4)
+
 === Version 0.6 ===
 2013-05-08
 
