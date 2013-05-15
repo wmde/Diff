@@ -189,7 +189,7 @@ $messages['ksh'] = array(
  * @author Robby
  */
 $messages['lb'] = array(
-	'diff-desc' => 'Diff-Library fir strukturéiert Daten', # Fuzzy
+	'diff-desc' => "Library mat Klasse fir Differenzen tëschent strukturéierten Donnéeën duerzestellen, genee esou wéi Service-Objeten fir Objeten ze differenzéieren oder z'aktualiséieren",
 );
 
 /** Macedonian (македонски)
