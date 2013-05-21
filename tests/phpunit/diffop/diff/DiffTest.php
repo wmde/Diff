@@ -610,5 +610,24 @@ class DiffTest extends DiffTestCase {
 		$this->assertArrayEquals( $list, $copy, true, true );
 	}
 
+	/**
+	 * @dataProvider instanceProvider
+	 *
+	 * @since 0.6
+	 *
+	 * @param Diff $list
+	 */
+	public function testAddInvalidDiffOp( Diff $list ) {
+		$invalidDiffOp = $this->getMock( 'Diff\DiffOp' );
+
+		$invalidDiffOp->expects( $this->atLeastOnce() )
+			->method( 'getType' )
+			->will( $this->returnValue( '~=[,,_,,]:3' ) );
+
+		$this->setExpectedException( 'Exception' );
+
+		$list->append( $invalidDiffOp );
+	}
+
 }
 	
