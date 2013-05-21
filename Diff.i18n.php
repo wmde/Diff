@@ -73,7 +73,7 @@ $messages['da'] = array(
  * @author Metalhead64
  */
 $messages['de'] = array(
-	'diff-desc' => 'Stellt eine Bibliothek zum Darstellen sowie Dienstobjekte zum Ändern von Unterschieden zwischen strukturierten Daten bereit',
+	'diff-desc' => 'Stellt eine Bibliothek zum Darstellen, sowie Dienstobjekte zum Ändern von Unterschieden zwischen strukturierten Daten bereit',
 );
 
 /** Lower Sorbian (dolnoserbski)
@@ -182,7 +182,7 @@ $messages['ko'] = array(
  * @author Purodha
  */
 $messages['ksh'] = array(
-	'diff-desc' => 'En Projrammbiblijoteek för Ongerscheide en Daate met Schtroktuur ze fenge.', # Fuzzy
+	'diff-desc' => 'En Projrammbiblijoteek för Ongerscheide en Daate met Schtroktuur ze fenge, un Objäkte för Ongerscheide en Objäkte ze fenge un se aanzepaße.',
 );
 
 /** Luxembourgish (Lëtzebuergesch)
