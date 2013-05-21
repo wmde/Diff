@@ -5,6 +5,7 @@ namespace Diff\Tests;
 use Diff\Diff;
 use Diff\DiffOpAdd;
 use Diff\DiffOpRemove;
+use Diff\ListPatcher;
 use Diff\MapPatcher;
 use Diff\Patcher;
 
@@ -42,14 +43,77 @@ class ListPatcherTest extends DiffTestCase {
 	public function patchProvider() {
 		$argLists = array();
 
-		$patcher = new \Diff\ListPatcher();
+		$patcher = new ListPatcher();
 		$base = array();
 		$diff = new Diff();
 		$expected = array();
 
 		$argLists[] = array( $patcher, $base, $diff, $expected );
 
-		// TODO
+
+		$patcher = new ListPatcher();
+		$base = array( 4, 2 );
+		$diff = new Diff();
+		$expected = array( 4, 2 );
+
+		$argLists[] = array( $patcher, $base, $diff, $expected );
+
+
+		$patcher = new ListPatcher();
+		$base = array();
+		$diff = new Diff( array(
+			new DiffOpAdd( 9001 )
+		) );
+		$expected = array( 9001 );
+
+		$argLists[] = array( $patcher, $base, $diff, $expected );
+
+
+		$patcher = new ListPatcher();
+		$base = array( 4, 2 );
+		$diff = new Diff( array(
+			new DiffOpAdd( 9001 )
+		) );
+		$expected = array( 4, 2, 9001 );
+
+		$argLists[] = array( $patcher, $base, $diff, $expected );
+
+
+		$patcher = new ListPatcher();
+		$base = array( 4, 2 );
+		$diff = new Diff( array(
+			new DiffOpAdd( 9001 ),
+			new DiffOpAdd( 9002 ),
+			new DiffOpAdd( 2 )
+		) );
+		$expected = array( 4, 2, 9001, 9002, 2 );
+
+		$argLists[] = array( $patcher, $base, $diff, $expected );
+
+
+		$patcher = new ListPatcher();
+		$base = array( 0, 1, 2, 3, 4 );
+		$diff = new Diff( array(
+			new DiffOpRemove( 2 ),
+			new DiffOpRemove( 3 ),
+		) );
+		$expected = array( 0, 1, 4 );
+
+		$argLists[] = array( $patcher, $base, $diff, $expected );
+
+
+		$patcher = new ListPatcher();
+		$base = array( 0, 1, 2, 2, 2, 3, 4 );
+		$diff = new Diff( array(
+			new DiffOpRemove( 2 ),
+			new DiffOpRemove( 3 ),
+			new DiffOpAdd( 6 ),
+			new DiffOpRemove( 2 ),
+		) );
+		$expected = array( 0, 1, 2, 4, 6 );
+
+		$argLists[] = array( $patcher, $base, $diff, $expected );
+
 
 		return $argLists;
 	}
@@ -65,7 +129,22 @@ class ListPatcherTest extends DiffTestCase {
 	public function testPatch( Patcher $patcher, array $base, Diff $diff, array $expected ) {
 		$actual = $patcher->patch( $base, $diff );
 
-		$this->assertArrayEquals( $actual, $expected );
+		$this->assertArrayEquals( $expected, $actual );
+	}
+
+	/**
+	 * @dataProvider getApplicableDiffProvider
+	 *
+	 * @param Diff $diff
+	 * @param array $currentObject
+	 * @param Diff $expected
+	 * @param string|null $message
+	 */
+	public function testGetApplicableDiff( Diff $diff, array $currentObject, Diff $expected, $message = null ) {
+		$patcher = new MapPatcher();
+		$actual = $patcher->getApplicableDiff( $currentObject, $diff );
+
+		$this->assertEquals( $expected->getOperations(), $actual->getOperations(), $message );
 	}
 
 	public function getApplicableDiffProvider() {
@@ -152,21 +231,6 @@ class ListPatcherTest extends DiffTestCase {
 		$argLists[] = array( $diff, $currentObject, $expected, 'list diffs containing only remove ops should be retained when present in the base' );
 
 		return $argLists;
-	}
-
-	/**
-	 * @dataProvider getApplicableDiffProvider
-	 *
-	 * @param Diff $diff
-	 * @param array $currentObject
-	 * @param Diff $expected
-	 * @param string|null $message
-	 */
-	public function testGetApplicableDiff( Diff $diff, array $currentObject, Diff $expected, $message = null ) {
-		$patcher = new MapPatcher();
-		$actual = $patcher->getApplicableDiff( $currentObject, $diff );
-
-		$this->assertEquals( $expected->getOperations(), $actual->getOperations(), $message );
 	}
 
 }
