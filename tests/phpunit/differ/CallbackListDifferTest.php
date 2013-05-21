@@ -231,4 +231,14 @@ class CallbackListDifferTest extends DiffTestCase {
 		);
 	}
 
+	public function testCallbackComparisonReturningNyanCat() {
+		$differ = new CallbackListDiffer( function( $foo, $bar ) {
+			return '~=[,,_,,]:3';
+		} );
+
+		$this->setExpectedException( 'Exception' );
+
+		$differ->doDiff( array( 1, '2', 'baz' ), array( 1, 'foo', '2' ) );
+	}
+
 }
