@@ -1,3 +1,5 @@
+[![Build Status](https://secure.travis-ci.org/JeroenDeDauw/Diff.png?branch=master)](http://travis-ci.org/JeroenDeDauw/Diff)
+
 These is the readme file for the Diff library.
 
 Extension page on mediawiki.org: https://www.mediawiki.org/wiki/Extension:Diff
