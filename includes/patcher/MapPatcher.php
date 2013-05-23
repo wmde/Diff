@@ -65,44 +65,14 @@ class MapPatcher extends ThrowingPatcher {
 	}
 
 	/**
-	 * Sets the value comparer that should be used to determine if values are equal.
-	 *
-	 * @since 0.6
-	 *
-	 * @param ValueComparer $comparer
-	 */
-	public function setValueComparer( ValueComparer $comparer ) {
-		$this->comparer = $comparer;
-	}
-
-	/**
 	 * @see Patcher::patch
 	 *
-	 * @since 0.4
-	 *
-	 * @param array $base
-	 * @param Diff $diff
-	 *
-	 * @return array
-	 */
-	public function patch( array $base, Diff $diff ) {
-		if ( $diff->looksAssociative() ) {
-			$base = $this->getPatchedMap( $base, $diff );
-		}
-		else {
-			$base = $this->listPatcher->patch( $base, $diff );
-		}
-
-		return $base;
-	}
-
-	/**
 	 * Applies the provided diff to the provided array and returns the result.
 	 * The array is treated as a map, ie keys are held into account.
 	 *
 	 * It is possible to pass in non-associative diffs (those for which isAssociative)
 	 * returns false, however the likely intended behavior can be obtained via
-	 * @see getPatchedList
+	 * a list patcher.
 	 *
 	 * @since 0.4
 	 *
@@ -112,7 +82,7 @@ class MapPatcher extends ThrowingPatcher {
 	 * @return array
 	 * @throws RuntimeException
 	 */
-	protected function getPatchedMap( array $base, Diff $diff ) {
+	public function patch( array $base, Diff $diff ) {
 		/**
 		 * @var DiffOp $diffOp
 		 */
@@ -135,7 +105,7 @@ class MapPatcher extends ThrowingPatcher {
 					$base[$key] = array();
 				}
 
-				$base[$key] = $this->patch( $base[$key], $diffOp );
+				$base[$key] = $this->patchMapOrList( $base[$key], $diffOp );
 			}
 			else if ( $diffOp instanceof DiffOpRemove ) {
 				if ( !array_key_exists( $key, $base ) ) {
@@ -144,7 +114,6 @@ class MapPatcher extends ThrowingPatcher {
 				}
 
 				unset( $base[$key] );
-				break;
 			}
 			else if ( $diffOp instanceof DiffOpChange ) {
 				if ( !array_key_exists( $key, $base ) ) {
@@ -167,12 +136,34 @@ class MapPatcher extends ThrowingPatcher {
 		return $base;
 	}
 
+	protected function patchMapOrList( array $base, Diff $diff ) {
+		if ( $diff->looksAssociative() ) {
+			$base = $this->patch( $base, $diff );
+		}
+		else {
+			$base = $this->listPatcher->patch( $base, $diff );
+		}
+
+		return $base;
+	}
+
 	protected function valuesAreEqual( $firstValue, $secondValue ) {
 		if ( $this->comparer === null ) {
 			$this->comparer = new StrictComparer();
 		}
 
 		return $this->comparer->valuesAreEqual( $firstValue, $secondValue );
+	}
+
+	/**
+	 * Sets the value comparer that should be used to determine if values are equal.
+	 *
+	 * @since 0.6
+	 *
+	 * @param ValueComparer $comparer
+	 */
+	public function setValueComparer( ValueComparer $comparer ) {
+		$this->comparer = $comparer;
 	}
 
 }

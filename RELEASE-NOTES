@@ -7,9 +7,21 @@ Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=med
 === Version 0.7 ===
 (dev)
 
+; Improvements
+
+* Added extra tests for MapPatcher and ListPatcher
+* Added extra tests for Diff
+
 ; Removals
 
 * Removed static methods from ListDiff and MapDiff (all deprecated since 0.4)
+* Removed DiffOpTestDummy
+
+; Bug fixes
+
+* MapPatcher will now no longer stop patching after the first remove operation it encounters
+* MapPatcher now always treats its top level input diff as a map diff
+* Fixed several issues in ListPatcherTest
 
 === Version 0.6 ===
 2013-05-08
