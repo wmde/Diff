@@ -3,6 +3,8 @@
 namespace Diff\Tests;
 
 use Diff\Diff;
+use Diff\DiffOpAdd;
+use Diff\DiffOpRemove;
 
 /**
  * @covers Diff\Diff
@@ -56,14 +58,14 @@ class DiffAsOpTest extends DiffOpTest {
 	public function constructorProvider() {
 		$argLists = array(
 			array( true, array() ),
-			array( true, array( new \Diff\DiffOpAdd( 42 ) ) ),
-			array( true, array( new \Diff\DiffOpRemove( new \Diff\Tests\DiffOpTestDummy( "spam" ) ) ) ),
-			array( true, array( new \Diff\Diff( array( new \Diff\DiffOpRemove( new \Diff\Tests\DiffOpTestDummy( "spam" ) ) ) ) ) ),
-			array( true, array( new \Diff\DiffOpAdd( 42 ), new \Diff\DiffOpAdd( 42 ) ) ),
-			array( true, array( 'a' => new \Diff\DiffOpAdd( 42 ), 'b' => new \Diff\DiffOpAdd( 42 ) ) ),
-			array( true, array( new \Diff\DiffOpAdd( 42 ), 'foo bar baz' => new \Diff\DiffOpAdd( 42 ) ) ),
-			array( true, array( 42 => new \Diff\DiffOpRemove( 42 ), '9001' => new \Diff\DiffOpAdd( 42 ) ) ),
-			array( true, array( 42 => new \Diff\DiffOpRemove( new \stdClass() ), '9001' => new \Diff\DiffOpAdd( new \stdClass() ) ) ),
+			array( true, array( new DiffOpAdd( 42 ) ) ),
+			array( true, array( new DiffOpRemove( new DiffOpRemove( "spam" ) ) ) ),
+			array( true, array( new Diff( array( new DiffOpRemove( new DiffOpRemove( "spam" ) ) ) ) ) ),
+			array( true, array( new DiffOpAdd( 42 ), new DiffOpAdd( 42 ) ) ),
+			array( true, array( 'a' => new DiffOpAdd( 42 ), 'b' => new DiffOpAdd( 42 ) ) ),
+			array( true, array( new DiffOpAdd( 42 ), 'foo bar baz' => new DiffOpAdd( 42 ) ) ),
+			array( true, array( 42 => new DiffOpRemove( 42 ), '9001' => new DiffOpAdd( 42 ) ) ),
+			array( true, array( 42 => new DiffOpRemove( new \stdClass() ), '9001' => new DiffOpAdd( new \stdClass() ) ) ),
 		);
 
 		$allArgLists = $argLists;

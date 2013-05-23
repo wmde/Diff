@@ -2,6 +2,7 @@
 
 namespace Diff\Tests;
 
+use Diff\DiffOpAdd;
 use Diff\DiffOpRemove;
 
 /**
@@ -59,7 +60,7 @@ class DiffOpRemoveTest extends DiffOpTest {
 			array( true, array() ),
 			array( true, true ),
 			array( true, 42 ),
-			array( true, new DiffOpTestDummy( "spam" ) ),
+			array( true, new DiffOpAdd( "spam" ) ),
 			array( false ),
 		);
 	}

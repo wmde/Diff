@@ -44,6 +44,5 @@ return array(
 	'Diff\MapDiff' => 'includes/diffop/diff/MapDiff.php',
 
 	'Diff\Tests\DiffOpTest' => 'tests/phpunit/diffop/DiffOpTest.php',
-	'Diff\Tests\DiffOpTestDummy' => 'tests/phpunit/DiffOpTestDummy.php',
 	'Diff\Tests\DiffTestCase' => 'tests/phpunit/DiffTestCase.php',
 );

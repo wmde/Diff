@@ -49,7 +49,7 @@ class DiffOpFactoryTest extends DiffTestCase {
 		$diffOps[9001] = new DiffOpAdd( 4.2 );
 		$diffOps['42'] = new DiffOpAdd( array( 42, array( 9001 ) ) );
 		$diffOps[] = new DiffOpRemove( 42 );
-		$diffOps[] = new DiffOpAdd( new DiffOpTestDummy( "spam" ) );
+		$diffOps[] = new DiffOpAdd( new DiffOpChange( 'spam', 'moar spam' ) );
 
 		$atomicDiffOps = $diffOps;
 
@@ -87,34 +87,36 @@ class DiffOpFactoryTest extends DiffTestCase {
 	 * @param DiffOp $diffOp
 	 */
 	public function testNewFromArrayWithConversion( DiffOp $diffOp ) {
-		$factory = new DiffOpFactory( 'Diff\Tests\DiffOpTestDummy::objectify' );
+		$unserializationFunction = function( $array ) {
+			if ( is_array( $array ) && isset( $array['type'] ) && $array['type'] === 'Change' ) {
+				return new DiffOpChange( $array['teh_old'], $array['teh_new'] );
+			}
+
+			return $array;
+		};
+
+		$factory = new DiffOpFactory( $unserializationFunction );
+
+		$serializationFunction = function( $obj ) {
+			if ( $obj instanceof DiffOpChange ) {
+				return array(
+					'type' => 'Change',
+					'teh_old' => $obj->getOldValue(),
+					'teh_new' => $obj->getNewValue(),
+				);
+			}
+
+			return $obj;
+		};
 
 		// try with conversion callback
-		$array = $diffOp->toArray( 'Diff\Tests\DiffOpTestDummy::arrayalize' );
+		$array = $diffOp->toArray( $serializationFunction );
+
 		$newInstance = $factory->newFromArray( $array );
 
 		// If an equality method is implemented in DiffOp, it should be used here
 		$this->assertEquals( $diffOp, $newInstance );
 		$this->assertEquals( $diffOp->getType(), $newInstance->getType() );
-	}
-
-	public static function dummyToArray( $obj ) {
-		if ( $obj instanceof DiffOpTestDummy ) {
-			return array(
-				'type' => 'Dummy',
-				'text' => $obj->text,
-			);
-		}
-
-		return $obj;
-	}
-
-	public static function arrayToDummy( $array ) {
-		if ( is_array( $array ) && isset( $array['type'] ) && $array['type'] === 'Dummy' ) {
-			return new DiffOpTestDummy( $array['text'] );
-		}
-
-		return $array;
 	}
 
 	public function invalidArrayFromArrayProvider() {
