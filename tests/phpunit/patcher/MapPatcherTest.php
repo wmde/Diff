@@ -131,6 +131,21 @@ class MapPatcherTest extends DiffTestCase {
 
 		$argLists[] = array( $patcher, $base, $diff, $expected );
 
+
+		$patcher = new MapPatcher();
+		$base = array(
+			'foo' => 'bar',
+		);
+		$diff = new Diff( array(
+			'baz' => new Diff( array( new DiffOpAdd( 'ny' ), new DiffOpAdd( 'an' ) ), false ),
+		) );
+		$expected = array(
+			'foo' => 'bar',
+			'baz' => array( 'ny', 'an' ),
+		);
+
+		$argLists[] = array( $patcher, $base, $diff, $expected );
+
 		// TODO
 
 		return $argLists;
