@@ -629,5 +629,58 @@ class DiffTest extends DiffTestCase {
 		$list->append( $invalidDiffOp );
 	}
 
+	/**
+	 * @dataProvider invalidIsAssociativeProvider
+	 */
+	public function testConstructWithInvalidIsAssociative( $isAssociative ) {
+		$this->setExpectedException( 'InvalidArgumentException' );
+		new Diff( array(), $isAssociative );
+	}
+
+	public function invalidIsAssociativeProvider() {
+		return $this->arrayWrap( array(
+			1,
+			'1',
+			'null',
+			0,
+			array(),
+			'foobar'
+		) );
+	}
+
+	/**
+	 * @dataProvider invalidDiffOpsProvider
+	 */
+	public function testConstructorWithInvalidDiffOps( array $diffOps ) {
+		$this->setExpectedException( 'InvalidArgumentException' );
+		new Diff( $diffOps );
+	}
+
+	public function invalidDiffOpsProvider() {
+		$diffOpLists = array();
+
+		$diffOpLists[] = array(
+			'foo'
+		);
+
+		$diffOpLists[] = array(
+			null
+		);
+
+		$diffOpLists[] = array(
+			false,
+			true,
+			array()
+		);
+
+		$diffOpLists[] = array(
+			new DiffOpAdd( 42 ),
+			'in your list',
+			new DiffOpAdd( 9001 ),
+		);
+
+		return $this->arrayWrap( $diffOpLists );
+	}
+
 }
 	
