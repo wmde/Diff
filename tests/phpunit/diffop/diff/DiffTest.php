@@ -538,6 +538,48 @@ class DiffTest extends DiffTestCase {
 		call_user_func_array( $function, $arguments );
 	}
 
+	public function testGetAddedValues() {
+		$diff = new Diff( array(
+			new DiffOpAdd( 0 ),
+			new DiffOpRemove( 1 ),
+			new DiffOpAdd( 2 ),
+			new DiffOpRemove( 3 ),
+			new DiffOpAdd( 4 ),
+			new DiffOpChange( 7, 5 ),
+			new Diff( array( new DiffOpAdd( 9 ) ) ),
+		) );
+
+		$addedValues = $diff->getAddedValues();
+
+		$this->assertInternalType( 'array', $addedValues );
+
+		$this->assertArrayEquals( array( 0, 2, 4 ), $addedValues );
+
+		$diff = new Diff();
+		$this->assertArrayEquals( array(), $diff->getAddedValues() );
+	}
+
+	public function testGetRemovedValues() {
+		$diff = new Diff( array(
+			new DiffOpAdd( 0 ),
+			new DiffOpRemove( 1 ),
+			new DiffOpAdd( 2 ),
+			new DiffOpRemove( 3 ),
+			new DiffOpAdd( 4 ),
+			new DiffOpChange( 6, 4 ),
+			new Diff( array( new DiffOPRemove( 8 ) ) ),
+		) );
+
+		$removedValues = $diff->getRemovedValues();
+
+		$this->assertInternalType( 'array', $removedValues );
+
+		$this->assertArrayEquals( array( 1, 3 ), $removedValues );
+
+		$diff = new Diff();
+		$this->assertArrayEquals( array(), $diff->getRemovedValues() );
+	}
+
 	/**
 	 * @dataProvider elementInstancesProvider
 	 *
