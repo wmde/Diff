@@ -37,6 +37,7 @@ use Diff\Patcher;
  *
  * @group Diff
  * @group DiffPatcher
+ * @group MapPatcherTest
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
@@ -50,6 +51,83 @@ class MapPatcherTest extends DiffTestCase {
 		$base = array();
 		$diff = new Diff();
 		$expected = array();
+
+		$argLists[] = array( $patcher, $base, $diff, $expected );
+
+
+		$patcher = new MapPatcher();
+		$base = array( 'foo', 'bar' => array( 'baz' ) );
+		$diff = new Diff();
+		$expected = array( 'foo', 'bar' => array( 'baz' ) );
+
+		$argLists[] = array( $patcher, $base, $diff, $expected );
+
+
+		$patcher = new MapPatcher();
+		$base = array( 'foo', 'bar' => array( 'baz' ) );
+		$diff = new Diff( array( 'bah' => new DiffOpAdd( 'blah' ) ) );
+		$expected = array( 'foo', 'bar' => array( 'baz' ), 'bah' => 'blah' );
+
+		$argLists[] = array( $patcher, $base, $diff, $expected );
+
+
+		$patcher = new MapPatcher();
+		$base = array( 'foo', 'bar' => array( 'baz' ) );
+		$diff = new Diff( array( 'bah' => new DiffOpAdd( 'blah' ) ) );
+		$expected = array( 'foo', 'bar' => array( 'baz' ), 'bah' => 'blah' );
+
+		$argLists[] = array( $patcher, $base, $diff, $expected );
+
+
+		$patcher = new MapPatcher();
+		$base = array();
+		$diff = new Diff( array(
+			'foo' => new DiffOpAdd( 'bar' ),
+			'bah' => new DiffOpAdd( 'blah' )
+		) );
+		$expected = array(
+			'foo' => 'bar',
+			'bah' => 'blah'
+		);
+
+		$argLists[] = array( $patcher, $base, $diff, $expected );
+
+
+		$patcher = new MapPatcher();
+		$base = array(
+			'foo' => 'bar',
+			'nyan' => 'cat',
+			'bah' => 'blah',
+		);
+		$diff = new Diff( array(
+			'foo' => new DiffOpRemove( 'bar' ),
+			'bah' => new DiffOpRemove( 'blah' ),
+		) );
+		$expected = array(
+			'nyan' => 'cat'
+		);
+
+		$argLists[] = array( $patcher, $base, $diff, $expected );
+
+
+		$patcher = new MapPatcher();
+		$base = array(
+			'foo' => 'bar',
+			'nyan' => 'cat',
+			'spam' => 'blah',
+			'bah' => 'blah',
+		);
+		$diff = new Diff( array(
+			'foo' => new DiffOpChange( 'bar', 'baz' ),
+			'bah' => new DiffOpRemove( 'blah' ),
+			'oh' => new DiffOpAdd( 'noez' ),
+		) );
+		$expected = array(
+			'foo' => 'baz',
+			'nyan' => 'cat',
+			'spam' => 'blah',
+			'oh' => 'noez',
+		);
 
 		$argLists[] = array( $patcher, $base, $diff, $expected );
 
@@ -69,7 +147,7 @@ class MapPatcherTest extends DiffTestCase {
 	public function testPatch( Patcher $patcher, array $base, Diff $diff, array $expected ) {
 		$actual = $patcher->patch( $base, $diff );
 
-		$this->assertArrayEquals( $actual, $expected );
+		$this->assertArrayEquals( $expected, $actual, true, true );
 	}
 
 	public function getApplicableDiffProvider() {

@@ -142,7 +142,7 @@ class ListPatcherTest extends DiffTestCase {
 	 * @param string|null $message
 	 */
 	public function testGetApplicableDiff( Diff $diff, array $currentObject, Diff $expected, $message = null ) {
-		$patcher = new MapPatcher();
+		$patcher = new ListPatcher();
 		$actual = $patcher->getApplicableDiff( $currentObject, $diff );
 
 		$this->assertEquals( $expected->getOperations(), $actual->getOperations(), $message );
@@ -209,8 +209,8 @@ class ListPatcherTest extends DiffTestCase {
 
 
 		$diff = new Diff( array(
-			'en' => new Diff( array( new DiffOpAdd( 42 ) ), false ),
-		), true );
+			new DiffOpAdd( 42 ),
+		), false );
 
 		$currentObject = array();
 
@@ -220,11 +220,14 @@ class ListPatcherTest extends DiffTestCase {
 
 
 		$diff = new Diff( array(
-			'en' => new Diff( array( new DiffOpRemove( 42 ) ), false ),
-		), true );
+			new DiffOpRemove( 42 ),
+			new DiffOpRemove( 9001 ),
+		), false );
 
 		$currentObject = array(
-			'en' => array( 42 ),
+			42,
+			72010,
+			9001,
 		);
 
 		$expected = clone $diff;
