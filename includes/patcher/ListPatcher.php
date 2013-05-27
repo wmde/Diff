@@ -67,8 +67,6 @@ class ListPatcher extends ThrowingPatcher {
 
 					unset( $base[$key] );
 					break;
-				default:
-					$this->handleError( 'Non-add and non-remove diff operation cannot be applied to a list' );
 			}
 		}
 

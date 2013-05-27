@@ -237,4 +237,15 @@ class ListPatcherTest extends DiffTestCase {
 		return $argLists;
 	}
 
+	public function testPatchMapRaisesError() {
+		$patcher = new ListPatcher();
+
+		$patcher->patch( array(), new Diff( array(), true ) );
+
+		$patcher->throwErrors();
+		$this->setExpectedException( 'Diff\PatcherException' );
+
+		$patcher->patch( array(), new Diff( array(), true ) );
+	}
+
 }
