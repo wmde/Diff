@@ -19,6 +19,7 @@ if ( !defined( 'Diff_VERSION' ) ) {
 	die( 'Not an entry point for MediaWiki. Use Diff.php' );
 }
 
+// @codeCoverageIgnoreStart
 spl_autoload_register( function ( $className ) {
 	static $classes = false;
 
@@ -30,4 +31,5 @@ spl_autoload_register( function ( $className ) {
 		include_once __DIR__ . '/' . $classes[$className];
 	}
 } );
+// @codeCoverageIgnoreEnd
 
