@@ -83,6 +83,8 @@ class ListDiffer implements Differ {
 	 * Sets a callback to use for comparison. The callback should accept two
 	 * arguments.
 	 *
+	 * FIXME: this field is not used!
+	 *
 	 * @since 0.5
 	 *
 	 * @param callable $comparisonCallback
