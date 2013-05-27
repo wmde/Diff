@@ -360,4 +360,23 @@ class MapPatcherTest extends DiffTestCase {
 		$this->assertEquals( $expectedMap, $patchedMap );
 	}
 
+	public function testErrorOnUnknownDiffOpType() {
+		$patcher = new MapPatcher();
+
+		$diffOp = $this->getMock( 'Diff\DiffOp' );
+
+		$diffOp->expects( $this->any() )
+			->method( 'getType' )
+			->will( $this->returnValue( 'diff' ) );
+
+		$diff = new Diff( array( $diffOp ), true );
+
+		$patcher->patch( array(), $diff );
+
+		$patcher->throwErrors();
+		$this->setExpectedException( 'Diff\PatcherException' );
+
+		$patcher->patch( array(), $diff );
+	}
+
 }
