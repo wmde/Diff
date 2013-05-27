@@ -24,7 +24,7 @@ class Diff extends \ArrayObject implements IDiff {
 	 *
 	 * @var boolean|null
 	 */
-	protected $isAssociative;
+	protected $isAssociative = null;
 
 	/**
 	 * Pointers to the operations of certain types for quick lookup.
@@ -192,10 +192,6 @@ class Diff extends \ArrayObject implements IDiff {
 		elseif ( $this instanceof ListDiff ) {
 			$this->isAssociative = false;
 		}
-		else {
-			$this->isAssociative = null;
-		}
-
 
 		return $serializationData;
 	}
