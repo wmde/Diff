@@ -25,19 +25,6 @@ class ListDiff extends Diff {
 	}
 
 	/**
-	 * Creates and returns an empty ListDiff.
-	 * @see Diff::newEmpty
-	 *
-	 * @since 0.1
-	 * @deprecated since 0.4, just use the constructor
-	 *
-	 * @return ListDiff
-	 */
-	public static function newEmpty() {
-		return new static( array() );
-	}
-
-	/**
 	 * @see DiffOp::getType
 	 *
 	 * @since 0.1
