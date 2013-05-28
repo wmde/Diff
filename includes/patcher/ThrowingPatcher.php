@@ -88,6 +88,7 @@ abstract class ThrowingPatcher implements PreviewablePatcher {
 	 * @param Diff $diff
 	 *
 	 * @return Diff
+	 * @throws PatcherException
 	 */
 	public function getApplicableDiff( array $base, Diff $diff ) {
 		$throwErrors = $this->throwErrors;

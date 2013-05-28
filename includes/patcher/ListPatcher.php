@@ -43,6 +43,7 @@ class ListPatcher extends ThrowingPatcher {
 	 * @param Diff $diff
 	 *
 	 * @return array
+	 * @throws PatcherException
 	 */
 	public function patch( array $base, Diff $diff ) {
 		if ( $this->throwErrors && $diff->looksAssociative() ) {

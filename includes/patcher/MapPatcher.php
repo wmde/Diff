@@ -4,7 +4,6 @@ namespace Diff;
 
 use Diff\Comparer\StrictComparer;
 use Diff\Comparer\ValueComparer;
-use RuntimeException;
 
 /**
  * Map patcher.
@@ -80,7 +79,7 @@ class MapPatcher extends ThrowingPatcher {
 	 * @param Diff $diff
 	 *
 	 * @return array
-	 * @throws RuntimeException
+	 * @throws PatcherException
 	 */
 	public function patch( array $base, Diff $diff ) {
 		/**
