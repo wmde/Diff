@@ -303,5 +303,5 @@ $messages['zh-hans'] = array(
  * @author Justincheng12345
  */
 $messages['zh-hant'] = array(
-	'diff-desc' => '用於結構化資料的差別庫', # Fuzzy
+	'diff-desc' => '以類描繪結構化數據的差異，以及作為服務對象來比較及修補庫',
 );
