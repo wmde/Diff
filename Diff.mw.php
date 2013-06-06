@@ -57,31 +57,15 @@ foreach ( include( __DIR__ . '/Diff.classes.php' ) as $class => $file ) {
  */
 $wgHooks['UnitTestsList'][]	= function( array &$files ) {
 	// @codeCoverageIgnoreStart
-	$testFiles = array(
-		'Comparer/CallbackComparer',
-		'Comparer/StrictComparer',
+	$directoryIterator = new RecursiveDirectoryIterator( __DIR__ . '/tests/phpunit/' );
 
-		'differ/CallbackListDiffer',
-		'differ/ListDiffer',
-		'differ/MapDiffer',
-
-		'diffop/DiffOpAdd',
-		'diffop/DiffOpChange',
-		'diffop/DiffOpRemove',
-
-		'diffop/diff/DiffAsOp',
-		'diffop/diff/Diff',
-		'diffop/diff/ListDiff',
-		'diffop/diff/MapDiff',
-
-		'patcher/ListPatcher',
-		'patcher/MapPatcher',
-
-		'DiffOpFactory',
-	);
-
-	foreach ( $testFiles as $file ) {
-		$files[] = __DIR__ . '/tests/phpunit/' . $file . 'Test.php';
+	/**
+	 * @var SplFileInfo $fileInfo
+	 */
+	foreach ( new RecursiveIteratorIterator( $directoryIterator ) as $fileInfo ) {
+		if ( substr( $fileInfo->getFilename(), -8 ) === 'Test.php' ) {
+			$files[] = $fileInfo->getPathname();
+		}
 	}
 
 	return true;
