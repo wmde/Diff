@@ -11,8 +11,6 @@ notifications:
       - jeroendedauw@gmail.com
     on_success: change
     on_failure: always
-
-notifications:
   irc:
     channels:
       - "chat.freenode.net#wikimedia-wikidata"
