@@ -3,6 +3,9 @@ These are the release notes for the Diff extension.
 Extension page on mediawiki.org: https://www.mediawiki.org/wiki/Extension:Diff
 Latest version of the release notes: https://gerrit.wikimedia.org/r/gitweb?p=mediawiki/extensions/Diff.git;a=blob;f=RELEASE-NOTES
 
+* Added Diff\Merger component with functionality to merge diffs together
+* Added @covers tags to the unit tests to improve coverage report accuracy
+
 
 === Version 0.7 ===
 (dev)
