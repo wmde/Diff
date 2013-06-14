@@ -3,6 +3,7 @@
 namespace Diff;
 
 use Exception;
+use LogicException;
 
 /**
  * Differ that does an associative diff between two arrays,
@@ -99,43 +100,71 @@ class MapDiffer implements Differ {
 
 		$diffSet = array();
 
-		foreach ( array_merge( array_keys( $oldSet ), array_keys( $newSet ) ) as $key ) {
-			$hasOld = array_key_exists( $key, $oldSet );
-			$hasNew = array_key_exists( $key, $newSet );
+		foreach ( $this->getAllKeys( $oldSet, $newSet ) as $key ) {
+			$diffOp = $this->getDiffOpForElement( $key, $oldSet, $newSet );
 
-			if ( $this->recursively ) {
-				if ( ( !$hasOld || is_array( $oldSet[$key] ) ) && ( !$hasNew || is_array( $newSet[$key] ) ) ) {
-
-					$old = $hasOld ? $oldSet[$key] : array();
-					$new = $hasNew ? $newSet[$key] : array();
-
-					if ( $this->isAssociative( $old ) || $this->isAssociative( $new ) ) {
-						$diff = new Diff( $this->doDiff( $old, $new ), true );
-					}
-					else {
-						$diff = new Diff( $this->listDiffer->doDiff( $old, $new ), false );
-					}
-
-					if ( !$diff->isEmpty() ) {
-						$diffSet[$key] = $diff;
-					}
-
-					continue;
-				}
-			}
-
-			if ( $hasOld && $hasNew ) {
-				$diffSet[$key] = new DiffOpChange( $oldSet[$key], $newSet[$key] );
-			}
-			elseif ( $hasOld ) {
-				$diffSet[$key] = new DiffOpRemove( $oldSet[$key] );
-			}
-			elseif ( $hasNew ) {
-				$diffSet[$key] = new DiffOpAdd( $newSet[$key] );
+			if ( $diffOp !== null ) {
+				$diffSet[$key] = $diffOp;
 			}
 		}
 
 		return $diffSet;
+	}
+
+	protected function getAllKeys( $oldSet, $newSet ) {
+		return array_unique( array_merge(
+			array_keys( $oldSet ),
+			array_keys( $newSet )
+		) );
+	}
+
+	protected function getDiffOpForElement( $key, array $oldSet, array $newSet ) {
+		$hasOld = array_key_exists( $key, $oldSet );
+		$hasNew = array_key_exists( $key, $newSet );
+
+		if ( $this->recursively ) {
+			$diffOp = $this->getDiffOpForElementRecursively( $key, $oldSet, $newSet );
+
+			if ( $diffOp !== null ) {
+				return $diffOp;
+			}
+		}
+
+		if ( $hasOld && $hasNew ) {
+			return new DiffOpChange( $oldSet[$key], $newSet[$key] );
+		}
+		elseif ( $hasOld ) {
+			return new DiffOpRemove( $oldSet[$key] );
+		}
+		elseif ( $hasNew ) {
+			return new DiffOpAdd( $newSet[$key] );
+		}
+
+		throw new LogicException( 'The element needs to exist in either the old or new list to compare' );
+	}
+
+	protected function getDiffOpForElementRecursively( $key, array $oldSet, array $newSet ) {
+		$old = array_key_exists( $key, $oldSet ) ? $oldSet[$key] : array();
+		$new = array_key_exists( $key, $newSet ) ? $newSet[$key] : array();
+
+		if ( is_array( $old ) && is_array( $new ) ) {
+			$diff = $this->getDiffForArrays( $old, $new );
+
+			if ( !$diff->isEmpty() ) {
+				return $diff;
+			}
+		}
+
+		return null;
+	}
+
+	protected function getDiffForArrays( array $old, array $new ) {
+		if ( $this->isAssociative( $old ) || $this->isAssociative( $new ) ) {
+			return new Diff( $this->doDiff( $old, $new ), true );
+		}
+		else {
+			return new Diff( $this->listDiffer->doDiff( $old, $new ), false );
+		}
 	}
 
 	/**
