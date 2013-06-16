@@ -2,7 +2,7 @@
 	"name": "diff/diff",
 	"type": "library",
 	"description": "Library for computing and representing diffs between JSON like data structures",
-	"keywords": ["diff"],
+	"keywords": ["diff", "wikidata"],
 	"homepage": "https://www.mediawiki.org/wiki/Extension:Diff",
 	"license": "GPL-2.0+",
 	"authors": [
