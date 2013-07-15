@@ -36,11 +36,6 @@ return array(
 	'Diff\DiffOpChange' => 'includes/diffop/DiffOpChange.php',
 	'Diff\DiffOpRemove' => 'includes/diffop/DiffOpRemove.php',
 
-	'Diff\Merger\DiffMerger' => 'includes/Merger/DiffMerger.php',
-	'Diff\Merger\ListDiffMerger' => 'includes/Merger/ListDiffMerger.php',
-	'Diff\Merger\MapDiffMerger' => 'includes/Merger/MapDiffMerger.php',
-	'Diff\Merger\MultipleDiffMerger' => 'includes/Merger/MultipleDiffMerger.php',
-
 	'Diff\ListPatcher' => 'includes/patcher/ListPatcher.php',
 	'Diff\MapPatcher' => 'includes/patcher/MapPatcher.php',
 	'Diff\Patcher' => 'includes/patcher/Patcher.php',
