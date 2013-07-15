@@ -2,6 +2,7 @@
 
 namespace Diff\Tests;
 
+use Diff\Diff;
 use Diff\DiffOpAdd;
 use Diff\DiffOpChange;
 use Diff\DiffOpRemove;
@@ -104,18 +105,58 @@ class MapDifferTest extends DiffTestCase {
 		$argLists[] = array( $old, $new, $expected,
 			'Changing the key of an element should result in a remove and an add op' );
 
+		$old = array( 'a' => 0, 'b' => 1 );
+		$new = array( 'b' => 1, 'a' => 0 );
+		$expected = array();
+
+		$argLists[] = array( $old, $new, $expected,
+			'Changing the order of associative elements should have no effect.' );
+
+		$old = array( 'a' => array( 'foo' ) );
+		$new = array( 'a' => array( 'foo' ) );
+		$expected = array();
+
+		$argLists[] = array( $old, $new, $expected,
+			'Comparing equal substructures without recursion should return nothing.', false );
+
+		$old = array( );
+		$new = array( 'a' => array( 'foo', 'bar' ) );
+		$expected = array( 'a' => new DiffOpAdd( array( 'foo', 'bar' ) ) );
+
+		$argLists[] = array( $old, $new, $expected,
+			'Adding a substructure should result in a single add operation when not in recursive mode.', false );
 
 		$old = array( 'a' => array( 'b' => 42 ) );
 		$new = array( 'a' => array( 'b' => 7201010 ) );
-		$expected = array( 'a' => new \Diff\Diff( array( 'b' => new DiffOpChange( 42, 7201010 ) ), true ) );
+		$expected = array( 'a' => new Diff( array( 'b' => new DiffOpChange( 42, 7201010 ) ), true ) );
 
 		$argLists[] = array( $old, $new, $expected,
 			'Recursion should work for nested associative diffs', true );
 
+		$old = array( 'a' => array( 'foo' ) );
+		$new = array( 'a' => array( 'foo' ) );
+		$expected = array();
+
+		$argLists[] = array( $old, $new, $expected,
+			'Comparing equal sub-structures with recursion should return nothing.', true );
+
+		$old = array( 'stuff' => array( 'a' => 0, 'b' => 1 ) );
+		$new = array( 'stuff' => array( 'b' => 1, 'a' => 0 ) );
+		$expected = array();
+
+		$argLists[] = array( $old, $new, $expected,
+			'Changing the order of associative elements in a substructure should have no effect.', true );
+
+		$old = array();
+		$new = array( 'stuff' => array( 'b' => 1, 'a' => 0 ) );
+		$expected = array( 'stuff' => new Diff( array( 'b' => new DiffOpAdd( 1 ), 'a' => new DiffOpAdd( 0 ) ) ) );
+
+		$argLists[] = array( $old, $new, $expected,
+			'Adding a substructure should be reported as adding *to* a substructure when in recursive mode.', true );
 
 		$old = array( 'a' => array( 42, 9001 ), 1 );
 		$new = array( 'a' => array( 42, 7201010 ), 1 );
-		$expected = array( 'a' => new \Diff\Diff( array( new DiffOpAdd( 7201010 ), new DiffOpRemove( 9001 ) ), false ) );
+		$expected = array( 'a' => new Diff( array( new DiffOpAdd( 7201010 ), new DiffOpRemove( 9001 ) ), false ) );
 
 		$argLists[] = array( $old, $new, $expected,
 			'Recursion should work for nested non-associative diffs', true );
@@ -123,7 +164,7 @@ class MapDifferTest extends DiffTestCase {
 
 		$old = array( array( 42 ), 1 );
 		$new = array( array( 42, 42 ), 1 );
-		$expected = array( new \Diff\Diff( array( new DiffOpAdd( 42 ) ), false ) );
+		$expected = array( new Diff( array( new DiffOpAdd( 42 ) ), false ) );
 
 		$argLists[] = array( $old, $new, $expected,
 			'Nested non-associative diffs should behave as the default ListDiffer', true );
@@ -131,7 +172,7 @@ class MapDifferTest extends DiffTestCase {
 
 		$old = array( array( 42 ), 1 );
 		$new = array( array( 42, 42, 1 ), 1 );
-		$expected = array( new \Diff\Diff( array( new DiffOpAdd( 1 ) ), false ) );
+		$expected = array( new Diff( array( new DiffOpAdd( 1 ) ), false ) );
 
 		$argLists[] = array( $old, $new, $expected,
 			'Setting a non-default Differ for non-associative diffs should work',
@@ -140,7 +181,7 @@ class MapDifferTest extends DiffTestCase {
 
 		$old = array( 'a' => array( 42 ), 1, array( 'a' => 'b', 5 ), 'bah' => array( 'foo' => 'bar' ) );
 		$new = array( 'a' => array( 42 ), 1, array( 'a' => 'b', 5 ), 'bah' => array( 'foo' => 'baz' ) );
-		$expected = array( 'bah' => new \Diff\Diff( array( 'foo' => new DiffOpChange( 'bar', 'baz' ) ), true ) );
+		$expected = array( 'bah' => new Diff( array( 'foo' => new DiffOpChange( 'bar', 'baz' ) ), true ) );
 
 		$argLists[] = array( $old, $new, $expected,
 			'Nested structures with no differences should not result in nested empty diffs (these empty diffs should be omitted)', true );
