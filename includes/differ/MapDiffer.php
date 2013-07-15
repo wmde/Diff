@@ -126,7 +126,12 @@ class MapDiffer implements Differ {
 			$diffOp = $this->getDiffOpForElementRecursively( $key, $oldSet, $newSet );
 
 			if ( $diffOp !== null ) {
-				return $diffOp;
+				if ( $diffOp->isEmpty() ) {
+					// there is no (relevant) difference
+					return null;
+				} else {
+					return $diffOp;
+				}
 			}
 		}
 
@@ -149,10 +154,7 @@ class MapDiffer implements Differ {
 
 		if ( is_array( $old ) && is_array( $new ) ) {
 			$diff = $this->getDiffForArrays( $old, $new );
-
-			if ( !$diff->isEmpty() ) {
-				return $diff;
-			}
+			return $diff;
 		}
 
 		return null;
