@@ -23,7 +23,7 @@ Extension page on mediawiki.org: https://www.mediawiki.org/wiki/Extension:Diff
 * MapPatcher will now no longer stop patching after the first remove operation it encounters
 * MapPatcher now always treats its top level input diff as a map diff
 * Fixed several issues in ListPatcherTest
-* MapDiffer will now treat equivalent sub-maps with different order correctly in recursive mode
+* MapDiffer will now treat equivalent sub-maps with different element order correctly in recursive mode
 
 === Version 0.6 ===
 2013-05-08
