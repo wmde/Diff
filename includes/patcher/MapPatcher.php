@@ -112,6 +112,11 @@ class MapPatcher extends ThrowingPatcher {
 					continue;
 				}
 
+				if ( !$this->valuesAreEqual( $base[$key], $diffOp->getOldValue() ) ) {
+					$this->handleError( 'Tried removing a map value that mismatches the current value' );
+					continue;
+				}
+
 				unset( $base[$key] );
 			}
 			else if ( $diffOp instanceof DiffOpChange ) {

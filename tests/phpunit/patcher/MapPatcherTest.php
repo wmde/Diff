@@ -41,6 +41,7 @@ use Diff\Patcher;
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author Daniel Kinzler
  */
 class MapPatcherTest extends DiffTestCase {
 
@@ -52,7 +53,7 @@ class MapPatcherTest extends DiffTestCase {
 		$diff = new Diff();
 		$expected = array();
 
-		$argLists[] = array( $patcher, $base, $diff, $expected );
+		$argLists['all empty'] = array( $patcher, $base, $diff, $expected );
 
 
 		$patcher = new MapPatcher();
@@ -60,7 +61,7 @@ class MapPatcherTest extends DiffTestCase {
 		$diff = new Diff();
 		$expected = array( 'foo', 'bar' => array( 'baz' ) );
 
-		$argLists[] = array( $patcher, $base, $diff, $expected );
+		$argLists['empty patch'] = array( $patcher, $base, $diff, $expected );
 
 
 		$patcher = new MapPatcher();
@@ -68,7 +69,7 @@ class MapPatcherTest extends DiffTestCase {
 		$diff = new Diff( array( 'bah' => new DiffOpAdd( 'blah' ) ) );
 		$expected = array( 'foo', 'bar' => array( 'baz' ), 'bah' => 'blah' );
 
-		$argLists[] = array( $patcher, $base, $diff, $expected );
+		$argLists['add'] = array( $patcher, $base, $diff, $expected );
 
 
 		$patcher = new MapPatcher();
@@ -76,7 +77,7 @@ class MapPatcherTest extends DiffTestCase {
 		$diff = new Diff( array( 'bah' => new DiffOpAdd( 'blah' ) ) );
 		$expected = array( 'foo', 'bar' => array( 'baz' ), 'bah' => 'blah' );
 
-		$argLists[] = array( $patcher, $base, $diff, $expected );
+		$argLists['add2'] = array( $patcher, $base, $diff, $expected ); //FIXME: dupe?
 
 
 		$patcher = new MapPatcher();
@@ -90,7 +91,7 @@ class MapPatcherTest extends DiffTestCase {
 			'bah' => 'blah'
 		);
 
-		$argLists[] = array( $patcher, $base, $diff, $expected );
+		$argLists['add to empty base'] = array( $patcher, $base, $diff, $expected );
 
 
 		$patcher = new MapPatcher();
@@ -107,7 +108,7 @@ class MapPatcherTest extends DiffTestCase {
 			'nyan' => 'cat'
 		);
 
-		$argLists[] = array( $patcher, $base, $diff, $expected );
+		$argLists['remove'] = array( $patcher, $base, $diff, $expected );
 
 
 		$patcher = new MapPatcher();
@@ -129,7 +130,7 @@ class MapPatcherTest extends DiffTestCase {
 			'oh' => 'noez',
 		);
 
-		$argLists[] = array( $patcher, $base, $diff, $expected );
+		$argLists['change/add/remove'] = array( $patcher, $base, $diff, $expected );
 
 
 		$patcher = new MapPatcher();
@@ -144,9 +145,73 @@ class MapPatcherTest extends DiffTestCase {
 			'baz' => array( 'ny', 'an' ),
 		);
 
-		$argLists[] = array( $patcher, $base, $diff, $expected );
+		$argLists['add to substructure'] = array( $patcher, $base, $diff, $expected );
 
-		// TODO
+
+		// ---- conflicts ----
+
+		$patcher = new MapPatcher();
+		$base = array();
+		$diff = new Diff( array(
+			'baz' => new DiffOpRemove( 'X' ),
+		) );
+		$expected = $base;
+
+		$argLists['conflict: remove missing'] = array( $patcher, $base, $diff, $expected );
+
+
+		$patcher = new MapPatcher();
+		$base = array( 'baz' => 'Y' );
+		$diff = new Diff( array(
+			'baz' => new DiffOpRemove( 'X' ),
+		) );
+		$expected = $base;
+
+		$argLists['conflict: remove mismatching value'] = array( $patcher, $base, $diff, $expected );
+
+
+		$patcher = new MapPatcher();
+		$base = array( 'baz' => 'Y' );
+		$diff = new Diff( array(
+			'baz' => new DiffOpAdd( 'X' ),
+		) );
+		$expected = $base;
+
+		$argLists['conflict: add existing'] = array( $patcher, $base, $diff, $expected );
+
+
+		$patcher = new MapPatcher();
+		$base = array( 'baz' => 'Y' );
+		$diff = new Diff( array(
+			'baz' => new DiffOpChange( 'X', 'Z' ),
+		) );
+		$expected = $base;
+
+		$argLists['conflict: change mismatching value'] = array( $patcher, $base, $diff, $expected );
+
+
+		$patcher = new MapPatcher();
+		$base = array(
+			'foo' => 'bar',
+			'nyan' => 'cat',
+			'spam' => 'blah',
+			'bah' => 'blah',
+		);
+		$diff = new Diff( array(
+			'foo' => new DiffOpChange( 'bar', 'var' ),
+			'nyan' => new DiffOpRemove( 'fat' ),
+			'bah' => new DiffOpChange( 'blubb', 'clubb' ),
+			'yea' => new DiffOpAdd( 'stuff' ),
+		) );
+		$expected = array(
+			'foo' => 'var',
+			'nyan' => 'cat',
+			'spam' => 'blah',
+			'bah' => 'blah',
+			'yea' => 'stuff',
+		);
+
+		$argLists['some mixed conflicts'] = array( $patcher, $base, $diff, $expected );
 
 		return $argLists;
 	}
