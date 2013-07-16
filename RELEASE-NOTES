@@ -3,6 +3,14 @@ These are the release notes for the Diff extension.
 Extension page on mediawiki.org: https://www.mediawiki.org/wiki/Extension:Diff
 
 
+=== Version 0.8 ===
+dev
+
+; Improvements
+
+* MapPatcher will now report conflicts for remove operations that specify a value to be removed
+different from the value in the structure being patched.
+
 === Version 0.7 ===
 2013-07-16
 
