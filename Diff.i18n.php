@@ -85,9 +85,10 @@ $messages['dsb'] = array(
 
 /** Spanish (español)
  * @author Armando-Martin
+ * @author Luis Felipe Schenone
  */
 $messages['es'] = array(
-	'diff-desc' => 'Biblioteca de diferencias para datos estructurados', # Fuzzy
+	'diff-desc' => 'Biblioteca con clases para representar diferencias entre datos estructurados, así como objetos de servicio a objectos de diferencias o parcharlos',
 );
 
 /** Basque (euskara)
