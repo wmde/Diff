@@ -186,6 +186,144 @@ class MapDifferTest extends DiffTestCase {
 		$argLists[] = array( $old, $new, $expected,
 			'Nested structures with no differences should not result in nested empty diffs (these empty diffs should be omitted)', true );
 
+
+		$old = array( 'links' => array(
+			'enwiki' => array(
+				'page' => 'Foo',
+				'badges' => array(),
+			)
+		) );
+		$new = array( 'links' => array(
+			'enwiki' => array(
+				'page' => 'Foo',
+				'badges' => array(),
+			)
+		) );
+		$expected = array();
+
+		$argLists[] = array( $old, $new, $expected,
+			'Comparing identical nested structures should not result in diff operations',
+			true );
+
+
+		$old = array( 'links' => array(
+		) );
+		$new = array( 'links' => array(
+			'enwiki' => array(
+				'page' => 'Foo',
+				'badges' => array(),
+			)
+		) );
+		$expected = array( 'links' => new Diff( array(
+			'enwiki' => new Diff( array(
+				'page' => new DiffOpAdd( 'Foo' )
+			) )
+		), true ) );
+
+		$argLists[] = array( $old, $new, $expected,
+			'Adding a sitelink with no badges',
+			true );
+
+
+		$old = array( 'links' => array(
+		) );
+		$new = array( 'links' => array(
+			'enwiki' => array(
+				'page' => 'Foo',
+				'badges' => array( 'Bar', 'Baz' ),
+			)
+		) );
+		$expected = array( 'links' => new Diff( array(
+			'enwiki' => new Diff( array(
+				'page' => new DiffOpAdd( 'Foo' ),
+				'badges' => new Diff( array(
+					new DiffOpAdd( 'Bar' ),
+					new DiffOpAdd( 'Baz' ),
+				), false )
+			), true )
+		), true ) );
+
+		$argLists[] = array( $old, $new, $expected,
+			'Adding a sitelink with badges',
+			true );
+
+
+		$old = array( 'links' => array(
+			'enwiki' => array(
+				'page' => 'Foo',
+				'badges' => array(),
+			)
+		) );
+		$new = array( 'links' => array(
+			'enwiki' => array(
+				'page' => 'Foo',
+				'badges' => array( 'Bar', 'Baz' ),
+			)
+		) );
+		$expected = array( 'links' => new Diff( array(
+			'enwiki' => new Diff( array(
+				'badges' => new Diff( array(
+					new DiffOpAdd( 'Bar' ),
+					new DiffOpAdd( 'Baz' ),
+				), false )
+			), true )
+		), true ) );
+
+		$argLists[] = array( $old, $new, $expected,
+			'Adding bagdes to a sitelink',
+			true );
+
+
+		$old = array();
+		$new = array(
+			'enwiki' => array(
+				'page' => 'Foo',
+				'badges' => array( 'Bar', 'Baz' ),
+			)
+		);
+		$expected = array(
+			'enwiki' => new DiffOpAdd(
+				array(
+					'page' => 'Foo',
+					'badges' => array( 'Bar', 'Baz' ),
+				)
+			)
+		);
+
+		$argLists[] = array( $old, $new, $expected,
+			'Adding a sitelink with non-recursive mode',
+			false );
+
+
+		$old = array(
+			'enwiki' => array(
+				'page' => 'Foo',
+				'badges' => array(),
+			)
+		);
+		$new = array(
+			'enwiki' => array(
+				'page' => 'Foo',
+				'badges' => array( 'Bar', 'Baz' ),
+			)
+		);
+		$expected = array(
+			'enwiki' => new DiffOpChange(
+				array(
+					'page' => 'Foo',
+					'badges' => array(),
+				),
+				array(
+					'page' => 'Foo',
+					'badges' => array( 'Bar', 'Baz' ),
+				)
+			)
+		);
+
+		$argLists[] = array( $old, $new, $expected,
+			'Adding badges to a sitelink with non-recursive mode',
+			false );
+
 		return $argLists;
 	}
 
