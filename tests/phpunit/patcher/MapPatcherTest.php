@@ -81,6 +81,36 @@ class MapPatcherTest extends DiffTestCase {
 
 		$patcher = new MapPatcher();
 		$base = array(
+			'enwiki' => array(
+				'name'   => 'Nyan Cat',
+				'badges' => array( 'FA' )
+			)
+		);
+		$diff = new Diff( array (
+			'nlwiki' => new Diff( array(
+				'name'   => new DiffOpAdd( 'Nyan Cat' ),
+				'badges' => new Diff( array(
+					new DiffOpAdd( 'J approves' ),
+				), false ),
+			), true ),
+		), true );
+		$expected = array(
+			'enwiki' => array(
+				'name'   => 'Nyan Cat',
+				'badges' => array( 'FA' )
+			),
+
+			'nlwiki' => array(
+				'name'   => 'Nyan Cat',
+				'badges' => array( 'J approves' )
+			)
+		);
+
+		$argLists['add to non-existent key'] = array( $patcher, $base, $diff, $expected );
+
+
+		$patcher = new MapPatcher();
+		$base = array(
 			'foo' => 'bar',
 			'nyan' => 'cat',
 			'bah' => 'blah',

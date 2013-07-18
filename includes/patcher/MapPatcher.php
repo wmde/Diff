@@ -80,7 +80,9 @@ class MapPatcher extends ThrowingPatcher {
 				$base[$key] = $diffOp->getNewValue();
 			}
 			else if ( $diffOp instanceof Diff ) {
-				if ( !array_key_exists( $key, $base ) && ( $diffOp->isAssociative() || $diffOp->getRemovals() !== array() ) ) {
+				if ( !array_key_exists( $key, $base )
+				&& ( $diffOp->getChanges() !== array() || $diffOp->getRemovals() !== array() )
+				) {
 					$this->handleError( 'Cannot apply a diff with non-add operations to an element not present in a map' );
 					continue;
 				}
