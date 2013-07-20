@@ -11,6 +11,10 @@ dev
 * MapPatcher will now report conflicts for remove operations that specify a value to be removed
 different from the value in the structure being patched.
 
+; Removals
+
+* Removed obsolete tests/phpunit.php test runner
+
 === Version 0.7 ===
 2013-07-16
 
