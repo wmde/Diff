@@ -1,8 +1,13 @@
 .*
 *~
 *.kate-swp
-.*.swp
 
 !.gitignore
 !.gitreview
 !.travis.yml
+
+build/
+vendor/
+
+composer.phar
+composer.lock
