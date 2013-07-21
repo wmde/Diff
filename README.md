@@ -133,7 +133,7 @@ TODO
 
 ## Examples
 
-; DiffOp:
+#### DiffOp
 
 ```php
 // Constructing an empty diff
@@ -164,7 +164,7 @@ $diff['recursion'] = new Diff( array( DiffOpAdd( 42 ) ), false );
 count( $diff );
 ```
 
-; Differ
+#### Differ
 
 ```php
 $oldValues = array( 0, 1, 2, 42, 9001, 'foobar' );
@@ -199,7 +199,7 @@ $diffOps = array(
 );
 ```
 
-; Patcher
+#### Patcher
 
 ```php
 $oldValues = array( 0, 1, 2, 42, 9001, 'foobar' );
