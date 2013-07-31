@@ -142,6 +142,13 @@ $messages['hsb'] = array(
 	'diff-desc' => 'Biblioteka z klasami za zwobraznjenje rozdźělow strukturowanych datow kaž tež słužbnych objektow',
 );
 
+/** Interlingua (interlingua)
+ * @author McDutchie
+ */
+$messages['ia'] = array(
+	'diff-desc' => 'Bibliotheca con classes pro representar differentias inter datos structurate, assi como objectos de servicio pro differentiar inter objectos o actualisar los',
+);
+
 /** Indonesian (Bahasa Indonesia)
  * @author Farras
  */
