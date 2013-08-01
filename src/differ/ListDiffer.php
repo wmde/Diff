@@ -6,10 +6,9 @@ use Diff\ArrayComparer\StrictArrayComparer;
 
 /**
  * Differ that only looks at the values of the arrays (and thus ignores key differences).
+ *
  * Values are compared using the strictDiff method in strict mode (default)
  * or using array_diff_assoc in native mode.
- *
- * TODO: use a ArrayComparer as strategy rather then the current flags and callback
  *
  * @since 0.4
  *
@@ -45,13 +44,6 @@ class ListDiffer implements Differ {
 	protected $diffMode;
 
 	/**
-	 * @since 0.5
-	 *
-	 * @var callable|null
-	 */
-	protected $comparisonCallback = null;
-
-	/**
 	 * Constructor.
 	 *
 	 * Takes an argument that determines the diff mode.
@@ -66,20 +58,6 @@ class ListDiffer implements Differ {
 	 */
 	public function __construct( $diffMode = self::MODE_STRICT ) {
 		$this->diffMode = $diffMode;
-	}
-
-	/**
-	 * Sets a callback to use for comparison. The callback should accept two
-	 * arguments.
-	 *
-	 * FIXME: this field is not used!
-	 *
-	 * @since 0.5
-	 *
-	 * @param callable $comparisonCallback
-	 */
-	public function setComparisonCallback( $comparisonCallback ) {
-		$this->comparisonCallback = $comparisonCallback;
 	}
 
 	/**
