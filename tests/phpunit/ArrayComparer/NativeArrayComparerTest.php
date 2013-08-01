@@ -9,7 +9,7 @@ use Diff\Tests\DiffTestCase;
  * @covers Diff\ArrayComparer\NativeArrayComparer
  *
  * @file
- * @since 0.7
+ * @since 0.8
  *
  * @ingroup DiffTest
  *

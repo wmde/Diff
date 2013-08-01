@@ -6,7 +6,7 @@ namespace Diff\ArrayComparer;
  * Interface for objects that can compute the difference between two arrays
  * in similar fashion to PHPs native array_diff.
  *
- * @since 0.7
+ * @since 0.8
  *
  * @file
  * @ingroup Diff
@@ -19,7 +19,9 @@ interface ArrayComparer {
 	/**
 	 * Returns an array containing all the entries from arrayOne that are not present in arrayTwo.
 	 *
-	 * @since 0.7
+	 * Implementations are allowed to hold quantity into account or to disregard it.
+	 *
+	 * @since 0.8
 	 *
 	 * @param array $firstArray
 	 * @param array $secondArray

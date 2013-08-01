@@ -5,7 +5,7 @@ namespace Diff\ArrayComparer;
 /**
  * Adapter for PHPs native array_diff method.
  *
- * @since 0.7
+ * @since 0.8
  *
  * @file
  * @ingroup Diff
@@ -20,7 +20,7 @@ class NativeArrayComparer implements ArrayComparer {
 	 *
 	 * Uses @see array_diff.
 	 *
-	 * @since 0.7
+	 * @since 0.8
 	 *
 	 * @param array $arrayOne
 	 * @param array $arrayTwo

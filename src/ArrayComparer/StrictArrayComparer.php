@@ -5,7 +5,15 @@ namespace Diff\ArrayComparer;
 /**
  * Strict variant of PHPs array_diff method.
  *
- * @since 0.7
+ * Similar to @see array_diff with the following differences:
+ *
+ * - Strict comparison for arrays: ['42'] and [42] are different
+ * - Quantity matters: [42, 42] and [42] are different
+ * - Arrays and objects are compared properly: [[1]] and [[2]] are different
+ * - Naive support for objects by using non-strict comparison
+ * - Only works with two arrays (array_diff can take more)
+ *
+ * @since 0.8
  *
  * @file
  * @ingroup Diff
@@ -18,15 +26,7 @@ class StrictArrayComparer implements ArrayComparer {
 	/**
 	 * @see ArrayComparer::diffArrays
 	 *
-	 * Similar to @see array_diff with the following differences:
-	 *
-	 * - Strict comparison for arrays: ['42'] and [42] are different
-	 * - Quantity matters: [42, 42] and [42] are different
-	 * - Arrays and objects are compared properly: [[1]] and [[2]] are different
-	 * - Naive support for objects by using non-strict comparison
-	 * - Only works with two arrays (array_diff can take more)
-	 *
-	 * @since 0.7
+	 * @since 0.8
 	 *
 	 * @param array $arrayOne
 	 * @param array $arrayTwo

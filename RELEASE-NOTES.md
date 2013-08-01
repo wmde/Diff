@@ -4,6 +4,13 @@
 
 ## Version 0.8 (dev)
 
+#### Additions
+
+* Added Diff\ArrayComparer\ArrayComparer interface
+* Added NativeArrayComparer, ArrayComparer adapter for array_diff
+* Added StrictArrayComparer, containing the "strict mode" logic from ListDiffer
+* Added StrategicArrayComparer, implementation of ArrayComparer that takes a ValueComparer as strategy
+
 #### Improvements
 
 * MapPatcher will now report conflicts for remove operations that specify a value to be removed

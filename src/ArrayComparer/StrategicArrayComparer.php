@@ -8,7 +8,9 @@ use Diff\Comparer\ValueComparer;
  * Computes the difference between two arrays by comparing elements with
  * a ValueComparer.
  *
- * @since 0.7
+ * Quantity matters: [42, 42] and [42] are different
+ *
+ * @since 0.8
  *
  * @file
  * @ingroup Diff
@@ -27,7 +29,7 @@ class StrategicArrayComparer implements ArrayComparer {
 	/**
 	 * @see ArrayComparer::diffArrays
 	 *
-	 * @since 0.7
+	 * @since 0.8
 	 *
 	 * @param array $arrayOne
 	 * @param array $arrayTwo
@@ -35,7 +37,40 @@ class StrategicArrayComparer implements ArrayComparer {
 	 * @return array
 	 */
 	public function diffArrays( array $arrayOne, array $arrayTwo ) {
-		return array(); // TODO: implement
+		$notInTwo = array();
+
+		foreach ( $arrayOne as $element ) {
+			$valueOffset = $this->arraySearch( $element, $arrayTwo );
+
+			if ( $valueOffset === false ) {
+				$notInTwo[] = $element;
+				continue;
+			}
+
+			unset( $arrayTwo[$valueOffset] );
+		}
+
+		return $notInTwo;
+	}
+
+	/**
+	 * @since 0.8
+	 *
+	 * @param string|int $needle
+	 * @param array $haystack
+	 *
+	 * @return bool|int|string
+	 */
+	protected function arraySearch( $needle, array $haystack ) {
+		foreach ( $haystack as $valueOffset => $thing ) {
+			$areEqual = $this->valueComparer->valuesAreEqual( $needle, $thing );
+
+			if ( $areEqual ) {
+				return $valueOffset;
+			}
+		}
+
+		return false;
 	}
 
 }

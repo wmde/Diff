@@ -101,6 +101,7 @@ class CallbackListDiffer implements Differ {
 			$areEqual = call_user_func_array( $this->comparisonCallback, array( $needle, $thing ) );
 
 			if ( !is_bool( $areEqual ) ) {
+				// TODO: throw a more specific exception type
 				throw new Exception( 'Comparison callback returned a non-boolean value' );
 			}
 
