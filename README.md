@@ -119,15 +119,15 @@ Diff comes with two clases implementing the Patcher interface:
 
 All classes part of the patcher component can be found in <code>includes/patcher</code>
 
-### Comparer
+### ValueComparer
 
 Added in 0.6
 
 TODO
 
-### Merger
+### ArrayComparer
 
-Added in 0.7
+Added in 0.8
 
 TODO
 
