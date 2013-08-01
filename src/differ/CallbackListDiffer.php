@@ -2,7 +2,8 @@
 
 namespace Diff;
 
-use Exception;
+use Diff\ArrayComparer\StrategicArrayComparer;
+use Diff\Comparer\CallbackComparer;
 
 /**
  * Differ that only looks at the values of the arrays (and thus ignores key differences).
@@ -21,11 +22,11 @@ use Exception;
 class CallbackListDiffer implements Differ {
 
 	/**
-	 * @since 0.5
+	 * @since 0.8
 	 *
-	 * @var callable|null
+	 * @var ListDiffer
 	 */
-	protected $comparisonCallback = null;
+	protected $differ = null;
 
 	/**
 	 * Constructor.
@@ -35,7 +36,7 @@ class CallbackListDiffer implements Differ {
 	 * @param callable $comparisonCallback
 	 */
 	public function __construct( $comparisonCallback ) {
-		$this->comparisonCallback = $comparisonCallback;
+		$this->differ = new ListDiffer( new StrategicArrayComparer( new CallbackComparer( $comparisonCallback ) ) );
 	}
 
 	/**
@@ -49,68 +50,7 @@ class CallbackListDiffer implements Differ {
 	 * @return DiffOp[]
 	 */
 	public function doDiff( array $oldValues, array $newValues ) {
-		$operations = array();
-
-		foreach ( $this->diffArrays( $newValues, $oldValues ) as $addition ) {
-			$operations[] = new DiffOpAdd( $addition );
-		}
-
-		foreach ( $this->diffArrays( $oldValues, $newValues ) as $removal ) {
-			$operations[] = new DiffOpRemove( $removal );
-		}
-
-		return $operations;
-	}
-
-	/**
-	 * @since 0.5
-	 *
-	 * @param array $arrayOne
-	 * @param array $arrayTwo
-	 *
-	 * @return array
-	 */
-	protected function diffArrays( array $arrayOne, array $arrayTwo ) {
-		$notInTwo = array();
-
-		foreach ( $arrayOne as $element ) {
-			$valueOffset = $this->arraySearch( $element, $arrayTwo );
-
-			if ( $valueOffset === false ) {
-				$notInTwo[] = $element;
-				continue;
-			}
-
-			unset( $arrayTwo[$valueOffset] );
-		}
-
-		return $notInTwo;
-	}
-
-	/**
-	 * @since 0.5
-	 *
-	 * @param string|int $needle
-	 * @param array $haystack
-	 *
-	 * @return bool|int|string
-	 * @throws Exception
-	 */
-	protected function arraySearch( $needle, array $haystack ) {
-		foreach ( $haystack as $valueOffset => $thing ) {
-			$areEqual = call_user_func_array( $this->comparisonCallback, array( $needle, $thing ) );
-
-			if ( !is_bool( $areEqual ) ) {
-				// TODO: throw a more specific exception type
-				throw new Exception( 'Comparison callback returned a non-boolean value' );
-			}
-
-			if ( $areEqual ) {
-				return $valueOffset;
-			}
-		}
-
-		return false;
+		return $this->differ->doDiff( $oldValues, $newValues );
 	}
 
 }

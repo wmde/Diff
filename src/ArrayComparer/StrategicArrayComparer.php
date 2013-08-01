@@ -3,6 +3,7 @@
 namespace Diff\ArrayComparer;
 
 use Diff\Comparer\ValueComparer;
+use RuntimeException;
 
 /**
  * Computes the difference between two arrays by comparing elements with
@@ -60,10 +61,15 @@ class StrategicArrayComparer implements ArrayComparer {
 	 * @param array $haystack
 	 *
 	 * @return bool|int|string
+	 * @throws RuntimeException
 	 */
 	protected function arraySearch( $needle, array $haystack ) {
 		foreach ( $haystack as $valueOffset => $thing ) {
 			$areEqual = $this->valueComparer->valuesAreEqual( $needle, $thing );
+
+			if ( !is_bool( $areEqual ) ) {
+				throw new RuntimeException( 'ValueComparer returned a non-boolean value' );
+			}
 
 			if ( $areEqual ) {
 				return $valueOffset;

@@ -214,4 +214,20 @@ class ListDifferTest extends DiffTestCase {
 		$this->assertArrayEquals( $expected, $actual, false, false, $message );
 	}
 
+	public function testDiffCallsArrayComparatorCorrectly() {
+		$arrayComparer = $this->getMock( 'Diff\ArrayComparer\ArrayComparer' );
+
+		$arrayComparer->expects( $this->exactly( 2 ) )
+			->method( 'diffArrays' )
+			->with(
+				$this->equalTo( array( 42 ) ),
+				$this->equalTo( array( 42 ) )
+			)
+			->will( $this->returnValue( array() ) );
+
+		$differ = new ListDiffer( $arrayComparer );
+
+		$differ->doDiff( array( 42 ), array( 42 ) );
+	}
+
 }

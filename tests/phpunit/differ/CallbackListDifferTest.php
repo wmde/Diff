@@ -221,7 +221,7 @@ class CallbackListDifferTest extends DiffTestCase {
 			return '~=[,,_,,]:3';
 		} );
 
-		$this->setExpectedException( 'Exception' );
+		$this->setExpectedException( 'RuntimeException' );
 
 		$differ->doDiff( array( 1, '2', 'baz' ), array( 1, 'foo', '2' ) );
 	}

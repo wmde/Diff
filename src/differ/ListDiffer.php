@@ -2,13 +2,16 @@
 
 namespace Diff;
 
+use Diff\ArrayComparer\ArrayComparer;
+use Diff\ArrayComparer\NativeArrayComparer;
 use Diff\ArrayComparer\StrictArrayComparer;
+use InvalidArgumentException;
 
 /**
  * Differ that only looks at the values of the arrays (and thus ignores key differences).
  *
- * Values are compared using the strictDiff method in strict mode (default)
- * or using array_diff_assoc in native mode.
+ * By default values are compared using a StrictArrayComparer.
+ * You can alter the ArrayComparer used by providing one in the constructor.
  *
  * @since 0.4
  *
@@ -25,6 +28,7 @@ class ListDiffer implements Differ {
 	 * This makes use of @see array_diff
 	 *
 	 * @since 0.4
+	 * @deprecated since 0.8
 	 */
 	const MODE_NATIVE = 0;
 
@@ -33,31 +37,48 @@ class ListDiffer implements Differ {
 	 * This makes use of @see ListDiffer::strictDiff
 	 *
 	 * @since 0.4
+	 * @deprecated since 0.8
 	 */
 	const MODE_STRICT = 1;
 
 	/**
-	 * @since 0.4
+	 * @since 0.8
 	 *
-	 * @var int
+	 * @var ArrayComparer
 	 */
-	protected $diffMode;
+	protected $arrayComparer;
 
 	/**
-	 * Constructor.
+	 * @param ArrayComparer $arrayComparer
 	 *
-	 * Takes an argument that determines the diff mode.
-	 * By default this is ListDiffer::MODE_STRICT, which causes
-	 * computation in @see doDiff to be done via @see arrayDiff.
-	 * If the native behavior is preferred, ListDiffer::MODE_NATIVE
-	 * can be specified.
-	 *
-	 * @since 0.4
-	 *
-	 * @param int $diffMode
+	 * The first argument is an ArrayComparer since version 0.8.
+	 * Before this it was an element of the ListDiffer::MODE_ enum.
+	 * The later is still supported though deprecated.
 	 */
-	public function __construct( $diffMode = self::MODE_STRICT ) {
-		$this->diffMode = $diffMode;
+	public function __construct( $arrayComparer = null ) {
+		$this->arrayComparer = $this->getRealArrayComparer( $arrayComparer );
+	}
+
+	/**
+	 * @param $arrayComparer
+	 *
+	 * @return ArrayComparer
+	 * @throws InvalidArgumentException
+	 */
+	protected function getRealArrayComparer( $arrayComparer ) {
+		if ( $arrayComparer === null || $arrayComparer === self::MODE_STRICT ) {
+			return new StrictArrayComparer();
+		}
+
+		if ( $arrayComparer === self::MODE_NATIVE ) {
+			 return new NativeArrayComparer();
+		}
+
+		if ( is_object( $arrayComparer ) && $arrayComparer instanceof ArrayComparer ) {
+			return $arrayComparer;
+		}
+
+		throw new InvalidArgumentException( 'Got an invalid $arrayComparer' );
 	}
 
 	/**
@@ -94,28 +115,7 @@ class ListDiffer implements Differ {
 	 * @return array
 	 */
 	protected function diffArrays( array $arrayOne, array $arrayTwo ) {
-		if ( $this->diffMode === self::MODE_STRICT ) {
-			return $this->strictDiff( $arrayOne, $arrayTwo );
-		}
-		else {
-			return array_diff( $arrayOne, $arrayTwo );
-		}
-	}
-
-	/**
-	 * Returns an array containing all the entries from arrayOne that are not present in arrayTwo.
-	 *
-	 * @since 0.4
-	 *
-	 * @param array $arrayOne
-	 * @param array $arrayTwo
-	 *
-	 * @return array
-	 */
-	protected function strictDiff( array $arrayOne, array $arrayTwo ) {
-		$differ = new StrictArrayComparer();
-
-		return $differ->diffArrays( $arrayOne, $arrayTwo );
+		return $this->arrayComparer->diffArrays( $arrayOne, $arrayTwo );
 	}
 
 }

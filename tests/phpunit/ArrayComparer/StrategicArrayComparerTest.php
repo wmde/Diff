@@ -201,4 +201,18 @@ class StrategicArrayComparerTest extends DiffTestCase {
 		);
 	}
 
+	public function testCallbackComparisonReturningNyanCat() {
+		$valueComparer = $this->getMock( 'Diff\Comparer\ValueComparer' );
+
+		$valueComparer->expects( $this->once() )
+			->method( 'valuesAreEqual' )
+			->will( $this->returnValue( '~=[,,_,,]:3' ) );
+
+		$arrayComparer = new StrategicArrayComparer( $valueComparer );
+
+		$this->setExpectedException( 'RuntimeException' );
+
+		$arrayComparer->diffArrays( array( 1, '2', 'baz' ), array( 1, 'foo', '2' ) );
+	}
+
 }

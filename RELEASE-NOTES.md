@@ -15,10 +15,18 @@
 
 * MapPatcher will now report conflicts for remove operations that specify a value to be removed
 different from the value in the structure being patched.
+* ListDiffer now supports arbitrary array comparison behaviour by using an ArrayComparer strategy.
+* The installation and usage documentation can now be found in README.md.
 
 #### Removals
 
 * Removed obsolete tests/phpunit.php test runner
+* Removed obsolete INSTALL file. Installation instructions are now in README.md.
+
+#### Deprecations
+
+* The "comparison mode" flag in the ListDiffer constructor has been deprecated in favour of
+  the ArrayComparer strategy it now has.
 
 ## Version 0.7 (2013-07-16)
 
