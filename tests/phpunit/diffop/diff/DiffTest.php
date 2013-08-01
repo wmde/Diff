@@ -7,7 +7,6 @@ use Diff\DiffOp;
 use Diff\DiffOpAdd;
 use Diff\DiffOpChange;
 use Diff\DiffOpRemove;
-use Diff\MapDiff;
 use stdClass;
 
 /**

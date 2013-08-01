@@ -3,7 +3,6 @@
 namespace Diff\Tests;
 
 use Diff\Comparer\CallbackComparer;
-use Diff\Comparer\StrictComparer;
 use Diff\Diff;
 use Diff\DiffOpAdd;
 use Diff\DiffOpChange;
