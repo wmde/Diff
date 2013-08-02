@@ -23,13 +23,6 @@ $wgExtensionCredits['other'][] = include( __DIR__ . '/Diff.credits.php' );
 
 $wgExtensionMessagesFiles['DiffExtension'] = __DIR__ . '/Diff.i18n.php';
 
-// Autoloading
-foreach ( include( __DIR__ . '/Diff.classes.php' ) as $class => $file ) {
-	if ( !array_key_exists( $class, $GLOBALS['wgAutoloadLocalClasses'] ) ) {
-		$wgAutoloadClasses[$class] = __DIR__ . '/' . $file;
-	}
-}
-
 /**
  * Hook to add PHPUnit test cases.
  * @see https://www.mediawiki.org/wiki/Manual:Hooks/UnitTestsList
