@@ -130,7 +130,9 @@ class MapDiffer implements Differ {
 			return new DiffOpAdd( $newSet[$key] );
 		}
 
+		// @codeCoverageIgnoreStart
 		throw new LogicException( 'The element needs to exist in either the old or new list to compare' );
+		// @codeCoverageIgnoreEnd
 	}
 
 	protected function getDiffOpForElementRecursively( $key, array $oldSet, array $newSet ) {
