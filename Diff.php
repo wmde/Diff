@@ -19,7 +19,7 @@ if ( defined( 'Diff_VERSION' ) ) {
 	return;
 }
 
-define( 'Diff_VERSION', '0.8 alpha' );
+define( 'Diff_VERSION', '0.8' );
 
 // @codeCoverageIgnoreStart
 spl_autoload_register( function ( $className ) {
