@@ -2,6 +2,7 @@
 
 namespace Diff\Tests;
 
+use Diff\ThrowingPatcher;
 use ReflectionClass;
 
 /**
@@ -21,6 +22,9 @@ use ReflectionClass;
 class ThrowingPatcherTest extends DiffTestCase {
 
 	public function testChangeThrowErrors() {
+		/**
+		 * @var ThrowingPatcher $patcher
+		 */
 		$patcher = $this->getMockForAbstractClass( 'Diff\ThrowingPatcher' );
 
 		$class = new ReflectionClass( 'Diff\ThrowingPatcher' );
