@@ -21,9 +21,10 @@ $messages['en'] = array(
 );
 
 /** Message documentation (Message documentation)
+ * @author Cainamarques
  */
 $messages['qqq'] = array(
-	'diff-desc' => 'Diff library for structured data',
+	'diff-desc' => '{{Desc|name=Diff|url=https://www.mediawiki.org/wiki/Extension:Diff}}',
 );
 
 /** Arabic (العربية)
