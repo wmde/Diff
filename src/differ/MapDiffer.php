@@ -80,8 +80,8 @@ class MapDiffer implements Differ {
 	 * @throws \Exception
 	 */
 	public function doDiff( array $oldValues, array $newValues ) {
-		$newSet = $this->array_diff_assoc( $newValues, $oldValues );
-		$oldSet = $this->array_diff_assoc( $oldValues, $newValues );
+		$newSet = $this->arrayDiffAssoc( $newValues, $oldValues );
+		$oldSet = $this->arrayDiffAssoc( $oldValues, $newValues );
 
 		$diffSet = array();
 
@@ -189,7 +189,7 @@ class MapDiffer implements Differ {
 	 *
 	 * @return array
 	 */
-	protected function array_diff_assoc( array $from, array $to ) {
+	protected function arrayDiffAssoc( array $from, array $to ) {
 		$diff = array();
 
 		foreach ( $from as $key => $value ) {
