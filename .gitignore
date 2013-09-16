@@ -1,12 +1,8 @@
-.*
 *~
 *.kate-swp
+*.swp
 
-!.gitignore
-!.gitreview
-
-!*.yml
-
+.idea/
 build/
 vendor/
 
