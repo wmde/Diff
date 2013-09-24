@@ -12,13 +12,13 @@ use RuntimeException;
  * Quantity matters: [42, 42] and [42] are different
  * Order matters: [42, 43] and [43, 42] are different
  *
- * @since 0.8
+ * @since 0.9
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class StrategicOrderedArrayComparer implements ArrayComparer {
+class OrderedArrayComparer implements ArrayComparer {
 
 	protected $valueComparer;
 
@@ -29,7 +29,7 @@ class StrategicOrderedArrayComparer implements ArrayComparer {
 	/**
 	 * @see ArrayComparer::diffArrays
 	 *
-	 * @since 0.8
+	 * @since 0.9
 	 *
 	 * @param array $arrayOne
 	 * @param array $arrayTwo
@@ -52,7 +52,7 @@ class StrategicOrderedArrayComparer implements ArrayComparer {
 	}
 
 	/**
-	 * @since 0.8
+	 * @since 0.9
 	 *
 	 * @param string|int $needle
 	 * @param array $haystack

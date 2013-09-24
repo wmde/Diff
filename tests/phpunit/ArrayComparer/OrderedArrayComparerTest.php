@@ -3,16 +3,13 @@
 namespace Diff\Tests\ArrayComparer;
 
 use Diff\ArrayComparer\ArrayComparer;
-use Diff\ArrayComparer\StrategicOrderedArrayComparer;
+use Diff\ArrayComparer\OrderedArrayComparer;
 use Diff\Tests\DiffTestCase;
 
 /**
- * @covers Diff\ArrayComparer\StrategicOrderedArrayComparer
+ * @covers Diff\ArrayComparer\OrderedArrayComparer
  *
- * @file
- * @since 0.8
- *
- * @ingroup DiffTest
+ * @since 0.9
  *
  * @group Diff
  *
@@ -20,10 +17,10 @@ use Diff\Tests\DiffTestCase;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class StrategicOrderedArrayComparerTest extends DiffTestCase {
+class OrderedArrayComparerTest extends DiffTestCase {
 
 	public function testCanConstruct() {
-		new StrategicOrderedArrayComparer( $this->getMock( 'Diff\Comparer\ValueComparer' ) );
+		new OrderedArrayComparer( $this->getMock( 'Diff\Comparer\ValueComparer' ) );
 		$this->assertTrue( true );
 	}
 
@@ -34,7 +31,7 @@ class StrategicOrderedArrayComparerTest extends DiffTestCase {
 			->method( 'valuesAreEqual' )
 			->will( $this->returnValue( true ) );
 
-		$arrayComparer = new StrategicOrderedArrayComparer( $valueComparer );
+		$arrayComparer = new OrderedArrayComparer( $valueComparer );
 
 		$this->assertNoDifference(
 			$arrayComparer,
@@ -84,7 +81,7 @@ class StrategicOrderedArrayComparerTest extends DiffTestCase {
 			->method( 'valuesAreEqual' )
 			->will( $this->returnValue( false ) );
 
-		$arrayComparer = new StrategicOrderedArrayComparer( $valueComparer );
+		$arrayComparer = new OrderedArrayComparer( $valueComparer );
 
 		$this->assertAllDifferent(
 			$arrayComparer,
@@ -128,7 +125,7 @@ class StrategicOrderedArrayComparerTest extends DiffTestCase {
 			->method( 'valuesAreEqual' )
 			->will( $this->returnValue( true ) );
 
-		$arrayComparer = new StrategicOrderedArrayComparer( $valueComparer );
+		$arrayComparer = new OrderedArrayComparer( $valueComparer );
 
 		$this->assertEquals(
 			array( 1, 1, 1 ),
@@ -156,7 +153,7 @@ class StrategicOrderedArrayComparerTest extends DiffTestCase {
 				return $firstValue == $secondValue;
 			} ) );
 
-		$arrayComparer = new StrategicOrderedArrayComparer( $valueComparer );
+		$arrayComparer = new OrderedArrayComparer( $valueComparer );
 
 		$this->assertEquals(
 			array( 1, 2, 3, 2, 5 ),
@@ -192,7 +189,7 @@ class StrategicOrderedArrayComparerTest extends DiffTestCase {
 				return $firstValue == $secondValue;
 			} ) );
 
-		$arrayComparer = new StrategicOrderedArrayComparer( $valueComparer );
+		$arrayComparer = new OrderedArrayComparer( $valueComparer );
 
 		$this->assertEquals(
 			array(),
@@ -246,7 +243,7 @@ class StrategicOrderedArrayComparerTest extends DiffTestCase {
 			)
 			->will( $this->returnValue( true ) );
 
-		$arrayComparer = new StrategicOrderedArrayComparer( $valueComparer );
+		$arrayComparer = new OrderedArrayComparer( $valueComparer );
 
 		$arrayComparer->diffArrays(
 			array( 1 ),
@@ -261,7 +258,7 @@ class StrategicOrderedArrayComparerTest extends DiffTestCase {
 			->method( 'valuesAreEqual' )
 			->will( $this->returnValue( '~=[,,_,,]:3' ) );
 
-		$arrayComparer = new StrategicOrderedArrayComparer( $valueComparer );
+		$arrayComparer = new OrderedArrayComparer( $valueComparer );
 
 		$this->setExpectedException( 'RuntimeException' );
 

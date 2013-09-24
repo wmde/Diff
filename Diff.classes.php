@@ -18,7 +18,7 @@ return array(
 	'Diff\ArrayComparer\ArrayComparer' => 'src/ArrayComparer/ArrayComparer.php',
 	'Diff\ArrayComparer\NativeArrayComparer' => 'src/ArrayComparer/NativeArrayComparer.php',
 	'Diff\ArrayComparer\StrategicArrayComparer' => 'src/ArrayComparer/StrategicArrayComparer.php',
-	'Diff\ArrayComparer\StrategicOrderedArrayComparer' => 'src/ArrayComparer/StrategicOrderedArrayComparer.php',
+	'Diff\ArrayComparer\OrderedArrayComparer' => 'src/ArrayComparer/OrderedArrayComparer.php',
 	'Diff\ArrayComparer\StrictArrayComparer' => 'src/ArrayComparer/StrictArrayComparer.php',
 
 	'Diff\Comparer\CallbackComparer' => 'src/Comparer/CallbackComparer.php',
@@ -26,7 +26,7 @@ return array(
 	'Diff\Comparer\ValueComparer' => 'src/Comparer/ValueComparer.php',
 
 	'Diff\CallbackListDiffer' => 'src/differ/CallbackListDiffer.php',
-	'Diff\CallbackOrderedListDiffer' => 'src/differ/CallbackOrderedListDiffer.php',
+	'Diff\OrderedListDiffer' => 'src/differ/OrderedListDiffer.php',
 	'Diff\Differ' => 'src/differ/Differ.php',
 	'Diff\ListDiffer' => 'src/differ/ListDiffer.php',
 	'Diff\MapDiffer' => 'src/differ/MapDiffer.php',

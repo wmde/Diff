@@ -2,7 +2,7 @@
 
 namespace Diff;
 
-use Diff\ArrayComparer\StrategicOrderedArrayComparer;
+use Diff\ArrayComparer\OrderedArrayComparer;
 use Diff\Comparer\CallbackComparer;
 
 /**
@@ -12,16 +12,16 @@ use Diff\Comparer\CallbackComparer;
  * Quantity matters: [42, 42] and [42] are different
  * Order matters: [42, 43] and [43, 42] are different
  *
- * @since 0.8
+ * @since 0.9
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class CallbackOrderedListDiffer implements Differ {
+class OrderedListDiffer implements Differ {
 
 	/**
-	 * @since 0.8
+	 * @since 0.9
 	 *
 	 * @var ListDiffer
 	 */
@@ -30,18 +30,18 @@ class CallbackOrderedListDiffer implements Differ {
 	/**
 	 * Constructor.
 	 *
-	 * @since 0.8
+	 * @since 0.9
 	 *
 	 * @param callable $comparisonCallback
 	 */
 	public function __construct( $comparisonCallback ) {
-		$this->differ = new ListDiffer( new StrategicOrderedArrayComparer( new CallbackComparer( $comparisonCallback ) ) );
+		$this->differ = new ListDiffer( new OrderedArrayComparer( new CallbackComparer( $comparisonCallback ) ) );
 	}
 
 	/**
 	 * @see Differ::doDiff
 	 *
-	 * @since 0.8
+	 * @since 0.9
 	 *
 	 * @param array $oldValues The first array
 	 * @param array $newValues The second array
@@ -49,8 +49,7 @@ class CallbackOrderedListDiffer implements Differ {
 	 * @return DiffOp[]
 	 */
 	public function doDiff( array $oldValues, array $newValues ) {
-		$diffOps = $this->differ->doDiff( $oldValues, $newValues );
-		return $diffOps;
+		return $this->differ->doDiff( $oldValues, $newValues );
 	}
 
 }

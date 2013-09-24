@@ -2,15 +2,15 @@
 
 namespace Diff\Tests;
 
-use Diff\CallbackOrderedListDiffer;
+use Diff\OrderedListDiffer;
 use Diff\DiffOpAdd;
 use Diff\DiffOpRemove;
 use Diff\Differ;
 
 /**
- * @covers Diff\CallbackOrderedListDiffer
+ * @covers Diff\OrderedListDiffer
  *
- * @since 0.8
+ * @since 0.9
  *
  * @group Diff
  * @group Differ
@@ -237,7 +237,7 @@ class CallbackOrderedListDifferTest extends DiffTestCase {
 			return is_object( $foo ) ? $foo == $bar : $foo === $bar;
 		};
 
-		$this->doTestDiff( new CallbackOrderedListDiffer( $callback ), $old, $new, $expected, $message );
+		$this->doTestDiff( new OrderedListDiffer( $callback ), $old, $new, $expected, $message );
 	}
 
 	protected function doTestDiff( Differ $differ, $old, $new, $expected, $message ) {
@@ -247,7 +247,7 @@ class CallbackOrderedListDifferTest extends DiffTestCase {
 	}
 
 	public function testCallbackComparisonReturningFalse() {
-		$differ = new CallbackOrderedListDiffer( function( $foo, $bar ) {
+		$differ = new OrderedListDiffer( function( $foo, $bar ) {
 			return false;
 		} );
 
@@ -268,7 +268,7 @@ class CallbackOrderedListDifferTest extends DiffTestCase {
 	}
 
 	public function testCallbackComparisonReturningTrue() {
-		$differ = new CallbackOrderedListDiffer( function( $foo, $bar ) {
+		$differ = new OrderedListDiffer( function( $foo, $bar ) {
 			return true;
 		} );
 
@@ -283,7 +283,7 @@ class CallbackOrderedListDifferTest extends DiffTestCase {
 	}
 
 	public function testCallbackComparisonReturningNyanCat() {
-		$differ = new CallbackOrderedListDiffer( function( $foo, $bar ) {
+		$differ = new OrderedListDiffer( function( $foo, $bar ) {
 			return '~=[,,_,,]:3';
 		} );
 

@@ -3,6 +3,13 @@
 Latest release:
 [![Latest Stable Version](https://poser.pugx.org/diff/diff/version.png)](https://packagist.org/packages/diff/diff)
 
+## Version 0.9 (Under development)
+
+#### Additions
+
+* Added OrderedArrayComparer
+* Added OrderedListDiffer
+
 ## Version 0.8 (2013-08-26)
 
 #### Additions
