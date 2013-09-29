@@ -9,6 +9,7 @@ Latest release:
 
 * Added OrderedArrayComparer
 * Added OrderedListDiffer
+* Added ComparableComparer
 
 ## Version 0.8 (2013-08-26)
 

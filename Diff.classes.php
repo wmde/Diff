@@ -22,6 +22,7 @@ return array(
 	'Diff\ArrayComparer\StrictArrayComparer' => 'src/ArrayComparer/StrictArrayComparer.php',
 
 	'Diff\Comparer\CallbackComparer' => 'src/Comparer/CallbackComparer.php',
+	'Diff\Comparer\ComparableComparer' => 'src/Comparer/ComparableComparer.php',
 	'Diff\Comparer\StrictComparer' => 'src/Comparer/StrictComparer.php',
 	'Diff\Comparer\ValueComparer' => 'src/Comparer/ValueComparer.php',
 
