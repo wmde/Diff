@@ -7,9 +7,9 @@ Latest release:
 
 #### Additions
 
-* Added OrderedArrayComparer
-* Added OrderedListDiffer
-* Added ComparableComparer
+* Added OrderedArrayComparer, an ArrayComparer for ordered arrays
+* Added OrderedListDiffer, a Differ that acts as facade for a ListDiffer using an OrderedArrayComparer
+* Added ComparableComparer, a ValueComparer that makes use of a "equals" method of the objects it compares
 
 ## Version 0.8 (2013-08-26)
 
