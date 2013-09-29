@@ -12,11 +12,6 @@ use stdClass;
 /**
  * @covers Diff\Diff
  *
- * @file
- * @since 0.1
- *
- * @ingroup DiffTest
- *
  * @group Diff
  * @group DiffOp
  *

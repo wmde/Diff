@@ -8,11 +8,6 @@ use Diff\Tests\DiffTestCase;
 /**
  * @covers Diff\Comparer\StrictComparer
  *
- * @file
- * @since 0.6
- *
- * @ingroup DiffTest
- *
  * @group Diff
  * @group Comparer
  *

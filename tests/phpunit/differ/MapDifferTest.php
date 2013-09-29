@@ -11,11 +11,6 @@ use Diff\MapDiffer;
 /**
  * @covers Diff\MapDiffer
  *
- * @file
- * @since 0.4
- *
- * @ingroup DiffTest
- *
  * @group Diff
  * @group Differ
  *

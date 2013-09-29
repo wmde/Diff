@@ -8,11 +8,6 @@ use Diff\Tests\DiffTestCase;
 /**
  * @covers Diff\ArrayComparer\NativeArrayComparer
  *
- * @file
- * @since 0.8
- *
- * @ingroup DiffTest
- *
  * @group Diff
  *
  * @licence GNU GPL v2+

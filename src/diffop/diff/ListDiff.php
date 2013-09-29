@@ -12,9 +12,6 @@ namespace Diff;
  * @since 0.1
  * @deprecated since 0.5
  *
- * @file
- * @ingroup Diff
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */

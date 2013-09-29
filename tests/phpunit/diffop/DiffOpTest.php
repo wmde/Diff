@@ -7,11 +7,6 @@ use Diff\DiffOp;
 /**
  * Base test class for the Diff\DiffOp deriving classes.
  *
- * @file
- * @since 0.1
- *
- * @ingroup DiffTest
- *
  * @group Diff
  * @group DiffOp
  *

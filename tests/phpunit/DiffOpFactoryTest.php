@@ -12,11 +12,6 @@ use Diff\DiffOpRemove;
 /**
  * @covers Diff\DiffOpFactory
  *
- * @file
- * @since 0.5
- *
- * @ingroup DiffTest
- *
  * @group Diff
  * @group DiffOpFactory
  *

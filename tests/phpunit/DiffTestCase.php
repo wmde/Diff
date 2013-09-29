@@ -5,11 +5,6 @@ namespace Diff\Tests;
 /**
  * Base class for unit tests in the Diff library.
  *
- * @since 0.6
- *
- * @file
- * @ingroup DiffTests
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */

@@ -8,11 +8,6 @@ use ReflectionClass;
 /**
  * @covers Diff\ThrowingPatcher
  *
- * @file
- * @since 0.7
- *
- * @ingroup DiffTest
- *
  * @group Diff
  * @group DiffPatcher
  *

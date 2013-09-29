@@ -7,9 +7,6 @@ namespace Diff\Comparer;
  *
  * @since 0.6
  *
- * @file
- * @ingroup Diff
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */

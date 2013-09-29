@@ -9,11 +9,6 @@ use Diff\DiffOpRemove;
  * @covers Diff\DiffOpRemove
  * @covers Diff\AtomicDiffOp
  *
- * @file
- * @since 0.1
- *
- * @ingroup DiffTest
- *
  * @group Diff
  * @group DiffOp
  *

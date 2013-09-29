@@ -14,11 +14,6 @@ use Diff\Patcher;
  * @covers Diff\MapPatcher
  * @covers Diff\ThrowingPatcher
  *
- * @file
- * @since 0.4
- *
- * @ingroup DiffTest
- *
  * @group Diff
  * @group DiffPatcher
  * @group MapPatcherTest

@@ -6,9 +6,6 @@
  *
  * @since 0.3
  *
- * @file
- * @ingroup Diff
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */

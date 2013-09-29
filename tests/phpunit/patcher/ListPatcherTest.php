@@ -12,11 +12,6 @@ use Diff\Patcher;
  * @covers Diff\ListPatcher
  * @covers Diff\ThrowingPatcher
  *
- * @file
- * @since 0.4
- *
- * @ingroup DiffTest
- *
  * @group Diff
  * @group DiffPatcher
  *

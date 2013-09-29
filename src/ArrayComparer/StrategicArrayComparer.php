@@ -13,9 +13,6 @@ use RuntimeException;
  *
  * @since 0.8
  *
- * @file
- * @ingroup Diff
- *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */

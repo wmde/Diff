@@ -10,11 +10,6 @@ use Diff\ListDiffer;
 /**
  * @covers Diff\ListDiffer
  *
- * @file
- * @since 0.4
- *
- * @ingroup DiffTest
- *
  * @group Diff
  * @group Differ
  *

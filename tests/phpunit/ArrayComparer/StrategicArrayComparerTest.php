@@ -9,11 +9,6 @@ use Diff\Tests\DiffTestCase;
 /**
  * @covers Diff\ArrayComparer\StrategicArrayComparer
  *
- * @file
- * @since 0.8
- *
- * @ingroup DiffTest
- *
  * @group Diff
  *
  * @licence GNU GPL v2+
