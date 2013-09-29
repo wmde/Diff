@@ -3,7 +3,7 @@
 namespace Diff;
 
 use Diff\ArrayComparer\OrderedArrayComparer;
-use Diff\Comparer\CallbackComparer;
+use Diff\Comparer\ValueComparer;
 
 /**
  * Differ that looks at the order of the values and the values of the arrays.
@@ -32,10 +32,10 @@ class OrderedListDiffer implements Differ {
 	 *
 	 * @since 0.9
 	 *
-	 * @param callable $comparisonCallback
+	 * @param ValueComparer $comparer
 	 */
-	public function __construct( $comparisonCallback ) {
-		$this->differ = new ListDiffer( new OrderedArrayComparer( new CallbackComparer( $comparisonCallback ) ) );
+	public function __construct( ValueComparer $comparer ) {
+		$this->differ = new ListDiffer( new OrderedArrayComparer( $comparer ) );
 	}
 
 	/**

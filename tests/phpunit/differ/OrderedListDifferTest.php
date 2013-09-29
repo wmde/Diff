@@ -2,6 +2,7 @@
 
 namespace Diff\Tests;
 
+use Diff\Comparer\CallbackComparer;
 use Diff\OrderedListDiffer;
 use Diff\DiffOpAdd;
 use Diff\DiffOpRemove;
@@ -19,7 +20,7 @@ use Diff\Differ;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class CallbackOrderedListDifferTest extends DiffTestCase {
+class OrderedListDifferTest extends DiffTestCase {
 
 	/**
 	 * Returns those that both work for native and strict mode.
@@ -237,7 +238,13 @@ class CallbackOrderedListDifferTest extends DiffTestCase {
 			return is_object( $foo ) ? $foo == $bar : $foo === $bar;
 		};
 
-		$this->doTestDiff( new OrderedListDiffer( $callback ), $old, $new, $expected, $message );
+		$this->doTestDiff(
+			new OrderedListDiffer( new CallbackComparer( $callback ) ),
+			$old,
+			$new,
+			$expected,
+			$message
+		);
 	}
 
 	protected function doTestDiff( Differ $differ, $old, $new, $expected, $message ) {
@@ -247,9 +254,9 @@ class CallbackOrderedListDifferTest extends DiffTestCase {
 	}
 
 	public function testCallbackComparisonReturningFalse() {
-		$differ = new OrderedListDiffer( function( $foo, $bar ) {
+		$differ = new OrderedListDiffer( new CallbackComparer( function( $foo, $bar ) {
 			return false;
-		} );
+		} ) );
 
 		$actual = $differ->doDiff( array( 1, '2' ), array( 1, '2', 'foo' ) );
 
@@ -268,9 +275,9 @@ class CallbackOrderedListDifferTest extends DiffTestCase {
 	}
 
 	public function testCallbackComparisonReturningTrue() {
-		$differ = new OrderedListDiffer( function( $foo, $bar ) {
+		$differ = new OrderedListDiffer( new CallbackComparer( function( $foo, $bar ) {
 			return true;
-		} );
+		} ) );
 
 		$actual = $differ->doDiff( array( 1, '2', 'baz' ), array( 1, 'foo', '2' ) );
 
@@ -283,9 +290,9 @@ class CallbackOrderedListDifferTest extends DiffTestCase {
 	}
 
 	public function testCallbackComparisonReturningNyanCat() {
-		$differ = new OrderedListDiffer( function( $foo, $bar ) {
+		$differ = new OrderedListDiffer( new CallbackComparer( function( $foo, $bar ) {
 			return '~=[,,_,,]:3';
-		} );
+		} ) );
 
 		$this->setExpectedException( 'RuntimeException' );
 
