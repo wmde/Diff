@@ -1,4 +1,4 @@
-# Diff release notes
+These are the release notes for the [Diff library](README.md).
 
 Latest release:
 [![Latest Stable Version](https://poser.pugx.org/diff/diff/version.png)](https://packagist.org/packages/diff/diff)

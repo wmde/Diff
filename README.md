@@ -4,6 +4,8 @@ Diff is a small PHP library with value objects to represent diffs and service ob
 various types of operations. These include creating a diff between two data structures,
 applying a diff onto a data structure and merging multiple diffs into one.
 
+Recent changes can be found in the [release notes](RELEASE-NOTES.md).
+
 [![Build Status](https://secure.travis-ci.org/wikimedia/mediawiki-extensions-Diff.png?branch=master)](http://travis-ci.org/wikimedia/mediawiki-extensions-Diff)
 [![Coverage Status](https://coveralls.io/repos/wikimedia/mediawiki-extensions-Diff/badge.png?branch=master)](https://coveralls.io/r/wikimedia/mediawiki-extensions-Diff?branch=master)
 [![Dependency Status](https://www.versioneye.com/package/php--diff--diff/badge.png)](https://www.versioneye.com/package/php--diff--diff)
