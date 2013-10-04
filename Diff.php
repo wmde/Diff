@@ -1,25 +1,11 @@
 <?php
 
-/**
- * This documentation group collects source code files belonging to Diff.
- *
- * @defgroup Diff Diff
- */
-
-/**
- * Tests part of the Diff extension.
- *
- * @defgroup DiffTests DiffTest
- * @ingroup Diff
- * @ingroup Test
- */
-
 if ( defined( 'Diff_VERSION' ) ) {
 	// Do not initialize more then once.
 	return;
 }
 
-define( 'Diff_VERSION', '0.9 alpha' );
+define( 'Diff_VERSION', '0.9' );
 
 // @codeCoverageIgnoreStart
 spl_autoload_register( function ( $className ) {

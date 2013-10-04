@@ -3,7 +3,7 @@
 Latest release:
 [![Latest Stable Version](https://poser.pugx.org/diff/diff/version.png)](https://packagist.org/packages/diff/diff)
 
-## Version 0.9 (Under development)
+## Version 0.9 (2013-10-04)
 
 #### Additions
 
