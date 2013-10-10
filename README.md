@@ -128,13 +128,54 @@ All classes part of the patcher component can be found in <code>includes/patcher
 
 Added in 0.6
 
-TODO
+The Diff\Comparer\ValueComposer interface contains one method:
+
+```php
+/**
+ * @since 0.6
+ *
+ * @param mixed $firstValue
+ * @param mixed $secondValue
+ *
+ * @return boolean
+ */
+public function valuesAreEqual( $firstValue, $secondValue );
+```
+
+Implemenations provided by Diff:
+
+* StrictComparer: Value comparer that uses PHPs native strict equality check (ie ===).
+* CallbackComparer: Adapter around a comparison callback that implements the ValueComparer interface.
+* ComparableComparer: Since 0.9. Value comparer for objects that provide an equals method taking a single argument.
 
 ### ArrayComparer
 
 Added in 0.8
 
-TODO
+The Diff\ArrayComparer\ArrayComposer interface contains one method:
+
+```php
+/**
+ * Returns an array containing all the entries from arrayOne that are not present in arrayTwo.
+ *
+ * Implementations are allowed to hold quantity into account or to disregard it.
+ *
+ * @since 0.8
+ *
+ * @param array $firstArray
+ * @param array $secondArray
+ *
+ * @return array
+ */
+public function diffArrays( array $firstArray, array $secondArray );
+```
+
+Implemenations provided by Diff:
+
+* NativeArrayComparer: Adapter for PHPs native array_diff method.
+* StrategicArrayComparer: Computes the difference between two arrays by comparing elements with a ValueComparer.
+* StrictArrayComparer: Does strict comparison of values and holds quantity into account.
+* OrderedArrayComparer: Since 0.9. Computes the difference between two ordered arrays by comparing elements with a ValueComparer.
 
 ## Examples
 
