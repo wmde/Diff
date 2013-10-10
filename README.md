@@ -150,6 +150,8 @@ Implemenations provided by Diff:
 * CallbackComparer: Adapter around a comparison callback that implements the ValueComparer interface.
 * ComparableComparer: Since 0.9. Value comparer for objects that provide an equals method taking a single argument.
 
+All classes part of the ValueComparer component can be found in <code>includes/Comparer</code>
+
 ### ArrayComparer
 
 Added in 0.8
@@ -178,6 +180,8 @@ Implemenations provided by Diff:
 * StrategicArrayComparer: Computes the difference between two arrays by comparing elements with a ValueComparer.
 * StrictArrayComparer: Does strict comparison of values and holds quantity into account.
 * OrderedArrayComparer: Since 0.9. Computes the difference between two ordered arrays by comparing elements with a ValueComparer.
+
+All classes part of the ArrayComparer component can be found in <code>includes/ArrayComparer</code>
 
 ## Examples
 
