@@ -7,7 +7,6 @@ use Diff\Comparer\ValueComparer;
 
 /**
  * Differ that looks at the order of the values and the values of the arrays.
- * Values are compared via callback.
  *
  * Quantity matters: [42, 42] and [42] are different
  * Order matters: [42, 43] and [43, 42] are different
