@@ -88,10 +88,12 @@ simple method.
 public function doDiff( array $oldValues, array $newValues );
 ```
 
-The Differs that come with the library are:
+Implemenations provided by Diff:
 
 * ListDiffer: Differ that only looks at the values of the arrays (and thus ignores key differences).
 * MapDiffer: Differ that does an associative diff between two arrays, with the option to do this recursively.
+* CallbackListDiffer: Since 0.5. Differ that only looks at the values of the arrays and compares them with a callback.
+* OrderedListDiffer: Since 0.9. Differ that looks at the order of the values and the values of the arrays.
 
 Both Differ objects come with a few options that can be used to change their behaviour.
 
@@ -117,7 +119,7 @@ interface. This interface contains a single simple method:
 public function patch( array $base, Diff $diffOps );
 ```
 
-Diff comes with two clases implementing the Patcher interface:
+Implemenations provided by Diff:
 
 * ListPatcher: Applies non-associative diffs to a base. With default options does the reverse of ListDiffer
 * MapPatcher: Applies diff to a base, recursivly if needed. With default options does the reverse of MapDiffer
