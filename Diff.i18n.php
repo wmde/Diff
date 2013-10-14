@@ -60,10 +60,11 @@ $messages['cs'] = array(
 );
 
 /** Danish (dansk)
+ * @author Christian List
  * @author Kaare
  */
 $messages['da'] = array(
-	'diff-desc' => 'Diff-bibliotek til strukturerede data', # Fuzzy
+	'diff-desc' => 'Bibliotek med klasser til at repræsentere forskelle i strukturerede data, samt serviceobjekter til at sammenligne objekter eller lappe dem',
 );
 
 /** German (Deutsch)
