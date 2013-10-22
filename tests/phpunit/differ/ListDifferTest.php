@@ -2,9 +2,9 @@
 
 namespace Diff\Tests;
 
+use Diff\Differ;
 use Diff\DiffOpAdd;
 use Diff\DiffOpRemove;
-use Diff\Differ;
 use Diff\ListDiffer;
 
 /**

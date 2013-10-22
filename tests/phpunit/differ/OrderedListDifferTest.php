@@ -3,10 +3,10 @@
 namespace Diff\Tests;
 
 use Diff\Comparer\CallbackComparer;
-use Diff\OrderedListDiffer;
+use Diff\Differ;
 use Diff\DiffOpAdd;
 use Diff\DiffOpRemove;
-use Diff\Differ;
+use Diff\OrderedListDiffer;
 
 /**
  * @covers Diff\OrderedListDiffer

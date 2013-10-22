@@ -3,9 +3,9 @@
 namespace Diff\Tests;
 
 use Diff\CallbackListDiffer;
+use Diff\Differ;
 use Diff\DiffOpAdd;
 use Diff\DiffOpRemove;
-use Diff\Differ;
 
 /**
  * @covers Diff\CallbackListDiffer

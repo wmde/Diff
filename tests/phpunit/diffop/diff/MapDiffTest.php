@@ -8,7 +8,6 @@ use Diff\DiffOpAdd;
 use Diff\DiffOpChange;
 use Diff\DiffOpRemove;
 use Diff\ListDiffer;
-use Diff\MapDiff;
 use Diff\MapDiffer;
 
 /**
