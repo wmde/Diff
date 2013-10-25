@@ -64,7 +64,7 @@ The available DiffOps are:
 
 These can all be found in <code>includes/diffop</code>.
 
-The Diff class can be set to be either associative or non-assocative. In case of the later, only
+The Diff class can be set to be either associative or non-associative. In case of the later, only
 DiffOpAdd and DiffOpRemove are allowed in it.
 
 ### Differ
@@ -88,7 +88,7 @@ simple method.
 public function doDiff( array $oldValues, array $newValues );
 ```
 
-Implemenations provided by Diff:
+Implementations provided by Diff:
 
 * ListDiffer: Differ that only looks at the values of the arrays (and thus ignores key differences).
 * MapDiffer: Differ that does an associative diff between two arrays, with the option to do this recursively.
@@ -119,10 +119,10 @@ interface. This interface contains a single simple method:
 public function patch( array $base, Diff $diffOps );
 ```
 
-Implemenations provided by Diff:
+Implementations provided by Diff:
 
 * ListPatcher: Applies non-associative diffs to a base. With default options does the reverse of ListDiffer
-* MapPatcher: Applies diff to a base, recursivly if needed. With default options does the reverse of MapDiffer
+* MapPatcher: Applies diff to a base, recursively if needed. With default options does the reverse of MapDiffer
 
 All classes part of the patcher component can be found in <code>includes/patcher</code>
 
@@ -144,7 +144,7 @@ The Diff\Comparer\ValueComposer interface contains one method:
 public function valuesAreEqual( $firstValue, $secondValue );
 ```
 
-Implemenations provided by Diff:
+Implementations provided by Diff:
 
 * StrictComparer: Value comparer that uses PHPs native strict equality check (ie ===).
 * CallbackComparer: Adapter around a comparison callback that implements the ValueComparer interface.
@@ -174,7 +174,7 @@ The Diff\ArrayComparer\ArrayComposer interface contains one method:
 public function diffArrays( array $firstArray, array $secondArray );
 ```
 
-Implemenations provided by Diff:
+Implementations provided by Diff:
 
 * NativeArrayComparer: Adapter for PHPs native array_diff method.
 * StrategicArrayComparer: Computes the difference between two arrays by comparing elements with a ValueComparer.
