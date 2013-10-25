@@ -46,7 +46,7 @@ Diff.php.
 
 ## Usage
 
-The Diff library can be subdivided into 3 components.
+The Diff library can be subdivided into several components.
 
 ### DiffOp
 
