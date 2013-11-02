@@ -194,9 +194,10 @@ $messages['ksh'] = array(
 
 /** Luxembourgish (Lëtzebuergesch)
  * @author Robby
+ * @author Soued031
  */
 $messages['lb'] = array(
-	'diff-desc' => "Library mat Klasse fir Differenzen tëschent strukturéierten Donnéeën duerzestellen, genee esou wéi Service-Objeten fir Objeten ze differenzéieren oder z'aktualiséieren",
+	'diff-desc' => "Bibliothéik mat Klasse fir Differenzen tëscht strukturéierten Donnéeën duerzestellen, genee sou wéi Serviceobjete fir Objeten ze differenzéieren oder z'aktualiséieren",
 );
 
 /** Macedonian (македонски)
