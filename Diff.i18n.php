@@ -79,7 +79,7 @@ $messages['de'] = array(
  * @author Michawiki
  */
 $messages['dsb'] = array(
-	'diff-desc' => 'Biblioteka rozdźělow za strukturěrowane daty', # Fuzzy
+	'diff-desc' => 'Biblioteka z klasami za zwobraznjenje rozdźělow strukturěrowanych datow a słužbnych objektow',
 );
 
 /** Spanish (español)
