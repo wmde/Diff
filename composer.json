@@ -2,8 +2,14 @@
 	"name": "diff/diff",
 	"type": "library",
 	"description": "Library for diffing, patching and representing differences between complex objects",
-	"keywords": ["diff", "wikidata"],
-	"homepage": "https://github.com/wikimedia/mediawiki-extensions-Diff",
+	"keywords": [
+		"diff",
+		"wikidata",
+		"patching",
+		"diffing",
+		"diffop"
+	],
+	"homepage": "https://github.com/wmde/Diff",
 	"license": "GPL-2.0+",
 	"authors": [
 		 {
@@ -15,9 +21,7 @@
 	],
 	"support": {
 		"issues": "https://bugzilla.wikimedia.org/",
-		"irc": "irc://irc.freenode.net/wikimedia-wikidata",
-		"forum": "https://www.mediawiki.org/wiki/Extension_talk:Diff",
-		"wiki": "https://www.mediawiki.org/wiki/Extension:Diff"
+		"irc": "irc://irc.freenode.net/wikidata"
 	},
 	"require": {
 		"php": ">=5.3.0"
