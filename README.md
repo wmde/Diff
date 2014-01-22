@@ -6,11 +6,10 @@ applying a diff onto a data structure and merging multiple diffs into one.
 
 Recent changes can be found in the [release notes](RELEASE-NOTES.md).
 
-[![Build Status](https://secure.travis-ci.org/wikimedia/mediawiki-extensions-Diff.png?branch=master)](http://travis-ci.org/wikimedia/mediawiki-extensions-Diff)
-[![Coverage Status](https://coveralls.io/repos/wikimedia/mediawiki-extensions-Diff/badge.png?branch=master)](https://coveralls.io/r/wikimedia/mediawiki-extensions-Diff?branch=master)
+[![Build Status](https://secure.travis-ci.org/wmde/Diff.png?branch=master)](http://travis-ci.org/wmde/Diff)
 [![Dependency Status](https://www.versioneye.com/package/php--diff--diff/badge.png)](https://www.versioneye.com/package/php--diff--diff)
 
-On [Packagist](https://packagist.org/packages/diff/diff):
+On Packagist:
 [![Latest Stable Version](https://poser.pugx.org/diff/diff/version.png)](https://packagist.org/packages/diff/diff)
 [![Download count](https://poser.pugx.org/diff/diff/d/total.png)](https://packagist.org/packages/diff/diff)
 
@@ -288,7 +287,6 @@ $newValues = array( 'a' => 1, 'b' => array( 'c' => 10, 'd' => 1 ), 'e' => 42 );
 ## Links
 
 * [Diff on Packagist](https://packagist.org/packages/diff/diff)
-* [Diff on Ohloh](https://www.ohloh.net/p/mwdiff)
-* [Diff on MediaWiki.org](https://www.mediawiki.org/wiki/Extension:Diff)
-* [TravisCI build status](https://travis-ci.org/wikimedia/mediawiki-extensions-Diff)
-* [Latest version of the readme file](https://github.com/wikimedia/mediawiki-extensions-Diff/blob/master/README.md)
+* [Diff on Ohloh](https://www.ohloh.net/p/phpdiff)
+* [Diff on TravisCI](https://travis-ci.org/wmde/Diff)
+* [Diff on ScrutinizerCI](https://scrutinizer-ci.com/g/wmde/Diff/)
