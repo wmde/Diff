@@ -12,4 +12,3 @@ if ( defined( 'MEDIAWIKI' ) ) {
 		require_once __DIR__ . '/Diff.mw.php';
 	} );
 }
-// @codeCoverageIgnoreEnd
