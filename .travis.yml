@@ -12,6 +12,7 @@ script:
   - phpunit --coverage-clover build/logs/clover.xml
 
 after_script:
+  - composer require satooshi/php-coveralls:dev-master
   - php vendor/bin/coveralls -v
 
 notifications:

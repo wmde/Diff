@@ -3,6 +3,12 @@ These are the release notes for the [Diff library](README.md).
 Latest release:
 [![Latest Stable Version](https://poser.pugx.org/diff/diff/version.png)](https://packagist.org/packages/diff/diff)
 
+## Version 1.0 (dev)
+
+#### Compatibility breaks
+
+* Replaced custom autoloader with PSR-4 based loading via Composer
+
 ## Version 0.9 (2013-10-04)
 
 #### Additions
