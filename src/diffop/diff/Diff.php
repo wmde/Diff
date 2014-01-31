@@ -416,8 +416,6 @@ class Diff extends \ArrayObject implements IDiff {
 	 *
 	 * @param mixed $index
 	 * @param mixed $value
-	 *
-	 * @throws \MWException
 	 */
 	public function offsetSet( $index, $value ) {
 		$this->setElement( $index, $value );

@@ -20,18 +20,24 @@
 		 }
 	],
 	"support": {
-		"issues": "https://bugzilla.wikimedia.org/",
 		"irc": "irc://irc.freenode.net/wikidata"
 	},
 	"require": {
 		"php": ">=5.3.0"
 	},
-	"require-dev": {
-		"satooshi/php-coveralls": "dev-master"
-	},
 	"autoload": {
 		"files" : [
 			"Diff.php"
+		],
+		"psr-4": {
+			"Diff\\": "src/"
+		},
+		"classmap": [
+			"src/differ/",
+			"src/diffop/",
+			"src/patcher/",
+			"tests/phpunit/diffop/DiffOpTest.php",
+			"tests/phpunit/DiffTestCase.php"
 		]
 	}
 }

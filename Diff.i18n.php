@@ -1,6 +1,6 @@
 <?php
 /**
- * Internationalization file for the diff extension.
+ * Internationalization file for the diff library.
  *
  * @since 0.1
  *
