@@ -8,7 +8,6 @@ php:
   - hhvm
 
 script:
-  - composer self-update
   - phpunit --coverage-clover build/logs/clover.xml
 
 after_script:
