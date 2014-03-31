@@ -1,0 +1,8 @@
+{
+    "@metadata": {
+        "authors": [
+            "Minh Nguyen"
+        ]
+    },
+    "diff-desc": "Thư viện cung cấp các lớp tượng trưng cho khác biệt dữ liệu có cấu trúc, cũng như các đối tượng hỗ trợ để so sánh hay vá đối tượng"
+}

@@ -1,0 +1,8 @@
+{
+    "@metadata": {
+        "authors": [
+            "WikiPhoenix"
+        ]
+    },
+    "diff-desc": "Bibliotek med klasser för att representera diffar av strukturerad data, såväl som serviceobjekt för att diffa objekt eller lappa dem"
+}

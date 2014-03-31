@@ -1,0 +1,9 @@
+{
+    "@metadata": {
+        "authors": [
+            "Christian List",
+            "Kaare"
+        ]
+    },
+    "diff-desc": "Bibliotek med klasser til at repræsentere forskelle i strukturerede data, samt serviceobjekter til at sammenligne objekter eller lappe dem"
+}
