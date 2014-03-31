@@ -1,0 +1,8 @@
+{
+    "@metadata": {
+        "authors": [
+            "Toliño"
+        ]
+    },
+    "diff-desc": "Biblioteca con clases para representar diferenzas de datos estruturados, así como os obxectos de servizo aos obxectos de diferenzas ou parchealos"
+}

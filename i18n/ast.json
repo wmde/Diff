@@ -1,0 +1,8 @@
+{
+    "@metadata": {
+        "authors": [
+            "Xuacu"
+        ]
+    },
+    "diff-desc": "Biblioteca con clases pa representar diferencies de datos estructuraos, lo mesmo qu'oxetos de serviciu pa facer diffs d'oxetos o aplica-yos parches"
+}

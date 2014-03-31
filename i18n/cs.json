@@ -1,0 +1,8 @@
+{
+    "@metadata": {
+        "authors": [
+            "Mormegil"
+        ]
+    },
+    "diff-desc": "Knihovna s třídami reprezentujícími změny ve strukturovaných datech a pomocné objekty pro zjišťování změn v objektech a promítání změn do nich"
+}

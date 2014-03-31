@@ -1,0 +1,9 @@
+{
+    "@metadata": {
+        "authors": [
+            "Armando-Martin",
+            "Luis Felipe Schenone"
+        ]
+    },
+    "diff-desc": "Biblioteca con clases para representar diferencias entre datos estructurados, así como objetos de servicio a objectos de diferencias o parcharlos"
+}
