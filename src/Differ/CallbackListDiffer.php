@@ -1,9 +1,10 @@
 <?php
 
-namespace Diff;
+namespace Diff\Differ;
 
 use Diff\ArrayComparer\StrategicArrayComparer;
 use Diff\Comparer\CallbackComparer;
+use Diff\DiffOp\DiffOp;
 
 /**
  * Differ that only looks at the values of the arrays (and thus ignores key differences).

@@ -1,6 +1,11 @@
 <?php
 
-namespace Diff;
+namespace Diff\Patcher;
+
+use Diff\DiffOp\Diff\Diff;
+use Diff\DiffOp\DiffOp;
+use Diff\DiffOp\DiffOpAdd;
+use Diff\DiffOp\DiffOpRemove;
 
 /**
  * @since 0.4

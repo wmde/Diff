@@ -1,6 +1,6 @@
 <?php
 
-namespace Diff;
+namespace Diff\DiffOp;
 
 /**
  * Represents a removal.

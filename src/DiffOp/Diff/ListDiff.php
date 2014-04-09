@@ -1,6 +1,6 @@
 <?php
 
-namespace Diff;
+namespace Diff\DiffOp\Diff;
 
 /**
  * Class representing the diff between to (non-associative) arrays.

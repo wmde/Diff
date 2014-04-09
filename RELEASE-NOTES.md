@@ -5,9 +5,22 @@ Latest release:
 
 ## Version 1.0 (dev)
 
+#### Improvements
+
+* Diff is now PSR-4 compliant
+
 #### Compatibility breaks
 
+* Removed the Diff\IDiff interface (deprecated since 0.5)
+* Removed the Diff\IDiffOp interface (deprecated since 0.4)
 * Replaced custom autoloader with PSR-4 based loading via Composer
+
+#### Deprecations
+
+* The classes that got moved into other namespace now have their old names as deprecated aliases:
+	* All Differ classes that resided directly in the Diff namespace are now in Diff\Differ.
+	* All DiffOp classes that resided directly in the Diff namespace are now in Diff\DiffOp.
+	* All Patcher classes that resided directly in the Diff namespace are now in Diff\Patcher.
 
 ## Version 0.9 (2013-10-04)
 

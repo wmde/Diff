@@ -1,10 +1,13 @@
 <?php
 
-namespace Diff;
+namespace Diff\Differ;
 
 use Diff\ArrayComparer\ArrayComparer;
 use Diff\ArrayComparer\NativeArrayComparer;
 use Diff\ArrayComparer\StrictArrayComparer;
+use Diff\DiffOp\DiffOp;
+use Diff\DiffOp\DiffOpAdd;
+use Diff\DiffOp\DiffOpRemove;
 use InvalidArgumentException;
 
 /**

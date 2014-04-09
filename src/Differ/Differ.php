@@ -1,6 +1,8 @@
 <?php
 
-namespace Diff;
+namespace Diff\Differ;
+
+use Diff\DiffOp\DiffOp;
 
 /**
  * Interface for objects that can diff two arrays to an array of DiffOp.

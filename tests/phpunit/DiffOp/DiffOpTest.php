@@ -2,11 +2,11 @@
 
 namespace Diff\Tests\DiffOp;
 
-use Diff\DiffOp;
+use Diff\DiffOp\DiffOp;
 use Diff\Tests\DiffTestCase;
 
 /**
- * Base test class for the Diff\DiffOp deriving classes.
+ * Base test class for the Diff\DiffOp\DiffOp deriving classes.
  *
  * @group Diff
  * @group DiffOp
@@ -101,9 +101,6 @@ abstract class DiffOpTest extends DiffTestCase {
 			}
 		}
 	}
-
-
-
 
 	/**
 	 * @dataProvider instanceProvider

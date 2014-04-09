@@ -2,16 +2,16 @@
 
 namespace Diff\Tests\DiffOp\Diff;
 
-use Diff\Diff;
-use Diff\DiffOp;
-use Diff\DiffOpAdd;
-use Diff\DiffOpChange;
-use Diff\DiffOpRemove;
+use Diff\DiffOp\Diff\Diff;
+use Diff\DiffOp\DiffOp;
+use Diff\DiffOp\DiffOpAdd;
+use Diff\DiffOp\DiffOpChange;
+use Diff\DiffOp\DiffOpRemove;
 use Diff\Tests\DiffTestCase;
 use stdClass;
 
 /**
- * @covers Diff\Diff
+ * @covers Diff\DiffOp\Diff\Diff
  *
  * @group Diff
  * @group DiffOp
@@ -125,12 +125,12 @@ class DiffTest extends DiffTestCase {
 	public function testStuff( array $operations ) {
 		$diff = new Diff( $operations );
 
-		$this->assertInstanceOf( '\Diff\Diff', $diff );
+		$this->assertInstanceOf( '\Diff\DiffOp\Diff\Diff', $diff );
 		$this->assertInstanceOf( '\ArrayObject', $diff );
 
 		$types = array();
 
-		$this->assertContainsOnlyInstancesOf( '\Diff\DiffOp', $diff );
+		$this->assertContainsOnlyInstancesOf( '\Diff\DiffOp\DiffOp', $diff );
 
 		/**
 		 * @var DiffOp $operation
@@ -161,10 +161,6 @@ class DiffTest extends DiffTestCase {
 		return $instances;
 	}
 
-	public function getInstanceClass() {
-		return '\Diff\Diff';
-	}
-
 	/**
 	 * @dataProvider instanceProvider
 	 */
@@ -172,7 +168,7 @@ class DiffTest extends DiffTestCase {
 		$ops = $diff->getOperations();
 
 		$this->assertInternalType( 'array', $ops );
-		$this->assertContainsOnlyInstancesOf( '\Diff\DiffOp', $ops );
+		$this->assertContainsOnlyInstancesOf( '\Diff\DiffOp\DiffOp', $ops );
 		$this->assertArrayEquals( $ops, $diff->getOperations() );
 	}
 
@@ -370,13 +366,6 @@ class DiffTest extends DiffTestCase {
 	}
 
 	public function testSerializationCompat() {
-//		$expected = new \Diff\MapDiff( array(
-//			new \Diff\DiffOpAdd( 'add' ),
-//			new \Diff\DiffOpRemove( 'rem' ),
-//			new \Diff\DiffOpChange( 'a', 'b' ),
-//			new \Diff\ListDiff( array( new \Diff\DiffOpRemove( 'rem' ) ) )
-//		) );
-
 		$v03serialization = 'C:12:"Diff\MapDiff":569:{a:4:{s:4:"data";a:4:{i:0;C:14:"Diff\DiffOpAdd":10:{s:3:"add";}i:1;C:17:"Diff\DiffOpRemove":10:{s:3:"rem";}i:2;C:17:"Diff\DiffOpChange":30:{a:2:{i:0;s:1:"b";i:1;s:1:"a";}}i:3;C:13:"Diff\ListDiff":170:{a:4:{s:4:"data";a:1:{i:0;C:17:"Diff\DiffOpRemove":10:{s:3:"rem";}}s:5:"index";i:0;s:12:"typePointers";a:2:{s:3:"add";a:0:{}s:6:"remove";a:1:{i:0;i:0;}}s:9:"parentKey";N;}}}s:5:"index";i:0;s:12:"typePointers";a:6:{s:3:"add";a:1:{i:0;i:0;}s:6:"remove";a:1:{i:0;i:1;}s:6:"change";a:1:{i:0;i:2;}s:4:"list";a:1:{i:0;i:3;}s:3:"map";a:0:{}s:4:"diff";a:0:{}}s:9:"parentKey";N;}}';
 
 		/**
@@ -393,18 +382,6 @@ class DiffTest extends DiffTestCase {
 	}
 
 	/**
-	 * @since 0.6
-	 *
-	 * @param array $elements
-	 *
-	 * @return Diff
-	 */
-	protected function getNew( array $elements = array() ) {
-		$class = $this->getInstanceClass();
-		return new $class( $elements );
-	}
-
-	/**
 	 * @dataProvider elementInstancesProvider
 	 *
 	 * @since 0.6
@@ -412,7 +389,7 @@ class DiffTest extends DiffTestCase {
 	 * @param array $elements
 	 */
 	public function testConstructor( array $elements ) {
-		$arrayObject = $this->getNew( $elements );
+		$arrayObject = new Diff( $elements );
 
 		$this->assertEquals( count( $elements ), $arrayObject->count() );
 	}
@@ -425,7 +402,7 @@ class DiffTest extends DiffTestCase {
 	 * @param array $elements
 	 */
 	public function testIsEmpty( array $elements ) {
-		$arrayObject = $this->getNew( $elements );
+		$arrayObject = new Diff( $elements );
 
 		$this->assertEquals( $elements === array(), $arrayObject->isEmpty() );
 	}
@@ -463,7 +440,7 @@ class DiffTest extends DiffTestCase {
 	 * @param array $elements
 	 */
 	public function testAppend( array $elements ) {
-		$list = $this->getNew();
+		$list = new Diff();
 
 		$listSize = count( $elements );
 
@@ -473,7 +450,7 @@ class DiffTest extends DiffTestCase {
 
 		$this->assertEquals( $listSize, $list->count() );
 
-		$list = $this->getNew();
+		$list = new Diff();
 
 		foreach ( $elements as $element ) {
 			$list[] = $element;
@@ -493,7 +470,7 @@ class DiffTest extends DiffTestCase {
 	 */
 	protected function checkTypeChecks( $function ) {
 		$excption = null;
-		$list = $this->getNew();
+		$list = new Diff();
 
 
 		foreach ( array( 42, 'foo', array(), new stdClass(), 4.2 ) as $element ) {
@@ -573,31 +550,31 @@ class DiffTest extends DiffTestCase {
 			return;
 		}
 
-		$list = $this->getNew();
+		$list = new Diff();
 
 		$element = reset( $elements );
 		$list->offsetSet( 42, $element );
 		$this->assertEquals( $element, $list->offsetGet( 42 ) );
 
-		$list = $this->getNew();
+		$list = new Diff();
 
 		$element = reset( $elements );
 		$list['oHai'] = $element;
 		$this->assertEquals( $element, $list['oHai'] );
 
-		$list = $this->getNew();
+		$list = new Diff();
 
 		$element = reset( $elements );
 		$list->offsetSet( 9001, $element );
 		$this->assertEquals( $element, $list[9001] );
 
-		$list = $this->getNew();
+		$list = new Diff();
 
 		$element = reset( $elements );
 		$list->offsetSet( null, $element );
 		$this->assertEquals( $element, $list[0] );
 
-		$list = $this->getNew();
+		$list = new Diff();
 		$offset = 0;
 
 		foreach ( $elements as $element ) {
@@ -640,7 +617,7 @@ class DiffTest extends DiffTestCase {
 	 * @param Diff $list
 	 */
 	public function testAddInvalidDiffOp( Diff $list ) {
-		$invalidDiffOp = $this->getMock( 'Diff\DiffOp' );
+		$invalidDiffOp = $this->getMock( 'Diff\DiffOp\DiffOp' );
 
 		$invalidDiffOp->expects( $this->atLeastOnce() )
 			->method( 'getType' )

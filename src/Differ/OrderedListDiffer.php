@@ -1,9 +1,10 @@
 <?php
 
-namespace Diff;
+namespace Diff\Differ;
 
 use Diff\ArrayComparer\OrderedArrayComparer;
 use Diff\Comparer\ValueComparer;
+use Diff\DiffOp\DiffOp;
 
 /**
  * Differ that looks at the order of the values and the values of the arrays.

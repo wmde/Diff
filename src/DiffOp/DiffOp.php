@@ -1,14 +1,12 @@
 <?php
 
-namespace Diff;
+namespace Diff\DiffOp;
 
 /**
  * Interface for diff operations. A diff operation
  * represents a change to a single element.
  * In case the elements are maps or diffs, the resulting operation
  * can be a MapDiff or ListDiff, which contain their own list of DiffOp objects.
- *
- * Softly deprecated (since 0.4), use Diff instead.
  *
  * @since 0.1
  *
@@ -59,8 +57,3 @@ interface DiffOp extends \Serializable, \Countable {
 	public function toArray( $valueConverter = null );
 
 }
-
-/**
- * @deprecated since 0.4
- */
-interface IDiffOp extends DiffOp {}

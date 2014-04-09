@@ -1,7 +1,11 @@
 <?php
 
-namespace Diff;
+namespace Diff\DiffOp\Diff;
 
+use Diff\DiffOp\DiffOp;
+use Diff\DiffOp\DiffOpAdd;
+use Diff\DiffOp\DiffOpChange;
+use Diff\DiffOp\DiffOpRemove;
 use InvalidArgumentException;
 
 /**
@@ -14,7 +18,7 @@ use InvalidArgumentException;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-class Diff extends \ArrayObject implements IDiff {
+class Diff extends \ArrayObject implements DiffOp {
 
 	/**
 	 * @since 0.4
@@ -47,8 +51,6 @@ class Diff extends \ArrayObject implements IDiff {
 	protected $indexOffset = 0;
 
 	/**
-	 * @see Diff::__construct
-	 *
 	 * @since 0.1
 	 *
 	 * @param DiffOp[] $operations
@@ -82,7 +84,7 @@ class Diff extends \ArrayObject implements IDiff {
 	 * @return string
 	 */
 	private function getObjectType() {
-		return '\Diff\DiffOp';
+		return '\Diff\DiffOp\DiffOp';
 	}
 
 	/**
@@ -194,8 +196,6 @@ class Diff extends \ArrayObject implements IDiff {
 	}
 
 	/**
-	 * Returns the add operations.
-	 *
 	 * @since 0.1
 	 *
 	 * @return DiffOpAdd[]
@@ -205,8 +205,6 @@ class Diff extends \ArrayObject implements IDiff {
 	}
 
 	/**
-	 * Returns the remove operations.
-	 *
 	 * @since 0.1
 	 *
 	 * @return DiffOpRemove[]

@@ -2,12 +2,12 @@
 
 namespace Diff\Tests\DiffOp;
 
-use Diff\DiffOpAdd;
-use Diff\DiffOpChange;
+use Diff\DiffOp\DiffOpAdd;
+use Diff\DiffOp\DiffOpChange;
 
 /**
- * @covers Diff\DiffOpChange
- * @covers Diff\AtomicDiffOp
+ * @covers Diff\DiffOp\DiffOpChange
+ * @covers Diff\DiffOp\AtomicDiffOp
  *
  * @group Diff
  * @group DiffOp
@@ -25,7 +25,7 @@ class DiffOpChangeTest extends DiffOpTest {
 	 * @return string
 	 */
 	public function getClass() {
-		return '\Diff\DiffOpChange';
+		return '\Diff\DiffOp\DiffOpChange';
 	}
 
 	/**

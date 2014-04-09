@@ -5,8 +5,6 @@ namespace Diff;
 use InvalidArgumentException;
 
 /**
- * Factory for constructing DiffOp objects.
- *
  * @since 0.5
  *
  * @licence GNU GPL v2+
@@ -35,7 +33,7 @@ class DiffOpFactory {
 	/**
 	 * Returns an instance of DiffOp constructed from the provided array.
 	 *
-	 * This roundtripes with @see DiffOp::toArray.
+	 * This roundtrips with @see DiffOp::toArray.
 	 *
 	 * @since 0.5
 	 *
@@ -94,7 +92,6 @@ class DiffOpFactory {
 			throw new InvalidArgumentException( 'Invalid array provided. Missing key "' . $key . '"' );
 		}
 	}
-
 
 	/**
 	 * Converts an array structure to an object using the value converter callback function

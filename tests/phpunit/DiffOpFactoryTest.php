@@ -2,12 +2,12 @@
 
 namespace Diff\Tests;
 
-use Diff\Diff;
-use Diff\DiffOp;
-use Diff\DiffOpAdd;
-use Diff\DiffOpChange;
+use Diff\DiffOp\Diff\Diff;
+use Diff\DiffOp\DiffOp;
+use Diff\DiffOp\DiffOpAdd;
+use Diff\DiffOp\DiffOpChange;
+use Diff\DiffOp\DiffOpRemove;
 use Diff\DiffOpFactory;
-use Diff\DiffOpRemove;
 
 /**
  * @covers Diff\DiffOpFactory

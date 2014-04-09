@@ -2,12 +2,12 @@
 
 namespace Diff\Tests\Patcher;
 
+use Diff\Patcher\ThrowingPatcher;
 use Diff\Tests\DiffTestCase;
-use Diff\ThrowingPatcher;
 use ReflectionClass;
 
 /**
- * @covers Diff\ThrowingPatcher
+ * @covers Diff\Patcher\ThrowingPatcher
  *
  * @group Diff
  * @group DiffPatcher
@@ -21,9 +21,9 @@ class ThrowingPatcherTest extends DiffTestCase {
 		/**
 		 * @var ThrowingPatcher $patcher
 		 */
-		$patcher = $this->getMockForAbstractClass( 'Diff\ThrowingPatcher' );
+		$patcher = $this->getMockForAbstractClass( 'Diff\Patcher\ThrowingPatcher' );
 
-		$class = new ReflectionClass( 'Diff\ThrowingPatcher' );
+		$class = new ReflectionClass( 'Diff\Patcher\ThrowingPatcher' );
 		$method = $class->getMethod( 'handleError' );
 		$method->setAccessible( true );
 
@@ -37,7 +37,7 @@ class ThrowingPatcherTest extends DiffTestCase {
 		$method->invokeArgs( $patcher, array( $errorMessage ) );
 
 		$patcher->throwErrors();
-		$this->setExpectedException( 'Diff\PatcherException' );
+		$this->setExpectedException( 'Diff\Patcher\PatcherException' );
 
 		$method->invokeArgs( $patcher, array( $errorMessage ) );
 	}

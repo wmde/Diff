@@ -2,15 +2,17 @@
 
 namespace Diff\Tests\Differ;
 
-use Diff\Diff;
-use Diff\DiffOpAdd;
-use Diff\DiffOpChange;
-use Diff\DiffOpRemove;
-use Diff\MapDiffer;
+use Diff\Differ\Differ;
+use Diff\Differ\ListDiffer;
+use Diff\Differ\MapDiffer;
+use Diff\DiffOp\Diff\Diff;
+use Diff\DiffOp\DiffOpAdd;
+use Diff\DiffOp\DiffOpChange;
+use Diff\DiffOp\DiffOpRemove;
 use Diff\Tests\DiffTestCase;
 
 /**
- * @covers Diff\MapDiffer
+ * @covers Diff\Differ\MapDiffer
  *
  * @group Diff
  * @group Differ
@@ -157,7 +159,7 @@ class MapDifferTest extends DiffTestCase {
 
 		$argLists[] = array( $old, $new, $expected,
 			'Setting a non-default Differ for non-associative diffs should work',
-			true, new \Diff\ListDiffer( \Diff\ListDiffer::MODE_NATIVE ) );
+			true, new ListDiffer( ListDiffer::MODE_NATIVE ) );
 
 
 		$old = array( 'a' => array( 42 ), 1, array( 'a' => 'b', 5 ), 'bah' => array( 'foo' => 'bar' ) );
@@ -311,7 +313,7 @@ class MapDifferTest extends DiffTestCase {
 	/**
 	 * @dataProvider toDiffProvider
 	 */
-	public function testDoDiff( $old, $new, $expected, $message = '', $recursively = false, \Diff\Differ $listDiffer = null ) {
+	public function testDoDiff( $old, $new, $expected, $message = '', $recursively = false, Differ $listDiffer = null ) {
 		$differ = new MapDiffer( $recursively, $listDiffer );
 
 		$actual = $differ->doDiff( $old, $new );

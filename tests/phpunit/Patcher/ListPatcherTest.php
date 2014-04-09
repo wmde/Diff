@@ -2,16 +2,16 @@
 
 namespace Diff\Tests\Patcher;
 
-use Diff\Diff;
-use Diff\DiffOpAdd;
-use Diff\DiffOpRemove;
-use Diff\ListPatcher;
-use Diff\Patcher;
+use Diff\DiffOp\Diff\Diff;
+use Diff\DiffOp\DiffOpAdd;
+use Diff\DiffOp\DiffOpRemove;
+use Diff\Patcher\ListPatcher;
+use Diff\Patcher\Patcher;
 use Diff\Tests\DiffTestCase;
 
 /**
- * @covers Diff\ListPatcher
- * @covers Diff\ThrowingPatcher
+ * @covers Diff\Patcher\ListPatcher
+ * @covers Diff\Patcher\ThrowingPatcher
  *
  * @group Diff
  * @group DiffPatcher
@@ -223,7 +223,7 @@ class ListPatcherTest extends DiffTestCase {
 		$patcher->patch( array(), new Diff( array(), true ) );
 
 		$patcher->throwErrors();
-		$this->setExpectedException( 'Diff\PatcherException' );
+		$this->setExpectedException( 'Diff\Patcher\PatcherException' );
 
 		$patcher->patch( array(), new Diff( array(), true ) );
 	}

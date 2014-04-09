@@ -2,17 +2,17 @@
 
 namespace Diff\Tests\DiffOp\Diff;
 
-use Diff\Diff;
-use Diff\DiffOp;
-use Diff\DiffOpAdd;
-use Diff\DiffOpChange;
-use Diff\DiffOpRemove;
-use Diff\ListDiffer;
-use Diff\MapDiffer;
+use Diff\Differ\ListDiffer;
+use Diff\Differ\MapDiffer;
+use Diff\DiffOp\Diff\Diff;
+use Diff\DiffOp\DiffOp;
+use Diff\DiffOp\DiffOpAdd;
+use Diff\DiffOp\DiffOpChange;
+use Diff\DiffOp\DiffOpRemove;
 use Diff\Tests\DiffOp\DiffOpTest;
 
 /**
- * @covers Diff\MapDiff
+ * @covers Diff\DiffOp\Diff\MapDiff
  *
  * @group Diff
  * @group DiffOp
@@ -30,7 +30,7 @@ class MapDiffTest extends DiffOpTest {
 	 * @return string
 	 */
 	public function getClass() {
-		return '\Diff\MapDiff';
+		return '\Diff\DiffOp\Diff\MapDiff';
 	}
 
 	/**
@@ -230,8 +230,8 @@ class MapDiffTest extends DiffOpTest {
 		$differ = new MapDiffer( true );
 		$diff = new Diff( $differ->doDiff( $from, $to ) );
 
-		$this->assertInstanceOf( '\Diff\DiffOp', $diff );
-		$this->assertInstanceOf( '\Diff\Diff', $diff );
+		$this->assertInstanceOf( '\Diff\DiffOp\DiffOp', $diff );
+		$this->assertInstanceOf( '\Diff\DiffOp\Diff\Diff', $diff );
 		$this->assertInstanceOf( '\ArrayObject', $diff );
 
 		// Sort to get rid of differences in order, since no promises about order are made.
@@ -320,9 +320,9 @@ class MapDiffTest extends DiffOpTest {
 		$this->assertFalse( $diff->offsetExists( 'onoez' ) );
 		$this->assertFalse( $diff->offsetExists( 'a' ) );
 
-		$this->assertInstanceOf( '\Diff\Diff', $diff['de'] );
-		$this->assertInstanceOf( '\Diff\Diff', $diff['nl'] );
-		$this->assertInstanceOf( '\Diff\Diff', $diff['en'] );
+		$this->assertInstanceOf( 'Diff\DiffOp\Diff\Diff', $diff['de'] );
+		$this->assertInstanceOf( 'Diff\DiffOp\Diff\Diff', $diff['nl'] );
+		$this->assertInstanceOf( 'Diff\DiffOp\Diff\Diff', $diff['en'] );
 
 		$this->assertEquals( 2, count( $diff['de'] ) );
 		$this->assertEquals( 2, count( $diff['nl'] ) );

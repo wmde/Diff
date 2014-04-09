@@ -2,12 +2,12 @@
 
 namespace Diff\Tests\DiffOp;
 
-use Diff\DiffOpAdd;
-use Diff\DiffOpRemove;
+use Diff\DiffOp\DiffOpAdd;
+use Diff\DiffOp\DiffOpRemove;
 
 /**
- * @covers Diff\DiffOpRemove
- * @covers Diff\AtomicDiffOp
+ * @covers Diff\DiffOp\DiffOpRemove
+ * @covers Diff\DiffOp\AtomicDiffOp
  *
  * @group Diff
  * @group DiffOp
@@ -25,7 +25,7 @@ class DiffOpRemoveTest extends DiffOpTest {
 	 * @return string
 	 */
 	public function getClass() {
-		return '\Diff\DiffOpRemove';
+		return '\Diff\DiffOp\DiffOpRemove';
 	}
 
 	/**

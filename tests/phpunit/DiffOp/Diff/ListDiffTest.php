@@ -2,14 +2,14 @@
 
 namespace Diff\Tests\DiffOp\Diff;
 
-use Diff\Diff;
-use Diff\DiffOpAdd;
-use Diff\DiffOpRemove;
-use Diff\ListDiffer;
+use Diff\Differ\ListDiffer;
+use Diff\DiffOp\Diff\Diff;
+use Diff\DiffOp\DiffOpAdd;
+use Diff\DiffOp\DiffOpRemove;
 use Diff\Tests\DiffOp\DiffOpTest;
 
 /**
- * @covers Diff\ListDiff
+ * @covers Diff\DiffOp\Diff\ListDiff
  *
  * @group Diff
  * @group DiffOp
@@ -27,7 +27,7 @@ class ListDiffTest extends DiffOpTest {
 	 * @return string
 	 */
 	public function getClass() {
-		return '\Diff\ListDiff';
+		return '\Diff\DiffOp\Diff\ListDiff';
 	}
 
 	/**
@@ -138,8 +138,8 @@ class ListDiffTest extends DiffOpTest {
 
 		$diff = new Diff( $differ->doDiff( $from, $to ), false );
 
-		$this->assertInstanceOf( '\Diff\DiffOp', $diff );
-		$this->assertInstanceOf( '\Diff\Diff', $diff );
+		$this->assertInstanceOf( '\Diff\DiffOp\DiffOp', $diff );
+		$this->assertInstanceOf( '\Diff\DiffOp\Diff\Diff', $diff );
 		$this->assertInstanceOf( '\ArrayObject', $diff );
 
 		// array_values because we only care about the values, not promises are made about the keys.

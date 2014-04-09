@@ -1,20 +1,19 @@
 <?php
 
-namespace Diff;
+namespace Diff\DiffOp;
 
 /**
- * Represents a change.
- * This means the item is present in both the new and old objects, but changed value.
+ * Represents an addition.
+ * This means the value was not present in the "old" object but is in the new.
  *
  * @since 0.1
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class DiffOpChange extends AtomicDiffOp {
+class DiffOpAdd extends AtomicDiffOp {
 
 	protected $newValue;
-	protected $oldValue;
 
 	/**
 	 * @see DiffOp::getType
@@ -24,7 +23,7 @@ class DiffOpChange extends AtomicDiffOp {
 	 * @return string
 	 */
 	public function getType() {
-		return 'change';
+		return 'add';
 	}
 
 	/**
@@ -32,21 +31,10 @@ class DiffOpChange extends AtomicDiffOp {
 	 *
 	 * @since 0.1
 	 *
-	 * @param mixed $oldValue
 	 * @param mixed $newValue
 	 */
-	public function __construct( $oldValue, $newValue ) {
-		$this->oldValue = $oldValue;
+	public function __construct( $newValue ) {
 		$this->newValue = $newValue;
-	}
-
-	/**
-	 * @since 0.1
-	 *
-	 * @return mixed
-	 */
-	public function getOldValue() {
-		return $this->oldValue;
 	}
 
 	/**
@@ -66,7 +54,7 @@ class DiffOpChange extends AtomicDiffOp {
 	 * @return string|null
 	 */
 	public function serialize() {
-		return serialize( array( $this->newValue, $this->oldValue ) );
+		return serialize( $this->newValue );
 	}
 
 	/**
@@ -76,10 +64,10 @@ class DiffOpChange extends AtomicDiffOp {
 	 *
 	 * @param string $serialization
 	 *
-	 * @return DiffOpChange
+	 * @return DiffOpAdd
 	 */
 	public function unserialize( $serialization ) {
-		list( $this->newValue, $this->oldValue ) = unserialize( $serialization );
+		$this->newValue = unserialize( $serialization );
 	}
 
 	/**
@@ -96,7 +84,6 @@ class DiffOpChange extends AtomicDiffOp {
 		return array(
 			'type' => $this->getType(),
 			'newvalue' => $this->objectToArray( $this->newValue, $valueConverter ),
-			'oldvalue' => $this->objectToArray( $this->oldValue, $valueConverter ),
 		);
 	}
 

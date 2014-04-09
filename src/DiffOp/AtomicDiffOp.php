@@ -1,6 +1,6 @@
 <?php
 
-namespace Diff;
+namespace Diff\DiffOp;
 
 /**
  * Base class for diff operations. A diff operation

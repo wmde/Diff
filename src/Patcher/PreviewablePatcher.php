@@ -1,6 +1,8 @@
 <?php
 
-namespace Diff;
+namespace Diff\Patcher;
+
+use Diff\DiffOp\Diff\Diff;
 
 /**
  * Interface for patchers that can, given a base and a diff, provide

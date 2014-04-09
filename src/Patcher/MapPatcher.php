@@ -1,9 +1,14 @@
 <?php
 
-namespace Diff;
+namespace Diff\Patcher;
 
 use Diff\Comparer\StrictComparer;
 use Diff\Comparer\ValueComparer;
+use Diff\DiffOp\Diff\Diff;
+use Diff\DiffOp\DiffOp;
+use Diff\DiffOp\DiffOpAdd;
+use Diff\DiffOp\DiffOpChange;
+use Diff\DiffOp\DiffOpRemove;
 
 /**
  * Map patcher.

@@ -1,6 +1,10 @@
 <?php
 
-namespace Diff;
+namespace Diff\Patcher;
+
+use Diff\Differ\ListDiffer;
+use Diff\Differ\MapDiffer;
+use Diff\DiffOp\Diff\Diff;
 
 /**
  * Base class for patchers that have the ability to throw errors

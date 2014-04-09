@@ -3,14 +3,14 @@
 namespace Diff\Tests\Differ;
 
 use Diff\Comparer\CallbackComparer;
-use Diff\Differ;
-use Diff\DiffOpAdd;
-use Diff\DiffOpRemove;
-use Diff\OrderedListDiffer;
+use Diff\Differ\Differ;
+use Diff\Differ\OrderedListDiffer;
+use Diff\DiffOp\DiffOpAdd;
+use Diff\DiffOp\DiffOpRemove;
 use Diff\Tests\DiffTestCase;
 
 /**
- * @covers Diff\OrderedListDiffer
+ * @covers Diff\Differ\OrderedListDiffer
  *
  * @since 0.9
  *

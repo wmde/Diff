@@ -31,11 +31,6 @@
 		],
 		"psr-4": {
 			"Diff\\": "src/"
-		},
-		"classmap": [
-			"src/differ/",
-			"src/diffop/",
-			"src/patcher/"
-		]
+		}
 	}
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Diff;
+namespace Diff\Patcher;
 
 class PatcherException extends \RuntimeException {
 

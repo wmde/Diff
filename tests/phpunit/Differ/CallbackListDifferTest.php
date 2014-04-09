@@ -2,14 +2,14 @@
 
 namespace Diff\Tests\Differ;
 
-use Diff\CallbackListDiffer;
-use Diff\Differ;
-use Diff\DiffOpAdd;
-use Diff\DiffOpRemove;
+use Diff\Differ\CallbackListDiffer;
+use Diff\Differ\Differ;
+use Diff\DiffOp\DiffOpAdd;
+use Diff\DiffOp\DiffOpRemove;
 use Diff\Tests\DiffTestCase;
 
 /**
- * @covers Diff\CallbackListDiffer
+ * @covers Diff\Differ\CallbackListDiffer
  *
  * @group Diff
  * @group Differ

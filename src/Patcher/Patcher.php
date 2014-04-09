@@ -1,6 +1,8 @@
 <?php
 
-namespace Diff;
+namespace Diff\Patcher;
+
+use Diff\DiffOp\Diff\Diff;
 
 /**
  * Interface for objects that can apply an array of DiffOp on an array.

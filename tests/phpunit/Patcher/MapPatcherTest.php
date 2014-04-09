@@ -3,17 +3,17 @@
 namespace Diff\Tests\Patcher;
 
 use Diff\Comparer\CallbackComparer;
-use Diff\Diff;
-use Diff\DiffOpAdd;
-use Diff\DiffOpChange;
-use Diff\DiffOpRemove;
-use Diff\MapPatcher;
-use Diff\Patcher;
+use Diff\DiffOp\Diff\Diff;
+use Diff\DiffOp\DiffOpAdd;
+use Diff\DiffOp\DiffOpChange;
+use Diff\DiffOp\DiffOpRemove;
+use Diff\Patcher\MapPatcher;
+use Diff\Patcher\Patcher;
 use Diff\Tests\DiffTestCase;
 
 /**
- * @covers Diff\MapPatcher
- * @covers Diff\ThrowingPatcher
+ * @covers Diff\Patcher\MapPatcher
+ * @covers Diff\Patcher\ThrowingPatcher
  *
  * @group Diff
  * @group DiffPatcher
@@ -438,7 +438,7 @@ class MapPatcherTest extends DiffTestCase {
 	public function testErrorOnUnknownDiffOpType() {
 		$patcher = new MapPatcher();
 
-		$diffOp = $this->getMock( 'Diff\DiffOp' );
+		$diffOp = $this->getMock( 'Diff\DiffOp\DiffOp' );
 
 		$diffOp->expects( $this->any() )
 			->method( 'getType' )
@@ -449,7 +449,7 @@ class MapPatcherTest extends DiffTestCase {
 		$patcher->patch( array(), $diff );
 
 		$patcher->throwErrors();
-		$this->setExpectedException( 'Diff\PatcherException' );
+		$this->setExpectedException( 'Diff\Patcher\PatcherException' );
 
 		$patcher->patch( array(), $diff );
 	}
