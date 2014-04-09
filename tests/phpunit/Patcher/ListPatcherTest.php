@@ -1,12 +1,13 @@
 <?php
 
-namespace Diff\Tests;
+namespace Diff\Tests\Patcher;
 
 use Diff\Diff;
 use Diff\DiffOpAdd;
 use Diff\DiffOpRemove;
 use Diff\ListPatcher;
 use Diff\Patcher;
+use Diff\Tests\DiffTestCase;
 
 /**
  * @covers Diff\ListPatcher

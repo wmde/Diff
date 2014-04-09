@@ -1,7 +1,8 @@
 <?php
 
-namespace Diff\Tests;
+namespace Diff\Tests\Patcher;
 
+use Diff\Tests\DiffTestCase;
 use Diff\ThrowingPatcher;
 use ReflectionClass;
 

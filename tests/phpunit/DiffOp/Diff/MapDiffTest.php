@@ -1,6 +1,6 @@
 <?php
 
-namespace Diff\Tests;
+namespace Diff\Tests\DiffOp\Diff;
 
 use Diff\Diff;
 use Diff\DiffOp;
@@ -9,6 +9,7 @@ use Diff\DiffOpChange;
 use Diff\DiffOpRemove;
 use Diff\ListDiffer;
 use Diff\MapDiffer;
+use Diff\Tests\DiffOp\DiffOpTest;
 
 /**
  * @covers Diff\MapDiff

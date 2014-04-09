@@ -1,14 +1,15 @@
 <?php
 
-namespace Diff\Tests;
+namespace Diff\Tests\Differ;
 
+use Diff\CallbackListDiffer;
 use Diff\Differ;
 use Diff\DiffOpAdd;
 use Diff\DiffOpRemove;
-use Diff\ListDiffer;
+use Diff\Tests\DiffTestCase;
 
 /**
- * @covers Diff\ListDiffer
+ * @covers Diff\CallbackListDiffer
  *
  * @group Diff
  * @group Differ
@@ -16,7 +17,7 @@ use Diff\ListDiffer;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ListDifferTest extends DiffTestCase {
+class CallbackListDifferTest extends DiffTestCase {
 
 	/**
 	 * Returns those that both work for native and strict mode.
@@ -162,45 +163,11 @@ class ListDifferTest extends DiffTestCase {
 	 * @dataProvider toDiffProvider
 	 */
 	public function testDoDiff( $old, $new, $expected, $message = '' ) {
-		$this->doTestDiff( new ListDiffer(), $old, $new, $expected, $message );
-	}
+		$callback = function( $foo, $bar ) {
+			return is_object( $foo ) ? $foo == $bar : $foo === $bar;
+		};
 
-	public function toDiffNativeProvider() {
-		$argLists = $this->getCommonArgLists();
-
-		$old = array( '42' );
-		$new = array( 42 );
-		$expected = array();
-
-		$argLists[] = array( $old, $new, $expected,
-			'["42"] to [42] should result in an empty diff' );
-
-
-		$old = array( 42, 42 );
-		$new = array( 42 );
-		$expected = array();
-
-		$argLists[] = array( $old, $new, $expected,
-			'[42, 42] to [42] should result in an empty diff' );
-
-
-		$old = array( 42 );
-		$new = array( 42, 42 );
-		$expected = array();
-
-		$argLists[] = array( $old, $new, $expected,
-			'[42] to [42, 42] should result in an empty diff' );
-
-		// TODO: test toString()-based object comparison
-
-		return $argLists;
-	}
-
-	/**
-	 * @dataProvider toDiffNativeProvider
-	 */
-	public function testDoNativeDiff( $old, $new, $expected, $message = '' ) {
-		$this->doTestDiff( new ListDiffer( ListDiffer::MODE_NATIVE ), $old, $new, $expected, $message );
+		$this->doTestDiff( new CallbackListDiffer( $callback ), $old, $new, $expected, $message );
 	}
 
 	protected function doTestDiff( Differ $differ, $old, $new, $expected, $message ) {
@@ -209,20 +176,50 @@ class ListDifferTest extends DiffTestCase {
 		$this->assertArrayEquals( $expected, $actual, false, false, $message );
 	}
 
-	public function testDiffCallsArrayComparatorCorrectly() {
-		$arrayComparer = $this->getMock( 'Diff\ArrayComparer\ArrayComparer' );
+	public function testCallbackComparisonReturningFalse() {
+		$differ = new CallbackListDiffer( function( $foo, $bar ) {
+			return false;
+		} );
 
-		$arrayComparer->expects( $this->exactly( 2 ) )
-			->method( 'diffArrays' )
-			->with(
-				$this->equalTo( array( 42 ) ),
-				$this->equalTo( array( 42 ) )
-			)
-			->will( $this->returnValue( array() ) );
+		$actual = $differ->doDiff( array( 1, '2' ), array( 1, '2', 'foo' ) );
 
-		$differ = new ListDiffer( $arrayComparer );
+		$expected = array(
+			new DiffOpAdd( 1 ),
+			new DiffOpAdd( '2' ),
+			new DiffOpAdd( 'foo' ),
+			new DiffOpRemove( 1 ),
+			new DiffOpRemove( '2' ),
+		);
 
-		$differ->doDiff( array( 42 ), array( 42 ) );
+		$this->assertArrayEquals(
+			$expected, $actual, false, false,
+			'All elements should be removed and added when comparison callback always returns false'
+		);
+	}
+
+	public function testCallbackComparisonReturningTrue() {
+		$differ = new CallbackListDiffer( function( $foo, $bar ) {
+			return true;
+		} );
+
+		$actual = $differ->doDiff( array( 1, '2', 'baz' ), array( 1, 'foo', '2' ) );
+
+		$expected = array();
+
+		$this->assertArrayEquals(
+			$expected, $actual, false, false,
+			'No elements should be removed or added when comparison callback always returns true'
+		);
+	}
+
+	public function testCallbackComparisonReturningNyanCat() {
+		$differ = new CallbackListDiffer( function( $foo, $bar ) {
+			return '~=[,,_,,]:3';
+		} );
+
+		$this->setExpectedException( 'RuntimeException' );
+
+		$differ->doDiff( array( 1, '2', 'baz' ), array( 1, 'foo', '2' ) );
 	}
 
 }

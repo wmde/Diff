@@ -1,6 +1,6 @@
 <?php
 
-namespace Diff\Tests;
+namespace Diff\Tests\Patcher;
 
 use Diff\Comparer\CallbackComparer;
 use Diff\Diff;
@@ -9,6 +9,7 @@ use Diff\DiffOpChange;
 use Diff\DiffOpRemove;
 use Diff\MapPatcher;
 use Diff\Patcher;
+use Diff\Tests\DiffTestCase;
 
 /**
  * @covers Diff\MapPatcher

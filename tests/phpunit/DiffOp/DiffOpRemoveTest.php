@@ -1,6 +1,6 @@
 <?php
 
-namespace Diff\Tests;
+namespace Diff\Tests\DiffOp;
 
 use Diff\DiffOpAdd;
 use Diff\DiffOpRemove;

@@ -35,9 +35,7 @@
 		"classmap": [
 			"src/differ/",
 			"src/diffop/",
-			"src/patcher/",
-			"tests/phpunit/diffop/DiffOpTest.php",
-			"tests/phpunit/DiffTestCase.php"
+			"src/patcher/"
 		]
 	}
 }
