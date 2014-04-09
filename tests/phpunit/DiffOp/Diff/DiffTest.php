@@ -1,12 +1,13 @@
 <?php
 
-namespace Diff\Tests;
+namespace Diff\Tests\DiffOp\Diff;
 
 use Diff\Diff;
 use Diff\DiffOp;
 use Diff\DiffOpAdd;
 use Diff\DiffOpChange;
 use Diff\DiffOpRemove;
+use Diff\Tests\DiffTestCase;
 use stdClass;
 
 /**

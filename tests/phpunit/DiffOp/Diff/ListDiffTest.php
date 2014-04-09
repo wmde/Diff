@@ -1,11 +1,12 @@
 <?php
 
-namespace Diff\Tests;
+namespace Diff\Tests\DiffOp\Diff;
 
 use Diff\Diff;
 use Diff\DiffOpAdd;
 use Diff\DiffOpRemove;
 use Diff\ListDiffer;
+use Diff\Tests\DiffOp\DiffOpTest;
 
 /**
  * @covers Diff\ListDiff

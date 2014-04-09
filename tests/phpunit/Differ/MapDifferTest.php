@@ -1,12 +1,13 @@
 <?php
 
-namespace Diff\Tests;
+namespace Diff\Tests\Differ;
 
 use Diff\Diff;
 use Diff\DiffOpAdd;
 use Diff\DiffOpChange;
 use Diff\DiffOpRemove;
 use Diff\MapDiffer;
+use Diff\Tests\DiffTestCase;
 
 /**
  * @covers Diff\MapDiffer

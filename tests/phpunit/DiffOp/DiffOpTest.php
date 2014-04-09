@@ -1,8 +1,9 @@
 <?php
 
-namespace Diff\Tests;
+namespace Diff\Tests\DiffOp;
 
 use Diff\DiffOp;
+use Diff\Tests\DiffTestCase;
 
 /**
  * Base test class for the Diff\DiffOp deriving classes.
