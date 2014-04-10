@@ -3,7 +3,7 @@ These are the release notes for the [Diff library](README.md).
 Latest release:
 [![Latest Stable Version](https://poser.pugx.org/diff/diff/version.png)](https://packagist.org/packages/diff/diff)
 
-## Version 1.0 (dev)
+## Version 1.0 (2014-04-10)
 
 #### Improvements
 

@@ -17,7 +17,7 @@ On Packagist:
 
 ## Requirements
 
-* PHP 5.3 or later
+* PHP 5.3 or later (tested with PHP 5.3 up to PHP 5.6 and hhvm)
 
 ## Installation
 

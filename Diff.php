@@ -5,7 +5,7 @@ if ( defined( 'Diff_VERSION' ) ) {
 	return 1;
 }
 
-define( 'Diff_VERSION', '1.0 alpha' );
+define( 'Diff_VERSION', '1.0' );
 
 if ( defined( 'MEDIAWIKI' ) ) {
 	call_user_func( function() {
