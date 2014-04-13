@@ -7,9 +7,12 @@
 [![Latest Stable Version](https://poser.pugx.org/diff/diff/version.png)](https://packagist.org/packages/diff/diff)
 [![Download count](https://poser.pugx.org/diff/diff/d/total.png)](https://packagist.org/packages/diff/diff)
 
-**Diff** is a small PHP library with value objects to represent diffs and service objects to do
-various types of operations. These include creating a diff between two data structures,
-applying a diff onto a data structure and merging multiple diffs into one.
+**Diff** is a small standalone PHP library for representing differences between data
+structures, computing such differences, and applying them as patches. It is extremely
+well tested and allows users to define their own comparison strategies.
+
+Diff does not provide any support for computing or representing the differences
+between unstructured data, ie text.
 
 Recent changes can be found in the [release notes](RELEASE-NOTES.md).
 
