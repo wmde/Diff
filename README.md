@@ -1,6 +1,6 @@
 # Diff
 
-*Diff* is a small PHP library with value objects to represent diffs and service objects to do
+**Diff** is a small PHP library with value objects to represent diffs and service objects to do
 various types of operations. These include creating a diff between two data structures,
 applying a diff onto a data structure and merging multiple diffs into one.
 
