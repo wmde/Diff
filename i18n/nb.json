@@ -1,8 +1,0 @@
-{
-    "@metadata": {
-        "authors": [
-            "Jeblad"
-        ]
-    },
-    "diff-desc": "Biblioteket med klasser for å representere diffs av strukturerte data, i tillegg til serviceobjekter for diff og lapping"
-}
