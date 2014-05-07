@@ -15,6 +15,6 @@ return array(
 	'author' => array(
 		'[https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw Jeroen De Dauw]',
 	),
-	'url' => 'https://www.mediawiki.org/wiki/Extension:Diff',
-	'descriptionmsg' => 'diff-desc'
+	'url' => 'https://github.com/wmde/Diff',
+	'description' => 'Library for diffing, patching and representing differences between complex objects'
 );

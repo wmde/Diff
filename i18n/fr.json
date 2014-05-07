@@ -1,9 +1,0 @@
-{
-    "@metadata": {
-        "authors": [
-            "Gomoko",
-            "Wyz"
-        ]
-    },
-    "diff-desc": "Bibliothèque avec des classes pour représenter les deltas ou les données structurées, tout comme les objets de service pour faire le delta entre objets ou les mettre à jour"
-}

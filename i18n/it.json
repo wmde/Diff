@@ -1,9 +1,0 @@
-{
-    "@metadata": {
-        "authors": [
-            "Beta16",
-            "Darth Kule"
-        ]
-    },
-    "diff-desc": "Libreria di classi per rappresentare le differenze di dati strutturati, come pure gli oggetti di servizio agli oggetti di confronto o di aggiornamento"
-}

@@ -1,9 +1,0 @@
-{
-    "@metadata": {
-        "authors": [
-            "Kghbln",
-            "Metalhead64"
-        ]
-    },
-    "diff-desc": "Stellt eine Bibliothek zum Darstellen, sowie Dienstobjekte zum Ändern von Unterschieden zwischen strukturierten Daten bereit"
-}
