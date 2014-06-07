@@ -1,7 +1,7 @@
 {
 	"name": "diff/diff",
 	"type": "library",
-	"description": "Library for diffing, patching and representing differences between complex objects",
+	"description": "Small standalone library for representing differences between data structures, computing such differences, and applying them as patches",
 	"keywords": [
 		"diff",
 		"wikidata",
