@@ -15,6 +15,3 @@ if ( !defined( 'Diff_VERSION' ) ) {
 }
 
 $GLOBALS['wgExtensionCredits']['other'][] = include( __DIR__ . '/Diff.credits.php' );
-
-$GLOBALS['wgMessagesDirs']['DiffExtension'] = __DIR__ . '/i18n';
-$GLOBALS['wgExtensionMessagesFiles']['DiffExtension'] = __DIR__ . '/Diff.i18n.php';
