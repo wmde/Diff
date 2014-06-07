@@ -21,11 +21,9 @@ use InvalidArgumentException;
 class Diff extends \ArrayObject implements DiffOp {
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var boolean|null
 	 */
-	protected $isAssociative = null;
+	private $isAssociative = null;
 
 	/**
 	 * Pointers to the operations of certain types for quick lookup.
@@ -34,7 +32,7 @@ class Diff extends \ArrayObject implements DiffOp {
 	 *
 	 * @var array
 	 */
-	protected $typePointers = array(
+	private $typePointers = array(
 		'add' => array(),
 		'remove' => array(),
 		'change' => array(),
@@ -48,7 +46,7 @@ class Diff extends \ArrayObject implements DiffOp {
 	 *
 	 * @var integer
 	 */
-	protected $indexOffset = 0;
+	private $indexOffset = 0;
 
 	/**
 	 * @since 0.1
@@ -142,7 +140,7 @@ class Diff extends \ArrayObject implements DiffOp {
 	 * @return boolean
 	 * @throws InvalidArgumentException
 	 */
-	protected function preSetElement( $index, $value ) {
+	private function preSetElement( $index, $value ) {
 		/**
 		 * @var DiffOp $value
 		 */
@@ -388,7 +386,7 @@ class Diff extends \ArrayObject implements DiffOp {
 	 *
 	 * @return integer
 	 */
-	protected function getNewOffset() {
+	private function getNewOffset() {
 		while ( $this->offsetExists( $this->indexOffset ) ) {
 			$this->indexOffset++;
 		}
@@ -429,7 +427,7 @@ class Diff extends \ArrayObject implements DiffOp {
 	 *
 	 * @return boolean
 	 */
-	protected function hasValidType( $value ) {
+	private function hasValidType( $value ) {
 		$class = $this->getObjectType();
 		return $value instanceof $class;
 	}
@@ -450,7 +448,7 @@ class Diff extends \ArrayObject implements DiffOp {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	protected function setElement( $index, $value ) {
+	private function setElement( $index, $value ) {
 		if ( !$this->hasValidType( $value ) ) {
 			throw new InvalidArgumentException(
 				'Can only add ' . $this->getObjectType() . ' implementing objects to ' . get_called_class() . '.'

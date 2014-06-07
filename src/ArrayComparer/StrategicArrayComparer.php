@@ -18,7 +18,7 @@ use RuntimeException;
  */
 class StrategicArrayComparer implements ArrayComparer {
 
-	protected $valueComparer;
+	private $valueComparer;
 
 	public function __construct( ValueComparer $valueComparer ) {
 		$this->valueComparer = $valueComparer;
@@ -60,7 +60,7 @@ class StrategicArrayComparer implements ArrayComparer {
 	 * @return bool|int|string
 	 * @throws RuntimeException
 	 */
-	protected function arraySearch( $needle, array $haystack ) {
+	private function arraySearch( $needle, array $haystack ) {
 		foreach ( $haystack as $valueOffset => $thing ) {
 			$areEqual = $this->valueComparer->valuesAreEqual( $needle, $thing );
 

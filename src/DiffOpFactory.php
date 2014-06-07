@@ -16,7 +16,7 @@ class DiffOpFactory {
 	/**
 	 * @var callable|null
 	 */
-	protected $valueConverter;
+	private $valueConverter;
 
 	/**
 	 * Constructor.
@@ -87,7 +87,7 @@ class DiffOpFactory {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	protected function assertHasKey( $key, array $diffOp ) {
+	private function assertHasKey( $key, array $diffOp ) {
 		if ( !array_key_exists( $key, $diffOp ) ) {
 			throw new InvalidArgumentException( 'Invalid array provided. Missing key "' . $key . '"' );
 		}
@@ -108,7 +108,7 @@ class DiffOpFactory {
 	 * @return mixed The $value unchanged, or the return value of calling the
 	 *         value converter callback on $value.
 	 */
-	protected function arrayToObject( $value ) {
+	private function arrayToObject( $value ) {
 		if ( $this->valueConverter !== null && is_array( $value ) ) {
 			$value = call_user_func( $this->valueConverter, $value );
 		}

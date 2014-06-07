@@ -13,7 +13,7 @@ namespace Diff\DiffOp;
  */
 class DiffOpAdd extends AtomicDiffOp {
 
-	protected $newValue;
+	private $newValue;
 
 	/**
 	 * @see DiffOp::getType
