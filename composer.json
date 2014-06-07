@@ -25,6 +25,9 @@
 	"require": {
 		"php": ">=5.3.0"
 	},
+	"require-dev": {
+		"whatthejeff/nyancat-phpunit-resultprinter": "~1.2"
+	},
 	"autoload": {
 		"files" : [
 			"Diff.php"

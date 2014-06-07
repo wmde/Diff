@@ -12,11 +12,7 @@ matrix:
     - php: hhvm
 
 script:
-  - phpunit --coverage-clover build/logs/clover.xml
-
-after_script:
-  - composer require satooshi/php-coveralls:dev-master
-  - php vendor/bin/coveralls -v
+  - phpunit -c tests/phpunit.travis.xml
 
 notifications:
   email:
