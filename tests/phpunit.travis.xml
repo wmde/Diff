@@ -1,27 +1,24 @@
 <phpunit backupGlobals="false"
          backupStaticAttributes="false"
-         bootstrap="tests/bootstrap.php"
+         bootstrap="bootstrap.php"
          cacheTokens="false"
          colors="true"
          convertErrorsToExceptions="true"
-         convertNoticesToExceptions="true"
+         convertNoticesToExceptions="false"
          convertWarningsToExceptions="true"
          stopOnError="false"
          stopOnFailure="false"
          stopOnIncomplete="false"
          stopOnSkipped="false"
-         strict="true"
-         verbose="true"
-         printerFile="vendor/whatthejeff/nyancat-phpunit-resultprinter/src/NyanCat/PHPUnit/ResultPrinter.php"
-         printerClass="NyanCat\PHPUnit\ResultPrinter">
+         verbose="true">
     <testsuites>
         <testsuite name="Diff">
-            <directory>tests</directory>
+            <directory>.</directory>
         </testsuite>
     </testsuites>
     <filter>
         <whitelist addUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">src</directory>
+            <directory suffix=".php">../src</directory>
         </whitelist>
     </filter>
 </phpunit>

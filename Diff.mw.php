@@ -14,4 +14,13 @@ if ( !defined( 'Diff_VERSION' ) ) {
 	die( 'Not an entry point.' );
 }
 
-$GLOBALS['wgExtensionCredits']['other'][] = include( __DIR__ . '/Diff.credits.php' );
+$GLOBALS['wgExtensionCredits']['other'][] = array(
+	'path' => __FILE__,
+	'name' => 'Diff',
+	'version' => Diff_VERSION,
+	'author' => array(
+		'[https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw Jeroen De Dauw]',
+	),
+	'url' => 'https://github.com/wmde/Diff',
+	'description' => 'Library for diffing, patching and representing differences between complex objects'
+);

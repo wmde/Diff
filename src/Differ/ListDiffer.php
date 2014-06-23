@@ -46,7 +46,7 @@ class ListDiffer implements Differ {
 	 *
 	 * @var ArrayComparer
 	 */
-	protected $arrayComparer;
+	private $arrayComparer;
 
 	/**
 	 * @param ArrayComparer $arrayComparer
@@ -65,7 +65,7 @@ class ListDiffer implements Differ {
 	 * @return ArrayComparer
 	 * @throws InvalidArgumentException
 	 */
-	protected function getRealArrayComparer( $arrayComparer ) {
+	private function getRealArrayComparer( $arrayComparer ) {
 		if ( $arrayComparer === null || $arrayComparer === self::MODE_STRICT ) {
 			return new StrictArrayComparer();
 		}
@@ -114,7 +114,7 @@ class ListDiffer implements Differ {
 	 *
 	 * @return array
 	 */
-	protected function diffArrays( array $arrayOne, array $arrayTwo ) {
+	private function diffArrays( array $arrayOne, array $arrayTwo ) {
 		return $this->arrayComparer->diffArrays( $arrayOne, $arrayTwo );
 	}
 

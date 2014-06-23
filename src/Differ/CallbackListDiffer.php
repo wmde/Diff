@@ -24,7 +24,7 @@ class CallbackListDiffer implements Differ {
 	 *
 	 * @var ListDiffer
 	 */
-	protected $differ = null;
+	private $differ = null;
 
 	/**
 	 * Constructor.

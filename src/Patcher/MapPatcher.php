@@ -21,18 +21,16 @@ use Diff\DiffOp\DiffOpRemove;
 class MapPatcher extends ThrowingPatcher {
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var Patcher
 	 */
-	protected $listPatcher;
+	private $listPatcher;
 
 	/**
 	 * @since 0.6
 	 *
 	 * @var ValueComparer|null
 	 */
-	protected $comparer = null;
+	private $comparer = null;
 
 	/**
 	 * @since 0.4
@@ -129,7 +127,7 @@ class MapPatcher extends ThrowingPatcher {
 		return $base;
 	}
 
-	protected function patchMapOrList( array $base, Diff $diff ) {
+	private function patchMapOrList( array $base, Diff $diff ) {
 		if ( $diff->looksAssociative() ) {
 			$base = $this->patch( $base, $diff );
 		}
@@ -140,7 +138,7 @@ class MapPatcher extends ThrowingPatcher {
 		return $base;
 	}
 
-	protected function valuesAreEqual( $firstValue, $secondValue ) {
+	private function valuesAreEqual( $firstValue, $secondValue ) {
 		if ( $this->comparer === null ) {
 			$this->comparer = new StrictComparer();
 		}

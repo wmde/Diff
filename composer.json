@@ -1,7 +1,7 @@
 {
 	"name": "diff/diff",
 	"type": "library",
-	"description": "Library for diffing, patching and representing differences between complex objects",
+	"description": "Small standalone library for representing differences between data structures, computing such differences, and applying them as patches",
 	"keywords": [
 		"diff",
 		"wikidata",
@@ -25,6 +25,9 @@
 	"require": {
 		"php": ">=5.3.0"
 	},
+	"require-dev": {
+		"whatthejeff/nyancat-phpunit-resultprinter": "~1.2"
+	},
 	"autoload": {
 		"files" : [
 			"Diff.php"
@@ -35,7 +38,7 @@
 	},
 	"extra": {
 		"branch-alias": {
-			"dev-master": "1.0.x-dev"
+			"dev-master": "2.0.x-dev"
 		}
 	}
 }
