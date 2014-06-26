@@ -67,7 +67,7 @@ A diff consists out of diff operations. These can be atomic operations such as a
 change and remove. These can also be diffs themselves, when dealing with nested structures.
 Hence the [composite pattern](https://en.wikipedia.org/wiki/Composite_pattern) is used.
 
-Diff operations implement the 'DiffOp' interface.
+Diff operations implement the **DiffOp** interface.
 
 The available operations are:
 
@@ -83,7 +83,7 @@ The `Diff` class can be set to be either associative or non-associative. In case
 
 ### Diffing data
 
-To compute the difference between two data structures, an instance of `Differ` is used.
+To compute the difference between two data structures, an instance of **Differ** is used.
 The `Differ` interface has a single method.
 
 ```php
@@ -112,7 +112,7 @@ All differ functionality can be found in [src/Differ](src/Differ).
 
 ### Applying patches
 
-To apply a diff as a patch onto a data structure, an instance of `Patcher` is used.
+To apply a diff as a patch onto a data structure, an instance of **Patcher** is used.
 The `Patcher` interface has a single method.
 
 ```php
