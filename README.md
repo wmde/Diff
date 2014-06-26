@@ -171,7 +171,8 @@ The `ArrayComposer` interface contains one method:
 
 ```php
 /**
- * Returns an array containing all the entries from arrayOne that are not present in arrayTwo.
+ * Returns an array containing all the entries from arrayOne that are not present
+ * in arrayTwo.
  *
  * Implementations are allowed to hold quantity into account or to disregard it.
  *
