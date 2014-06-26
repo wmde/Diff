@@ -5,7 +5,7 @@ Latest release:
 
 ## Version 2.0 (dev)
 
-* Made most protected fields and methods private
+* Changed visibility of most protected fields and methods to private
 * Removed Diff.credits.php
 
 ## Version 1.0.1 (2014-05-07)
