@@ -46,15 +46,20 @@ You can find a list of the dependencies in the "require" section of the composer
 Load all dependencies and the load the Diff library by including its entry point:
 Diff.php.
 
-## Usage
+## High level structure
 
-The Diff library can be subdivided into several packages.
+The Diff library can be subdivided into several components. The main components are:
 
 * **DiffOp** Value objects that represent add, change, remove and composite operations.
 * **Differ** Service objects to create a diff between two sets of data.
 * **Patcher** Service objects toa apply a diff as patch to a set of data.
-* **Comparer** Support service objects for determining if two values are equal.
-* **ArrayComparer** Support service objects for computing the difference between to arrays.
+
+There are two support components, which are nevertheless package public:
+
+* **Comparer** Service objects for determining if two values are equal.
+* **ArrayComparer** Service objects for computing the difference between to arrays.
+
+## Usage
 
 ### DiffOp
 
