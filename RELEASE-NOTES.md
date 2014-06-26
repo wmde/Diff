@@ -21,8 +21,8 @@ Latest release:
 
 #### Compatibility breaks
 
-* Removed the Diff\IDiff interface (deprecated since 0.5)
-* Removed the Diff\IDiffOp interface (deprecated since 0.4)
+* Removed the `Diff\IDiff` interface (deprecated since 0.5)
+* Removed the `Diff\IDiffOp` interface (deprecated since 0.4)
 * Replaced custom autoloader with PSR-4 based loading via Composer
 
 #### Deprecations
@@ -36,9 +36,9 @@ Latest release:
 
 #### Additions
 
-* Added OrderedArrayComparer, an ArrayComparer for ordered arrays
-* Added OrderedListDiffer, a Differ that acts as facade for a ListDiffer using an OrderedArrayComparer
-* Added ComparableComparer, a ValueComparer that makes use of a "equals" method of the objects it compares
+* Added `OrderedArrayComparer`, an `ArrayComparer` for ordered arrays
+* Added `OrderedListDiffer`, a Differ that acts as facade for a `ListDiffer` using an `OrderedArrayComparer`
+* Added `ComparableComparer`, a `ValueComparer` that makes use of a "equals" method of the objects it compares
 
 ## Version 0.8 (2013-08-26)
 

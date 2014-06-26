@@ -31,11 +31,11 @@ the git repository and take care of loading yourself.
 To add this package as a local, per-project dependency to your project, simply add a
 dependency on `diff/diff` to your project's `composer.json` file.
 Here is a minimal example of a `composer.json` file that just defines a dependency on
-Diff 1.0:
+Diff 2.0:
 
     {
         "require": {
-            "diff/diff": "1.0.*"
+            "diff/diff": "2.0.*"
         }
     }
 
@@ -54,20 +54,20 @@ The Diff library can be subdivided into several components.
 
 First and foremost are the objects to represent diffs. Diffs are represented by the Diff class, which
 is an aggregate for diff operations, think "add" and "remove", that all extend from DiffOp. Diff
-itself is a DiffOp, since the library supports recursion, and thus has the need to be able to
+itself is a `DiffOp`, since the library supports recursion, and thus has the need to be able to
 represent nested diffs.
 
 The available DiffOps are:
 
-* DiffOpAdd - addition of a value (newValue)
-* DiffOpChange - modification of a value (oldValue, newValue)
-* DiffOpRemove - removal of a value (oldValue)
-* Diff - a collection of diff operations
+* `DiffOpAdd` - addition of a value (newValue)
+* `DiffOpChange` - modification of a value (oldValue, newValue)
+* `DiffOpRemove` - removal of a value (oldValue)
+* `Diff` - a collection of diff operations
 
-These can all be found in <code>includes/diffop</code>.
+These can all be found in [src/DiffOp].
 
-The Diff class can be set to be either associative or non-associative. In case of the later, only
-DiffOpAdd and DiffOpRemove are allowed in it.
+The `Diff` class can be set to be either associative or non-associative. In case of the later, only
+`DiffOpAdd` and `DiffOpRemove` are allowed in it.
 
 ### Differ
 
@@ -92,18 +92,18 @@ public function doDiff( array $oldValues, array $newValues );
 
 Implementations provided by Diff:
 
-* ListDiffer: Differ that only looks at the values of the arrays (and thus ignores key differences).
-* MapDiffer: Differ that does an associative diff between two arrays, with the option to do this recursively.
-* CallbackListDiffer: Since 0.5. Differ that only looks at the values of the arrays and compares them with a callback.
-* OrderedListDiffer: Since 0.9. Differ that looks at the order of the values and the values of the arrays.
+* `ListDiffer`: Differ that only looks at the values of the arrays (and thus ignores key differences).
+* `MapDiffer`: Differ that does an associative diff between two arrays, with the option to do this recursively.
+* `CallbackListDiffer`: Since 0.5. Differ that only looks at the values of the arrays and compares them with a callback.
+* `OrderedListDiffer`: Since 0.9. Differ that looks at the order of the values and the values of the arrays.
 
 Both Differ objects come with a few options that can be used to change their behaviour.
 
-All differ functionality can be found in <code>includes/differ</code>.
+All differ functionality can be found in [src/Differ].
 
 ### Patcher
 
-The third component that comes with the Diff library is a set of classes implementing the Patcher
+The third component that comes with the Diff library is a set of classes implementing the `Patcher`
 interface. This interface contains a single simple method:
 
 ```php
@@ -123,16 +123,16 @@ public function patch( array $base, Diff $diffOps );
 
 Implementations provided by Diff:
 
-* ListPatcher: Applies non-associative diffs to a base. With default options does the reverse of ListDiffer
-* MapPatcher: Applies diff to a base, recursively if needed. With default options does the reverse of MapDiffer
+* `ListPatcher`: Applies non-associative diffs to a base. With default options does the reverse of `ListDiffer`
+* `MapPatcher`: Applies diff to a base, recursively if needed. With default options does the reverse of `MapDiffer`
 
-All classes part of the patcher component can be found in <code>includes/patcher</code>
+All classes part of the patcher component can be found in [src/Patcher]
 
 ### ValueComparer
 
 Added in 0.6
 
-The Diff\Comparer\ValueComposer interface contains one method:
+The `ValueComparer` interface contains one method:
 
 ```php
 /**
@@ -148,17 +148,17 @@ public function valuesAreEqual( $firstValue, $secondValue );
 
 Implementations provided by Diff:
 
-* StrictComparer: Value comparer that uses PHPs native strict equality check (ie ===).
-* CallbackComparer: Adapter around a comparison callback that implements the ValueComparer interface.
-* ComparableComparer: Since 0.9. Value comparer for objects that provide an equals method taking a single argument.
+* `StrictComparer`: Value comparer that uses PHPs native strict equality check (ie ===).
+* `CallbackComparer`: Adapter around a comparison callback that implements the `ValueComparer` interface.
+* `ComparableComparer`: Since 0.9. Value comparer for objects that provide an equals method taking a single argument.
 
-All classes part of the ValueComparer component can be found in <code>includes/Comparer</code>
+All classes part of the ValueComparer component can be found in [src/Comparer]
 
 ### ArrayComparer
 
 Added in 0.8
 
-The Diff\ArrayComparer\ArrayComposer interface contains one method:
+The `ArrayComposer` interface contains one method:
 
 ```php
 /**
@@ -178,12 +178,12 @@ public function diffArrays( array $firstArray, array $secondArray );
 
 Implementations provided by Diff:
 
-* NativeArrayComparer: Adapter for PHPs native array_diff method.
-* StrategicArrayComparer: Computes the difference between two arrays by comparing elements with a ValueComparer.
-* StrictArrayComparer: Does strict comparison of values and holds quantity into account.
-* OrderedArrayComparer: Since 0.9. Computes the difference between two ordered arrays by comparing elements with a ValueComparer.
+* `NativeArrayComparer`: Adapter for PHPs native array_diff method.
+* `StrategicArrayComparer`: Computes the difference between two arrays by comparing elements with a `ValueComparer`.
+* `StrictArrayComparer`: Does strict comparison of values and holds quantity into account.
+* `OrderedArrayComparer`: Since 0.9. Computes the difference between two ordered arrays by comparing elements with a `ValueComparer`.
 
-All classes part of the ArrayComparer component can be found in <code>includes/ArrayComparer</code>
+All classes part of the ArrayComparer component can be found in [src/ArrayComparer]
 
 ## Examples
 
