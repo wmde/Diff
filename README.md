@@ -203,7 +203,7 @@ $diff = new Diff( array(
 	'email' => new DiffOpAdd( 'nyan@c.at' ),
 	'awesome' => new DiffOpChange( 42, 9001 ),
 ) );
-```php
+```
 
 ### Computing a diff
 
@@ -219,7 +219,7 @@ $newVersion = array(
 
 $differ = new MapDiffer();
 $diff = $differ->diff( $oldVersion, $newVersion );
-```php
+```
 
 ### Applying a diff as patch
 
@@ -232,7 +232,7 @@ $diff = new Diff( /* ... */ );
 
 $patcher = new MapPatcher();
 $newVersion = $patcher->patch( $oldVersion, $diff );
-```php
+```
 
 ## Links
 
