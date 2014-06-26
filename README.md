@@ -48,7 +48,13 @@ Diff.php.
 
 ## Usage
 
-The Diff library can be subdivided into several components.
+The Diff library can be subdivided into several packages.
+
+* **DiffOp** Value objects that represent add, change, remove and composite operations.
+* **Differ** Service objects to create a diff between two sets of data.
+* **Patcher** Service objects toa apply a diff as patch to a set of data.
+* **Comparer** Support service objects for determining if two values are equal.
+* **ArrayComparer** Support service objects for computing the difference between to arrays.
 
 ### DiffOp
 
