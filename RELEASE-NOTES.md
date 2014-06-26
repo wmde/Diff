@@ -7,6 +7,7 @@ Latest release:
 
 * Changed visibility of most protected fields and methods to private
 * Removed Diff.credits.php
+* Removed unused `Diff\Appendable` interface
 
 ## Version 1.0.1 (2014-05-07)
 
