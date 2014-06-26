@@ -64,7 +64,7 @@ The available DiffOps are:
 * `DiffOpRemove` - removal of a value (oldValue)
 * `Diff` - a collection of diff operations
 
-These can all be found in [src/DiffOp].
+These can all be found in [src/DiffOp]().
 
 The `Diff` class can be set to be either associative or non-associative. In case of the later, only
 `DiffOpAdd` and `DiffOpRemove` are allowed in it.
@@ -99,7 +99,7 @@ Implementations provided by Diff:
 
 Both Differ objects come with a few options that can be used to change their behaviour.
 
-All differ functionality can be found in [src/Differ].
+All differ functionality can be found in [src/Differ]().
 
 ### Patcher
 
@@ -126,7 +126,7 @@ Implementations provided by Diff:
 * `ListPatcher`: Applies non-associative diffs to a base. With default options does the reverse of `ListDiffer`
 * `MapPatcher`: Applies diff to a base, recursively if needed. With default options does the reverse of `MapDiffer`
 
-All classes part of the patcher component can be found in [src/Patcher]
+All classes part of the patcher component can be found in [src/Patcher]()
 
 ### ValueComparer
 
@@ -152,7 +152,7 @@ Implementations provided by Diff:
 * `CallbackComparer`: Adapter around a comparison callback that implements the `ValueComparer` interface.
 * `ComparableComparer`: Since 0.9. Value comparer for objects that provide an equals method taking a single argument.
 
-All classes part of the ValueComparer component can be found in [src/Comparer]
+All classes part of the ValueComparer component can be found in [src/Comparer]()
 
 ### ArrayComparer
 
@@ -183,7 +183,7 @@ Implementations provided by Diff:
 * `StrictArrayComparer`: Does strict comparison of values and holds quantity into account.
 * `OrderedArrayComparer`: Since 0.9. Computes the difference between two ordered arrays by comparing elements with a `ValueComparer`.
 
-All classes part of the ArrayComparer component can be found in [src/ArrayComparer]
+All classes part of the ArrayComparer component can be found in [src/ArrayComparer]()
 
 ## Examples
 
