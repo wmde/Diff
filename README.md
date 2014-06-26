@@ -61,14 +61,15 @@ There are two support components, which are nevertheless package public:
 
 ## Usage
 
-### DiffOp
+### Representing diffs
 
-First and foremost are the objects to represent diffs. Diffs are represented by the Diff class, which
-is an aggregate for diff operations, think "add" and "remove", that all extend from DiffOp. Diff
-itself is a `DiffOp`, since the library supports recursion, and thus has the need to be able to
-represent nested diffs.
+A diff consists out of diff operations. These can be atomic operations such as add,
+change and remove. These can also be diffs themselves, when dealing with nested structures.
+Hence the [composite pattern](https://en.wikipedia.org/wiki/Composite_pattern) is used.
 
-The available DiffOps are:
+Diff operations implement the 'DiffOp' interface.
+
+The available operations are:
 
 * `DiffOpAdd` - addition of a value (newValue)
 * `DiffOpChange` - modification of a value (oldValue, newValue)
@@ -80,17 +81,16 @@ These can all be found in [src/DiffOp](src/DiffOp).
 The `Diff` class can be set to be either associative or non-associative. In case of the later, only
 `DiffOpAdd` and `DiffOpRemove` are allowed in it.
 
-### Differ
+### Diffing data
 
-Often you need to construct a diff between two arrays, rather then creating it manually. To do this,
-the Diff library includes a few classes implementing the Differ interface, which contains one very
-simple method.
+To compute the difference between two data structures, an instance of `Differ` is used.
+The `Differ` interface has a single method.
 
 ```php
 /**
  * Takes two arrays, computes the diff, and returns this diff as an array of DiffOp.
  *
- * @since 0.1
+ * @since 0.4
  *
  * @param array $oldValues The first array
  * @param array $newValues The second array
@@ -108,21 +108,19 @@ Implementations provided by Diff:
 * `CallbackListDiffer`: Since 0.5. Differ that only looks at the values of the arrays and compares them with a callback.
 * `OrderedListDiffer`: Since 0.9. Differ that looks at the order of the values and the values of the arrays.
 
-Both Differ objects come with a few options that can be used to change their behaviour.
-
 All differ functionality can be found in [src/Differ](src/Differ).
 
-### Patcher
+### Applying patches
 
-The third component that comes with the Diff library is a set of classes implementing the `Patcher`
-interface. This interface contains a single simple method:
+To apply a diff as a patch onto a data structure, an instance of `Patcher` is used.
+The `Patcher` interface has a single method.
 
 ```php
 /**
  * Applies the applicable operations from the provided diff to
  * the provided base value.
  *
- * @since 0.1
+ * @since 0.4
  *
  * @param array $base
  * @param Diff $diffOps
@@ -198,105 +196,43 @@ All classes part of the ArrayComparer component can be found in [src/ArrayCompar
 
 ## Examples
 
-#### DiffOp
+### Manually constructing a diff
 
 ```php
-// Constructing an empty diff
-$diff = new Diff();
+$diff = new Diff( array(
+	'email' => new DiffOpAdd( 'nyan@c.at' ),
+	'awesome' => new DiffOpChange( 42, 9001 ),
+) );
+```php
 
-// Adding a single add-operation to the diff
-$diff[] = new DiffOpAdd( 'added value' );
-
-// Adding a single change-operation to the diff for key "awesomeness"
-$diff['awesomeness'] = new DiffOpChange( 9000, 9001 );
-
-// Getting an array with the change operations from the Diff
-$changeOps = $diff->getChanges();
-
-// Creating a new diff with a set op DiffOps, and specifying that it is an associative diff
-$diff = new Diff( $changeOps, true );
-
-// Looping over the diff operations that make up the diff
-foreach ( $diff as $diffOp ) {}
-
-// Removing the "awesomeness" operation from the diff
-unset( $diff['awesomeness'] );
-
-// Adding a non-associative diff with one add operation to the diff for the "recursion" key
-$diff['recursion'] = new Diff( array( DiffOpAdd( 42 ) ), false );
-
-// Counting the number of diff operations that make up the diff
-count( $diff );
-```
-
-#### Differ
+### Computing a diff
 
 ```php
-$oldValues = array( 0, 1, 2, 42, 9001, 'foobar' );
-$newValues = array( 0, 0, 23, 'foobar', 1, 2 );
-
-$differ = new ListDiffer();
-
-$diffOps = $differ->doDiff( $oldValues, $newValues );
-
-// This is the result
-$diffOps = array(
-    DiffOpRemove( 42 ),
-    DiffOpRemove( 9001 )
-    DiffOpAdd( 0 ),
-    DiffOpAdd( 23 )
+$oldVersion = array(
+	'awesome' => 42,
 );
-```
 
-```php
-$oldValues = array( 'a' => 0, 'b' => array( 'c' => 0, 'd' => 1 ) );
-$newValues = array( 'a' => 1, 'b' => array( 'c' => 10, 'd' => 1 ), 'e' => 42 );
+$newVersion = array(
+	'email' => 'nyan@c.at',
+	'awesome' => 9001,
+);
 
 $differ = new MapDiffer();
+$diff = $differ->diff( $oldVersion, $newVersion );
+```php
 
-$diffOps = $differ->doDiff( $oldValues, $newValues );
+### Applying a diff as patch
 
-// This is the result
-$diffOps = array(
-    'a' => DiffOpChange( 0, 1 ),
-    'b' => Diff( array( 'c' => new DiffOpChange( 0, 10 ) ) ),
-    'e' => DiffOpAdd( 42 )
+```php
+$oldVersion = array(
+	/* ... */
 );
-```
 
-#### Patcher
+$diff = new Diff( /* ... */ );
 
+$patcher = new MapPatcher();
+$newVersion = $patcher->patch( $oldVersion, $diff );
 ```php
-$oldValues = array( 0, 1, 2, 42, 9001, 'foobar' );
-$diff = new Diff( array(
-    'a' => DiffOpChange( 0, 1 ),
-    'b' => Diff( array( 'c' => new DiffOpChange( 0, 10 ) ) ),
-    'e' => DiffOpAdd( 42 )
-) );
-
-$patcher = new ListPatcher();
-
-$newValues = $patcher->patch( $oldValues, $diff );
-
-// This is the result
-$diffOps = array( 0, 0, 23, 'foobar', 1, 2 );
-```
-
-```php
-$oldValues = array( 'a' => 0, 'b' => array( 'c' => 0, 'd' => 1 ) );
-$diff = new Diff( array(
-    'a' => DiffOpChange( 0, 1 ),
-    'b' => Diff( array( 'c' => new DiffOpChange( 0, 10 ) ) ),
-    'e' => DiffOpAdd( 42 )
-) );
-
-$differ = new MapPatcher();
-
-$newValues = $patcher->patch( $oldValues, $diff );
-
-// This is the result
-$newValues = array( 'a' => 1, 'b' => array( 'c' => 10, 'd' => 1 ), 'e' => 42 );
-```
 
 ## Links
 
