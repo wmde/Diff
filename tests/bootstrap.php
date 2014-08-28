@@ -6,7 +6,7 @@
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 
-if ( php_sapi_name() !== 'cli' ) {
+if ( PHP_SAPI !== 'cli' ) {
 	die( 'Not an entry point' );
 }
 
