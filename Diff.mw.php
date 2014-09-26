@@ -22,5 +22,6 @@ $GLOBALS['wgExtensionCredits']['other'][] = array(
 		'[https://www.mediawiki.org/wiki/User:Jeroen_De_Dauw Jeroen De Dauw]',
 	),
 	'url' => 'https://github.com/wmde/Diff',
-	'description' => 'Library for diffing, patching and representing differences between complex objects'
+	'description' => 'Library for diffing, patching and representing differences between complex objects',
+	'license-name' => 'GPL-2.0+'
 );
