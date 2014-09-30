@@ -52,7 +52,7 @@ The Diff library can be subdivided into several components. The main components 
 
 * **DiffOp** Value objects that represent add, change, remove and composite operations.
 * **Differ** Service objects to create a diff between two sets of data.
-* **Patcher** Service objects toa apply a diff as patch to a set of data.
+* **Patcher** Service objects to apply a diff as patch to a set of data.
 
 There are two support components, which are nevertheless package public:
 
