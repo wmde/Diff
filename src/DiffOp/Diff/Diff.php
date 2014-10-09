@@ -164,8 +164,6 @@ class Diff extends \ArrayObject implements DiffOp {
 	 * @since 0.1
 	 *
 	 * @param string $serialization
-	 *
-	 * @return array
 	 */
 	public function unserialize( $serialization ) {
 		$serializationData = unserialize( $serialization );
@@ -189,8 +187,6 @@ class Diff extends \ArrayObject implements DiffOp {
 		elseif ( $this instanceof ListDiff ) {
 			$this->isAssociative = false;
 		}
-
-		return $serializationData;
 	}
 
 	/**
