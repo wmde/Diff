@@ -375,10 +375,10 @@ class DiffTest extends DiffTestCase {
 
 		$this->assertInstanceOf( '\Diff\Diff', $diff );
 		$this->assertTrue( $diff->isAssociative() );
-		$this->assertEquals( 4, count( $diff ) );
-		$this->assertEquals( 1, count( $diff->getAdditions() ) );
-		$this->assertEquals( 1, count( $diff->getRemovals() ) );
-		$this->assertEquals( 1, count( $diff->getChanges() ) );
+		$this->assertSame( 4, $diff->count() );
+		$this->assertSame( 1, count( $diff->getAdditions() ) );
+		$this->assertSame( 1, count( $diff->getRemovals() ) );
+		$this->assertSame( 1, count( $diff->getChanges() ) );
 	}
 
 	/**
@@ -600,8 +600,8 @@ class DiffTest extends DiffTestCase {
 		$serialization = serialize( $list );
 		$copy = unserialize( $serialization );
 
-		$this->assertEquals( $serialization, serialize( $copy ) );
-		$this->assertEquals( count( $list ), count( $copy ) );
+		$this->assertSame( $serialization, serialize( $copy ) );
+		$this->assertSame( $list->count(), $copy->count() );
 
 		$list = $list->getArrayCopy();
 		$copy = $copy->getArrayCopy();

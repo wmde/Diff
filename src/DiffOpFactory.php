@@ -87,7 +87,7 @@ class DiffOpFactory {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	private function assertHasKey( $key, array $diffOp ) {
+	protected function assertHasKey( $key, array $diffOp ) {
 		if ( !array_key_exists( $key, $diffOp ) ) {
 			throw new InvalidArgumentException( 'Invalid array provided. Missing key "' . $key . '"' );
 		}

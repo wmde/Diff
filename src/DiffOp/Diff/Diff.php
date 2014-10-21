@@ -289,7 +289,7 @@ class Diff extends \ArrayObject implements DiffOp {
 		 * @var DiffOp $diffOp
 		 */
 		foreach ( $this as $diffOp ) {
-			$count += count( $diffOp );
+			$count += $diffOp->count();
 		}
 
 		return $count;

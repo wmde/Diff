@@ -67,9 +67,6 @@ class MapPatcher extends ThrowingPatcher {
 	 * @throws PatcherException
 	 */
 	public function patch( array $base, Diff $diff ) {
-		/**
-		 * @var DiffOp $diffOp
-		 */
 		foreach ( $diff as $key => $diffOp ) {
 			if ( $diffOp instanceof DiffOpAdd ) {
 				if ( array_key_exists( $key, $base ) ) {

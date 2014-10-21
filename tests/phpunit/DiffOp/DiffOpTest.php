@@ -131,7 +131,7 @@ abstract class DiffOpTest extends DiffTestCase {
 	 */
 	public function testCount( DiffOp $diffOp ) {
 		if ( $diffOp->isAtomic() ) {
-			$this->assertEquals( 1, count( $diffOp ) );
+			$this->assertSame( 1, $diffOp->count() );
 		}
 		else {
 			$count = 0;
@@ -143,7 +143,7 @@ abstract class DiffOpTest extends DiffTestCase {
 				$count += $childOp->count();
 			}
 
-			$this->assertEquals( $count, count( $diffOp ) );
+			$this->assertSame( $count, $diffOp->count() );
 		}
 	}
 
