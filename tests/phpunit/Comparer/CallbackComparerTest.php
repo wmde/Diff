@@ -16,7 +16,7 @@ use Diff\Tests\DiffTestCase;
  */
 class CallbackComparerTest extends DiffTestCase {
 
-	protected function newComparerInstance() {
+	private function newComparerInstance() {
 		return new CallbackComparer( function( $firstValue, $secondValue ) {
 			return $firstValue === 1 || $firstValue === $secondValue;
 		} );

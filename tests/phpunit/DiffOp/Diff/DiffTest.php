@@ -96,16 +96,10 @@ class DiffTest extends DiffTestCase {
 	}
 
 	public function testPreSetElement() {
-		$pokemons = null;
+		$this->setExpectedException( 'Exception' );
 
 		$diff = new Diff( array(), false );
-
-		try {
-			$diff[] = new DiffOpChange( 0, 1 );
-		}
-		catch( \Exception $pokemons ) {}
-
-		$this->assertInstanceOf( '\Exception', $pokemons );
+		$diff[] = new DiffOpChange( 0, 1 );
 	}
 
 	/**
@@ -464,11 +458,9 @@ class DiffTest extends DiffTestCase {
 	}
 
 	/**
-	 * @since 0.6
-	 *
 	 * @param callback $function
 	 */
-	protected function checkTypeChecks( $function ) {
+	private function checkTypeChecks( $function ) {
 		$excption = null;
 		$list = new Diff();
 
@@ -482,11 +474,9 @@ class DiffTest extends DiffTestCase {
 	 * Asserts that an InvalidArgumentException gets thrown when calling the provided
 	 * callable. Extra arguments specified to the method are also provided to the callable.
 	 *
-	 * @since 0.6
-	 *
 	 * @param callable $function
 	 */
-	protected function assertInvalidArgument( $function ) {
+	private function assertInvalidArgument( $function ) {
 		$this->setExpectedException( 'InvalidArgumentException' );
 
 		$arguments = func_get_args();
@@ -682,4 +672,3 @@ class DiffTest extends DiffTestCase {
 	}
 
 }
-	

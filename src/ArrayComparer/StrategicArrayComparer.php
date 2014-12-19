@@ -52,8 +52,6 @@ class StrategicArrayComparer implements ArrayComparer {
 	}
 
 	/**
-	 * @since 0.8
-	 *
 	 * @param string|int $needle
 	 * @param array $haystack
 	 *

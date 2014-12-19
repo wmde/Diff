@@ -52,8 +52,6 @@ class OrderedArrayComparer implements ArrayComparer {
 	}
 
 	/**
-	 * @since 0.9
-	 *
 	 * @param string|int $needle
 	 * @param array $haystack
 	 * @param int|string $valueOffset

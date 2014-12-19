@@ -26,7 +26,7 @@ class OrderedListDifferTest extends DiffTestCase {
 	/**
 	 * Returns those that both work for native and strict mode.
 	 */
-	protected function getCommonArgLists() {
+	private function getCommonArgLists() {
 		$argLists = array();
 
 		$old = array();
@@ -248,7 +248,7 @@ class OrderedListDifferTest extends DiffTestCase {
 		);
 	}
 
-	protected function doTestDiff( Differ $differ, $old, $new, $expected, $message ) {
+	private function doTestDiff( Differ $differ, $old, $new, $expected, $message ) {
 		$actual = $differ->doDiff( $old, $new );
 
 		$this->assertArrayEquals( $expected, $actual, false, false, $message );
