@@ -14,7 +14,7 @@ matrix:
     - php: hhvm-nightly
 
 script:
-  - phpunit -c tests/phpunit.travis.xml
+  - phpunit
 
 notifications:
   email:
