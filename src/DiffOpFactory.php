@@ -19,8 +19,6 @@ class DiffOpFactory {
 	private $valueConverter;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.5
 	 *
 	 * @param callable|null $valueConverter optional callback used to convert special
@@ -39,7 +37,7 @@ class DiffOpFactory {
 	 *
 	 * @param array $diffOp
 	 *
-	 * @return DiffOp
+	 * @return DiffOp\DiffOp
 	 * @throws InvalidArgumentException
 	 */
 	public function newFromArray( array $diffOp ) {
@@ -47,18 +45,18 @@ class DiffOpFactory {
 
 		if ( $diffOp['type'] === 'add' ) {
 			$this->assertHasKey( 'newvalue', $diffOp );
-			return new DiffOpAdd( $this->arrayToObject( $diffOp['newvalue'] ) );
+			return new DiffOp\DiffOpAdd( $this->arrayToObject( $diffOp['newvalue'] ) );
 		}
 
 		if ( $diffOp['type'] === 'remove' ) {
 			$this->assertHasKey( 'oldvalue', $diffOp );
-			return new DiffOpRemove( $this->arrayToObject( $diffOp['oldvalue'] ) );
+			return new DiffOp\DiffOpRemove( $this->arrayToObject( $diffOp['oldvalue'] ) );
 		}
 
 		if ( $diffOp['type'] === 'change' ) {
 			$this->assertHasKey( 'newvalue', $diffOp );
 			$this->assertHasKey( 'oldvalue', $diffOp );
-			return new DiffOpChange(
+			return new DiffOp\DiffOpChange(
 				$this->arrayToObject( $diffOp['oldvalue'] ),
 				$this->arrayToObject( $diffOp['newvalue'] ) );
 		}
@@ -73,7 +71,7 @@ class DiffOpFactory {
 				$operations[$key] = $this->newFromArray( $operation );
 			}
 
-			return new Diff( $operations, $diffOp['isassoc'] );
+			return new DiffOp\Diff\Diff( $operations, $diffOp['isassoc'] );
 		}
 
 		throw new InvalidArgumentException( 'Invalid array provided. Unknown type' );
@@ -82,7 +80,7 @@ class DiffOpFactory {
 	/**
 	 * @since 0.5
 	 *
-	 * @param mixed $key
+	 * @param string $key
 	 * @param array $diffOp
 	 *
 	 * @throws InvalidArgumentException
