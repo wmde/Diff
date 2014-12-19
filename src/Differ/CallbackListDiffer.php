@@ -27,8 +27,6 @@ class CallbackListDiffer implements Differ {
 	private $differ = null;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.5
 	 *
 	 * @param callable $comparisonCallback

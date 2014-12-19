@@ -61,7 +61,7 @@ class StrategicArrayComparerTest extends DiffTestCase {
 		);
 	}
 
-	protected function assertNoDifference( ArrayComparer $arrayComparer, array $arrayOne, array $arrayTwo ) {
+	private function assertNoDifference( ArrayComparer $arrayComparer, array $arrayOne, array $arrayTwo ) {
 		$this->assertEquals(
 			array(),
 			$arrayComparer->diffArrays(
@@ -105,7 +105,7 @@ class StrategicArrayComparerTest extends DiffTestCase {
 		);
 	}
 
-	protected function assertAllDifferent( ArrayComparer $arrayComparer, array $arrayOne, array $arrayTwo ) {
+	private function assertAllDifferent( ArrayComparer $arrayComparer, array $arrayOne, array $arrayTwo ) {
 		$this->assertEquals(
 			$arrayOne,
 			$arrayComparer->diffArrays(

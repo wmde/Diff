@@ -72,7 +72,7 @@ class ComparableComparerTest extends DiffTestCase {
 
 class StubComparable {
 
-	protected $field;
+	private $field;
 
 	public function __construct( $field ) {
 		$this->field = $field;

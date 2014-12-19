@@ -28,8 +28,6 @@ class OrderedListDiffer implements Differ {
 	private $differ = null;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.9
 	 *
 	 * @param ValueComparer $comparer

@@ -39,8 +39,6 @@ class MapDiffer implements Differ {
 	private $comparisonCallback = null;
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.4
 	 *
 	 * @param bool $recursively

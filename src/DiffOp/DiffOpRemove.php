@@ -27,8 +27,6 @@ class DiffOpRemove extends AtomicDiffOp {
 	}
 
 	/**
-	 * Constructor.
-	 *
 	 * @since 0.1
 	 *
 	 * @param mixed $oldValue

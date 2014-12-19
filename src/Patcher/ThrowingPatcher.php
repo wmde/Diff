@@ -19,11 +19,9 @@ use Diff\DiffOp\Diff\Diff;
 abstract class ThrowingPatcher implements PreviewablePatcher {
 
 	/**
-	 * @since 0.4
-	 *
 	 * @var boolean
 	 */
-	protected $throwErrors;
+	private $throwErrors;
 
 	/**
 	 * @since 0.4

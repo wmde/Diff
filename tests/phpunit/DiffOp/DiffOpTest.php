@@ -4,6 +4,8 @@ namespace Diff\Tests\DiffOp;
 
 use Diff\DiffOp\DiffOp;
 use Diff\Tests\DiffTestCase;
+use Exception;
+use ReflectionClass;
 
 /**
  * Base test class for the Diff\DiffOp\DiffOp deriving classes.
@@ -44,10 +46,8 @@ abstract class DiffOpTest extends DiffTestCase {
 	 * @return mixed
 	 */
 	public function newInstance() {
-		$reflector = new \ReflectionClass( $this->getClass() );
-		$args = func_get_args();
-		$instance = $reflector->newInstanceArgs( $args );
-		return $instance;
+		$reflector = new ReflectionClass( $this->getClass() );
+		return $reflector->newInstanceArgs( func_get_args() );
 	}
 
 	/**
@@ -80,21 +80,18 @@ abstract class DiffOpTest extends DiffTestCase {
 	 */
 	public function testConstructor() {
 		$args = func_get_args();
-
 		$valid = array_shift( $args );
-		$pokemons = null;
 
 		try {
 			$dataItem = call_user_func_array( array( $this, 'newInstance' ), $args );
 			$this->assertInstanceOf( $this->getClass(), $dataItem );
-		}
-		catch ( \Exception $pokemons ) {
+		} catch ( Exception $ex ) {
 			if ( $valid === true ) {
-				throw $pokemons;
+				throw $ex;
 			}
 
 			if ( is_string( $valid ) ) {
-				$this->assertEquals( $valid, get_class( $pokemons ) );
+				$this->assertEquals( $valid, get_class( $ex ) );
 			}
 			else {
 				$this->assertFalse( $valid );

@@ -22,7 +22,7 @@ class ListDifferTest extends DiffTestCase {
 	/**
 	 * Returns those that both work for native and strict mode.
 	 */
-	protected function getCommonArgLists() {
+	private function getCommonArgLists() {
 		$argLists = array();
 
 		$old = array();
@@ -204,7 +204,7 @@ class ListDifferTest extends DiffTestCase {
 		$this->doTestDiff( new ListDiffer( ListDiffer::MODE_NATIVE ), $old, $new, $expected, $message );
 	}
 
-	protected function doTestDiff( Differ $differ, $old, $new, $expected, $message ) {
+	private function doTestDiff( Differ $differ, $old, $new, $expected, $message ) {
 		$actual = $differ->doDiff( $old, $new );
 
 		$this->assertArrayEquals( $expected, $actual, false, false, $message );

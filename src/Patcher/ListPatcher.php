@@ -3,7 +3,6 @@
 namespace Diff\Patcher;
 
 use Diff\DiffOp\Diff\Diff;
-use Diff\DiffOp\DiffOp;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
 
@@ -35,7 +34,7 @@ class ListPatcher extends ThrowingPatcher {
 	 * @throws PatcherException
 	 */
 	public function patch( array $base, Diff $diff ) {
-		if ( $this->throwErrors && $diff->looksAssociative() ) {
+		if ( $diff->looksAssociative() ) {
 			$this->handleError( 'ListPatcher can only patch using non-associative diffs' );
 		}
 
