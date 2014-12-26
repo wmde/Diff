@@ -107,8 +107,6 @@ class ListDiffer implements Differ {
 	}
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param array $arrayOne
 	 * @param array $arrayTwo
 	 *

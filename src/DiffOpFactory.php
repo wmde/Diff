@@ -99,8 +99,6 @@ class DiffOpFactory {
 	 * unchanged. The Converter callback is intended for constructing an object from an array,
 	 * but may also just leave the value unchanged if it cannot handle it.
 	 *
-	 * @since 0.5
-	 *
 	 * @param mixed $value The value to convert
 	 *
 	 * @return mixed The $value unchanged, or the return value of calling the
