@@ -32,8 +32,6 @@ class MapDiffer implements Differ {
 	private $listDiffer;
 
 	/**
-	 * @since 0.5
-	 *
 	 * @var callable|null
 	 */
 	private $comparisonCallback = null;
@@ -159,8 +157,6 @@ class MapDiffer implements Differ {
 	/**
 	 * Returns if an array is associative or not.
 	 *
-	 * @since 0.4
-	 *
 	 * @param array $array
 	 *
 	 * @return boolean
@@ -182,8 +178,6 @@ class MapDiffer implements Differ {
 	 *
 	 * @see http://php.net/manual/en/function.array-diff-assoc.php
 	 *
-	 * @since 0.4
-	 *
 	 * @param array $from
 	 * @param array $to
 	 *
@@ -202,8 +196,6 @@ class MapDiffer implements Differ {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @param mixed $value0
 	 * @param mixed $value1
 	 *

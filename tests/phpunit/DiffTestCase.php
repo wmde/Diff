@@ -62,8 +62,6 @@ abstract class DiffTestCase extends \PHPUnit_Framework_TestCase {
 	/**
 	 * Does an associative sort that works for objects.
 	 *
-	 * @since 0.6
-	 *
 	 * @param array $array
 	 */
 	private function objectAssociativeSort( array &$array ) {

@@ -20,8 +20,6 @@ use Diff\DiffOp\DiffOp;
 class CallbackListDiffer implements Differ {
 
 	/**
-	 * @since 0.8
-	 *
 	 * @var ListDiffer
 	 */
 	private $differ = null;

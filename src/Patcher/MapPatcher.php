@@ -25,8 +25,6 @@ class MapPatcher extends ThrowingPatcher {
 	private $listPatcher;
 
 	/**
-	 * @since 0.6
-	 *
 	 * @var ValueComparer|null
 	 */
 	private $comparer = null;

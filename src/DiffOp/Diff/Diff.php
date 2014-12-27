@@ -28,8 +28,6 @@ class Diff extends \ArrayObject implements DiffOp {
 	/**
 	 * Pointers to the operations of certain types for quick lookup.
 	 *
-	 * @since 0.1
-	 *
 	 * @var array
 	 */
 	private $typePointers = array(
@@ -42,8 +40,6 @@ class Diff extends \ArrayObject implements DiffOp {
 	);
 
 	/**
-	 * @since 0.1
-	 *
 	 * @var integer
 	 */
 	private $indexOffset = 0;
@@ -76,8 +72,6 @@ class Diff extends \ArrayObject implements DiffOp {
 
 	/**
 	 * Returns the name of an interface/class that the element should implement/extend.
-	 *
-	 * @since 0.1
 	 *
 	 * @return string
 	 */
@@ -131,8 +125,6 @@ class Diff extends \ArrayObject implements DiffOp {
 	 *
 	 * Should return a boolean. When false is returned the element
 	 * does not get added to the ArrayObject.
-	 *
-	 * @since 0.1
 	 *
 	 * @param integer|string $index
 	 * @param mixed $value
@@ -378,8 +370,6 @@ class Diff extends \ArrayObject implements DiffOp {
 	 * The base class does this, so it would be better to integrate,
 	 * but there does not appear to be any way to do this...
 	 *
-	 * @since 0.1
-	 *
 	 * @return integer
 	 */
 	private function getNewOffset() {
@@ -417,8 +407,6 @@ class Diff extends \ArrayObject implements DiffOp {
 	 * Returns if the provided value has the same type as the elements
 	 * that can be added to this ArrayObject.
 	 *
-	 * @since 0.1
-	 *
 	 * @param mixed $value
 	 *
 	 * @return boolean
@@ -436,8 +424,6 @@ class Diff extends \ArrayObject implements DiffOp {
 	 * If you want to do additional indexing or have code that
 	 * otherwise needs to be executed whenever an element is added,
 	 * you can overload @see preSetElement.
-	 *
-	 * @since 0.1
 	 *
 	 * @param mixed $index
 	 * @param mixed $value

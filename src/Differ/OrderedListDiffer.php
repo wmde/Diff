@@ -21,8 +21,6 @@ use Diff\DiffOp\DiffOp;
 class OrderedListDiffer implements Differ {
 
 	/**
-	 * @since 0.9
-	 *
 	 * @var ListDiffer
 	 */
 	private $differ = null;
