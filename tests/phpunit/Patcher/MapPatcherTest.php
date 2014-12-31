@@ -317,7 +317,12 @@ class MapPatcherTest extends DiffTestCase {
 
 		$expected = new Diff( array(), true );
 
-		$argLists[] = array( $diff, $currentObject, $expected, 'Mismatching add ops and remove ops not present in base should be removed' );
+		$argLists[] = array(
+			$diff,
+			$currentObject,
+			$expected,
+			'Mismatching add ops and remove ops not present in base should be removed'
+		);
 
 
 		$diff = new Diff( array(
@@ -345,7 +350,12 @@ class MapPatcherTest extends DiffTestCase {
 			'foo' => new DiffOpAdd( 42 ),
 		), true );
 
-		$argLists[] = array( $diff, $currentObject, $expected, 'Add ops not present in the base should be retained (MapDiff)' );
+		$argLists[] = array(
+			$diff,
+			$currentObject,
+			$expected,
+			'Add ops not present in the base should be retained (MapDiff)'
+		);
 
 
 		$diff = new Diff( array(

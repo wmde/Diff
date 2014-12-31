@@ -9,6 +9,12 @@ Latest release:
 * Removed Diff.credits.php
 * Removed unused `Diff\Appendable` interface
 
+#### Internal changes
+
+* `bootstrap.php` no longer runs `composer update`
+* Added `composer cs` command and `phpcs.xml` config file
+* CI now runs `composer ci` (includes code style checks) instead of `phpunit`
+
 ## Version 1.0.1 (2014-05-07)
 
 * Removed not needed support for the MediaWiki i18n system

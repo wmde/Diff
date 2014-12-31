@@ -75,13 +75,13 @@ class MapPatcher extends ThrowingPatcher {
 		if ( $diffOp instanceof DiffOpAdd ) {
 			$this->applyDiffOpAdd( $base, $key, $diffOp );
 		}
-		else if ( $diffOp instanceof DiffOpChange ) {
+		elseif ( $diffOp instanceof DiffOpChange ) {
 			$this->applyDiffOpChange( $base, $key, $diffOp );
 		}
-		else if ( $diffOp instanceof DiffOpRemove ) {
+		elseif ( $diffOp instanceof DiffOpRemove ) {
 			$this->applyDiffOpRemove( $base, $key, $diffOp );
 		}
-		else if ( $diffOp instanceof Diff ) {
+		elseif ( $diffOp instanceof Diff ) {
 			$this->applyDiff( $base, $key, $diffOp );
 		}
 		else {

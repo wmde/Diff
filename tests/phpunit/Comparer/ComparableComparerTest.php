@@ -4,6 +4,7 @@ namespace Diff\Tests\Comparer;
 
 use Diff\Comparer\ComparableComparer;
 use Diff\Tests\DiffTestCase;
+use Diff\Tests\Fixtures\StubComparable;
 
 /**
  * @covers Diff\Comparer\ComparableComparer
@@ -70,21 +71,3 @@ class ComparableComparerTest extends DiffTestCase {
 
 }
 
-class StubComparable {
-
-	private $field;
-
-	public function __construct( $field ) {
-		$this->field = $field;
-	}
-
-	public function equals( $otherComparable ) {
-		return $otherComparable instanceof StubComparable
-			&& $otherComparable->getField() === $this->field;
-	}
-
-	public function getField() {
-		return $this->field;
-	}
-
-}

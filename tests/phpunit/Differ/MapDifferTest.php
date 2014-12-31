@@ -166,8 +166,14 @@ class MapDifferTest extends DiffTestCase {
 		$new = array( 'a' => array( 42 ), 1, array( 'a' => 'b', 5 ), 'bah' => array( 'foo' => 'baz' ) );
 		$expected = array( 'bah' => new Diff( array( 'foo' => new DiffOpChange( 'bar', 'baz' ) ), true ) );
 
-		$argLists[] = array( $old, $new, $expected,
-			'Nested structures with no differences should not result in nested empty diffs (these empty diffs should be omitted)', true );
+		$argLists[] = array(
+			$old,
+			$new,
+			$expected,
+			'Nested structures with no differences should not result '
+				. 'in nested empty diffs (these empty diffs should be omitted)',
+			true
+		);
 
 
 		$old = array( 'links' => array(
@@ -356,7 +362,8 @@ class MapDifferTest extends DiffTestCase {
 
 		$this->assertArrayEquals(
 			$expected, $actual, false, true,
-			'No change ops should be created when the arrays have the same length and the comparison callback always returns true'
+			'No change ops should be created when the arrays have '
+				. 'the same length and the comparison callback always returns true'
 		);
 	}
 
