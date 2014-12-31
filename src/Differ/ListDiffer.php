@@ -71,7 +71,7 @@ class ListDiffer implements Differ {
 		}
 
 		if ( $arrayComparer === self::MODE_NATIVE ) {
-			 return new NativeArrayComparer();
+			return new NativeArrayComparer();
 		}
 
 		if ( is_object( $arrayComparer ) && $arrayComparer instanceof ArrayComparer ) {
