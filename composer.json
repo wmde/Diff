@@ -47,7 +47,7 @@
 			"phpunit"
 		],
 		"cs": [
-			"vendor/bin/phpcs src/* tests/* --standard=phpcs.xml --extensions=php -s"
+			"vendor/bin/phpcs src/* tests/* --standard=phpcs.xml --extensions=php -sp"
 		],
 		"ci": [
 			"composer test",
