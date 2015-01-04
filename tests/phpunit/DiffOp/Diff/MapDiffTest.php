@@ -122,7 +122,7 @@ class MapDiffTest extends DiffOpTest {
 				array(
 					'bar' => array( 4, 2 ),
 					'en' => array( 'd' => 4, 'b' => 2 ),
-					'de' => array( 'a' =>'hax' ),
+					'de' => array( 'a' => 'hax' ),
 				),
 				array(
 					'en' => 'map',

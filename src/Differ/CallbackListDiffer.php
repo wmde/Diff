@@ -30,7 +30,9 @@ class CallbackListDiffer implements Differ {
 	 * @param callable $comparisonCallback
 	 */
 	public function __construct( $comparisonCallback ) {
-		$this->differ = new ListDiffer( new StrategicArrayComparer( new CallbackComparer( $comparisonCallback ) ) );
+		$this->differ = new ListDiffer(
+			new StrategicArrayComparer( new CallbackComparer( $comparisonCallback ) )
+		);
 	}
 
 	/**

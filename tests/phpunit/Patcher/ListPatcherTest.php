@@ -170,7 +170,12 @@ class ListPatcherTest extends DiffTestCase {
 			new DiffOpAdd( 42 ),
 		), true );
 
-		$argLists[] = array( $diff, $currentObject, $expected, 'Add ops not present in the base should be retained (ListDiff)' );
+		$argLists[] = array(
+			$diff,
+			$currentObject,
+			$expected,
+			'Add ops not present in the base should be retained (ListDiff)'
+		);
 
 
 		$diff = new Diff( array(
@@ -185,7 +190,12 @@ class ListPatcherTest extends DiffTestCase {
 			new DiffOpRemove( 9001 ),
 		), false );
 
-		$argLists[] = array( $diff, $currentObject, $expected, 'Add ops with values present in the base should be retained in ListDiff' );
+		$argLists[] = array(
+			$diff,
+			$currentObject,
+			$expected,
+			'Add ops with values present in the base should be retained in ListDiff'
+		);
 
 
 		$diff = new Diff( array(
@@ -196,7 +206,12 @@ class ListPatcherTest extends DiffTestCase {
 
 		$expected = clone $diff;
 
-		$argLists[] = array( $diff, $currentObject, $expected, 'list diffs containing only add ops should be retained even when not in the base' );
+		$argLists[] = array(
+			$diff,
+			$currentObject,
+			$expected,
+			'list diffs containing only add ops should be retained even when not in the base'
+		);
 
 
 		$diff = new Diff( array(
@@ -212,7 +227,12 @@ class ListPatcherTest extends DiffTestCase {
 
 		$expected = clone $diff;
 
-		$argLists[] = array( $diff, $currentObject, $expected, 'list diffs containing only remove ops should be retained when present in the base' );
+		$argLists[] = array(
+			$diff,
+			$currentObject,
+			$expected,
+			'list diffs containing only remove ops should be retained when present in the base'
+		);
 
 		return $argLists;
 	}

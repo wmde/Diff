@@ -85,8 +85,13 @@ class CallbackListDifferTest extends DiffTestCase {
 		$new = array( 9001, 2, 0, 42 );
 		$expected = array( new DiffOpRemove( 1 ), new DiffOpAdd( 2 ) );
 
-		$argLists[] = array( $old, $new, $expected,
-			'Two arrays with a single different element should differ by an add and a remove op even when they share identical elements' );
+		$argLists[] = array(
+			$old,
+			$new,
+			$expected,
+			'Two arrays with a single different element should differ by an add '
+				. 'and a remove op even when they share identical elements'
+		);
 
 		return $argLists;
 	}
