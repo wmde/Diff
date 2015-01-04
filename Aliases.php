@@ -1,6 +1,6 @@
 <?php
 
-// This is a IDE helper to understand class aliasing.
+// This is an IDE helper to understand class aliasing.
 // It should not be included anywhere.
 // Actual aliasing happens in the entry point using class_alias.
 
