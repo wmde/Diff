@@ -13,9 +13,6 @@ matrix:
     - php: hhvm
     - php: hhvm-nightly
 
-script:
-  - phpunit
-
 notifications:
   email:
     recipients:
