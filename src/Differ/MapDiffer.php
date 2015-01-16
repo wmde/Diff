@@ -157,8 +157,6 @@ class MapDiffer implements Differ {
 	/**
 	 * Returns if an array is associative or not.
 	 *
-	 * @SuppressWarnings(PHPMD.UnusedLocalVariable)
-	 *
 	 * @param array $array
 	 *
 	 * @return boolean
