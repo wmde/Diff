@@ -22,7 +22,7 @@ class CallbackListDiffer implements Differ {
 	/**
 	 * @var ListDiffer
 	 */
-	private $differ = null;
+	private $differ;
 
 	/**
 	 * @since 0.5
