@@ -2,6 +2,7 @@
 
 namespace Diff\Tests\Differ;
 
+use Diff\ArrayComparer\NativeArrayComparer;
 use Diff\Differ\Differ;
 use Diff\Differ\ListDiffer;
 use Diff\DiffOp\DiffOpAdd;
@@ -206,7 +207,7 @@ class ListDifferTest extends DiffTestCase {
 	 * @dataProvider toDiffNativeProvider
 	 */
 	public function testDoNativeDiff( $old, $new, $expected, $message = '' ) {
-		$this->doTestDiff( new ListDiffer( ListDiffer::MODE_NATIVE ), $old, $new, $expected, $message );
+		$this->doTestDiff( new ListDiffer( new NativeArrayComparer() ), $old, $new, $expected, $message );
 	}
 
 	private function doTestDiff( Differ $differ, $old, $new, $expected, $message ) {
