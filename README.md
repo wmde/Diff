@@ -150,7 +150,7 @@ The `ValueComparer` interface contains one method:
  * @param mixed $firstValue
  * @param mixed $secondValue
  *
- * @return boolean
+ * @return bool
  */
 public function valuesAreEqual( $firstValue, $secondValue );
 ```

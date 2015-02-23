@@ -21,7 +21,7 @@ use InvalidArgumentException;
 class Diff extends \ArrayObject implements DiffOp {
 
 	/**
-	 * @var boolean|null
+	 * @var bool|null
 	 */
 	private $isAssociative = null;
 
@@ -48,7 +48,7 @@ class Diff extends \ArrayObject implements DiffOp {
 	 * @since 0.1
 	 *
 	 * @param DiffOp[] $operations
-	 * @param boolean|null $isAssociative
+	 * @param bool|null $isAssociative
 	 *
 	 * @throws InvalidArgumentException
 	 */
@@ -129,7 +129,7 @@ class Diff extends \ArrayObject implements DiffOp {
 	 * @param integer|string $index
 	 * @param mixed $value
 	 *
-	 * @return boolean
+	 * @return bool
 	 * @throws InvalidArgumentException
 	 */
 	private function preSetElement( $index, $value ) {
@@ -245,7 +245,7 @@ class Diff extends \ArrayObject implements DiffOp {
 	 *
 	 * @since 0.1
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isAtomic() {
 		return false;
@@ -305,7 +305,7 @@ class Diff extends \ArrayObject implements DiffOp {
 	 *
 	 * @since 0.4
 	 *
-	 * @return boolean|null
+	 * @return bool|null
 	 */
 	public function isAssociative() {
 		return $this->isAssociative;
@@ -318,7 +318,7 @@ class Diff extends \ArrayObject implements DiffOp {
 	 *
 	 * @since 0.4
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function looksAssociative() {
 		return $this->isAssociative === null ? $this->hasAssociativeOperations() : $this->isAssociative;
@@ -330,7 +330,7 @@ class Diff extends \ArrayObject implements DiffOp {
 	 *
 	 * @since 0.4
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function hasAssociativeOperations() {
 		return !empty( $this->typePointers['change'] )
@@ -409,7 +409,7 @@ class Diff extends \ArrayObject implements DiffOp {
 	 *
 	 * @param mixed $value
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	private function hasValidType( $value ) {
 		$class = $this->getObjectType();
@@ -471,7 +471,7 @@ class Diff extends \ArrayObject implements DiffOp {
 	 *
 	 * @since 0.1
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isEmpty() {
 		return $this->count() === 0;

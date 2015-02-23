@@ -39,8 +39,8 @@ abstract class DiffTestCase extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @param array $expected
 	 * @param array $actual
-	 * @param boolean $ordered If the order of the values should match
-	 * @param boolean $named If the keys should match
+	 * @param bool $ordered If the order of the values should match
+	 * @param bool $named If the keys should match
 	 */
 	protected function assertArrayEquals( array $expected, array $actual, $ordered = false, $named = false ) {
 		if ( !$ordered ) {

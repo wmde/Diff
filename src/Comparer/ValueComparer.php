@@ -18,7 +18,7 @@ interface ValueComparer {
 	 * @param mixed $firstValue
 	 * @param mixed $secondValue
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function valuesAreEqual( $firstValue, $secondValue );
 
