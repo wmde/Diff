@@ -33,8 +33,6 @@ class DiffAsOpTest extends DiffOpTest {
 	 * @see DiffOpTest::constructorProvider
 	 *
 	 * @since 0.5
-	 *
-	 * @return array
 	 */
 	public function constructorProvider() {
 		$argLists = array(

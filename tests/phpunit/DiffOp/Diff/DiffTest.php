@@ -52,6 +52,7 @@ class DiffTest extends DiffTestCase {
 
 	/**
 	 * @dataProvider elementInstancesProvider
+	 * @param DiffOp[] $operations
 	 */
 	public function testGetAdditions( array $operations ) {
 		$diff = new Diff( $operations, true );
@@ -72,6 +73,7 @@ class DiffTest extends DiffTestCase {
 
 	/**
 	 * @dataProvider elementInstancesProvider
+	 * @param DiffOp[] $operations
 	 */
 	public function testGetRemovals( array $operations ) {
 		$diff = new Diff( $operations, true );
@@ -104,6 +106,7 @@ class DiffTest extends DiffTestCase {
 
 	/**
 	 * @dataProvider elementInstancesProvider
+	 * @param DiffOp[] $operations
 	 */
 	public function testAddOperations( array $operations ) {
 		$diff = new Diff();
@@ -115,6 +118,7 @@ class DiffTest extends DiffTestCase {
 
 	/**
 	 * @dataProvider elementInstancesProvider
+	 * @param DiffOp[] $operations
 	 */
 	public function testStuff( array $operations ) {
 		$diff = new Diff( $operations );
@@ -382,7 +386,7 @@ class DiffTest extends DiffTestCase {
 	 *
 	 * @since 0.6
 	 *
-	 * @param array $elements
+	 * @param DiffOp[] $elements
 	 */
 	public function testConstructor( array $elements ) {
 		$arrayObject = new Diff( $elements );
@@ -395,7 +399,7 @@ class DiffTest extends DiffTestCase {
 	 *
 	 * @since 0.6
 	 *
-	 * @param array $elements
+	 * @param DiffOp[] $elements
 	 */
 	public function testIsEmpty( array $elements ) {
 		$arrayObject = new Diff( $elements );
@@ -433,7 +437,7 @@ class DiffTest extends DiffTestCase {
 	 *
 	 * @since 0.6
 	 *
-	 * @param array $elements
+	 * @param DiffOp[] $elements
 	 */
 	public function testAppend( array $elements ) {
 		$list = new Diff();
@@ -534,7 +538,7 @@ class DiffTest extends DiffTestCase {
 	 *
 	 * @since 0.6
 	 *
-	 * @param array $elements
+	 * @param DiffOp[] $elements
 	 */
 	public function testOffsetSet( array $elements ) {
 		if ( $elements === array() ) {

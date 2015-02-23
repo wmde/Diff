@@ -19,7 +19,7 @@ abstract class DiffTestCase extends \PHPUnit_Framework_TestCase {
 	 *
 	 * @param array $elements
 	 *
-	 * @return array
+	 * @return array[]
 	 */
 	protected function arrayWrap( array $elements ) {
 		return array_map(
