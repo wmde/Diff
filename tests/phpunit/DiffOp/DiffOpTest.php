@@ -56,18 +56,17 @@ abstract class DiffOpTest extends DiffTestCase {
 	 * @return array [instance, constructor args]
 	 */
 	public function instanceProvider() {
-		$phpFails = array( $this, 'newInstance' );
+		$self = $this;
 
 		return array_filter( array_map(
-			function( array $args ) use ( $phpFails ) {
+			function( array $args ) use ( $self ) {
 				$isValid = array_shift( $args ) === true;
 
-				if ( $isValid ) {
-					return array( call_user_func_array( $phpFails, $args ), $args );
-				}
-				else {
+				if ( !$isValid ) {
 					return false;
 				}
+
+				return array( call_user_func_array( array( $self, 'newInstance' ), $args ), $args );
 			},
 			$this->constructorProvider()
 		), 'is_array' );
