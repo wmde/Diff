@@ -33,8 +33,6 @@ abstract class DiffOpTest extends DiffTestCase {
 	 * or a string indicating the type of exception that should be thrown (ie not valid either).
 	 *
 	 * @since 0.1
-	 *
-	 * @return array
 	 */
 	public abstract function constructorProvider();
 
@@ -53,7 +51,8 @@ abstract class DiffOpTest extends DiffTestCase {
 	/**
 	 * @since 0.1
 	 *
-	 * @return array [instance, constructor args]
+	 * @return array[] An array of arrays, each containing an instance and an array of constructor
+	 * arguments used to construct the instance.
 	 */
 	public function instanceProvider() {
 		$phpFails = array( $this, 'newInstance' );

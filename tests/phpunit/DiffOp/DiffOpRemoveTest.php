@@ -32,8 +32,6 @@ class DiffOpRemoveTest extends DiffOpTest {
 	 * @see DiffOpTest::constructorProvider
 	 *
 	 * @since 0.1
-	 *
-	 * @return array
 	 */
 	public function constructorProvider() {
 		return array(

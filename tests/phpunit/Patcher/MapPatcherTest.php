@@ -81,7 +81,7 @@ class MapPatcherTest extends DiffTestCase {
 				'badges' => array( 'FA' )
 			)
 		);
-		$diff = new Diff( array (
+		$diff = new Diff( array(
 			'nlwiki' => new Diff( array(
 				'name'   => new DiffOpAdd( 'Nyan Cat' ),
 				'badges' => new Diff( array(

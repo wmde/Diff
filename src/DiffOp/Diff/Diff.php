@@ -28,7 +28,7 @@ class Diff extends \ArrayObject implements DiffOp {
 	/**
 	 * Pointers to the operations of certain types for quick lookup.
 	 *
-	 * @var array
+	 * @var array[]
 	 */
 	private $typePointers = array(
 		'add' => array(),
