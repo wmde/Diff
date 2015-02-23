@@ -40,7 +40,7 @@ class Diff extends \ArrayObject implements DiffOp {
 	);
 
 	/**
-	 * @var integer
+	 * @var int
 	 */
 	private $indexOffset = 0;
 
@@ -126,7 +126,7 @@ class Diff extends \ArrayObject implements DiffOp {
 	 * Should return a boolean. When false is returned the element
 	 * does not get added to the ArrayObject.
 	 *
-	 * @param integer|string $index
+	 * @param int|string $index
 	 * @param mixed $value
 	 *
 	 * @return boolean
@@ -272,7 +272,7 @@ class Diff extends \ArrayObject implements DiffOp {
 	 *
 	 * @since 0.1
 	 *
-	 * @return integer
+	 * @return int
 	 */
 	public function count() {
 		$count = 0;
@@ -370,7 +370,7 @@ class Diff extends \ArrayObject implements DiffOp {
 	 * The base class does this, so it would be better to integrate,
 	 * but there does not appear to be any way to do this...
 	 *
-	 * @return integer
+	 * @return int
 	 */
 	private function getNewOffset() {
 		while ( $this->offsetExists( $this->indexOffset ) ) {
