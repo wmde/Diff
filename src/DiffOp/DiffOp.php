@@ -30,7 +30,7 @@ interface DiffOp extends \Serializable, \Countable {
 	 *
 	 * @since 0.1
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isAtomic();
 

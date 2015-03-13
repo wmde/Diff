@@ -30,7 +30,7 @@ abstract class AtomicDiffOp implements DiffOp {
 	 *
 	 * @since 0.1
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isAtomic() {
 		return true;

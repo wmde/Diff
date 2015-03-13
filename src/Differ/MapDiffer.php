@@ -22,7 +22,7 @@ use LogicException;
 class MapDiffer implements Differ {
 
 	/**
-	 * @var boolean
+	 * @var bool
 	 */
 	private $recursively;
 
@@ -159,7 +159,7 @@ class MapDiffer implements Differ {
 	 *
 	 * @param array $array
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	private function isAssociative( array $array ) {
 		foreach ( $array as $key => $value ) {
