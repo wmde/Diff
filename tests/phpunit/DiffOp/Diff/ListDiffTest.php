@@ -2,6 +2,7 @@
 
 namespace Diff\Tests\DiffOp\Diff;
 
+use Diff\ArrayComparer\NativeArrayComparer;
 use Diff\Differ\ListDiffer;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
@@ -134,7 +135,7 @@ class ListDiffTest extends DiffOpTest {
 	 * @dataProvider newFromArraysProvider
 	 */
 	public function testNewFromArrays( array $from, array $to, array $additions, array $removals ) {
-		$differ = new ListDiffer( ListDiffer::MODE_NATIVE );
+		$differ = new ListDiffer( new NativeArrayComparer() );
 
 		$diff = new Diff( $differ->doDiff( $from, $to ), false );
 

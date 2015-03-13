@@ -28,7 +28,7 @@ class ListDiffer implements Differ {
 	 * This makes use of @see array_diff
 	 *
 	 * @since 0.4
-	 * @deprecated since 0.8
+	 * @deprecated since 0.8, use new NativeArrayComparer() instead
 	 */
 	const MODE_NATIVE = 0;
 
@@ -37,7 +37,7 @@ class ListDiffer implements Differ {
 	 * This makes use of @see ListDiffer::strictDiff
 	 *
 	 * @since 0.4
-	 * @deprecated since 0.8
+	 * @deprecated since 0.8, use null instead
 	 */
 	const MODE_STRICT = 1;
 

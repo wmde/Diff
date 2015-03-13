@@ -10,7 +10,7 @@ namespace Diff\DiffOp\Diff;
  * Soft deprecated since 0.4, just use Diff
  *
  * @since 0.1
- * @deprecated since 0.5
+ * @deprecated since 0.5, just use Diff instead
  *
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
