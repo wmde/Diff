@@ -48,12 +48,18 @@
 			"phpunit"
 		],
 		"cs": [
-			"vendor/bin/phpcs src/* tests/* --standard=phpcs.xml --extensions=php -sp",
-			"vendor/bin/phpmd src/ text phpmd.xml"
+			"composer phpcs",
+			"composer phpmd"
 		],
 		"ci": [
 			"composer test",
 			"composer cs"
+		],
+		"phpcs": [
+			"vendor/bin/phpcs src/* tests/* --standard=phpcs.xml --extensions=php -sp"
+		],
+		"phpmd": [
+			"vendor/bin/phpmd src/ text phpmd.xml"
 		]
 	}
 }
