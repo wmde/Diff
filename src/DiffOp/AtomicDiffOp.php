@@ -19,7 +19,7 @@ abstract class AtomicDiffOp implements DiffOp {
 	 *
 	 * @since 0.1
 	 *
-	 * @return integer
+	 * @return int
 	 */
 	public function count() {
 		return 1;
