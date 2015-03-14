@@ -2,6 +2,7 @@
 
 namespace Diff\DiffOp\Diff;
 
+use ArrayObject;
 use Diff\DiffOp\DiffOp;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
@@ -17,8 +18,9 @@ use InvalidArgumentException;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
+ * @author Thiemo Mättig
  */
-class Diff extends \ArrayObject implements DiffOp {
+class Diff extends ArrayObject implements DiffOp {
 
 	/**
 	 * @var bool|null
@@ -71,15 +73,6 @@ class Diff extends \ArrayObject implements DiffOp {
 	}
 
 	/**
-	 * Returns the name of an interface/class that the element should implement/extend.
-	 *
-	 * @return string
-	 */
-	private function getObjectType() {
-		return '\Diff\DiffOp\DiffOp';
-	}
-
-	/**
 	 * @see Diff::getOperations
 	 *
 	 * @since 0.1
@@ -127,15 +120,12 @@ class Diff extends \ArrayObject implements DiffOp {
 	 * does not get added to the ArrayObject.
 	 *
 	 * @param int|string $index
-	 * @param mixed $value
+	 * @param DiffOp $value
 	 *
 	 * @return bool
 	 * @throws InvalidArgumentException
 	 */
-	private function preSetElement( $index, $value ) {
-		/**
-		 * @var DiffOp $value
-		 */
+	private function preSetElement( $index, DiffOp $value ) {
 		if ( $this->isAssociative === false && ( $value->getType() !== 'add' && $value->getType() !== 'remove' ) ) {
 			throw new InvalidArgumentException( 'Diff operation with invalid type "' . $value->getType() . '" provided.' );
 		}
@@ -366,6 +356,26 @@ class Diff extends \ArrayObject implements DiffOp {
 	}
 
 	/**
+	 * @since 2.0
+	 *
+	 * @param mixed $target
+	 *
+	 * @return bool
+	 */
+	public function equals( $target ) {
+		if ( $target === $this ) {
+			return true;
+		}
+
+		if ( !( $target instanceof self ) ) {
+			return false;
+		}
+
+		return $this->isAssociative === $target->isAssociative
+			&& $this->getArrayCopy() == $target->getArrayCopy();
+	}
+
+	/**
 	 * Finds a new offset for when appending an element.
 	 * The base class does this, so it would be better to integrate,
 	 * but there does not appear to be any way to do this...
@@ -396,24 +406,11 @@ class Diff extends \ArrayObject implements DiffOp {
 	 *
 	 * @since 0.1
 	 *
-	 * @param mixed $index
+	 * @param int|string $index
 	 * @param mixed $value
 	 */
 	public function offsetSet( $index, $value ) {
 		$this->setElement( $index, $value );
-	}
-
-	/**
-	 * Returns if the provided value has the same type as the elements
-	 * that can be added to this ArrayObject.
-	 *
-	 * @param mixed $value
-	 *
-	 * @return bool
-	 */
-	private function hasValidType( $value ) {
-		$class = $this->getObjectType();
-		return $value instanceof $class;
 	}
 
 	/**
@@ -425,19 +422,19 @@ class Diff extends \ArrayObject implements DiffOp {
 	 * otherwise needs to be executed whenever an element is added,
 	 * you can overload @see preSetElement.
 	 *
-	 * @param mixed $index
+	 * @param int|string|null $index
 	 * @param mixed $value
 	 *
 	 * @throws InvalidArgumentException
 	 */
 	private function setElement( $index, $value ) {
-		if ( !$this->hasValidType( $value ) ) {
+		if ( !( $value instanceof DiffOp ) ) {
 			throw new InvalidArgumentException(
-				'Can only add ' . $this->getObjectType() . ' implementing objects to ' . get_called_class() . '.'
+				'Can only add DiffOp implementing objects to ' . get_called_class() . '.'
 			);
 		}
 
-		if ( is_null( $index ) ) {
+		if ( $index === null ) {
 			$index = $this->getNewOffset();
 		}
 
