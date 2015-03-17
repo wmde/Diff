@@ -42,8 +42,6 @@ class ListDiffer implements Differ {
 	const MODE_STRICT = 1;
 
 	/**
-	 * @since 0.8
-	 *
 	 * @var ArrayComparer
 	 */
 	private $arrayComparer;
@@ -90,7 +88,6 @@ class ListDiffer implements Differ {
 	 * @param array $newValues The second array
 	 *
 	 * @return DiffOp[]
-	 * @throws \Exception
 	 */
 	public function doDiff( array $oldValues, array $newValues ) {
 		$operations = array();
