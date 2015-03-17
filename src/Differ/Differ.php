@@ -23,8 +23,8 @@ interface Differ {
 	 * @param array $oldValues The first array
 	 * @param array $newValues The second array
 	 *
-	 * @return DiffOp[]
 	 * @throws Exception
+	 * @return DiffOp[]
 	 */
 	public function doDiff( array $oldValues, array $newValues );
 
