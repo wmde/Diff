@@ -5,9 +5,10 @@ Latest release:
 
 ## Version 2.0 (2015-03-17)
 
-* Changed visibility of most protected fields and methods to private
-* Removed Diff.credits.php
+* Added `Diff::equals`
 * Removed unused `Diff\Appendable` interface
+* Removed `Diff.credits.php`
+* Changed visibility of most protected fields and methods to private
 
 #### Internal changes
 
