@@ -3,16 +3,18 @@ These are the release notes for the [Diff library](README.md).
 Latest release:
 [![Latest Stable Version](https://poser.pugx.org/diff/diff/version.png)](https://packagist.org/packages/diff/diff)
 
-## Version 2.0 (dev)
+## Version 2.0 (2015-03-17)
 
-* Changed visibility of most protected fields and methods to private
-* Removed Diff.credits.php
+* Added `Diff::equals`
 * Removed unused `Diff\Appendable` interface
+* Removed `Diff.credits.php`
+* Changed visibility of most protected fields and methods to private
 
 #### Internal changes
 
 * `bootstrap.php` no longer runs `composer update`
-* Added `composer cs` command and `phpcs.xml` config file
+* Added PHPCS and PHPMD support and configuration (`phpcs.xml` and `phpmd.xml`)
+* Added `composer cs` command for running the code style checks
 * CI now runs `composer ci` (includes code style checks) instead of `phpunit`
 
 ## Version 1.0.1 (2014-05-07)
