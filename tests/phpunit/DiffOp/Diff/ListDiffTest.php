@@ -65,9 +65,9 @@ class ListDiffTest extends DiffOpTest {
 			$argLists[] = array( true, $operationList, 'foobar' );
 		}
 
-		$argLists[] = array( false, 42 );
-		$argLists[] = array( false, new DiffOpAdd( 42 ) );
-		$argLists[] = array( false, '~=[,,_,,]:3' );
+		$argLists[] = array( false, array( 42 ) );
+		$argLists[] = array( false, array( new ListDiffer() ) );
+		$argLists[] = array( false, array( '~=[,,_,,]:3' ) );
 
 		return $argLists;
 	}

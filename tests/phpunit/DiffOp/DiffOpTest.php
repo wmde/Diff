@@ -4,7 +4,6 @@ namespace Diff\Tests\DiffOp;
 
 use Diff\DiffOp\DiffOp;
 use Diff\Tests\DiffTestCase;
-use Exception;
 use ReflectionClass;
 
 /**
@@ -80,21 +79,12 @@ abstract class DiffOpTest extends DiffTestCase {
 		$args = func_get_args();
 		$valid = array_shift( $args );
 
-		try {
-			$dataItem = call_user_func_array( array( $this, 'newInstance' ), $args );
-			$this->assertInstanceOf( $this->getClass(), $dataItem );
-		} catch ( Exception $ex ) {
-			if ( $valid === true ) {
-				throw $ex;
-			}
-
-			if ( is_string( $valid ) ) {
-				$this->assertEquals( $valid, get_class( $ex ) );
-			}
-			else {
-				$this->assertFalse( $valid );
-			}
+		if ( $valid !== true ) {
+			$this->setExpectedException( $valid ?: 'InvalidArgumentException' );
 		}
+
+		$dataItem = call_user_func_array( array( $this, 'newInstance' ), $args );
+		$this->assertInstanceOf( $this->getClass(), $dataItem );
 	}
 
 	/**

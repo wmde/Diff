@@ -39,7 +39,6 @@ class DiffOpAddTest extends DiffOpTest {
 			array( true, true ),
 			array( true, 42 ),
 			array( true, new DiffOpAdd( "spam" ) ),
-			array( false ),
 		);
 	}
 
