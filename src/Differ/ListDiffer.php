@@ -47,7 +47,8 @@ class ListDiffer implements Differ {
 	private $arrayComparer;
 
 	/**
-	 * @param ArrayComparer $arrayComparer
+	 * @param ArrayComparer|int|null $arrayComparer Defaults to a StrictArrayComparer. The use of
+	 * the self::MODE_... constants is deprecated.
 	 *
 	 * The first argument is an ArrayComparer since version 0.8.
 	 * Before this it was an element of the ListDiffer::MODE_ enum.
@@ -58,7 +59,8 @@ class ListDiffer implements Differ {
 	}
 
 	/**
-	 * @param $arrayComparer
+	 * @param ArrayComparer|int|null $arrayComparer Defaults to a StrictArrayComparer. The use of
+	 * the self::MODE_... constants is deprecated.
 	 *
 	 * @return ArrayComparer
 	 * @throws InvalidArgumentException
