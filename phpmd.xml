@@ -6,11 +6,17 @@
 
     <rule ref="rulesets/codesize.xml">
         <exclude name="TooManyMethods" />
+        <exclude name="TooManyPublicMethods" />
         <exclude name="ExcessiveClassComplexity" />
     </rule>
     <rule ref="rulesets/codesize.xml/TooManyMethods">
         <properties>
             <property name="maxmethods" value="20" />
+        </properties>
+    </rule>
+    <rule ref="rulesets/codesize.xml/TooManyPublicMethods">
+        <properties>
+            <property name="maxmethods" value="15" />
         </properties>
     </rule>
 
