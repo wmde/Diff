@@ -25,3 +25,7 @@ notifications:
       - "chat.freenode.net#wikidata-feed"
     on_success: change
     on_failure: always
+
+cache:
+  directories:
+    - $HOME/.composer/cache
