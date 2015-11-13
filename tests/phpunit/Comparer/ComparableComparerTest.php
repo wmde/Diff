@@ -70,4 +70,3 @@ class ComparableComparerTest extends DiffTestCase {
 	}
 
 }
-

@@ -38,8 +38,8 @@ class DiffAsOpTest extends DiffOpTest {
 		$argLists = array(
 			array( true, array() ),
 			array( true, array( new DiffOpAdd( 42 ) ) ),
-			array( true, array( new DiffOpRemove( new DiffOpRemove( "spam" ) ) ) ),
-			array( true, array( new Diff( array( new DiffOpRemove( new DiffOpRemove( "spam" ) ) ) ) ) ),
+			array( true, array( new DiffOpRemove( new DiffOpRemove( 'spam' ) ) ) ),
+			array( true, array( new Diff( array( new DiffOpRemove( new DiffOpRemove( 'spam' ) ) ) ) ) ),
 			array( true, array( new DiffOpAdd( 42 ), new DiffOpAdd( 42 ) ) ),
 			array( true, array( 'a' => new DiffOpAdd( 42 ), 'b' => new DiffOpAdd( 42 ) ) ),
 			array( true, array( new DiffOpAdd( 42 ), 'foo bar baz' => new DiffOpAdd( 42 ) ) ),

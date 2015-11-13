@@ -210,9 +210,9 @@ class OrderedListDifferTest extends DiffTestCase {
 		$obj2 = new \stdClass();
 		$objX = new \stdClass();
 
-		$obj1->test = "Test";
-		$obj2->test = "Test";
-		$objX->xest = "Test";
+		$obj1->test = 'Test';
+		$obj2->test = 'Test';
+		$objX->xest = 'Test';
 
 		$old = array( $obj1 );
 		$new = array( $obj2 );

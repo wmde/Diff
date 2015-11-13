@@ -163,4 +163,3 @@ class ListDiffTest extends DiffOpTest {
 	}
 
 }
-
