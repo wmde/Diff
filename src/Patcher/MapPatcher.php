@@ -5,6 +5,7 @@ namespace Diff\Patcher;
 use Diff\Comparer\StrictComparer;
 use Diff\Comparer\ValueComparer;
 use Diff\DiffOp\Diff\Diff;
+use Diff\DiffOp\DiffOp;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
@@ -38,11 +39,7 @@ class MapPatcher extends ThrowingPatcher {
 	public function __construct( $throwErrors = false, Patcher $listPatcher = null ) {
 		parent::__construct( $throwErrors );
 
-		if ( $listPatcher === null ) {
-			$listPatcher = new ListPatcher( $throwErrors );
-		}
-
-		$this->listPatcher = $listPatcher;
+		$this->listPatcher = $listPatcher ?: new ListPatcher( $throwErrors );
 	}
 
 	/**
@@ -71,7 +68,14 @@ class MapPatcher extends ThrowingPatcher {
 		return $base;
 	}
 
-	private function applyOperation( &$base, $key, $diffOp ) {
+	/**
+	 * @param array &$base
+	 * @param int|string $key
+	 * @param DiffOp $diffOp
+	 *
+	 * @throws PatcherException
+	 */
+	private function applyOperation( &$base, $key, DiffOp $diffOp ) {
 		if ( $diffOp instanceof DiffOpAdd ) {
 			$this->applyDiffOpAdd( $base, $key, $diffOp );
 		}
