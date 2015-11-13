@@ -12,6 +12,12 @@ namespace Diff\Comparer;
  */
 class StrictComparer implements ValueComparer {
 
+	/**
+	 * @param mixed $firstValue
+	 * @param mixed $secondValue
+	 *
+	 * @return bool
+	 */
 	public function valuesAreEqual( $firstValue, $secondValue ) {
 		return $firstValue === $secondValue;
 	}
