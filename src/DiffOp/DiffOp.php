@@ -18,8 +18,6 @@ interface DiffOp extends \Serializable, \Countable {
 	/**
 	 * Returns a string identifier for the operation type.
 	 *
-	 * @since 0.1
-	 *
 	 * @return string
 	 */
 	public function getType();
@@ -27,8 +25,6 @@ interface DiffOp extends \Serializable, \Countable {
 	/**
 	 * Returns if the operation is atomic, opposing to it
 	 * being a composite that can contain one or more child elements.
-	 *
-	 * @since 0.1
 	 *
 	 * @return bool
 	 */

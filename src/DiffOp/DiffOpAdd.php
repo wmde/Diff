@@ -18,8 +18,6 @@ class DiffOpAdd extends AtomicDiffOp {
 	/**
 	 * @see DiffOp::getType
 	 *
-	 * @since 0.1
-	 *
 	 * @return string
 	 */
 	public function getType() {
@@ -27,8 +25,6 @@ class DiffOpAdd extends AtomicDiffOp {
 	}
 
 	/**
-	 * @since 0.1
-	 *
 	 * @param mixed $newValue
 	 */
 	public function __construct( $newValue ) {
@@ -36,8 +32,6 @@ class DiffOpAdd extends AtomicDiffOp {
 	}
 
 	/**
-	 * @since 0.1
-	 *
 	 * @return mixed
 	 */
 	public function getNewValue() {
@@ -47,8 +41,6 @@ class DiffOpAdd extends AtomicDiffOp {
 	/**
 	 * @see Serializable::serialize
 	 *
-	 * @since 0.1
-	 *
 	 * @return string|null
 	 */
 	public function serialize() {
@@ -57,8 +49,6 @@ class DiffOpAdd extends AtomicDiffOp {
 
 	/**
 	 * @see Serializable::unserialize
-	 *
-	 * @since 0.1
 	 *
 	 * @param string $serialization
 	 *

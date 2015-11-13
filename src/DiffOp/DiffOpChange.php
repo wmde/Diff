@@ -19,8 +19,6 @@ class DiffOpChange extends AtomicDiffOp {
 	/**
 	 * @see DiffOp::getType
 	 *
-	 * @since 0.1
-	 *
 	 * @return string
 	 */
 	public function getType() {
@@ -28,8 +26,6 @@ class DiffOpChange extends AtomicDiffOp {
 	}
 
 	/**
-	 * @since 0.1
-	 *
 	 * @param mixed $oldValue
 	 * @param mixed $newValue
 	 */
@@ -39,8 +35,6 @@ class DiffOpChange extends AtomicDiffOp {
 	}
 
 	/**
-	 * @since 0.1
-	 *
 	 * @return mixed
 	 */
 	public function getOldValue() {
@@ -48,8 +42,6 @@ class DiffOpChange extends AtomicDiffOp {
 	}
 
 	/**
-	 * @since 0.1
-	 *
 	 * @return mixed
 	 */
 	public function getNewValue() {
@@ -59,8 +51,6 @@ class DiffOpChange extends AtomicDiffOp {
 	/**
 	 * @see Serializable::serialize
 	 *
-	 * @since 0.1
-	 *
 	 * @return string|null
 	 */
 	public function serialize() {
@@ -69,8 +59,6 @@ class DiffOpChange extends AtomicDiffOp {
 
 	/**
 	 * @see Serializable::unserialize
-	 *
-	 * @since 0.1
 	 *
 	 * @param string $serialization
 	 *

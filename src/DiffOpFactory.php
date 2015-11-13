@@ -19,8 +19,6 @@ class DiffOpFactory {
 	private $valueConverter;
 
 	/**
-	 * @since 0.5
-	 *
 	 * @param callable|null $valueConverter optional callback used to convert special
 	 *        array structures into objects used as values in atomic diff ops.
 	 */
@@ -32,8 +30,6 @@ class DiffOpFactory {
 	 * Returns an instance of DiffOp constructed from the provided array.
 	 *
 	 * This roundtrips with @see DiffOp::toArray.
-	 *
-	 * @since 0.5
 	 *
 	 * @param array $diffOp
 	 *
@@ -78,8 +74,6 @@ class DiffOpFactory {
 	}
 
 	/**
-	 * @since 0.5
-	 *
 	 * @param string $key
 	 * @param array $diffOp
 	 *

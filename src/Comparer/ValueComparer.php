@@ -13,8 +13,6 @@ namespace Diff\Comparer;
 interface ValueComparer {
 
 	/**
-	 * @since 0.6
-	 *
 	 * @param mixed $firstValue
 	 * @param mixed $secondValue
 	 *
