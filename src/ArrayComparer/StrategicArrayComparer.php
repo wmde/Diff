@@ -27,8 +27,6 @@ class StrategicArrayComparer implements ArrayComparer {
 	/**
 	 * @see ArrayComparer::diffArrays
 	 *
-	 * @since 0.8
-	 *
 	 * @param array $arrayOne
 	 * @param array $arrayTwo
 	 *

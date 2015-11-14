@@ -37,8 +37,6 @@ class MapDiffer implements Differ {
 	private $comparisonCallback = null;
 
 	/**
-	 * @since 0.4
-	 *
 	 * @param bool $recursively
 	 * @param Differ $listDiffer
 	 */
@@ -68,8 +66,6 @@ class MapDiffer implements Differ {
 	 * @see Differ::doDiff
 	 *
 	 * Computes the diff between two associate arrays.
-	 *
-	 * @since 0.4
 	 *
 	 * @param array $oldValues The first array
 	 * @param array $newValues The second array

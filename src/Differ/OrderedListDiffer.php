@@ -26,8 +26,6 @@ class OrderedListDiffer implements Differ {
 	private $differ;
 
 	/**
-	 * @since 0.9
-	 *
 	 * @param ValueComparer $comparer
 	 */
 	public function __construct( ValueComparer $comparer ) {
@@ -36,8 +34,6 @@ class OrderedListDiffer implements Differ {
 
 	/**
 	 * @see Differ::doDiff
-	 *
-	 * @since 0.9
 	 *
 	 * @param array $oldValues The first array
 	 * @param array $newValues The second array

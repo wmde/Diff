@@ -18,8 +18,6 @@ interface Patcher {
 	 * Applies the applicable operations from the provided diff to
 	 * the provided base value.
 	 *
-	 * @since 0.4
-	 *
 	 * @param array $base
 	 * @param Diff $diffOps
 	 *

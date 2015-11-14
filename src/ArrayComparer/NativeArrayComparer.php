@@ -17,8 +17,6 @@ class NativeArrayComparer implements ArrayComparer {
 	 *
 	 * Uses @see array_diff.
 	 *
-	 * @since 0.8
-	 *
 	 * @param array $arrayOne
 	 * @param array $arrayTwo
 	 *

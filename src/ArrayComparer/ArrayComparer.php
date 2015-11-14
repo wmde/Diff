@@ -18,8 +18,6 @@ interface ArrayComparer {
 	 *
 	 * Implementations are allowed to hold quantity into account or to disregard it.
 	 *
-	 * @since 0.8
-	 *
 	 * @param array $firstArray
 	 * @param array $secondArray
 	 *

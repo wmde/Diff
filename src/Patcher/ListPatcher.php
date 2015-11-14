@@ -25,8 +25,6 @@ class ListPatcher extends ThrowingPatcher {
 	 * For instance, when the input is [ 0 => 'a', 1 => 'b', 2 => 'c' ], and there
 	 * is one remove operation for 'b', the result will be [ 0 => 'a', 2 => 'c' ].
 	 *
-	 * @since 0.4
-	 *
 	 * @param array $base
 	 * @param Diff $diff
 	 *
