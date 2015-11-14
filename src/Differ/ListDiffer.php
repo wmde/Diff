@@ -27,6 +27,7 @@ class ListDiffer implements Differ {
 	 * Use non-strict comparison and do not care about quantity.
 	 * This makes use of @see array_diff
 	 *
+	 * @since 0.4
 	 * @deprecated since 0.8, use new NativeArrayComparer() instead
 	 */
 	const MODE_NATIVE = 0;
@@ -35,6 +36,7 @@ class ListDiffer implements Differ {
 	 * Use strict comparison and care about quantity.
 	 * This makes use of @see ListDiffer::strictDiff
 	 *
+	 * @since 0.4
 	 * @deprecated since 0.8, use null instead
 	 */
 	const MODE_STRICT = 1;
@@ -81,6 +83,8 @@ class ListDiffer implements Differ {
 
 	/**
 	 * @see Differ::doDiff
+	 *
+	 * @since 0.4
 	 *
 	 * @param array $oldValues The first array
 	 * @param array $newValues The second array

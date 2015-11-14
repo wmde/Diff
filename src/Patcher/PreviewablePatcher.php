@@ -22,6 +22,8 @@ interface PreviewablePatcher extends Patcher {
 	 * The returned operations are thus the difference between
 	 * the result of @see patch and it's input base value.
 	 *
+	 * @since 0.4
+	 *
 	 * @param array $base
 	 * @param Diff $diffOps
 	 *

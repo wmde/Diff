@@ -30,6 +30,8 @@ class MapPatcher extends ThrowingPatcher {
 	private $comparer = null;
 
 	/**
+	 * @since 0.4
+	 *
 	 * @param bool $throwErrors
 	 * @param Patcher|null $listPatcher The patcher that will be used for lists in the value
 	 */
@@ -52,6 +54,8 @@ class MapPatcher extends ThrowingPatcher {
 	 * It is possible to pass in non-associative diffs (those for which isAssociative)
 	 * returns false, however the likely intended behavior can be obtained via
 	 * a list patcher.
+	 *
+	 * @since 0.4
 	 *
 	 * @param array $base
 	 * @param Diff $diff
