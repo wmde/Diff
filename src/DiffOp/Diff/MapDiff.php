@@ -25,6 +25,8 @@ class MapDiff extends Diff {
 	/**
 	 * @see DiffOp::getType
 	 *
+	 * @since 0.1
+	 *
 	 * @return string
 	 */
 	public function getType() {

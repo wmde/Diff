@@ -29,6 +29,8 @@ class OrderedArrayComparer implements ArrayComparer {
 	/**
 	 * @see ArrayComparer::diffArrays
 	 *
+	 * @since 0.9
+	 *
 	 * @param array $arrayOne
 	 * @param array $arrayTwo
 	 *

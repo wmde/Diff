@@ -16,6 +16,8 @@ class CallbackComparer implements ValueComparer {
 	private $callback;
 
 	/**
+	 * @since 0.6
+	 *
 	 * @param callable $callback
 	 */
 	public function __construct( $callback ) {

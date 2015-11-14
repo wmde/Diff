@@ -25,6 +25,8 @@ class CallbackListDiffer implements Differ {
 	private $differ;
 
 	/**
+	 * @since 0.5
+	 *
 	 * @param callable $comparisonCallback
 	 */
 	public function __construct( $comparisonCallback ) {
@@ -35,6 +37,8 @@ class CallbackListDiffer implements Differ {
 
 	/**
 	 * @see Differ::doDiff
+	 *
+	 * @since 0.5
 	 *
 	 * @param array $oldValues The first array
 	 * @param array $newValues The second array

@@ -47,6 +47,8 @@ class Diff extends ArrayObject implements DiffOp {
 	private $indexOffset = 0;
 
 	/**
+	 * @since 0.1
+	 *
 	 * @param DiffOp[] $operations
 	 * @param bool|null $isAssociative
 	 *
@@ -73,6 +75,8 @@ class Diff extends ArrayObject implements DiffOp {
 	/**
 	 * @see Diff::getOperations
 	 *
+	 * @since 0.1
+	 *
 	 * @return DiffOp[]
 	 */
 	public function getOperations() {
@@ -80,6 +84,8 @@ class Diff extends ArrayObject implements DiffOp {
 	}
 
 	/**
+	 * @since 0.1
+	 *
 	 * @param string $type
 	 *
 	 * @return DiffOp[]
@@ -93,6 +99,8 @@ class Diff extends ArrayObject implements DiffOp {
 
 	/**
 	 * @see Diff::addOperations
+	 *
+	 * @since 0.1
 	 *
 	 * @param DiffOp[] $operations
 	 */
@@ -135,6 +143,8 @@ class Diff extends ArrayObject implements DiffOp {
 	/**
 	 * @see Serializable::unserialize
 	 *
+	 * @since 0.1
+	 *
 	 * @param string $serialization
 	 */
 	public function unserialize( $serialization ) {
@@ -162,6 +172,8 @@ class Diff extends ArrayObject implements DiffOp {
 	}
 
 	/**
+	 * @since 0.1
+	 *
 	 * @return DiffOpAdd[]
 	 */
 	public function getAdditions() {
@@ -169,6 +181,8 @@ class Diff extends ArrayObject implements DiffOp {
 	}
 
 	/**
+	 * @since 0.1
+	 *
 	 * @return DiffOpRemove[]
 	 */
 	public function getRemovals() {
@@ -176,6 +190,8 @@ class Diff extends ArrayObject implements DiffOp {
 	}
 
 	/**
+	 * @since 0.1
+	 *
 	 * @return DiffOpChange[]
 	 */
 	public function getChanges() {
@@ -184,6 +200,8 @@ class Diff extends ArrayObject implements DiffOp {
 
 	/**
 	 * Returns the added values.
+	 *
+	 * @since 0.1
 	 *
 	 * @return array of mixed
 	 */
@@ -199,6 +217,8 @@ class Diff extends ArrayObject implements DiffOp {
 	/**
 	 * Returns the removed values.
 	 *
+	 * @since 0.1
+	 *
 	 * @return array of mixed
 	 */
 	public function getRemovedValues() {
@@ -213,6 +233,8 @@ class Diff extends ArrayObject implements DiffOp {
 	/**
 	 * @see DiffOp::isAtomic
 	 *
+	 * @since 0.1
+	 *
 	 * @return bool
 	 */
 	public function isAtomic() {
@@ -221,6 +243,8 @@ class Diff extends ArrayObject implements DiffOp {
 
 	/**
 	 * @see DiffOp::getType
+	 *
+	 * @since 0.1
 	 *
 	 * @return string
 	 */
@@ -235,6 +259,8 @@ class Diff extends ArrayObject implements DiffOp {
 	 * holds two atomic operations will be 3.
 	 *
 	 * @see Countable::count
+	 *
+	 * @since 0.1
 	 *
 	 * @return int
 	 */
@@ -367,6 +393,8 @@ class Diff extends ArrayObject implements DiffOp {
 	/**
 	 * @see ArrayObject::append
 	 *
+	 * @since 0.1
+	 *
 	 * @param mixed $value
 	 */
 	public function append( $value ) {
@@ -375,6 +403,8 @@ class Diff extends ArrayObject implements DiffOp {
 
 	/**
 	 * @see ArrayObject::offsetSet()
+	 *
+	 * @since 0.1
 	 *
 	 * @param int|string $index
 	 * @param mixed $value
@@ -416,6 +446,8 @@ class Diff extends ArrayObject implements DiffOp {
 	/**
 	 * @see Serializable::serialize
 	 *
+	 * @since 0.1
+	 *
 	 * @return string
 	 */
 	public function serialize() {
@@ -433,6 +465,8 @@ class Diff extends ArrayObject implements DiffOp {
 
 	/**
 	 * Returns if the ArrayObject has no elements.
+	 *
+	 * @since 0.1
 	 *
 	 * @return bool
 	 */

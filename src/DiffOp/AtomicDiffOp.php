@@ -17,6 +17,8 @@ abstract class AtomicDiffOp implements DiffOp {
 	/**
 	 * @see Countable::count
 	 *
+	 * @since 0.1
+	 *
 	 * @return int
 	 */
 	public function count() {
@@ -25,6 +27,8 @@ abstract class AtomicDiffOp implements DiffOp {
 
 	/**
 	 * @see DiffOp::isAtomic
+	 *
+	 * @since 0.1
 	 *
 	 * @return bool
 	 */
