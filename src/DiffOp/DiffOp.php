@@ -2,6 +2,9 @@
 
 namespace Diff\DiffOp;
 
+use Countable;
+use Serializable;
+
 /**
  * Interface for diff operations. A diff operation
  * represents a change to a single element.
@@ -13,7 +16,7 @@ namespace Diff\DiffOp;
  * @licence GNU GPL v2+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface DiffOp extends \Serializable, \Countable {
+interface DiffOp extends Serializable, Countable {
 
 	/**
 	 * Returns a string identifier for the operation type.

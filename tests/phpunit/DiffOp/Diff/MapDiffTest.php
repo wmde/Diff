@@ -355,7 +355,7 @@ class MapDiffTest extends DiffOpTest {
 		$diff = new Diff( $differ->doDiff( $old, $new ) );
 
 		$this->assertTrue( $diff->isEmpty() );
-		$this->assertTrue( $diff->getOperations() === array() );
+		$this->assertSame( array(), $diff->getOperations() );
 	}
 
 }
