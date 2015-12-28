@@ -31,14 +31,12 @@ class ListPatcherTest extends DiffTestCase {
 
 		$argLists[] = array( $patcher, $base, $diff, $expected );
 
-
 		$patcher = new ListPatcher();
 		$base = array( 4, 2 );
 		$diff = new Diff();
 		$expected = array( 4, 2 );
 
 		$argLists[] = array( $patcher, $base, $diff, $expected );
-
 
 		$patcher = new ListPatcher();
 		$base = array();
@@ -49,7 +47,6 @@ class ListPatcherTest extends DiffTestCase {
 
 		$argLists[] = array( $patcher, $base, $diff, $expected );
 
-
 		$patcher = new ListPatcher();
 		$base = array( 4, 2 );
 		$diff = new Diff( array(
@@ -58,7 +55,6 @@ class ListPatcherTest extends DiffTestCase {
 		$expected = array( 4, 2, 9001 );
 
 		$argLists[] = array( $patcher, $base, $diff, $expected );
-
 
 		$patcher = new ListPatcher();
 		$base = array( 4, 2 );
@@ -71,7 +67,6 @@ class ListPatcherTest extends DiffTestCase {
 
 		$argLists[] = array( $patcher, $base, $diff, $expected );
 
-
 		$patcher = new ListPatcher();
 		$base = array( 0, 1, 2, 3, 4 );
 		$diff = new Diff( array(
@@ -81,7 +76,6 @@ class ListPatcherTest extends DiffTestCase {
 		$expected = array( 0, 1, 4 );
 
 		$argLists[] = array( $patcher, $base, $diff, $expected );
-
 
 		$patcher = new ListPatcher();
 		$base = array( 0, 1, 2, 2, 2, 3, 4 );
@@ -94,7 +88,6 @@ class ListPatcherTest extends DiffTestCase {
 		$expected = array( 0, 1, 2, 4, 6 );
 
 		$argLists[] = array( $patcher, $base, $diff, $expected );
-
 
 		return $argLists;
 	}
@@ -138,7 +131,6 @@ class ListPatcherTest extends DiffTestCase {
 
 		$argLists[] = array( $diff, $currentObject, $expected, 'Empty diff should remain empty on empty base' );
 
-
 		$diff = new Diff( array(), false );
 
 		$currentObject = array( 'foo' => 0, 'bar' => 1 );
@@ -146,7 +138,6 @@ class ListPatcherTest extends DiffTestCase {
 		$expected = clone $diff;
 
 		$argLists[] = array( $diff, $currentObject, $expected, 'Empty diff should remain empty on non-empty base' );
-
 
 		$diff = new Diff( array(
 			new DiffOpRemove( 9001 ),
@@ -157,7 +148,6 @@ class ListPatcherTest extends DiffTestCase {
 		$expected = new Diff( array(), false );
 
 		$argLists[] = array( $diff, $currentObject, $expected, 'Remove ops should be removed on empty base' );
-
 
 		$diff = new Diff( array(
 			new DiffOpAdd( 42 ),
@@ -176,7 +166,6 @@ class ListPatcherTest extends DiffTestCase {
 			$expected,
 			'Add ops not present in the base should be retained (ListDiff)'
 		);
-
 
 		$diff = new Diff( array(
 			new DiffOpAdd( 42 ),
@@ -197,7 +186,6 @@ class ListPatcherTest extends DiffTestCase {
 			'Add ops with values present in the base should be retained in ListDiff'
 		);
 
-
 		$diff = new Diff( array(
 			new DiffOpAdd( 42 ),
 		), false );
@@ -212,7 +200,6 @@ class ListPatcherTest extends DiffTestCase {
 			$expected,
 			'list diffs containing only add ops should be retained even when not in the base'
 		);
-
 
 		$diff = new Diff( array(
 			new DiffOpRemove( 42 ),
