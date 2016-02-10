@@ -79,9 +79,8 @@
     <rule ref="Squiz.Functions.GlobalFunction" />
     <rule ref="Squiz.Scope" />
 
-    <rule ref="Squiz.Strings.DoubleQuoteUsage" />
-    <rule ref="Squiz.Strings.DoubleQuoteUsage.ContainsVar">
-        <severity>0</severity>
+    <rule ref="Squiz.Strings.DoubleQuoteUsage">
+        <exclude name="Squiz.Strings.DoubleQuoteUsage.ContainsVar" />
     </rule>
 
     <rule ref="Squiz.WhiteSpace.CastSpacing" />
