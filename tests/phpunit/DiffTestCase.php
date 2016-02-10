@@ -41,8 +41,15 @@ abstract class DiffTestCase extends \PHPUnit_Framework_TestCase {
 	 * @param array $actual
 	 * @param bool $ordered If the order of the values should match
 	 * @param bool $named If the keys should match
+	 * @param string $message
 	 */
-	protected function assertArrayEquals( array $expected, array $actual, $ordered = false, $named = false ) {
+	protected function assertArrayEquals(
+		array $expected,
+		array $actual,
+		$ordered = false,
+		$named = false,
+		$message = ''
+	) {
 		if ( !$ordered ) {
 			$this->objectAssociativeSort( $expected );
 			$this->objectAssociativeSort( $actual );
@@ -53,10 +60,7 @@ abstract class DiffTestCase extends \PHPUnit_Framework_TestCase {
 			$actual = array_values( $actual );
 		}
 
-		call_user_func_array(
-			array( $this, 'assertEquals' ),
-			array_merge( array( $expected, $actual ), array_slice( func_get_args(), 4 ) )
-		);
+		$this->assertEquals( $expected, $actual, $message );
 	}
 
 	/**
