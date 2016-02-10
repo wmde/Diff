@@ -40,7 +40,7 @@ class MapDiffer implements Differ {
 	 * @since 0.4
 	 *
 	 * @param bool $recursively
-	 * @param Differ $listDiffer
+	 * @param Differ|null $listDiffer
 	 */
 	public function __construct( $recursively = false, Differ $listDiffer = null ) {
 		$this->recursively = $recursively;
