@@ -278,7 +278,7 @@ class Diff extends ArrayObject implements DiffOp {
 	 */
 	public function removeEmptyOperations() {
 		foreach ( $this->getArrayCopy() as $key => $operation ) {
-			if ( $operation instanceof Diff && $operation->isEmpty() ) {
+			if ( $operation instanceof self && $operation->isEmpty() ) {
 				unset( $this[$key] );
 			}
 		}
