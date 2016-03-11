@@ -4,6 +4,7 @@ namespace Diff\Tests\Patcher;
 
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
+use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 use Diff\Patcher\ListPatcher;
 use Diff\Patcher\Patcher;
@@ -66,6 +67,13 @@ class ListPatcherTest extends DiffTestCase {
 		$expected = array( 4, 2, 9001, 9002, 2 );
 
 		$argLists[] = array( $patcher, $base, $diff, $expected );
+
+		$argLists[] = array(
+			new ListPatcher(),
+			array( 1 ),
+			new Diff( array( new DiffOpChange( 1, 2 ) ) ),
+			array( 2 )
+		);
 
 		$patcher = new ListPatcher();
 		$base = array( 0, 1, 2, 3, 4 );
@@ -139,6 +147,13 @@ class ListPatcherTest extends DiffTestCase {
 
 		$argLists[] = array( $diff, $currentObject, $expected, 'Empty diff should remain empty on non-empty base' );
 
+		$argLists[] = array(
+			new Diff( array( new Diff( array( new DiffOpAdd( 1 ) ) ) ) ),
+			array(),
+			new Diff(),
+			'Recursive diffs should be ignored by ListPatcher'
+		);
+
 		$diff = new Diff( array(
 			new DiffOpRemove( 9001 ),
 		), false );
@@ -148,6 +163,13 @@ class ListPatcherTest extends DiffTestCase {
 		$expected = new Diff( array(), false );
 
 		$argLists[] = array( $diff, $currentObject, $expected, 'Remove ops should be removed on empty base' );
+
+		$argLists[] = array(
+			new Diff( array( new DiffOpChange( 1, 2 ) ) ),
+			array(),
+			new Diff(),
+			'Change ops should be removed on empty base'
+		);
 
 		$diff = new Diff( array(
 			new DiffOpAdd( 42 ),
@@ -199,6 +221,13 @@ class ListPatcherTest extends DiffTestCase {
 			$currentObject,
 			$expected,
 			'list diffs containing only add ops should be retained even when not in the base'
+		);
+
+		$argLists[] = array(
+			new Diff( array( new DiffOpChange( 1, 2 ) ) ),
+			array( 1 ),
+			new Diff( array( new DiffOpRemove( 1 ), new DiffOpAdd( 2 ) ) ),
+			'Change ops with values present in the base should be retained in ListDiff'
 		);
 
 		$diff = new Diff( array(
