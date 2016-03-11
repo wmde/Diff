@@ -73,8 +73,6 @@ class Diff extends ArrayObject implements DiffOp {
 	}
 
 	/**
-	 * @see Diff::getOperations
-	 *
 	 * @since 0.1
 	 *
 	 * @return DiffOp[]
@@ -98,8 +96,6 @@ class Diff extends ArrayObject implements DiffOp {
 	}
 
 	/**
-	 * @see Diff::addOperations
-	 *
 	 * @since 0.1
 	 *
 	 * @param DiffOp[] $operations
@@ -278,8 +274,6 @@ class Diff extends ArrayObject implements DiffOp {
 	}
 
 	/**
-	 * @see Diff::removeEmptyOperations
-	 *
 	 * @since 0.3
 	 */
 	public function removeEmptyOperations() {
