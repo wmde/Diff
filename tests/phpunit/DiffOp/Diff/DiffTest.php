@@ -2,6 +2,7 @@
 
 namespace Diff\Tests\DiffOp\Diff;
 
+use Closure;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\Diff\ListDiff;
 use Diff\DiffOp\Diff\MapDiff;
@@ -461,9 +462,9 @@ class DiffTest extends DiffTestCase {
 	}
 
 	/**
-	 * @param callback $function
+	 * @param Closure $function
 	 */
-	private function checkTypeChecks( $function ) {
+	private function checkTypeChecks( Closure $function ) {
 		$excption = null;
 		$list = new Diff();
 
@@ -477,9 +478,9 @@ class DiffTest extends DiffTestCase {
 	 * Asserts that an InvalidArgumentException gets thrown when calling the provided
 	 * callable. Extra arguments specified to the method are also provided to the callable.
 	 *
-	 * @param callable $function
+	 * @param Closure $function
 	 */
-	private function assertInvalidArgument( $function ) {
+	private function assertInvalidArgument( Closure $function ) {
 		$this->setExpectedException( 'InvalidArgumentException' );
 
 		$arguments = func_get_args();
@@ -630,14 +631,14 @@ class DiffTest extends DiffTestCase {
 	}
 
 	public function invalidIsAssociativeProvider() {
-		return $this->arrayWrap( array(
-			1,
-			'1',
-			'null',
-			0,
-			array(),
-			'foobar'
-		) );
+		return array(
+			array( 1 ),
+			array( '1' ),
+			array( 'null' ),
+			array( 0 ),
+			array( array() ),
+			array( 'foobar' ),
+		);
 	}
 
 	/**
@@ -649,29 +650,24 @@ class DiffTest extends DiffTestCase {
 	}
 
 	public function invalidDiffOpsProvider() {
-		$diffOpLists = array();
-
-		$diffOpLists[] = array(
-			'foo'
+		return array(
+			array( array(
+				'foo',
+			) ),
+			array( array(
+				null,
+			) ),
+			array( array(
+				false,
+				true,
+				array(),
+			) ),
+			array( array(
+				new DiffOpAdd( 42 ),
+				'in your list',
+				new DiffOpAdd( 9001 ),
+			) )
 		);
-
-		$diffOpLists[] = array(
-			null
-		);
-
-		$diffOpLists[] = array(
-			false,
-			true,
-			array()
-		);
-
-		$diffOpLists[] = array(
-			new DiffOpAdd( 42 ),
-			'in your list',
-			new DiffOpAdd( 9001 ),
-		);
-
-		return $this->arrayWrap( $diffOpLists );
 	}
 
 	/**

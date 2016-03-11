@@ -19,36 +19,30 @@ class AutoloadingAliasesTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function oldNameProvider() {
-		return array_map(
-			function( $className ) {
-				return array( $className );
-			},
-			array(
-				'Diff\Diff',
-				'Diff\MapDiff',
-				'Diff\ListDiff',
+		return array(
+			array( 'Diff\Diff' ),
+			array( 'Diff\MapDiff' ),
+			array( 'Diff\ListDiff' ),
 
-				'Diff\AtomicDiffOp',
-				'Diff\DiffOp',
-				'Diff\DiffOpAdd',
-				'Diff\DiffOpChange',
-				'Diff\DiffOpRemove',
+			array( 'Diff\AtomicDiffOp' ),
+			array( 'Diff\DiffOp' ),
+			array( 'Diff\DiffOpAdd' ),
+			array( 'Diff\DiffOpChange' ),
+			array( 'Diff\DiffOpRemove' ),
 
-				'Diff\CallbackListDiffer',
-				'Diff\Differ',
-				'Diff\ListDiffer',
-				'Diff\MapDiffer',
-				'Diff\OrderedListDiffer',
+			array( 'Diff\CallbackListDiffer' ),
+			array( 'Diff\Differ' ),
+			array( 'Diff\ListDiffer' ),
+			array( 'Diff\MapDiffer' ),
+			array( 'Diff\OrderedListDiffer' ),
 
-				'Diff\ListPatcher',
-				'Diff\MapPatcher',
-				'Diff\Patcher',
-				'Diff\PatcherException',
-				'Diff\PreviewablePatcher',
-				'Diff\ThrowingPatcher',
-			)
+			array( 'Diff\ListPatcher' ),
+			array( 'Diff\MapPatcher' ),
+			array( 'Diff\Patcher' ),
+			array( 'Diff\PatcherException' ),
+			array( 'Diff\PreviewablePatcher' ),
+			array( 'Diff\ThrowingPatcher' ),
 		);
-
 	}
 
 }

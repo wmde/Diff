@@ -100,29 +100,18 @@ class DiffOpFactoryTest extends DiffTestCase {
 	}
 
 	public function invalidArrayFromArrayProvider() {
-		$arrays = array();
-
-		$arrays[] = array();
-
-		$arrays[] = array( '~=[,,_,,]:3' );
-
-		$arrays[] = array( '~=[,,_,,]:3' => '~=[,,_,,]:3' );
-
-		$arrays[] = array( 'type' => '~=[,,_,,]:3' );
-
-		$arrays[] = array( 'type' => 'add', 'oldvalue' => 'foo' );
-
-		$arrays[] = array( 'type' => 'remove', 'newvalue' => 'foo' );
-
-		$arrays[] = array( 'type' => 'change', 'newvalue' => 'foo' );
-
-		$arrays[] = array( 'diff' => 'remove', 'newvalue' => 'foo' );
-
-		$arrays[] = array( 'diff' => 'remove', 'operations' => array() );
-
-		$arrays[] = array( 'diff' => 'remove', 'isassoc' => true );
-
-		return $this->arrayWrap( $arrays );
+		return array(
+			array( array() ),
+			array( array( '~=[,,_,,]:3' ) ),
+			array( array( '~=[,,_,,]:3' => '~=[,,_,,]:3' ) ),
+			array( array( 'type' => '~=[,,_,,]:3' ) ),
+			array( array( 'type' => 'add', 'oldvalue' => 'foo' ) ),
+			array( array( 'type' => 'remove', 'newvalue' => 'foo' ) ),
+			array( array( 'type' => 'change', 'newvalue' => 'foo' ) ),
+			array( array( 'diff' => 'remove', 'newvalue' => 'foo' ) ),
+			array( array( 'diff' => 'remove', 'operations' => array() ) ),
+			array( array( 'diff' => 'remove', 'isassoc' => true ) ),
+		);
 	}
 
 	/**
