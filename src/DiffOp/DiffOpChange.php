@@ -73,8 +73,6 @@ class DiffOpChange extends AtomicDiffOp {
 	 * @since 0.1
 	 *
 	 * @param string $serialization
-	 *
-	 * @return DiffOpChange
 	 */
 	public function unserialize( $serialization ) {
 		list( $this->newValue, $this->oldValue ) = unserialize( $serialization );
