@@ -55,6 +55,14 @@ class ComparableComparerTest extends DiffTestCase {
 	public function unequalProvider() {
 		return array(
 			array(
+				null,
+				null
+			),
+			array(
+				new StubComparable( 1 ),
+				null
+			),
+			array(
 				new StubComparable( 1 ),
 				new StubComparable( 2 ),
 			),
