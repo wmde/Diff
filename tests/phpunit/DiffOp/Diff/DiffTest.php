@@ -679,10 +679,15 @@ class DiffTest extends DiffTestCase {
 	}
 
 	public function equalsProvider() {
+		$empty = new Diff();
+
 		return array(
+			// Identity
+			array( $empty, $empty ),
+
 			// Empty diffs
-			array( new Diff(), new Diff() ),
-			array( new Diff(), new Diff( array(), null ) ),
+			array( $empty, new Diff() ),
+			array( $empty, new Diff( array(), null ) ),
 
 			// Simple diffs
 			array( new Diff( array( new DiffOpAdd( 1 ) ) ), new Diff( array( new DiffOpAdd( 1 ) ) ) ),
@@ -697,13 +702,16 @@ class DiffTest extends DiffTestCase {
 	/**
 	 * @dataProvider notEqualsProvider
 	 */
-	public function testNotEquals( Diff $diff, Diff $target ) {
+	public function testNotEquals( Diff $diff, $target ) {
 		$this->assertFalse( $diff->equals( $target ) );
-		$this->assertFalse( $target->equals( $diff ) );
 	}
 
 	public function notEqualsProvider() {
 		return array(
+			// Not an instance or subclass of Diff
+			array( new Diff(), null ),
+			array( new Diff(), new DiffOpAdd( 1 ) ),
+
 			// Empty diffs
 			array( new Diff(), new Diff( array(), false ) ),
 			array( new Diff(), new Diff( array(), true ) ),
