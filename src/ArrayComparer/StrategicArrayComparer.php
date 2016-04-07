@@ -13,7 +13,7 @@ use RuntimeException;
  *
  * @since 0.8
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class StrategicArrayComparer implements ArrayComparer {

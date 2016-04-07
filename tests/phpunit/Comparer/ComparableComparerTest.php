@@ -12,7 +12,7 @@ use Diff\Tests\Fixtures\StubComparable;
  * @group Diff
  * @group Comparer
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class ComparableComparerTest extends DiffTestCase {

@@ -13,7 +13,7 @@ use Diff\Tests\DiffTestCase;
  *
  * @group Diff
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
