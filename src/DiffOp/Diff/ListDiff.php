@@ -12,7 +12,7 @@ namespace Diff\DiffOp\Diff;
  * @since 0.1
  * @deprecated since 0.5, just use Diff instead
  *
- * @licence GNU GPL v2+
+ * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class ListDiff extends Diff {
