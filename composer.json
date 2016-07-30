@@ -27,7 +27,8 @@
 	},
 	"require-dev": {
 		"squizlabs/php_codesniffer": "~2.3",
-		"phpmd/phpmd": "~2.3"
+		"phpmd/phpmd": "~2.3",
+		"phpunit/phpunit": "~4.8"
 	},
 	"autoload": {
 		"files" : [
@@ -45,15 +46,15 @@
 	"scripts": {
 		"test": [
 			"composer validate --no-interaction",
-			"phpunit"
+			"vendor/bin/phpunit"
 		],
 		"cs": [
-			"composer phpcs",
-			"composer phpmd"
+			"@phpcs",
+			"@phpmd"
 		],
 		"ci": [
-			"composer test",
-			"composer cs"
+			"@test",
+			"@cs"
 		],
 		"phpcs": [
 			"vendor/bin/phpcs src/* tests/* --standard=phpcs.xml --extensions=php -sp"
