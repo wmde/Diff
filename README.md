@@ -18,7 +18,7 @@ Recent changes can be found in the [release notes](RELEASE-NOTES.md).
 
 ## Requirements
 
-* PHP 5.3 or later (tested with PHP 5.3 up to PHP 5.6 and hhvm)
+* PHP 5.3 or later (tested with PHP 5.3 up to PHP 7.1 and hhvm)
 
 ## Installation
 
