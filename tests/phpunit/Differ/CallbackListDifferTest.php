@@ -32,14 +32,12 @@ class CallbackListDifferTest extends DiffTestCase {
 		$argLists[] = array( $old, $new, $expected,
 			'There should be no difference between empty arrays' );
 
-
 		$old = array( 42 );
 		$new = array( 42 );
 		$expected = array();
 
 		$argLists[] = array( $old, $new, $expected,
 			'There should be no difference between arrays with the same element' );
-
 
 		$old = array( 42, 'ohi', 4.2, false );
 		$new = array( 42, 'ohi', 4.2, false );
@@ -48,14 +46,12 @@ class CallbackListDifferTest extends DiffTestCase {
 		$argLists[] = array( $old, $new, $expected,
 			'There should be no difference between arrays with the same elements' );
 
-
 		$old = array( 42, 'ohi', 4.2, false );
 		$new = array( false, 4.2, 'ohi', 42 );
 		$expected = array();
 
 		$argLists[] = array( $old, $new, $expected,
 			'There should be no difference between arrays with the same elements even when not ordered the same' );
-
 
 		$old = array();
 		$new = array( 42 );
@@ -64,7 +60,6 @@ class CallbackListDifferTest extends DiffTestCase {
 		$argLists[] = array( $old, $new, $expected,
 			'An array with a single element should be an add operation different from an empty array' );
 
-
 		$old = array( 42 );
 		$new = array();
 		$expected = array( new DiffOpRemove( 42 ) );
@@ -72,14 +67,12 @@ class CallbackListDifferTest extends DiffTestCase {
 		$argLists[] = array( $old, $new, $expected,
 			'An empty array should be a remove operation different from an array with one element' );
 
-
 		$old = array( 1 );
 		$new = array( 2 );
 		$expected = array( new DiffOpRemove( 1 ), new DiffOpAdd( 2 ) );
 
 		$argLists[] = array( $old, $new, $expected,
 			'Two arrays with a single different element should differ by an add and a remove op' );
-
 
 		$old = array( 9001, 42, 1, 0 );
 		$new = array( 9001, 2, 0, 42 );
@@ -106,14 +99,12 @@ class CallbackListDifferTest extends DiffTestCase {
 		$argLists[] = array( $old, $new, $expected,
 			'[42, 42] to [42] should [rem(42)]' );
 
-
 		$old = array( 42 );
 		$new = array( 42, 42 );
 		$expected = array( new DiffOpAdd( 42 ) );
 
 		$argLists[] = array( $old, $new, $expected,
 			'[42] to [42, 42] should [add(42)]' );
-
 
 		$old = array( '42' );
 		$new = array( 42 );
@@ -122,14 +113,12 @@ class CallbackListDifferTest extends DiffTestCase {
 		$argLists[] = array( $old, $new, $expected,
 			'["42"] to [42] should [rem("42"), add(42)]' );
 
-
 		$old = array( array( 1 ) );
 		$new = array( array( 2 ) );
 		$expected = array( new DiffOpRemove( array( 1 ) ), new DiffOpAdd( array( 2 ) ) );
 
 		$argLists[] = array( $old, $new, $expected,
 			'[[1]] to [[2]] should [rem([1]), add([2])]' );
-
 
 		$old = array( array( 2 ) );
 		$new = array( array( 2 ) );

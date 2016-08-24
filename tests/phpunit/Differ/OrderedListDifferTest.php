@@ -36,7 +36,6 @@ class OrderedListDifferTest extends DiffTestCase {
 		$argLists[] = array( $old, $new, $expected,
 			'There should be no difference between empty arrays' );
 
-
 		$old = array( 42 );
 		$new = array( 42 );
 		$expected = array();
@@ -44,14 +43,12 @@ class OrderedListDifferTest extends DiffTestCase {
 		$argLists[] = array( $old, $new, $expected,
 			'There should be no difference between arrays with the same element' );
 
-
 		$old = array( 42, 'ohi', 4.2, false );
 		$new = array( 42, 'ohi', 4.2, false );
 		$expected = array();
 
 		$argLists[] = array( $old, $new, $expected,
 			'There should be no difference between arrays with the same elements' );
-
 
 		$old = array( 42, 'ohi', 4.2, false );
 		$new = array( false, 4.2, 'ohi', 42 );
@@ -69,7 +66,6 @@ class OrderedListDifferTest extends DiffTestCase {
 		$argLists[] = array( $old, $new, $expected,
 			'Changing the order of all four elements should result in four add operations and four remove operations' );
 
-
 		$old = array( 42, 'ohi', 4.2, false );
 		$new = array( 4.2, 'ohi', 42, false );
 		$expected = array(
@@ -82,14 +78,12 @@ class OrderedListDifferTest extends DiffTestCase {
 		$argLists[] = array( $old, $new, $expected,
 			'Changing the order of two of four elements should result in two add operations and two remove operations' );
 
-
 		$old = array();
 		$new = array( 42 );
 		$expected = array( new DiffOpAdd( 42 ) );
 
 		$argLists[] = array( $old, $new, $expected,
 			'An array with a single element should be an add operation different from an empty array' );
-
 
 		$old = array( 42 );
 		$new = array();
@@ -98,14 +92,12 @@ class OrderedListDifferTest extends DiffTestCase {
 		$argLists[] = array( $old, $new, $expected,
 			'An empty array should be a remove operation different from an array with one element' );
 
-
 		$old = array( 1 );
 		$new = array( 2 );
 		$expected = array( new DiffOpRemove( 1 ), new DiffOpAdd( 2 ) );
 
 		$argLists[] = array( $old, $new, $expected,
 			'Two arrays with a single different element should differ by an add and a remove op' );
-
 
 		$old = array( 9001, 42, 1, 0 );
 		$new = array( 9001, 42, 2, 0 );
@@ -114,7 +106,6 @@ class OrderedListDifferTest extends DiffTestCase {
 		$argLists[] = array( $old, $new, $expected,
 			'Two arrays with a single different element should differ by an add and a remove op
 			 when the order of the identical elements stays the same' );
-
 
 		$old = array( 'a', 'b', 'c' );
 		$new = array( 'c', 'b', 'a', 'd' );
@@ -130,7 +121,6 @@ class OrderedListDifferTest extends DiffTestCase {
 			'Changing the position of two elements and adding one new element should result
 			in two remove ops and three add ops' );
 
-
 		$old = array( 'a', 'b', 'c', 'd' );
 		$new = array( 'b', 'a', 'c' );
 		$expected = array(
@@ -144,7 +134,6 @@ class OrderedListDifferTest extends DiffTestCase {
 		$argLists[] = array( $old, $new, $expected,
 			'Changing the position of two elements and removing the last element should result
 			in three remove ops and two add ops' );
-
 
 		$old = array( 'a', 'b', 'c' );
 		$new = array( 'b', 'c' );
@@ -173,14 +162,12 @@ class OrderedListDifferTest extends DiffTestCase {
 		$argLists[] = array( $old, $new, $expected,
 			'[42, 42] to [42] should [rem(42)]' );
 
-
 		$old = array( 42 );
 		$new = array( 42, 42 );
 		$expected = array( new DiffOpAdd( 42 ) );
 
 		$argLists[] = array( $old, $new, $expected,
 			'[42] to [42, 42] should [add(42)]' );
-
 
 		$old = array( '42' );
 		$new = array( 42 );
@@ -189,14 +176,12 @@ class OrderedListDifferTest extends DiffTestCase {
 		$argLists[] = array( $old, $new, $expected,
 			'["42"] to [42] should [rem("42"), add(42)]' );
 
-
 		$old = array( array( 1 ) );
 		$new = array( array( 2 ) );
 		$expected = array( new DiffOpRemove( array( 1 ) ), new DiffOpAdd( array( 2 ) ) );
 
 		$argLists[] = array( $old, $new, $expected,
 			'[[1]] to [[2]] should [rem([1]), add([2])]' );
-
 
 		$old = array( array( 2 ) );
 		$new = array( array( 2 ) );

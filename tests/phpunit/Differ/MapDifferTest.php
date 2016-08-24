@@ -33,14 +33,12 @@ class MapDifferTest extends DiffTestCase {
 		$argLists[] = array( $old, $new, $expected,
 			'There should be no difference between empty arrays' );
 
-
 		$old = array( 42 );
 		$new = array( 42 );
 		$expected = array();
 
 		$argLists[] = array( $old, $new, $expected,
 			'There should be no difference between two arrays with the same element' );
-
 
 		$old = array( 42, 10, 'ohi', false, null, array( '.', 4.2 ) );
 		$new = array( 42, 10, 'ohi', false, null, array( '.', 4.2 ) );
@@ -49,14 +47,12 @@ class MapDifferTest extends DiffTestCase {
 		$argLists[] = array( $old, $new, $expected,
 			'There should be no difference between two arrays with the same elements' );
 
-
 		$old = array( 42, 42, 42 );
 		$new = array( 42, 42, 42 );
 		$expected = array();
 
 		$argLists[] = array( $old, $new, $expected,
 			'There should be no difference between two arrays with the same elements' );
-
 
 		$old = array( 1, 2 );
 		$new = array( 2, 1 );
@@ -65,7 +61,6 @@ class MapDifferTest extends DiffTestCase {
 		$argLists[] = array( $old, $new, $expected,
 			'Switching position should cause a diff' );
 
-
 		$old = array( 0, 1, 2, 3 );
 		$new = array( 0, 2, 1, 3 );
 		$expected = array( 1 => new DiffOpChange( 1, 2 ), 2 => new DiffOpChange( 2, 1 ) );
@@ -73,14 +68,12 @@ class MapDifferTest extends DiffTestCase {
 		$argLists[] = array( $old, $new, $expected,
 			'Switching position should cause a diff' );
 
-
 		$old = array( 'a' => 0, 'b' => 1, 'c' => 0 );
 		$new = array( 'a' => 42, 'b' => 1, 'c' => 42 );
 		$expected = array( 'a' => new DiffOpChange( 0, 42 ), 'c' => new DiffOpChange( 0, 42 ) );
 
 		$argLists[] = array( $old, $new, $expected,
 			'Doing the same change to two different elements should result in two identical change ops' );
-
 
 		$old = array( 'a' => 0, 'b' => 1 );
 		$new = array( 'a' => 0, 'c' => 1 );
@@ -145,14 +138,12 @@ class MapDifferTest extends DiffTestCase {
 		$argLists[] = array( $old, $new, $expected,
 			'Recursion should work for nested non-associative diffs', true );
 
-
 		$old = array( array( 42 ), 1 );
 		$new = array( array( 42, 42 ), 1 );
 		$expected = array( new Diff( array( new DiffOpAdd( 42 ) ), false ) );
 
 		$argLists[] = array( $old, $new, $expected,
 			'Nested non-associative diffs should behave as the default ListDiffer', true );
-
 
 		$old = array( array( 42 ), 1 );
 		$new = array( array( 42, 42, 1 ), 1 );
@@ -161,7 +152,6 @@ class MapDifferTest extends DiffTestCase {
 		$argLists[] = array( $old, $new, $expected,
 			'Setting a non-default Differ for non-associative diffs should work',
 			true, new ListDiffer( new NativeArrayComparer() ) );
-
 
 		$old = array( 'a' => array( 42 ), 1, array( 'a' => 'b', 5 ), 'bah' => array( 'foo' => 'bar' ) );
 		$new = array( 'a' => array( 42 ), 1, array( 'a' => 'b', 5 ), 'bah' => array( 'foo' => 'baz' ) );
@@ -175,7 +165,6 @@ class MapDifferTest extends DiffTestCase {
 				. 'in nested empty diffs (these empty diffs should be omitted)',
 			true
 		);
-
 
 		$old = array( 'links' => array(
 			'enwiki' => array(
@@ -195,7 +184,6 @@ class MapDifferTest extends DiffTestCase {
 			'Comparing identical nested structures should not result in diff operations',
 			true );
 
-
 		$old = array( 'links' => array(
 		) );
 		$new = array( 'links' => array(
@@ -213,7 +201,6 @@ class MapDifferTest extends DiffTestCase {
 		$argLists[] = array( $old, $new, $expected,
 			'Adding a sitelink with no badges',
 			true );
-
 
 		$old = array( 'links' => array(
 		) );
@@ -236,7 +223,6 @@ class MapDifferTest extends DiffTestCase {
 		$argLists[] = array( $old, $new, $expected,
 			'Adding a sitelink with badges',
 			true );
-
 
 		$old = array( 'links' => array(
 			'enwiki' => array(
@@ -263,7 +249,6 @@ class MapDifferTest extends DiffTestCase {
 			'Adding bagdes to a sitelink',
 			true );
 
-
 		$old = array();
 		$new = array(
 			'enwiki' => array(
@@ -283,7 +268,6 @@ class MapDifferTest extends DiffTestCase {
 		$argLists[] = array( $old, $new, $expected,
 			'Adding a sitelink with non-recursive mode',
 			false );
-
 
 		$old = array(
 			'enwiki' => array(
