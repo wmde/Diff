@@ -3,6 +3,10 @@ These are the release notes for the [Diff library](README.md).
 Latest release:
 [![Latest Stable Version](https://poser.pugx.org/diff/diff/version.png)](https://packagist.org/packages/diff/diff)
 
+## Version 2.1 (2016-09-01)
+
+* Improved various PHPDocs
+
 ## Version 2.0 (2015-03-17)
 
 * Added `Diff::equals`
