@@ -17,7 +17,6 @@ use Diff\Tests\DiffTestCase;
  *
  * @group Diff
  * @group DiffPatcher
- * @group MapPatcherTest
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
