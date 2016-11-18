@@ -231,7 +231,7 @@ class ListDifferTest extends DiffTestCase {
 	}
 
 	public function testDiffCallsArrayComparatorCorrectly() {
-		$arrayComparer = $this->getMock( 'Diff\ArrayComparer\ArrayComparer' );
+		$arrayComparer = $this->createMock( 'Diff\ArrayComparer\ArrayComparer' );
 
 		$arrayComparer->expects( $this->exactly( 2 ) )
 			->method( 'diffArrays' )

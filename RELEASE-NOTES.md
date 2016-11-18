@@ -3,6 +3,11 @@ These are the release notes for the [Diff library](README.md).
 Latest release:
 [![Latest Stable Version](https://poser.pugx.org/diff/diff/version.png)](https://packagist.org/packages/diff/diff)
 
+## Version 3.0 (dev)
+
+* Dropped support for PHP 5.x
+* Dropped class aliases deprecated since Diff 1.0
+
 ## Version 2.1 (2016-09-01)
 
 * Improved various PHPDocs
