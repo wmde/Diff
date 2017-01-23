@@ -71,7 +71,7 @@ class DiffAsOpTest extends DiffOpTest {
 		$this->assertArrayHasKey( 'isassoc', $array );
 
 		$this->assertTrue(
-			is_bool( $array['isassoc'] ) || is_null( $array['isassoc'] ),
+			is_bool( $array['isassoc'] ) || $array['isassoc'] === null,
 			'The isassoc element needs to be a boolean or null'
 		);
 	}
