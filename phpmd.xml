@@ -11,7 +11,12 @@
     </rule>
     <rule ref="rulesets/codesize.xml/TooManyMethods">
         <properties>
-            <property name="maxmethods" value="20" />
+            <property name="maxmethods" value="16" />
+        </properties>
+    </rule>
+    <rule ref="rulesets/codesize.xml/ExcessiveClassComplexity">
+        <properties>
+            <property name="maximum" value="57" />
         </properties>
     </rule>
     <rule ref="rulesets/codesize.xml/TooManyPublicMethods">
@@ -28,6 +33,11 @@
     <rule ref="rulesets/naming.xml">
         <exclude name="ShortVariable" />
         <exclude name="LongVariable" />
+    </rule>
+    <rule ref="rulesets/naming.xml/ShortVariable">
+        <properties>
+            <property name="exceptions" value="to" />
+        </properties>
     </rule>
 
     <rule ref="rulesets/unusedcode.xml">
