@@ -50,35 +50,20 @@ class ListDiffer implements Differ {
 	 * @param ArrayComparer|int|null $arrayComparer Defaults to a StrictArrayComparer. The use of
 	 * the self::MODE_... constants is deprecated.
 	 *
-	 * The first argument is an ArrayComparer since version 0.8.
-	 * Before this it was an element of the ListDiffer::MODE_ enum.
-	 * The later is still supported though deprecated.
-	 */
-	public function __construct( $arrayComparer = null ) {
-		$this->arrayComparer = $this->getRealArrayComparer( $arrayComparer );
-	}
-
-	/**
-	 * @param ArrayComparer|int|null $arrayComparer Defaults to a StrictArrayComparer. The use of
-	 * the self::MODE_... constants is deprecated.
-	 *
-	 * @return ArrayComparer
 	 * @throws InvalidArgumentException
 	 */
-	private function getRealArrayComparer( $arrayComparer ) {
-		if ( $arrayComparer === null || $arrayComparer === self::MODE_STRICT ) {
-			return new StrictArrayComparer();
-		}
-
+	public function __construct( $arrayComparer = null ) {
 		if ( $arrayComparer === self::MODE_NATIVE ) {
-			return new NativeArrayComparer();
+			$arrayComparer = new NativeArrayComparer();
+		} elseif ( $arrayComparer === self::MODE_STRICT ) {
+			$arrayComparer = new StrictArrayComparer();
 		}
 
-		if ( is_object( $arrayComparer ) && $arrayComparer instanceof ArrayComparer ) {
-			return $arrayComparer;
+		if ( $arrayComparer !== null && !( $arrayComparer instanceof ArrayComparer ) ) {
+			throw new InvalidArgumentException( 'Got an invalid $arrayComparer' );
 		}
 
-		throw new InvalidArgumentException( 'Got an invalid $arrayComparer' );
+		$this->arrayComparer = $arrayComparer ?: new StrictArrayComparer();
 	}
 
 	/**
