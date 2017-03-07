@@ -8,6 +8,7 @@ Latest release:
 * Dropped support for PHP 5.x
 * Dropped class aliases deprecated since Diff 1.0
 * Removed ListDiff and MapDiff, deprecated since Diff 0.5
+* Removed ListDiffer::MODE_NATIVE and ListDiffer::MODE_STRICT, deprecated since Diff 0.8
 
 ## Version 2.1 (2016-09-01)
 
