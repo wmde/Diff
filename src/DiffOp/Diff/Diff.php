@@ -77,7 +77,7 @@ class Diff extends ArrayObject implements DiffOp {
 	 *
 	 * @return DiffOp[]
 	 */
-	public function getOperations() {
+	public function getOperations(): array {
 		return $this->getArrayCopy();
 	}
 
@@ -88,7 +88,7 @@ class Diff extends ArrayObject implements DiffOp {
 	 *
 	 * @return DiffOp[]
 	 */
-	public function getTypeOperations( $type ) {
+	public function getTypeOperations( $type ): array {
 		return array_intersect_key(
 			$this->getArrayCopy(),
 			array_flip( $this->typePointers[$type] )
@@ -121,7 +121,7 @@ class Diff extends ArrayObject implements DiffOp {
 	 * @return bool
 	 * @throws InvalidArgumentException
 	 */
-	private function preSetElement( $index, DiffOp $value ) {
+	private function preSetElement( $index, DiffOp $value ): bool {
 		if ( $this->isAssociative === false && ( $value->getType() !== 'add' && $value->getType() !== 'remove' ) ) {
 			throw new InvalidArgumentException( 'Diff operation with invalid type "' . $value->getType() . '" provided.' );
 		}
@@ -172,7 +172,7 @@ class Diff extends ArrayObject implements DiffOp {
 	 *
 	 * @return DiffOpAdd[]
 	 */
-	public function getAdditions() {
+	public function getAdditions(): array {
 		return $this->getTypeOperations( 'add' );
 	}
 
@@ -181,7 +181,7 @@ class Diff extends ArrayObject implements DiffOp {
 	 *
 	 * @return DiffOpRemove[]
 	 */
-	public function getRemovals() {
+	public function getRemovals(): array {
 		return $this->getTypeOperations( 'remove' );
 	}
 
@@ -190,7 +190,7 @@ class Diff extends ArrayObject implements DiffOp {
 	 *
 	 * @return DiffOpChange[]
 	 */
-	public function getChanges() {
+	public function getChanges(): array {
 		return $this->getTypeOperations( 'change' );
 	}
 
@@ -201,7 +201,7 @@ class Diff extends ArrayObject implements DiffOp {
 	 *
 	 * @return array of mixed
 	 */
-	public function getAddedValues() {
+	public function getAddedValues(): array {
 		return array_map(
 			function( DiffOpAdd $addition ) {
 				return $addition->getNewValue();
@@ -217,7 +217,7 @@ class Diff extends ArrayObject implements DiffOp {
 	 *
 	 * @return array of mixed
 	 */
-	public function getRemovedValues() {
+	public function getRemovedValues(): array {
 		return array_map(
 			function( DiffOpRemove $addition ) {
 				return $addition->getOldValue();
@@ -233,7 +233,7 @@ class Diff extends ArrayObject implements DiffOp {
 	 *
 	 * @return bool
 	 */
-	public function isAtomic() {
+	public function isAtomic(): bool {
 		return false;
 	}
 
@@ -244,7 +244,7 @@ class Diff extends ArrayObject implements DiffOp {
 	 *
 	 * @return string
 	 */
-	public function getType() {
+	public function getType(): string {
 		return 'diff';
 	}
 
@@ -260,7 +260,7 @@ class Diff extends ArrayObject implements DiffOp {
 	 *
 	 * @return int
 	 */
-	public function count() {
+	public function count(): int {
 		$count = 0;
 
 		/**
@@ -304,7 +304,7 @@ class Diff extends ArrayObject implements DiffOp {
 	 *
 	 * @return bool
 	 */
-	public function looksAssociative() {
+	public function looksAssociative(): bool {
 		return $this->isAssociative === null ? $this->hasAssociativeOperations() : $this->isAssociative;
 	}
 
@@ -316,7 +316,7 @@ class Diff extends ArrayObject implements DiffOp {
 	 *
 	 * @return bool
 	 */
-	public function hasAssociativeOperations() {
+	public function hasAssociativeOperations(): bool {
 		return !empty( $this->typePointers['change'] )
 			|| !empty( $this->typePointers['diff'] )
 			|| !empty( $this->typePointers['map'] )
@@ -335,7 +335,7 @@ class Diff extends ArrayObject implements DiffOp {
 	 *
 	 * @return array
 	 */
-	public function toArray( $valueConverter = null ) {
+	public function toArray( $valueConverter = null ): array {
 		$operations = array();
 
 		foreach ( $this->getOperations() as $key => $diffOp ) {
@@ -376,7 +376,7 @@ class Diff extends ArrayObject implements DiffOp {
 	 *
 	 * @return int
 	 */
-	private function getNewOffset() {
+	private function getNewOffset(): int {
 		while ( $this->offsetExists( $this->indexOffset ) ) {
 			$this->indexOffset++;
 		}
@@ -464,7 +464,7 @@ class Diff extends ArrayObject implements DiffOp {
 	 *
 	 * @return bool
 	 */
-	public function isEmpty() {
+	public function isEmpty(): bool {
 		return $this->count() === 0;
 	}
 

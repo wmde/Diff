@@ -28,7 +28,7 @@ class ListDiff extends Diff {
 	 *
 	 * @return string
 	 */
-	public function getType() {
+	public function getType(): string {
 		return 'list';
 	}
 

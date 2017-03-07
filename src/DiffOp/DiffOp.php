@@ -25,7 +25,7 @@ interface DiffOp extends Serializable, Countable {
 	 *
 	 * @return string
 	 */
-	public function getType();
+	public function getType(): string;
 
 	/**
 	 * Returns if the operation is atomic, opposing to it
@@ -35,7 +35,7 @@ interface DiffOp extends Serializable, Countable {
 	 *
 	 * @return bool
 	 */
-	public function isAtomic();
+	public function isAtomic(): bool;
 
 	/**
 	 * Returns the DiffOp in array form.
@@ -57,6 +57,6 @@ interface DiffOp extends Serializable, Countable {
 	 *
 	 * @return array
 	 */
-	public function toArray( $valueConverter = null );
+	public function toArray( $valueConverter = null ): array;
 
 }
