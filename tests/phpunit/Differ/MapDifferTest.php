@@ -359,7 +359,7 @@ class MapDifferTest extends DiffTestCase {
 			return '~=[,,_,,]:3';
 		} );
 
-		$this->setExpectedException( 'Exception' );
+		$this->expectException( 'Exception' );
 
 		$differ->doDiff( array( 1, '2', 'baz' ), array( 1, 'foo', '2' ) );
 	}

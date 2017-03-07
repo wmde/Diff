@@ -436,7 +436,7 @@ class MapPatcherTest extends DiffTestCase {
 		$patcher->patch( array(), $diff );
 
 		$patcher->throwErrors();
-		$this->setExpectedException( 'Diff\Patcher\PatcherException' );
+		$this->expectException( 'Diff\Patcher\PatcherException' );
 
 		$patcher->patch( array(), $diff );
 	}

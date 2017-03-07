@@ -43,7 +43,7 @@ class ListDifferTest extends DiffTestCase {
 	}
 
 	public function testInvalidConstructorArgument() {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->expectException( 'InvalidArgumentException' );
 		new ListDiffer( 2 );
 	}
 

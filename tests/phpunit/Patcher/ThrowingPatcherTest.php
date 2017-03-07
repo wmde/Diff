@@ -37,7 +37,7 @@ class ThrowingPatcherTest extends DiffTestCase {
 		$method->invokeArgs( $patcher, array( $errorMessage ) );
 
 		$patcher->throwErrors();
-		$this->setExpectedException( 'Diff\Patcher\PatcherException' );
+		$this->expectException( 'Diff\Patcher\PatcherException' );
 
 		$method->invokeArgs( $patcher, array( $errorMessage ) );
 	}

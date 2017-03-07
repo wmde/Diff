@@ -260,7 +260,7 @@ class OrderedArrayComparerTest extends DiffTestCase {
 
 		$arrayComparer = new OrderedArrayComparer( $valueComparer );
 
-		$this->setExpectedException( 'RuntimeException' );
+		$this->expectException( 'RuntimeException' );
 
 		$arrayComparer->diffArrays( array( 1, '2', 'baz' ), array( 1, 'foo', '2' ) );
 	}

@@ -80,7 +80,7 @@ abstract class DiffOpTest extends DiffTestCase {
 		$valid = array_shift( $args );
 
 		if ( $valid !== true ) {
-			$this->setExpectedException( $valid ?: 'InvalidArgumentException' );
+			$this->expectException( $valid ?: 'InvalidArgumentException' );
 		}
 
 		$dataItem = call_user_func_array( array( $this, 'newInstance' ), $args );
@@ -148,7 +148,7 @@ abstract class DiffOpTest extends DiffTestCase {
 	 * @dataProvider instanceProvider
 	 */
 	public function testToArrayWithConversion( DiffOp $diffOp ) {
-		$array = $diffOp->toArray( function( $diffOp ) {
+		$array = $diffOp->toArray( function() {
 			return array( 'Nyan!' );
 		} );
 

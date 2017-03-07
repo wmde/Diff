@@ -205,7 +205,7 @@ class StrategicArrayComparerTest extends DiffTestCase {
 
 		$arrayComparer = new StrategicArrayComparer( $valueComparer );
 
-		$this->setExpectedException( 'RuntimeException' );
+		$this->expectException( 'RuntimeException' );
 
 		$arrayComparer->diffArrays( array( 1, '2', 'baz' ), array( 1, 'foo', '2' ) );
 	}

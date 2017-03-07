@@ -120,7 +120,7 @@ class DiffOpFactoryTest extends DiffTestCase {
 	 * @param array $array
 	 */
 	public function testNewFromArrayInvalid( array $array ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->expectException( 'InvalidArgumentException' );
 
 		$factory = new DiffOpFactory();
 		$factory->newFromArray( $array );

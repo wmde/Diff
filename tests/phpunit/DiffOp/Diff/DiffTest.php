@@ -96,7 +96,7 @@ class DiffTest extends DiffTestCase {
 	}
 
 	public function testPreSetElement() {
-		$this->setExpectedException( 'Exception' );
+		$this->expectException( 'Exception' );
 
 		$diff = new Diff( array(), false );
 		$diff[] = new DiffOpChange( 0, 1 );
@@ -354,7 +354,7 @@ class DiffTest extends DiffTestCase {
 	 * @param Closure $function
 	 */
 	private function assertInvalidArgument( Closure $function ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->expectException( 'InvalidArgumentException' );
 
 		$arguments = func_get_args();
 		array_shift( $arguments );
@@ -490,7 +490,7 @@ class DiffTest extends DiffTestCase {
 			->method( 'getType' )
 			->will( $this->returnValue( '~=[,,_,,]:3' ) );
 
-		$this->setExpectedException( 'Exception' );
+		$this->expectException( 'Exception' );
 
 		$list->append( $invalidDiffOp );
 	}
@@ -499,7 +499,7 @@ class DiffTest extends DiffTestCase {
 	 * @dataProvider invalidIsAssociativeProvider
 	 */
 	public function testConstructWithInvalidIsAssociative( $isAssociative ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->expectException( 'InvalidArgumentException' );
 		new Diff( array(), $isAssociative );
 	}
 
@@ -518,7 +518,7 @@ class DiffTest extends DiffTestCase {
 	 * @dataProvider invalidDiffOpsProvider
 	 */
 	public function testConstructorWithInvalidDiffOps( array $diffOps ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->expectException( 'InvalidArgumentException' );
 		new Diff( $diffOps );
 	}
 
