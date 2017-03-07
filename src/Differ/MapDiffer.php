@@ -42,14 +42,10 @@ class MapDiffer implements Differ {
 	 * @param bool $recursively
 	 * @param Differ|null $listDiffer
 	 */
-	public function __construct( $recursively = false, Differ $listDiffer = null ) {
+	public function __construct( bool $recursively = false, Differ $listDiffer = null ) {
 		$this->recursively = $recursively;
 
-		if ( $listDiffer === null ) {
-			$listDiffer = new ListDiffer();
-		}
-
-		$this->listDiffer = $listDiffer;
+		$this->listDiffer = $listDiffer ?? new ListDiffer();
 	}
 
 	/**
@@ -60,7 +56,7 @@ class MapDiffer implements Differ {
 	 *
 	 * @param callable $comparisonCallback
 	 */
-	public function setComparisonCallback( $comparisonCallback ) {
+	public function setComparisonCallback( callable $comparisonCallback ) {
 		$this->comparisonCallback = $comparisonCallback;
 	}
 
