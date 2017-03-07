@@ -91,7 +91,7 @@ class ListDiffer implements Differ {
 	 *
 	 * @return DiffOp[]
 	 */
-	public function doDiff( array $oldValues, array $newValues ) {
+	public function doDiff( array $oldValues, array $newValues ): array {
 		$operations = array();
 
 		foreach ( $this->diffArrays( $newValues, $oldValues ) as $addition ) {

@@ -60,7 +60,7 @@ class MapPatcher extends ThrowingPatcher {
 	 * @return array
 	 * @throws PatcherException
 	 */
-	public function patch( array $base, Diff $diff ) {
+	public function patch( array $base, Diff $diff ): array {
 		foreach ( $diff as $key => $diffOp ) {
 			$this->applyOperation( $base, $key, $diffOp );
 		}

@@ -34,7 +34,7 @@ class StrategicArrayComparer implements ArrayComparer {
 	 *
 	 * @return array
 	 */
-	public function diffArrays( array $arrayOne, array $arrayTwo ) {
+	public function diffArrays( array $arrayOne, array $arrayTwo ): array {
 		$notInTwo = array();
 
 		foreach ( $arrayOne as $element ) {
@@ -56,17 +56,10 @@ class StrategicArrayComparer implements ArrayComparer {
 	 * @param array $haystack
 	 *
 	 * @return bool|int|string
-	 * @throws RuntimeException
 	 */
 	private function arraySearch( $needle, array $haystack ) {
 		foreach ( $haystack as $valueOffset => $thing ) {
-			$areEqual = $this->valueComparer->valuesAreEqual( $needle, $thing );
-
-			if ( !is_bool( $areEqual ) ) {
-				throw new RuntimeException( 'ValueComparer returned a non-boolean value' );
-			}
-
-			if ( $areEqual ) {
+			if ( $this->valueComparer->valuesAreEqual( $needle, $thing ) ) {
 				return $valueOffset;
 			}
 		}

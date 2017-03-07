@@ -44,7 +44,7 @@ class OrderedListDiffer implements Differ {
 	 *
 	 * @return DiffOp[]
 	 */
-	public function doDiff( array $oldValues, array $newValues ) {
+	public function doDiff( array $oldValues, array $newValues ): array {
 		return $this->differ->doDiff( $oldValues, $newValues );
 	}
 

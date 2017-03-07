@@ -26,6 +26,6 @@ interface Differ {
 	 * @throws Exception
 	 * @return DiffOp[]
 	 */
-	public function doDiff( array $oldValues, array $newValues );
+	public function doDiff( array $oldValues, array $newValues ): array;
 
 }

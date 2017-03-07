@@ -25,6 +25,6 @@ interface Patcher {
 	 *
 	 * @return array
 	 */
-	public function patch( array $base, Diff $diffOps );
+	public function patch( array $base, Diff $diffOps ): array;
 
 }

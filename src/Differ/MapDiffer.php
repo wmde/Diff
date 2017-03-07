@@ -77,7 +77,7 @@ class MapDiffer implements Differ {
 	 * @throws Exception
 	 * @return DiffOp[]
 	 */
-	public function doDiff( array $oldValues, array $newValues ) {
+	public function doDiff( array $oldValues, array $newValues ): array {
 		$newSet = $this->arrayDiffAssoc( $newValues, $oldValues );
 		$oldSet = $this->arrayDiffAssoc( $oldValues, $newValues );
 

@@ -251,18 +251,4 @@ class OrderedArrayComparerTest extends DiffTestCase {
 		);
 	}
 
-	public function testCallbackComparisonReturningNyanCat() {
-		$valueComparer = $this->createMock( 'Diff\Comparer\ValueComparer' );
-
-		$valueComparer->expects( $this->once() )
-			->method( 'valuesAreEqual' )
-			->will( $this->returnValue( '~=[,,_,,]:3' ) );
-
-		$arrayComparer = new OrderedArrayComparer( $valueComparer );
-
-		$this->expectException( 'RuntimeException' );
-
-		$arrayComparer->diffArrays( array( 1, '2', 'baz' ), array( 1, 'foo', '2' ) );
-	}
-
 }

@@ -30,7 +30,7 @@ class StrictArrayComparer implements ArrayComparer {
 	 *
 	 * @return array
 	 */
-	public function diffArrays( array $arrayOne, array $arrayTwo ) {
+	public function diffArrays( array $arrayOne, array $arrayTwo ): array {
 		$notInTwo = array();
 
 		foreach ( $arrayOne as $element ) {

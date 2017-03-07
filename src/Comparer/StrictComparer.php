@@ -18,7 +18,7 @@ class StrictComparer implements ValueComparer {
 	 *
 	 * @return bool
 	 */
-	public function valuesAreEqual( $firstValue, $secondValue ) {
+	public function valuesAreEqual( $firstValue, $secondValue ): bool {
 		return $firstValue === $secondValue;
 	}
 

@@ -25,6 +25,6 @@ interface ArrayComparer {
 	 *
 	 * @return array
 	 */
-	public function diffArrays( array $firstArray, array $secondArray );
+	public function diffArrays( array $firstArray, array $secondArray ): array;
 
 }

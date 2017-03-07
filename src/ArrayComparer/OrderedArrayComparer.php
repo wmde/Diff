@@ -36,7 +36,7 @@ class OrderedArrayComparer implements ArrayComparer {
 	 *
 	 * @return array
 	 */
-	public function diffArrays( array $arrayOne, array $arrayTwo ) {
+	public function diffArrays( array $arrayOne, array $arrayTwo ): array {
 		$notInTwo = array();
 
 		foreach ( $arrayOne as $valueOffset => $element ) {
@@ -57,17 +57,10 @@ class OrderedArrayComparer implements ArrayComparer {
 	 * @param int|string $valueOffset
 	 *
 	 * @return bool
-	 * @throws RuntimeException
 	 */
 	private function arraySearch( $needle, array $haystack, $valueOffset ) {
-		if ( array_key_exists( $valueOffset, $haystack )) {
-			$areEqual = $this->valueComparer->valuesAreEqual( $needle, $haystack[$valueOffset] );
-
-			if ( !is_bool( $areEqual ) ) {
-				throw new RuntimeException( 'ValueComparer returned a non-boolean value' );
-			}
-
-			return $areEqual;
+		if ( array_key_exists( $valueOffset, $haystack ) ) {
+			return $this->valueComparer->valuesAreEqual( $needle, $haystack[$valueOffset] );
 		}
 
 		return false;

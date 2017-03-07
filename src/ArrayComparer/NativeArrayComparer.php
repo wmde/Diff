@@ -24,7 +24,7 @@ class NativeArrayComparer implements ArrayComparer {
 	 *
 	 * @return array
 	 */
-	public function diffArrays( array $arrayOne, array $arrayTwo ) {
+	public function diffArrays( array $arrayOne, array $arrayTwo ): array {
 		return array_diff( $arrayOne, $arrayTwo );
 	}
 

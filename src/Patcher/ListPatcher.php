@@ -33,7 +33,7 @@ class ListPatcher extends ThrowingPatcher {
 	 * @return array
 	 * @throws PatcherException
 	 */
-	public function patch( array $base, Diff $diff ) {
+	public function patch( array $base, Diff $diff ): array {
 		if ( $diff->looksAssociative() ) {
 			$this->handleError( 'ListPatcher can only patch using non-associative diffs' );
 		}
