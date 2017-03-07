@@ -158,12 +158,6 @@ class Diff extends ArrayObject implements DiffOp {
 
 		if ( array_key_exists( 'assoc', $serializationData ) ) {
 			$this->isAssociative = $serializationData['assoc'] === 'n' ? null : $serializationData['assoc'] === 't';
-		} // The below cases are compat with < 0.4.
-		elseif ( $this instanceof MapDiff ) {
-			$this->isAssociative = true;
-		}
-		elseif ( $this instanceof ListDiff ) {
-			$this->isAssociative = false;
 		}
 	}
 

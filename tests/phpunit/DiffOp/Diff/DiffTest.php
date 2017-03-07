@@ -4,8 +4,6 @@ namespace Diff\Tests\DiffOp\Diff;
 
 use Closure;
 use Diff\DiffOp\Diff\Diff;
-use Diff\DiffOp\Diff\ListDiff;
-use Diff\DiffOp\Diff\MapDiff;
 use Diff\DiffOp\DiffOp;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
@@ -565,10 +563,6 @@ class DiffTest extends DiffTestCase {
 			// Simple diffs
 			array( new Diff( array( new DiffOpAdd( 1 ) ) ), new Diff( array( new DiffOpAdd( 1 ) ) ) ),
 			array( new Diff( array( new DiffOpAdd( 1 ) ) ), new Diff( array( new DiffOpAdd( '1' ) ) ) ),
-
-			// Subclasses that are shortcuts and should be equal
-			array( new Diff( array(), false ), new ListDiff() ),
-			array( new Diff( array(), true ), new MapDiff() ),
 		);
 	}
 
