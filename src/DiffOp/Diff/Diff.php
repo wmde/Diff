@@ -88,7 +88,7 @@ class Diff extends ArrayObject implements DiffOp {
 	 *
 	 * @return DiffOp[]
 	 */
-	public function getTypeOperations( $type ): array {
+	public function getTypeOperations( string $type ): array {
 		return array_intersect_key(
 			$this->getArrayCopy(),
 			array_flip( $this->typePointers[$type] )
@@ -335,7 +335,7 @@ class Diff extends ArrayObject implements DiffOp {
 	 *
 	 * @return array
 	 */
-	public function toArray( $valueConverter = null ): array {
+	public function toArray( callable $valueConverter = null ): array {
 		$operations = array();
 
 		foreach ( $this->getOperations() as $key => $diffOp ) {

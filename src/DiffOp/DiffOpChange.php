@@ -88,7 +88,7 @@ class DiffOpChange extends AtomicDiffOp {
 	 *
 	 * @return array
 	 */
-	public function toArray( $valueConverter = null ): array {
+	public function toArray( callable $valueConverter = null ): array {
 		return array(
 			'type' => $this->getType(),
 			'newvalue' => $this->objectToArray( $this->newValue, $valueConverter ),

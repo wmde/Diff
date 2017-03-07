@@ -58,7 +58,7 @@ class OrderedArrayComparer implements ArrayComparer {
 	 *
 	 * @return bool
 	 */
-	private function arraySearch( $needle, array $haystack, $valueOffset ) {
+	private function arraySearch( $needle, array $haystack, $valueOffset ): bool {
 		if ( array_key_exists( $valueOffset, $haystack ) ) {
 			return $this->valueComparer->valuesAreEqual( $needle, $haystack[$valueOffset] );
 		}

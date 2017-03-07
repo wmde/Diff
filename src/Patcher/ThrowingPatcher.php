@@ -28,7 +28,7 @@ abstract class ThrowingPatcher implements PreviewablePatcher {
 	 *
 	 * @param bool $throwErrors
 	 */
-	public function __construct( $throwErrors = false ) {
+	public function __construct( bool $throwErrors = false ) {
 		$this->throwErrors = $throwErrors;
 	}
 
@@ -39,7 +39,7 @@ abstract class ThrowingPatcher implements PreviewablePatcher {
 	 *
 	 * @throws PatcherException
 	 */
-	protected function handleError( $message ) {
+	protected function handleError( string $message ) {
 		if ( $this->throwErrors ) {
 			throw new PatcherException( $message );
 		}
@@ -74,7 +74,7 @@ abstract class ThrowingPatcher implements PreviewablePatcher {
 	 * @return Diff
 	 * @throws PatcherException
 	 */
-	public function getApplicableDiff( array $base, Diff $diff ) {
+	public function getApplicableDiff( array $base, Diff $diff ): Diff {
 		$throwErrors = $this->throwErrors;
 		$this->throwErrors = false;
 
