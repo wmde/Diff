@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Diff\Tests\Patcher;
 
 use Diff\DiffOp\Diff\Diff;

@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Diff\Tests\Differ;
 
 use Diff\Comparer\CallbackComparer;
