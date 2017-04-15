@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 if ( defined( 'Diff_VERSION' ) ) {
 	// Do not initialize more than once.
 	return 1;

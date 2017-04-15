@@ -20,8 +20,4 @@ if ( !is_readable( __DIR__ . '/../vendor/autoload.php' ) ) {
 	die( 'You need to install this package with Composer before you can run the tests' );
 }
 
-$classLoader = require __DIR__ . '/../vendor/autoload.php';
-
-$classLoader->addPsr4( 'Diff\\Tests\\', __DIR__ . '/phpunit/' );
-
-unset( $classLoader );
+require __DIR__ . '/../vendor/autoload.php';

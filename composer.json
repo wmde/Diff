@@ -39,6 +39,11 @@
 			"Diff\\": "src/"
 		}
 	},
+	"autoload-dev": {
+		"psr-4": {
+			"Diff\\Tests\\": "tests/phpunit/"
+		}
+	},
 	"extra": {
 		"branch-alias": {
 			"dev-master": "3.0.x-dev"
