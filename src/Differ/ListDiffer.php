@@ -5,12 +5,10 @@ declare( strict_types = 1 );
 namespace Diff\Differ;
 
 use Diff\ArrayComparer\ArrayComparer;
-use Diff\ArrayComparer\NativeArrayComparer;
 use Diff\ArrayComparer\StrictArrayComparer;
 use Diff\DiffOp\DiffOp;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
-use InvalidArgumentException;
 
 /**
  * Differ that only looks at the values of the arrays (and thus ignores key differences).

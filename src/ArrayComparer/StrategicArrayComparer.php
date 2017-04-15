@@ -5,7 +5,6 @@ declare( strict_types = 1 );
 namespace Diff\ArrayComparer;
 
 use Diff\Comparer\ValueComparer;
-use RuntimeException;
 
 /**
  * Computes the difference between two arrays by comparing elements with
