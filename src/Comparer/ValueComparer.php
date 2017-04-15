@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Diff\Comparer;
 
 /**
@@ -20,6 +22,6 @@ interface ValueComparer {
 	 *
 	 * @return bool
 	 */
-	public function valuesAreEqual( $firstValue, $secondValue );
+	public function valuesAreEqual( $firstValue, $secondValue ): bool;
 
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Diff\Tests\Differ;
 
 use Diff\Differ\CallbackListDiffer;
@@ -211,7 +213,7 @@ class CallbackListDifferTest extends DiffTestCase {
 			return '~=[,,_,,]:3';
 		} );
 
-		$this->setExpectedException( 'RuntimeException' );
+		$this->expectException( 'RuntimeException' );
 
 		$differ->doDiff( array( 1, '2', 'baz' ), array( 1, 'foo', '2' ) );
 	}

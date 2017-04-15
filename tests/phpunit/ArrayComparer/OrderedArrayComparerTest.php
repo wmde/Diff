@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Diff\Tests\ArrayComparer;
 
 use Diff\ArrayComparer\ArrayComparer;
@@ -20,12 +22,12 @@ use Diff\Tests\DiffTestCase;
 class OrderedArrayComparerTest extends DiffTestCase {
 
 	public function testCanConstruct() {
-		new OrderedArrayComparer( $this->getMock( 'Diff\Comparer\ValueComparer' ) );
+		new OrderedArrayComparer( $this->createMock( 'Diff\Comparer\ValueComparer' ) );
 		$this->assertTrue( true );
 	}
 
 	public function testDiffArraysWithComparerThatAlwaysReturnsTrue() {
-		$valueComparer = $this->getMock( 'Diff\Comparer\ValueComparer' );
+		$valueComparer = $this->createMock( 'Diff\Comparer\ValueComparer' );
 
 		$valueComparer->expects( $this->any() )
 			->method( 'valuesAreEqual' )
@@ -75,7 +77,7 @@ class OrderedArrayComparerTest extends DiffTestCase {
 	}
 
 	public function testDiffArraysWithComparerThatAlwaysReturnsFalse() {
-		$valueComparer = $this->getMock( 'Diff\Comparer\ValueComparer' );
+		$valueComparer = $this->createMock( 'Diff\Comparer\ValueComparer' );
 
 		$valueComparer->expects( $this->any() )
 			->method( 'valuesAreEqual' )
@@ -119,7 +121,7 @@ class OrderedArrayComparerTest extends DiffTestCase {
 	}
 
 	public function testQuantityMattersWithReturnTrue() {
-		$valueComparer = $this->getMock( 'Diff\Comparer\ValueComparer' );
+		$valueComparer = $this->createMock( 'Diff\Comparer\ValueComparer' );
 
 		$valueComparer->expects( $this->any() )
 			->method( 'valuesAreEqual' )
@@ -145,7 +147,7 @@ class OrderedArrayComparerTest extends DiffTestCase {
 	}
 
 	public function testQuantityMattersWithSimpleComparison() {
-		$valueComparer = $this->getMock( 'Diff\Comparer\ValueComparer' );
+		$valueComparer = $this->createMock( 'Diff\Comparer\ValueComparer' );
 
 		$valueComparer->expects( $this->any() )
 			->method( 'valuesAreEqual' )
@@ -181,7 +183,7 @@ class OrderedArrayComparerTest extends DiffTestCase {
 	}
 
 	public function testOrderMattersWithSimpleComparison() {
-		$valueComparer = $this->getMock( 'Diff\Comparer\ValueComparer' );
+		$valueComparer = $this->createMock( 'Diff\Comparer\ValueComparer' );
 
 		$valueComparer->expects( $this->any() )
 			->method( 'valuesAreEqual' )
@@ -233,7 +235,7 @@ class OrderedArrayComparerTest extends DiffTestCase {
 	}
 
 	public function testValueComparerGetsCalledWithCorrectValues() {
-		$valueComparer = $this->getMock( 'Diff\Comparer\ValueComparer' );
+		$valueComparer = $this->createMock( 'Diff\Comparer\ValueComparer' );
 
 		$valueComparer->expects( $this->once() )
 			->method( 'valuesAreEqual' )
@@ -249,20 +251,6 @@ class OrderedArrayComparerTest extends DiffTestCase {
 			array( 1 ),
 			array( 2 )
 		);
-	}
-
-	public function testCallbackComparisonReturningNyanCat() {
-		$valueComparer = $this->getMock( 'Diff\Comparer\ValueComparer' );
-
-		$valueComparer->expects( $this->once() )
-			->method( 'valuesAreEqual' )
-			->will( $this->returnValue( '~=[,,_,,]:3' ) );
-
-		$arrayComparer = new OrderedArrayComparer( $valueComparer );
-
-		$this->setExpectedException( 'RuntimeException' );
-
-		$arrayComparer->diffArrays( array( 1, '2', 'baz' ), array( 1, 'foo', '2' ) );
 	}
 
 }

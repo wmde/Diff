@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Diff\ArrayComparer;
 
 /**
@@ -25,6 +27,6 @@ interface ArrayComparer {
 	 *
 	 * @return array
 	 */
-	public function diffArrays( array $firstArray, array $secondArray );
+	public function diffArrays( array $firstArray, array $secondArray ): array;
 
 }

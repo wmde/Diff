@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Diff\Tests\Patcher;
 
 use Diff\DiffOp\Diff\Diff;
@@ -230,7 +232,7 @@ class ListPatcherTest extends DiffTestCase {
 		$patcher->patch( array(), new Diff( array(), true ) );
 
 		$patcher->throwErrors();
-		$this->setExpectedException( 'Diff\Patcher\PatcherException' );
+		$this->expectException( 'Diff\Patcher\PatcherException' );
 
 		$patcher->patch( array(), new Diff( array(), true ) );
 	}

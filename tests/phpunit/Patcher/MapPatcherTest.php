@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Diff\Tests\Patcher;
 
 use Diff\Comparer\CallbackComparer;
@@ -425,7 +427,7 @@ class MapPatcherTest extends DiffTestCase {
 	public function testErrorOnUnknownDiffOpType() {
 		$patcher = new MapPatcher();
 
-		$diffOp = $this->getMock( 'Diff\DiffOp\DiffOp' );
+		$diffOp = $this->createMock( 'Diff\DiffOp\DiffOp' );
 
 		$diffOp->expects( $this->any() )
 			->method( 'getType' )
@@ -436,7 +438,7 @@ class MapPatcherTest extends DiffTestCase {
 		$patcher->patch( array(), $diff );
 
 		$patcher->throwErrors();
-		$this->setExpectedException( 'Diff\Patcher\PatcherException' );
+		$this->expectException( 'Diff\Patcher\PatcherException' );
 
 		$patcher->patch( array(), $diff );
 	}

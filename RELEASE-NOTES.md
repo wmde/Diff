@@ -3,6 +3,13 @@ These are the release notes for the [Diff library](README.md).
 Latest release:
 [![Latest Stable Version](https://poser.pugx.org/diff/diff/version.png)](https://packagist.org/packages/diff/diff)
 
+## Version 3.0 (dev)
+
+* Dropped support for PHP 5.x
+* Dropped class aliases deprecated since Diff 1.0
+* Removed ListDiff and MapDiff, deprecated since Diff 0.5
+* Removed ListDiffer::MODE_NATIVE and ListDiffer::MODE_STRICT, deprecated since Diff 0.8
+
 ## Version 2.1 (2016-09-01)
 
 * Improved various PHPDocs

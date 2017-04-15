@@ -90,15 +90,13 @@ The `Differ` interface has a single method.
 /**
  * Takes two arrays, computes the diff, and returns this diff as an array of DiffOp.
  *
- * @since 0.4
- *
  * @param array $oldValues The first array
  * @param array $newValues The second array
  *
  * @throws Exception
  * @return DiffOp[]
  */
-public function doDiff( array $oldValues, array $newValues );
+public function doDiff( array $oldValues, array $newValues ): array;
 ```
 
 Implementations provided by Diff:
@@ -120,14 +118,12 @@ The `Patcher` interface has a single method.
  * Applies the applicable operations from the provided diff to
  * the provided base value.
  *
- * @since 0.4
- *
  * @param array $base
  * @param Diff $diffOps
  *
  * @return array
  */
-public function patch( array $base, Diff $diffOps );
+public function patch( array $base, Diff $diffOps ): array;
 ```
 
 Implementations provided by Diff:
@@ -145,14 +141,12 @@ The `ValueComparer` interface contains one method:
 
 ```php
 /**
- * @since 0.6
- *
  * @param mixed $firstValue
  * @param mixed $secondValue
  *
  * @return bool
  */
-public function valuesAreEqual( $firstValue, $secondValue );
+public function valuesAreEqual( $firstValue, $secondValue ): bool;
 ```
 
 Implementations provided by Diff:
@@ -176,14 +170,12 @@ The `ArrayComposer` interface contains one method:
  *
  * Implementations are allowed to hold quantity into account or to disregard it.
  *
- * @since 0.8
- *
  * @param array $firstArray
  * @param array $secondArray
  *
  * @return array
  */
-public function diffArrays( array $firstArray, array $secondArray );
+public function diffArrays( array $firstArray, array $secondArray ): array;
 ```
 
 Implementations provided by Diff:

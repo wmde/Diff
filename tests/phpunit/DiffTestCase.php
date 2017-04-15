@@ -1,6 +1,10 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Diff\Tests;
+
+use PHPUnit\Framework\TestCase;
 
 /**
  * Base class for unit tests in the Diff library.
@@ -8,7 +12,7 @@ namespace Diff\Tests;
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class DiffTestCase extends \PHPUnit_Framework_TestCase {
+abstract class DiffTestCase extends TestCase {
 
 	/**
 	 * Utility method taking an array of elements and wrapping

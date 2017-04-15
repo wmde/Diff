@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Diff\Tests\Patcher;
 
 use Diff\Patcher\ThrowingPatcher;
@@ -37,7 +39,7 @@ class ThrowingPatcherTest extends DiffTestCase {
 		$method->invokeArgs( $patcher, array( $errorMessage ) );
 
 		$patcher->throwErrors();
-		$this->setExpectedException( 'Diff\Patcher\PatcherException' );
+		$this->expectException( 'Diff\Patcher\PatcherException' );
 
 		$method->invokeArgs( $patcher, array( $errorMessage ) );
 	}

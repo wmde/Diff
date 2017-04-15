@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Diff\Tests;
 
 use Diff\DiffOp\Diff\Diff;
@@ -120,7 +122,7 @@ class DiffOpFactoryTest extends DiffTestCase {
 	 * @param array $array
 	 */
 	public function testNewFromArrayInvalid( array $array ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->expectException( 'InvalidArgumentException' );
 
 		$factory = new DiffOpFactory();
 		$factory->newFromArray( $array );

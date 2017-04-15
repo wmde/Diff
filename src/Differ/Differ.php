@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Diff\Differ;
 
 use Diff\DiffOp\DiffOp;
@@ -26,6 +28,6 @@ interface Differ {
 	 * @throws Exception
 	 * @return DiffOp[]
 	 */
-	public function doDiff( array $oldValues, array $newValues );
+	public function doDiff( array $oldValues, array $newValues ): array;
 
 }

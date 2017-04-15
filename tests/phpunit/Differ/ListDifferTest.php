@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Diff\Tests\Differ;
 
 use Diff\ArrayComparer\NativeArrayComparer;
@@ -26,8 +28,6 @@ class ListDifferTest extends DiffTestCase {
 
 		return array(
 			'null' => array( null, $add ),
-			'native const' => array( ListDiffer::MODE_NATIVE, array() ),
-			'strict const' => array( ListDiffer::MODE_STRICT, $add ),
 			'native object' => array( new NativeArrayComparer(), array() ),
 			'strict object' => array( new StrictArrayComparer(), $add ),
 		);
@@ -40,11 +40,6 @@ class ListDifferTest extends DiffTestCase {
 		$differ = new ListDiffer( $arrayComparer );
 		$diff = $differ->doDiff( array( 1 ), array( 1, 1 ) );
 		$this->assertEquals( $expected, $diff );
-	}
-
-	public function testInvalidConstructorArgument() {
-		$this->setExpectedException( 'InvalidArgumentException' );
-		new ListDiffer( 2 );
 	}
 
 	/**
@@ -231,7 +226,7 @@ class ListDifferTest extends DiffTestCase {
 	}
 
 	public function testDiffCallsArrayComparatorCorrectly() {
-		$arrayComparer = $this->getMock( 'Diff\ArrayComparer\ArrayComparer' );
+		$arrayComparer = $this->createMock( 'Diff\ArrayComparer\ArrayComparer' );
 
 		$arrayComparer->expects( $this->exactly( 2 ) )
 			->method( 'diffArrays' )

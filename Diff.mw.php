@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 /**
  * MediaWiki setup of the Diff library as a MediaWiki extension.
  * The library should be included via the main entry point, Diff.php.

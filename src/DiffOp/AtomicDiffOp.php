@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Diff\DiffOp;
 
 /**
@@ -21,7 +23,7 @@ abstract class AtomicDiffOp implements DiffOp {
 	 *
 	 * @return int
 	 */
-	public function count() {
+	public function count(): int {
 		return 1;
 	}
 
@@ -32,7 +34,7 @@ abstract class AtomicDiffOp implements DiffOp {
 	 *
 	 * @return bool
 	 */
-	public function isAtomic() {
+	public function isAtomic(): bool {
 		return true;
 	}
 

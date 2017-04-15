@@ -1,11 +1,11 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Diff\Tests\DiffOp\Diff;
 
 use Closure;
 use Diff\DiffOp\Diff\Diff;
-use Diff\DiffOp\Diff\ListDiff;
-use Diff\DiffOp\Diff\MapDiff;
 use Diff\DiffOp\DiffOp;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
@@ -96,7 +96,7 @@ class DiffTest extends DiffTestCase {
 	}
 
 	public function testPreSetElement() {
-		$this->setExpectedException( 'Exception' );
+		$this->expectException( 'Exception' );
 
 		$diff = new Diff( array(), false );
 		$diff[] = new DiffOpChange( 0, 1 );
@@ -253,24 +253,6 @@ class DiffTest extends DiffTestCase {
 		$this->assertEquals( $hasAssocOps, $diff->hasAssociativeOperations() );
 	}
 
-	public function testSerializationCompat() {
-		// @codingStandardsIgnoreStart
-		$v03serialization = 'C:12:"Diff\MapDiff":569:{a:4:{s:4:"data";a:4:{i:0;C:14:"Diff\DiffOpAdd":10:{s:3:"add";}i:1;C:17:"Diff\DiffOpRemove":10:{s:3:"rem";}i:2;C:17:"Diff\DiffOpChange":30:{a:2:{i:0;s:1:"b";i:1;s:1:"a";}}i:3;C:13:"Diff\ListDiff":170:{a:4:{s:4:"data";a:1:{i:0;C:17:"Diff\DiffOpRemove":10:{s:3:"rem";}}s:5:"index";i:0;s:12:"typePointers";a:2:{s:3:"add";a:0:{}s:6:"remove";a:1:{i:0;i:0;}}s:9:"parentKey";N;}}}s:5:"index";i:0;s:12:"typePointers";a:6:{s:3:"add";a:1:{i:0;i:0;}s:6:"remove";a:1:{i:0;i:1;}s:6:"change";a:1:{i:0;i:2;}s:4:"list";a:1:{i:0;i:3;}s:3:"map";a:0:{}s:4:"diff";a:0:{}}s:9:"parentKey";N;}}';
-		// @codingStandardsIgnoreEnd
-
-		/**
-		 * @var Diff $diff
-		 */
-		$diff = unserialize( $v03serialization );
-
-		$this->assertInstanceOf( 'Diff\Diff', $diff );
-		$this->assertTrue( $diff->isAssociative() );
-		$this->assertSame( 4, $diff->count() );
-		$this->assertSame( 1, count( $diff->getAdditions() ) );
-		$this->assertSame( 1, count( $diff->getRemovals() ) );
-		$this->assertSame( 1, count( $diff->getChanges() ) );
-	}
-
 	/**
 	 * @dataProvider elementInstancesProvider
 	 *
@@ -372,7 +354,7 @@ class DiffTest extends DiffTestCase {
 	 * @param Closure $function
 	 */
 	private function assertInvalidArgument( Closure $function ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->expectException( 'InvalidArgumentException' );
 
 		$arguments = func_get_args();
 		array_shift( $arguments );
@@ -502,13 +484,13 @@ class DiffTest extends DiffTestCase {
 	 * @param Diff $list
 	 */
 	public function testAddInvalidDiffOp( Diff $list ) {
-		$invalidDiffOp = $this->getMock( 'Diff\DiffOp\DiffOp' );
+		$invalidDiffOp = $this->createMock( 'Diff\DiffOp\DiffOp' );
 
 		$invalidDiffOp->expects( $this->atLeastOnce() )
 			->method( 'getType' )
 			->will( $this->returnValue( '~=[,,_,,]:3' ) );
 
-		$this->setExpectedException( 'Exception' );
+		$this->expectException( 'Exception' );
 
 		$list->append( $invalidDiffOp );
 	}
@@ -517,7 +499,7 @@ class DiffTest extends DiffTestCase {
 	 * @dataProvider invalidIsAssociativeProvider
 	 */
 	public function testConstructWithInvalidIsAssociative( $isAssociative ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->expectException( 'InvalidArgumentException' );
 		new Diff( array(), $isAssociative );
 	}
 
@@ -536,7 +518,7 @@ class DiffTest extends DiffTestCase {
 	 * @dataProvider invalidDiffOpsProvider
 	 */
 	public function testConstructorWithInvalidDiffOps( array $diffOps ) {
-		$this->setExpectedException( 'InvalidArgumentException' );
+		$this->expectException( 'InvalidArgumentException' );
 		new Diff( $diffOps );
 	}
 
@@ -583,10 +565,6 @@ class DiffTest extends DiffTestCase {
 			// Simple diffs
 			array( new Diff( array( new DiffOpAdd( 1 ) ) ), new Diff( array( new DiffOpAdd( 1 ) ) ) ),
 			array( new Diff( array( new DiffOpAdd( 1 ) ) ), new Diff( array( new DiffOpAdd( '1' ) ) ) ),
-
-			// Subclasses that are shortcuts and should be equal
-			array( new Diff( array(), false ), new ListDiff() ),
-			array( new Diff( array(), true ), new MapDiff() ),
 		);
 	}
 

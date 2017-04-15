@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Diff\Patcher;
 
 use Diff\DiffOp\Diff\Diff;
@@ -25,6 +27,6 @@ interface Patcher {
 	 *
 	 * @return array
 	 */
-	public function patch( array $base, Diff $diffOps );
+	public function patch( array $base, Diff $diffOps ): array;
 
 }

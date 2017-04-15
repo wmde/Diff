@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Diff\DiffOp;
 
 /**
@@ -22,7 +24,7 @@ class DiffOpRemove extends AtomicDiffOp {
 	 *
 	 * @return string
 	 */
-	public function getType() {
+	public function getType(): string {
 		return 'remove';
 	}
 
@@ -76,7 +78,7 @@ class DiffOpRemove extends AtomicDiffOp {
 	 *
 	 * @return array
 	 */
-	public function toArray( $valueConverter = null ) {
+	public function toArray( callable $valueConverter = null ): array {
 		return array(
 			'type' => $this->getType(),
 			'oldvalue' => $this->objectToArray( $this->oldValue, $valueConverter ),

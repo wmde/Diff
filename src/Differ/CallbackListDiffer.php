@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace Diff\Differ;
 
 use Diff\ArrayComparer\StrategicArrayComparer;
@@ -45,7 +47,7 @@ class CallbackListDiffer implements Differ {
 	 *
 	 * @return DiffOp[]
 	 */
-	public function doDiff( array $oldValues, array $newValues ) {
+	public function doDiff( array $oldValues, array $newValues ): array {
 		return $this->differ->doDiff( $oldValues, $newValues );
 	}
 
