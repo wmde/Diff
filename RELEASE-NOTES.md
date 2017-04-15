@@ -5,6 +5,14 @@ Latest release:
 
 ## Version 3.0 (dev)
 
+#### Improvements
+
+* Added return type hints where possible
+* Added scalar type hints where possible
+* Added strict_types declare statements to all files 
+
+#### Breaking changes
+
 * Dropped support for PHP 5.x
 * Dropped class aliases deprecated since Diff 1.0
 * Removed ListDiff and MapDiff, deprecated since Diff 0.5
@@ -39,7 +47,7 @@ Latest release:
 
 * Diff is now PSR-4 compliant
 
-#### Compatibility breaks
+#### Breaking changes
 
 * Removed the `Diff\IDiff` interface (deprecated since 0.5)
 * Removed the `Diff\IDiffOp` interface (deprecated since 0.4)
