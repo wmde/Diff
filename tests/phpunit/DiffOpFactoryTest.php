@@ -15,7 +15,6 @@ use Diff\DiffOpFactory;
  * @covers Diff\DiffOpFactory
  *
  * @group Diff
- * @group DiffOpFactory
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >

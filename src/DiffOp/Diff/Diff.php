@@ -191,8 +191,6 @@ class Diff extends ArrayObject implements DiffOp {
 	}
 
 	/**
-	 * Returns the added values.
-	 *
 	 * @since 0.1
 	 *
 	 * @return array of mixed
@@ -207,8 +205,6 @@ class Diff extends ArrayObject implements DiffOp {
 	}
 
 	/**
-	 * Returns the removed values.
-	 *
 	 * @since 0.1
 	 *
 	 * @return array of mixed
