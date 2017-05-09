@@ -22,29 +22,18 @@ Recent changes can be found in the [release notes](RELEASE-NOTES.md).
 
 ## Installation
 
-You can use [Composer](http://getcomposer.org/) to download and install
-this package as well as its dependencies. Alternatively you can simply clone
-the git repository and take care of loading yourself.
-
-### Composer
-
 To add this package as a local, per-project dependency to your project, simply add a
-dependency on `diff/diff` to your project's `composer.json` file.
+dependency on `diff/diff` to your project's [`composer.json`](http://getcomposer.org/) file.
 Here is a minimal example of a `composer.json` file that just defines a dependency on
-Diff 2.x:
+Diff 3.x:
 
-    {
-        "require": {
-            "diff/diff": "2.*"
-        }
+```json
+{
+    "require": {
+        "diff/diff": "~3.0"
     }
-
-### Manual
-
-Get the Diff code, either via git, or some other means. Also get all dependencies.
-You can find a list of the dependencies in the "require" section of the composer.json file.
-Load all dependencies and the load the Diff library by including its entry point:
-Diff.php.
+}
+```
 
 ## High level structure
 
@@ -103,8 +92,8 @@ Implementations provided by Diff:
 
 * `ListDiffer`: Differ that only looks at the values of the arrays (and thus ignores key differences).
 * `MapDiffer`: Differ that does an associative diff between two arrays, with the option to do this recursively.
-* `CallbackListDiffer`: Since 0.5. Differ that only looks at the values of the arrays and compares them with a callback.
-* `OrderedListDiffer`: Since 0.9. Differ that looks at the order of the values and the values of the arrays.
+* `CallbackListDiffer`: Differ that only looks at the values of the arrays and compares them with a callback.
+* `OrderedListDiffer`: Differ that looks at the order of the values and the values of the arrays.
 
 All differ functionality can be found in [src/Differ](src/Differ).
 
@@ -135,8 +124,6 @@ All classes part of the patcher component can be found in [src/Patcher](src/Patc
 
 ### ValueComparer
 
-Added in 0.6
-
 The `ValueComparer` interface contains one method:
 
 ```php
@@ -153,13 +140,11 @@ Implementations provided by Diff:
 
 * `StrictComparer`: Value comparer that uses PHPs native strict equality check (ie ===).
 * `CallbackComparer`: Adapter around a comparison callback that implements the `ValueComparer` interface.
-* `ComparableComparer`: Since 0.9. Value comparer for objects that provide an equals method taking a single argument.
+* `ComparableComparer`: Value comparer for objects that provide an equals method taking a single argument.
 
 All classes part of the ValueComparer component can be found in [src/Comparer](src/Comparer)
 
 ### ArrayComparer
-
-Added in 0.8
 
 The `ArrayComposer` interface contains one method:
 
@@ -183,7 +168,7 @@ Implementations provided by Diff:
 * `NativeArrayComparer`: Adapter for PHPs native array_diff method.
 * `StrategicArrayComparer`: Computes the difference between two arrays by comparing elements with a `ValueComparer`.
 * `StrictArrayComparer`: Does strict comparison of values and holds quantity into account.
-* `OrderedArrayComparer`: Since 0.9. Computes the difference between two ordered arrays by comparing elements with a `ValueComparer`.
+* `OrderedArrayComparer`: Computes the difference between two ordered arrays by comparing elements with a `ValueComparer`.
 
 All classes part of the ArrayComparer component can be found in [src/ArrayComparer](src/ArrayComparer)
 
