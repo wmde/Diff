@@ -135,8 +135,6 @@ All classes part of the patcher component can be found in [src/Patcher](src/Patc
 
 ### ValueComparer
 
-Added in 0.6
-
 The `ValueComparer` interface contains one method:
 
 ```php
@@ -158,8 +156,6 @@ Implementations provided by Diff:
 All classes part of the ValueComparer component can be found in [src/Comparer](src/Comparer)
 
 ### ArrayComparer
-
-Added in 0.8
 
 The `ArrayComposer` interface contains one method:
 
