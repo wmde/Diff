@@ -92,8 +92,8 @@ Implementations provided by Diff:
 
 * `ListDiffer`: Differ that only looks at the values of the arrays (and thus ignores key differences).
 * `MapDiffer`: Differ that does an associative diff between two arrays, with the option to do this recursively.
-* `CallbackListDiffer`: Since 0.5. Differ that only looks at the values of the arrays and compares them with a callback.
-* `OrderedListDiffer`: Since 0.9. Differ that looks at the order of the values and the values of the arrays.
+* `CallbackListDiffer`: Differ that only looks at the values of the arrays and compares them with a callback.
+* `OrderedListDiffer`: Differ that looks at the order of the values and the values of the arrays.
 
 All differ functionality can be found in [src/Differ](src/Differ).
 
@@ -140,7 +140,7 @@ Implementations provided by Diff:
 
 * `StrictComparer`: Value comparer that uses PHPs native strict equality check (ie ===).
 * `CallbackComparer`: Adapter around a comparison callback that implements the `ValueComparer` interface.
-* `ComparableComparer`: Since 0.9. Value comparer for objects that provide an equals method taking a single argument.
+* `ComparableComparer`: Value comparer for objects that provide an equals method taking a single argument.
 
 All classes part of the ValueComparer component can be found in [src/Comparer](src/Comparer)
 
@@ -168,7 +168,7 @@ Implementations provided by Diff:
 * `NativeArrayComparer`: Adapter for PHPs native array_diff method.
 * `StrategicArrayComparer`: Computes the difference between two arrays by comparing elements with a `ValueComparer`.
 * `StrictArrayComparer`: Does strict comparison of values and holds quantity into account.
-* `OrderedArrayComparer`: Since 0.9. Computes the difference between two ordered arrays by comparing elements with a `ValueComparer`.
+* `OrderedArrayComparer`: Computes the difference between two ordered arrays by comparing elements with a `ValueComparer`.
 
 All classes part of the ArrayComparer component can be found in [src/ArrayComparer](src/ArrayComparer)
 
