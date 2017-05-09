@@ -23,7 +23,7 @@ Recent changes can be found in the [release notes](RELEASE-NOTES.md).
 ## Installation
 
 To add this package as a local, per-project dependency to your project, simply add a
-dependency on `wmde/euro` to your project's [`composer.json`](http://getcomposer.org/) file.
+dependency on `diff/diff` to your project's [`composer.json`](http://getcomposer.org/) file.
 Here is a minimal example of a `composer.json` file that just defines a dependency on
 Diff 3.x:
 
