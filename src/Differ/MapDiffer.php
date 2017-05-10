@@ -4,6 +4,8 @@ declare( strict_types = 1 );
 
 namespace Diff\Differ;
 
+use Diff\Comparer\StrictComparer;
+use Diff\Comparer\ValueComparer;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOp;
 use Diff\DiffOp\DiffOpAdd;
@@ -34,32 +36,17 @@ class MapDiffer implements Differ {
 	private $listDiffer;
 
 	/**
-	 * @var callable|null
+	 * @var ValueComparer
 	 */
-	private $comparisonCallback = null;
+	private $valueComparer;
 
 	/**
-	 * @since 0.4
-	 *
-	 * @param bool $recursively
-	 * @param Differ|null $listDiffer
+	 * The third argument ($comparer) was added in 3.0
 	 */
-	public function __construct( bool $recursively = false, Differ $listDiffer = null ) {
+	public function __construct( bool $recursively = false, Differ $listDiffer = null, ValueComparer $comparer = null ) {
 		$this->recursively = $recursively;
-
 		$this->listDiffer = $listDiffer ?? new ListDiffer();
-	}
-
-	/**
-	 * Sets a callback to use for comparison. The callback should accept two
-	 * arguments.
-	 *
-	 * @since 0.5
-	 *
-	 * @param callable $comparisonCallback
-	 */
-	public function setComparisonCallback( callable $comparisonCallback ) {
-		$this->comparisonCallback = $comparisonCallback;
+		$this->valueComparer = $comparer ?? new StrictComparer();
 	}
 
 	/**
@@ -184,33 +171,12 @@ class MapDiffer implements Differ {
 		$diff = array();
 
 		foreach ( $from as $key => $value ) {
-			if ( !array_key_exists( $key, $to ) || !$this->valuesAreEqual( $to[$key], $value ) ) {
+			if ( !array_key_exists( $key, $to ) || !$this->valueComparer->valuesAreEqual( $to[$key], $value ) ) {
 				$diff[$key] = $value;
 			}
 		}
 
 		return $diff;
-	}
-
-	/**
-	 * @param mixed $value0
-	 * @param mixed $value1
-	 *
-	 * @return bool
-	 * @throws Exception
-	 */
-	private function valuesAreEqual( $value0, $value1 ): bool {
-		if ( $this->comparisonCallback === null ) {
-			return $value0 === $value1;
-		}
-
-		$areEqual = call_user_func_array( $this->comparisonCallback, array( $value0, $value1 ) );
-
-		if ( !is_bool( $areEqual ) ) {
-			throw new Exception( 'Comparison callback returned a non-boolean value' );
-		}
-
-		return $areEqual;
 	}
 
 }

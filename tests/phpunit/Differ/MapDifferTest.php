@@ -13,6 +13,7 @@ use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 use Diff\Tests\DiffTestCase;
+use Diff\Tests\Fixtures\StubValueComparer;
 
 /**
  * @covers Diff\Differ\MapDiffer
@@ -315,11 +316,7 @@ class MapDifferTest extends DiffTestCase {
 	}
 
 	public function testCallbackComparisonReturningFalse() {
-		$differ = new MapDiffer();
-
-		$differ->setComparisonCallback( function( $foo, $bar ) {
-			return false;
-		} );
+		$differ = new MapDiffer( false, null, new StubValueComparer( false ) );
 
 		$actual = $differ->doDiff( array( 1, '2', 3 ), array( 1, '2', 4, 'foo' ) );
 
@@ -337,11 +334,7 @@ class MapDifferTest extends DiffTestCase {
 	}
 
 	public function testCallbackComparisonReturningTrue() {
-		$differ = new MapDiffer();
-
-		$differ->setComparisonCallback( function( $foo, $bar ) {
-			return true;
-		} );
+		$differ = new MapDiffer( false, null, new StubValueComparer( true ) );
 
 		$actual = $differ->doDiff( array( 1, '2', 'baz' ), array( 1, 'foo', '2' ) );
 
@@ -352,18 +345,6 @@ class MapDifferTest extends DiffTestCase {
 			'No change ops should be created when the arrays have '
 				. 'the same length and the comparison callback always returns true'
 		);
-	}
-
-	public function testCallbackComparisonReturningNyanCat() {
-		$differ = new MapDiffer();
-
-		$differ->setComparisonCallback( function( $foo, $bar ) {
-			return '~=[,,_,,]:3';
-		} );
-
-		$this->expectException( 'Exception' );
-
-		$differ->doDiff( array( 1, '2', 'baz' ), array( 1, 'foo', '2' ) );
 	}
 
 }
