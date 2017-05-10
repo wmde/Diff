@@ -3,7 +3,7 @@ These are the release notes for the [Diff library](README.md).
 Latest release:
 [![Latest Stable Version](https://poser.pugx.org/diff/diff/version.png)](https://packagist.org/packages/diff/diff)
 
-## Version 3.0 (dev)
+## Version 3.0 (2017-05-10)
 
 #### Improvements
 
@@ -40,7 +40,7 @@ Latest release:
 ## Version 1.0.1 (2014-05-07)
 
 * Removed not needed support for the MediaWiki i18n system
-* Updated the url in Diff.credits.php (used on Special:Version when included with MediaWiki)
+* Updated the url in `Diff.credits.php` (used on Special:Version when included with MediaWiki)
 
 ## Version 1.0 (2014-04-10)
 
