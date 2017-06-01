@@ -196,7 +196,7 @@ $newVersion = array(
 );
 
 $differ = new MapDiffer();
-$diff = $differ->diff( $oldVersion, $newVersion );
+$diff = $differ->doDiff( $oldVersion, $newVersion );
 ```
 
 ### Applying a diff as patch
