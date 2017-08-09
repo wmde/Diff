@@ -6,6 +6,7 @@ Latest release:
 ## Version 2.2 (2017-08-09)
 
 * Removed MediaWiki extension registration
+* Add .gitattributes file to exclude not needed files from git exports
 
 ## Version 2.1 (2016-09-01)
 
