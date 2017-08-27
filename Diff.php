@@ -7,10 +7,4 @@ if ( defined( 'Diff_VERSION' ) ) {
 	return 1;
 }
 
-define( 'Diff_VERSION', '3.0' );
-
-if ( defined( 'MEDIAWIKI' ) ) {
-	call_user_func( function() {
-		require_once __DIR__ . '/Diff.mw.php';
-	} );
-}
+define( 'Diff_VERSION', '3.1' );
