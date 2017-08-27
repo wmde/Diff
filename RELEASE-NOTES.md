@@ -3,6 +3,11 @@ These are the release notes for the [Diff library](README.md).
 Latest release:
 [![Latest Stable Version](https://poser.pugx.org/diff/diff/version.png)](https://packagist.org/packages/diff/diff)
 
+## Version 3.1 (dev)
+
+* Add .gitattributes file to exclude not needed files from git exports
+* Removed MediaWiki extension registration
+
 ## Version 3.0 (2017-05-10)
 
 #### Improvements
