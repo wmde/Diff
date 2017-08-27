@@ -148,7 +148,7 @@ abstract class DiffOpTest extends DiffTestCase {
 	 * @dataProvider instanceProvider
 	 */
 	public function testToArrayWithConversion( DiffOp $diffOp ) {
-		$array = $diffOp->toArray( function( $diffOp ) {
+		$array = $diffOp->toArray( function() {
 			return array( 'Nyan!' );
 		} );
 
