@@ -450,14 +450,19 @@ class Diff extends ArrayObject implements DiffOp {
 	}
 
 	/**
-	 * Returns if the ArrayObject has no elements.
-	 *
 	 * @since 0.1
 	 *
 	 * @return bool
 	 */
 	public function isEmpty(): bool {
-		return $this->count() === 0;
+		/** @var DiffOp $diffOp */
+		foreach ( $this as $diffOp ) {
+			if ( $diffOp->count() > 0 ) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 }
