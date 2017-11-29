@@ -21,7 +21,7 @@ use stdClass;
  *
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class DiffTest extends DiffTestCase {
 
