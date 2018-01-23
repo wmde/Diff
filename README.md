@@ -18,6 +18,12 @@ Recent changes can be found in the [release notes](RELEASE-NOTES.md).
 
 ## Requirements
 
+**Diff 3.x:**
+
+* PHP 7.0 or later (tested with PHP 7.0 up to PHP 7.2)
+
+**Diff 2.x:**
+
 * PHP 5.3 or later (tested with PHP 5.3 up to PHP 7.1 and hhvm)
 
 ## Installation
