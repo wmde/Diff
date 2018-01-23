@@ -24,7 +24,7 @@ Recent changes can be found in the [release notes](RELEASE-NOTES.md).
 
 **Diff 2.x:**
 
-* PHP 5.3 or later (tested with PHP 5.3 up to PHP 7.1 and hhvm)
+* PHP 5.3 or later (tested with PHP 5.3 up to PHP 7.1 and HHVM)
 
 ## Installation
 
