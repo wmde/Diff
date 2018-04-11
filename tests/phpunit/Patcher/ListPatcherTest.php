@@ -98,7 +98,7 @@ class ListPatcherTest extends DiffTestCase {
 			$this->newObject( 'bar' ),
 		);
 		$diff = new Diff( array(
-			new DiffOpRemove( $this->newObject( 'foo') ),
+			new DiffOpRemove( $this->newObject( 'foo' ) ),
 			new DiffOpAdd( $this->newObject( 'baz' ) ),
 		) );
 		$expected = array( $this->newObject( 'bar' ), $this->newObject( 'baz' ) );
