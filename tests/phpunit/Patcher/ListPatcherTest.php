@@ -8,6 +8,7 @@ use Diff\DiffOp\DiffOpRemove;
 use Diff\Patcher\ListPatcher;
 use Diff\Patcher\Patcher;
 use Diff\Tests\DiffTestCase;
+use stdClass;
 
 /**
  * @covers Diff\Patcher\ListPatcher
@@ -89,7 +90,26 @@ class ListPatcherTest extends DiffTestCase {
 
 		$argLists[] = array( $patcher, $base, $diff, $expected );
 
+		$patcher = new ListPatcher();
+		$base = array(
+			$this->newObject( 'foo' ),
+			$this->newObject( 'bar' ),
+		);
+		$diff = new Diff( array(
+			new DiffOpRemove( $this->newObject( 'foo' ) ),
+			new DiffOpAdd( $this->newObject( 'baz' ) ),
+		) );
+		$expected = array( $this->newObject( 'bar' ), $this->newObject( 'baz' ) );
+
+		$argLists[] = array( $patcher, $base, $diff, $expected );
+
 		return $argLists;
+	}
+
+	private function newObject( $value ) {
+		$object = new stdClass();
+		$object->element = $value;
+		return $object;
 	}
 
 	/**

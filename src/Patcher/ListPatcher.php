@@ -42,7 +42,8 @@ class ListPatcher extends ThrowingPatcher {
 			if ( $diffOp instanceof DiffOpAdd ) {
 				$base[] = $diffOp->getNewValue();
 			} elseif ( $diffOp instanceof DiffOpRemove ) {
-				$key = array_search( $diffOp->getOldValue(), $base, true );
+				$needle = $diffOp->getOldValue();
+				$key = array_search( $needle, $base, !is_object( $needle ) );
 
 				if ( $key === false ) {
 					$this->handleError( 'Cannot remove an element from a list if it is not present' );

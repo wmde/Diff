@@ -5,7 +5,7 @@ if ( defined( 'Diff_VERSION' ) ) {
 	return 1;
 }
 
-define( 'Diff_VERSION', '2.2' );
+define( 'Diff_VERSION', '2.3' );
 
 // Aliasing of classes that got renamed.
 // For more details, see Aliases.php.
