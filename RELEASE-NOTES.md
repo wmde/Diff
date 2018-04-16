@@ -3,7 +3,7 @@ These are the release notes for the [Diff library](README.md).
 Latest release:
 [![Latest Stable Version](https://poser.pugx.org/diff/diff/version.png)](https://packagist.org/packages/diff/diff)
 
-## Version 3.1 (dev)
+## Version 3.1 (2018-04-17)
 
 * Fixed bug in `ListPatcher` that caused it to compare objects by identity rather than by value
 * Add `.gitattributes` file to exclude not needed files from git exports
@@ -24,6 +24,15 @@ Latest release:
 * Removed `ListDiff` and `MapDiff`, deprecated since Diff 0.5
 * Removed `ListDiffer::MODE_NATIVE` and `ListDiffer::MODE_STRICT`, deprecated since Diff 0.8
 * Removed `MapDiffer::setComparisonCallback` in favour of a new constructor argument
+
+## Version 2.3 (2018-04-11)
+
+* Fixed bug in `ListPatcher` that caused it to compare objects by identity rather than by value
+
+## Version 2.2 (2017-08-09)
+
+* Removed MediaWiki extension registration
+* Add `.gitattributes` file to exclude not needed files from git exports
 
 ## Version 2.1 (2016-09-01)
 
