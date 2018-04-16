@@ -13,7 +13,7 @@ well tested and allows users to define their own comparison strategies.
 Diff does not provide any support for computing or representing the differences
 between unstructured data, ie text.
 
-Recent changes can be found in the [release notes](RELEASE-NOTES.md).
+A full history of the different versions of Diff can be found in the [release notes](RELEASE-NOTES.md).
 
 ## Requirements
 
