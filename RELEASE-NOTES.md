@@ -6,7 +6,7 @@ Latest release:
 ## Version 3.1 (dev)
 
 * Fixed bug in `ListPatcher` that caused it to compare objects by identity rather than by value
-* Add .gitattributes file to exclude not needed files from git exports
+* Add `.gitattributes` file to exclude not needed files from git exports
 * Removed MediaWiki extension registration
 
 ## Version 3.0 (2017-05-10)
