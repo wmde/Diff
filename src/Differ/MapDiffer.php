@@ -87,9 +87,6 @@ class MapDiffer implements Differ {
 	}
 
 	private function getDiffOpForElement( $key, array $oldSet, array $newSet ) {
-		$hasOld = array_key_exists( $key, $oldSet );
-		$hasNew = array_key_exists( $key, $newSet );
-
 		if ( $this->recursively ) {
 			$diffOp = $this->getDiffOpForElementRecursively( $key, $oldSet, $newSet );
 
@@ -102,6 +99,9 @@ class MapDiffer implements Differ {
 				}
 			}
 		}
+
+		$hasOld = array_key_exists( $key, $oldSet );
+		$hasNew = array_key_exists( $key, $newSet );
 
 		if ( $hasOld && $hasNew ) {
 			return new DiffOpChange( $oldSet[$key], $newSet[$key] );
