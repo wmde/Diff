@@ -7,4 +7,7 @@ if ( defined( 'Diff_VERSION' ) ) {
 	return 1;
 }
 
+/**
+ * @deprecated Will be removed in 4.0
+ */
 define( 'Diff_VERSION', '3.2 alpha' );
