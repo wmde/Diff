@@ -79,7 +79,7 @@ class MapDiffer implements Differ {
 		return $diffSet;
 	}
 
-	private function getAllKeys( $oldSet, $newSet ): array {
+	private function getAllKeys( array $oldSet, array $newSet ): array {
 		return array_unique( array_merge(
 			array_keys( $oldSet ),
 			array_keys( $newSet )
