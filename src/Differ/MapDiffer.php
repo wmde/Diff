@@ -135,7 +135,6 @@ class MapDiffer implements Differ {
 		}
 
 		return new Diff( $this->listDiffer->doDiff( $old, $new ), false );
-
 	}
 
 	/**
