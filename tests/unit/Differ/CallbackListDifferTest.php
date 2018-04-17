@@ -11,7 +11,7 @@ use Diff\DiffOp\DiffOpRemove;
 use Diff\Tests\DiffTestCase;
 
 /**
- * @covers Diff\Differ\CallbackListDiffer
+ * @covers \Diff\Differ\CallbackListDiffer
  *
  * @group Diff
  * @group Differ

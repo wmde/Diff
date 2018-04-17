@@ -9,7 +9,7 @@ use Diff\Tests\DiffTestCase;
 use Diff\Tests\Fixtures\StubComparable;
 
 /**
- * @covers Diff\Comparer\ComparableComparer
+ * @covers \Diff\Comparer\ComparableComparer
  *
  * @group Diff
  * @group Comparer

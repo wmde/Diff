@@ -14,8 +14,8 @@ use Diff\Patcher\Patcher;
 use Diff\Tests\DiffTestCase;
 
 /**
- * @covers Diff\Patcher\MapPatcher
- * @covers Diff\Patcher\ThrowingPatcher
+ * @covers \Diff\Patcher\MapPatcher
+ * @covers \Diff\Patcher\ThrowingPatcher
  *
  * @group Diff
  * @group DiffPatcher

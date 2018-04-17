@@ -7,8 +7,8 @@ namespace Diff\Tests\DiffOp;
 use Diff\DiffOp\DiffOpAdd;
 
 /**
- * @covers Diff\DiffOp\DiffOpAdd
- * @covers Diff\DiffOp\AtomicDiffOp
+ * @covers \Diff\DiffOp\DiffOpAdd
+ * @covers \Diff\DiffOp\AtomicDiffOp
  *
  * @group Diff
  * @group DiffOp

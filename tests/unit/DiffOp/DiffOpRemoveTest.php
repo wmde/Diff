@@ -8,8 +8,8 @@ use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
 
 /**
- * @covers Diff\DiffOp\DiffOpRemove
- * @covers Diff\DiffOp\AtomicDiffOp
+ * @covers \Diff\DiffOp\DiffOpRemove
+ * @covers \Diff\DiffOp\AtomicDiffOp
  *
  * @group Diff
  * @group DiffOp

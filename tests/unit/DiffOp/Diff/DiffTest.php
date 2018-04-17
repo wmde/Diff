@@ -14,7 +14,7 @@ use Diff\Tests\DiffTestCase;
 use stdClass;
 
 /**
- * @covers Diff\DiffOp\Diff\Diff
+ * @covers \Diff\DiffOp\Diff\Diff
  *
  * @group Diff
  * @group DiffOp

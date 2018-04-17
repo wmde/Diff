@@ -9,7 +9,7 @@ use Diff\ArrayComparer\OrderedArrayComparer;
 use Diff\Tests\DiffTestCase;
 
 /**
- * @covers Diff\ArrayComparer\OrderedArrayComparer
+ * @covers \Diff\ArrayComparer\OrderedArrayComparer
  *
  * @since 0.9
  *

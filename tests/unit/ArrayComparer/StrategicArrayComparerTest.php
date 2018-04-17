@@ -9,7 +9,7 @@ use Diff\ArrayComparer\StrategicArrayComparer;
 use Diff\Tests\DiffTestCase;
 
 /**
- * @covers Diff\ArrayComparer\StrategicArrayComparer
+ * @covers \Diff\ArrayComparer\StrategicArrayComparer
  *
  * @group Diff
  *

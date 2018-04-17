@@ -12,7 +12,7 @@ use Diff\DiffOp\DiffOpRemove;
 use Diff\Tests\DiffTestCase;
 
 /**
- * @covers Diff\Differ\OrderedListDiffer
+ * @covers \Diff\Differ\OrderedListDiffer
  *
  * @since 0.9
  *

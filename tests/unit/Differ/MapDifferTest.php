@@ -16,7 +16,7 @@ use Diff\Tests\DiffTestCase;
 use Diff\Tests\Fixtures\StubValueComparer;
 
 /**
- * @covers Diff\Differ\MapDiffer
+ * @covers \Diff\Differ\MapDiffer
  *
  * @group Diff
  * @group Differ
