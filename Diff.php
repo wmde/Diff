@@ -7,4 +7,4 @@ if ( defined( 'Diff_VERSION' ) ) {
 	return 1;
 }
 
-define( 'Diff_VERSION', '3.1' );
+define( 'Diff_VERSION', '3.2 alpha' );

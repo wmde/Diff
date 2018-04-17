@@ -41,7 +41,7 @@
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"Diff\\Tests\\": "tests/phpunit/"
+			"Diff\\Tests\\": "tests/unit/"
 		}
 	},
 	"extra": {
