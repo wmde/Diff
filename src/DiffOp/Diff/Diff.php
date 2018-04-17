@@ -18,7 +18,7 @@ use InvalidArgumentException;
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
- * @author Thiemo Mättig
+ * @author Thiemo Kreuz
  */
 class Diff extends ArrayObject implements DiffOp {
 
@@ -458,14 +458,19 @@ class Diff extends ArrayObject implements DiffOp {
 	}
 
 	/**
-	 * Returns if the ArrayObject has no elements.
-	 *
 	 * @since 0.1
 	 *
 	 * @return bool
 	 */
 	public function isEmpty() {
-		return $this->count() === 0;
+		/** @var DiffOp $diffOp */
+		foreach ( $this as $diffOp ) {
+			if ( $diffOp->count() > 0 ) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 }
