@@ -27,7 +27,7 @@ class CallbackComparer implements ValueComparer {
 	}
 
 	public function valuesAreEqual( $firstValue, $secondValue ): bool {
-		$valuesAreEqual = call_user_func_array( $this->callback, array( $firstValue, $secondValue ) );
+		$valuesAreEqual = call_user_func_array( $this->callback, [ $firstValue, $secondValue ] );
 
 		if ( !is_bool( $valuesAreEqual ) ) {
 			throw new \RuntimeException( 'ValueComparer callback needs to return a boolean' );

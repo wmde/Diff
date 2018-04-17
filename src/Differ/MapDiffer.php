@@ -66,7 +66,7 @@ class MapDiffer implements Differ {
 		$newSet = $this->arrayDiffAssoc( $newValues, $oldValues );
 		$oldSet = $this->arrayDiffAssoc( $oldValues, $newValues );
 
-		$diffSet = array();
+		$diffSet = [];
 
 		foreach ( $this->getAllKeys( $oldSet, $newSet ) as $key ) {
 			$diffOp = $this->getDiffOpForElement( $key, $oldSet, $newSet );
@@ -119,8 +119,8 @@ class MapDiffer implements Differ {
 	}
 
 	private function getDiffOpForElementRecursively( $key, array $oldSet, array $newSet ) {
-		$old = array_key_exists( $key, $oldSet ) ? $oldSet[$key] : array();
-		$new = array_key_exists( $key, $newSet ) ? $newSet[$key] : array();
+		$old = array_key_exists( $key, $oldSet ) ? $oldSet[$key] : [];
+		$new = array_key_exists( $key, $newSet ) ? $newSet[$key] : [];
 
 		if ( is_array( $old ) && is_array( $new ) ) {
 			return $this->getDiffForArrays( $old, $new );
@@ -168,7 +168,7 @@ class MapDiffer implements Differ {
 	 * @return array
 	 */
 	private function arrayDiffAssoc( array $from, array $to ): array {
-		$diff = array();
+		$diff = [];
 
 		foreach ( $from as $key => $value ) {
 			if ( !array_key_exists( $key, $to ) || !$this->valueComparer->valuesAreEqual( $to[$key], $value ) ) {

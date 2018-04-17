@@ -38,7 +38,7 @@ class OrderedArrayComparer implements ArrayComparer {
 	 * @return array
 	 */
 	public function diffArrays( array $arrayOne, array $arrayTwo ): array {
-		$notInTwo = array();
+		$notInTwo = [];
 
 		foreach ( $arrayOne as $valueOffset => $element ) {
 			if ( !$this->arraySearch( $element, $arrayTwo, $valueOffset ) ) {

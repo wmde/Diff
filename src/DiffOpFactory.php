@@ -67,7 +67,7 @@ class DiffOpFactory {
 			$this->assertHasKey( 'operations', $diffOp );
 			$this->assertHasKey( 'isassoc', $diffOp );
 
-			$operations = array();
+			$operations = [];
 
 			foreach ( $diffOp['operations'] as $key => $operation ) {
 				$operations[$key] = $this->newFromArray( $operation );
