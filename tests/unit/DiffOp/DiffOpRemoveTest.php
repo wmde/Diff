@@ -5,10 +5,11 @@ declare( strict_types = 1 );
 namespace Diff\Tests\DiffOp;
 
 use Diff\DiffOp\DiffOpAdd;
+use Diff\DiffOp\DiffOpRemove;
 
 /**
- * @covers Diff\DiffOp\DiffOpAdd
- * @covers Diff\DiffOp\AtomicDiffOp
+ * @covers \Diff\DiffOp\DiffOpRemove
+ * @covers \Diff\DiffOp\AtomicDiffOp
  *
  * @group Diff
  * @group DiffOp
@@ -16,7 +17,7 @@ use Diff\DiffOp\DiffOpAdd;
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class DiffOpAddTest extends DiffOpTest {
+class DiffOpRemoveTest extends DiffOpTest {
 
 	/**
 	 * @see DiffOpTest::getClass
@@ -26,7 +27,7 @@ class DiffOpAddTest extends DiffOpTest {
 	 * @return string
 	 */
 	public function getClass() {
-		return '\Diff\DiffOp\DiffOpAdd';
+		return '\Diff\DiffOp\DiffOpRemove';
 	}
 
 	/**
@@ -47,16 +48,16 @@ class DiffOpAddTest extends DiffOpTest {
 	/**
 	 * @dataProvider instanceProvider
 	 */
-	public function testGetNewValue( DiffOpAdd $diffOp, array $constructorArgs ) {
-		$this->assertEquals( $constructorArgs[0], $diffOp->getNewValue() );
+	public function testGetNewValue( DiffOpRemove $diffOp, array $constructorArgs ) {
+		$this->assertEquals( $constructorArgs[0], $diffOp->getOldValue() );
 	}
 
 	/**
 	 * @dataProvider instanceProvider
 	 */
-	public function testToArrayMore( DiffOpAdd $diffOp ) {
+	public function testToArrayMore( DiffOpRemove $diffOp ) {
 		$array = $diffOp->toArray();
-		$this->assertArrayHasKey( 'newvalue', $array );
+		$this->assertArrayHasKey( 'oldvalue', $array );
 	}
 
 }

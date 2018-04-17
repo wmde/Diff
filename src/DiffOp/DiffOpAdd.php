@@ -79,10 +79,10 @@ class DiffOpAdd extends AtomicDiffOp {
 	 * @return array
 	 */
 	public function toArray( callable $valueConverter = null ): array {
-		return array(
+		return [
 			'type' => $this->getType(),
 			'newvalue' => $this->objectToArray( $this->newValue, $valueConverter ),
-		);
+		];
 	}
 
 }

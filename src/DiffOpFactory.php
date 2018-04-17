@@ -4,9 +4,15 @@ declare( strict_types = 1 );
 
 namespace Diff;
 
+use Diff\DiffOp\Diff\Diff;
+use Diff\DiffOp\DiffOpAdd;
+use Diff\DiffOp\DiffOpChange;
+use Diff\DiffOp\DiffOpRemove;
 use InvalidArgumentException;
 
 /**
+ * Constructs a DiffOp from its array form (which can be obtained via @see DiffOp::toArray).
+ *
  * @since 0.5
  *
  * @license GPL-2.0+
@@ -47,18 +53,18 @@ class DiffOpFactory {
 
 		if ( $diffOp['type'] === 'add' ) {
 			$this->assertHasKey( 'newvalue', $diffOp );
-			return new DiffOp\DiffOpAdd( $this->arrayToObject( $diffOp['newvalue'] ) );
+			return new DiffOpAdd( $this->arrayToObject( $diffOp['newvalue'] ) );
 		}
 
 		if ( $diffOp['type'] === 'remove' ) {
 			$this->assertHasKey( 'oldvalue', $diffOp );
-			return new DiffOp\DiffOpRemove( $this->arrayToObject( $diffOp['oldvalue'] ) );
+			return new DiffOpRemove( $this->arrayToObject( $diffOp['oldvalue'] ) );
 		}
 
 		if ( $diffOp['type'] === 'change' ) {
 			$this->assertHasKey( 'newvalue', $diffOp );
 			$this->assertHasKey( 'oldvalue', $diffOp );
-			return new DiffOp\DiffOpChange(
+			return new DiffOpChange(
 				$this->arrayToObject( $diffOp['oldvalue'] ),
 				$this->arrayToObject( $diffOp['newvalue'] ) );
 		}
@@ -67,13 +73,13 @@ class DiffOpFactory {
 			$this->assertHasKey( 'operations', $diffOp );
 			$this->assertHasKey( 'isassoc', $diffOp );
 
-			$operations = array();
+			$operations = [];
 
 			foreach ( $diffOp['operations'] as $key => $operation ) {
 				$operations[$key] = $this->newFromArray( $operation );
 			}
 
-			return new DiffOp\Diff\Diff( $operations, $diffOp['isassoc'] );
+			return new Diff( $operations, $diffOp['isassoc'] );
 		}
 
 		throw new InvalidArgumentException( 'Invalid array provided. Unknown type' );

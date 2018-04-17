@@ -3,6 +3,11 @@ These are the release notes for the [Diff library](README.md).
 Latest release:
 [![Latest Stable Version](https://poser.pugx.org/diff/diff/version.png)](https://packagist.org/packages/diff/diff)
 
+
+## Version 3.2 (dev)
+
+* Deprecated constant `Diff_VERSION`
+
 ## Version 3.1 (2018-04-17)
 
 * Fixed bug in `ListPatcher` that caused it to compare objects by identity rather than by value

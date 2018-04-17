@@ -66,7 +66,7 @@ class DiffOpChange extends AtomicDiffOp {
 	 * @return string|null
 	 */
 	public function serialize() {
-		return serialize( array( $this->newValue, $this->oldValue ) );
+		return serialize( [ $this->newValue, $this->oldValue ] );
 	}
 
 	/**
@@ -91,11 +91,11 @@ class DiffOpChange extends AtomicDiffOp {
 	 * @return array
 	 */
 	public function toArray( callable $valueConverter = null ): array {
-		return array(
+		return [
 			'type' => $this->getType(),
 			'newvalue' => $this->objectToArray( $this->newValue, $valueConverter ),
 			'oldvalue' => $this->objectToArray( $this->oldValue, $valueConverter ),
-		);
+		];
 	}
 
 }

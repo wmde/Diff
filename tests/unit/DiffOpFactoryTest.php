@@ -12,7 +12,7 @@ use Diff\DiffOp\DiffOpRemove;
 use Diff\DiffOpFactory;
 
 /**
- * @covers Diff\DiffOpFactory
+ * @covers \Diff\DiffOpFactory
  *
  * @group Diff
  *

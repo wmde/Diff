@@ -13,8 +13,8 @@ use Diff\Tests\DiffTestCase;
 use stdClass;
 
 /**
- * @covers Diff\Patcher\ListPatcher
- * @covers Diff\Patcher\ThrowingPatcher
+ * @covers \Diff\Patcher\ListPatcher
+ * @covers \Diff\Patcher\ThrowingPatcher
  *
  * @group Diff
  * @group DiffPatcher

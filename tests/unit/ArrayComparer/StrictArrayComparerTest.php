@@ -8,7 +8,7 @@ use Diff\ArrayComparer\StrictArrayComparer;
 use Diff\Tests\DiffTestCase;
 
 /**
- * @covers Diff\ArrayComparer\StrictArrayComparer
+ * @covers \Diff\ArrayComparer\StrictArrayComparer
  *
  * @group Diff
  *

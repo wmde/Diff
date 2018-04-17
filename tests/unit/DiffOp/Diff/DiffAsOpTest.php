@@ -10,7 +10,7 @@ use Diff\DiffOp\DiffOpRemove;
 use Diff\Tests\DiffOp\DiffOpTest;
 
 /**
- * @covers Diff\DiffOp\Diff\Diff
+ * @covers \Diff\DiffOp\Diff\Diff
  *
  * @group Diff
  * @group DiffOp

@@ -8,7 +8,7 @@ use Diff\Comparer\StrictComparer;
 use Diff\Tests\DiffTestCase;
 
 /**
- * @covers Diff\Comparer\StrictComparer
+ * @covers \Diff\Comparer\StrictComparer
  *
  * @group Diff
  * @group Comparer

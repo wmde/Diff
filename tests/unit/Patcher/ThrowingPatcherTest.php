@@ -9,7 +9,7 @@ use Diff\Tests\DiffTestCase;
 use ReflectionClass;
 
 /**
- * @covers Diff\Patcher\ThrowingPatcher
+ * @covers \Diff\Patcher\ThrowingPatcher
  *
  * @group Diff
  * @group DiffPatcher

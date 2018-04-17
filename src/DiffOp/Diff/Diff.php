@@ -34,14 +34,14 @@ class Diff extends ArrayObject implements DiffOp {
 	 *
 	 * @var array[]
 	 */
-	private $typePointers = array(
-		'add' => array(),
-		'remove' => array(),
-		'change' => array(),
-		'list' => array(),
-		'map' => array(),
-		'diff' => array(),
-	);
+	private $typePointers = [
+		'add' => [],
+		'remove' => [],
+		'change' => [],
+		'list' => [],
+		'map' => [],
+		'diff' => [],
+	];
 
 	/**
 	 * @var int
@@ -56,12 +56,12 @@ class Diff extends ArrayObject implements DiffOp {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	public function __construct( array $operations = array(), $isAssociative = null ) {
+	public function __construct( array $operations = [], $isAssociative = null ) {
 		if ( $isAssociative !== null && !is_bool( $isAssociative ) ) {
 			throw new InvalidArgumentException( '$isAssociative should be a boolean or null' );
 		}
 
-		parent::__construct( array() );
+		parent::__construct( [] );
 
 		foreach ( $operations as $offset => $operation ) {
 			if ( !( $operation instanceof DiffOp ) ) {
@@ -328,17 +328,17 @@ class Diff extends ArrayObject implements DiffOp {
 	 * @return array
 	 */
 	public function toArray( callable $valueConverter = null ): array {
-		$operations = array();
+		$operations = [];
 
 		foreach ( $this->getOperations() as $key => $diffOp ) {
 			$operations[$key] = $diffOp->toArray( $valueConverter );
 		}
 
-		return array(
+		return [
 			'type' => $this->getType(),
 			'isassoc' => $this->isAssociative,
 			'operations' => $operations
-		);
+		];
 	}
 
 	/**
@@ -439,12 +439,12 @@ class Diff extends ArrayObject implements DiffOp {
 	public function serialize() {
 		$assoc = $this->isAssociative === null ? 'n' : ( $this->isAssociative ? 't' : 'f' );
 
-		$data = array(
+		$data = [
 			'data' => $this->getArrayCopy(),
 			'index' => $this->indexOffset,
 			'typePointers' => $this->typePointers,
 			'assoc' => $assoc
-		);
+		];
 
 		return serialize( $data );
 	}

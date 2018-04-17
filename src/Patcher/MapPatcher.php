@@ -167,7 +167,7 @@ class MapPatcher extends ThrowingPatcher {
 		}
 
 		if ( !array_key_exists( $key, $base ) ) {
-			$base[$key] = array();
+			$base[$key] = [];
 		}
 
 		$base[$key] = $this->patchMapOrList( $base[$key], $diffOp );
@@ -182,7 +182,7 @@ class MapPatcher extends ThrowingPatcher {
 	 */
 	private function isAttemptToModifyNotExistingElement( $base, $key, Diff $diffOp ): bool {
 		return !array_key_exists( $key, $base )
-			&& ( $diffOp->getChanges() !== array() || $diffOp->getRemovals() !== array() );
+			&& ( $diffOp->getChanges() !== [] || $diffOp->getRemovals() !== [] );
 	}
 
 	/**

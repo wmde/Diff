@@ -13,7 +13,7 @@ use Diff\DiffOp\DiffOpRemove;
 use Diff\Tests\DiffTestCase;
 
 /**
- * @covers Diff\Differ\ListDiffer
+ * @covers \Diff\Differ\ListDiffer
  *
  * @group Diff
  * @group Differ
