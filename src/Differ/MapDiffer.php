@@ -23,7 +23,7 @@ use LogicException;
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class MapDiffer implements Differ {
+class MapDiffer implements Differ, MapDifferInterface {
 
 	/**
 	 * @var bool
@@ -39,6 +39,16 @@ class MapDiffer implements Differ {
 	 * @var ValueComparer
 	 */
 	private $valueComparer;
+
+	/**
+	 * Create differ for recursive diffs
+	 */
+	public static function createRecursive( ValueComparer $comparer = null, Differ $listDiffer = null ) {
+		$differ = new self( true, null, $comparer );
+		$differ->listDiffer = $listDiffer ?? $differ;
+
+		return $differ;
+	}
 
 	/**
 	 * The third argument ($comparer) was added in 3.0
@@ -134,7 +144,7 @@ class MapDiffer implements Differ {
 			return new Diff( $this->doDiff( $old, $new ), true );
 		}
 
-		return new Diff( $this->listDiffer->doDiff( $old, $new ), false );
+		return new Diff( $this->listDiffer->doDiff( $old, $new ), $this->listDiffer instanceof MapDifferInterface );
 	}
 
 	/**
