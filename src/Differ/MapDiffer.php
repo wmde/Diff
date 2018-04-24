@@ -23,7 +23,7 @@ use LogicException;
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class MapDiffer implements Differ, MapDifferInterface {
+class MapDiffer implements MapDifferInterface {
 
 	/**
 	 * @var bool
@@ -33,7 +33,7 @@ class MapDiffer implements Differ, MapDifferInterface {
 	/**
 	 * @var Differ
 	 */
-	private $listDiffer;
+	private $elementDiffer;
 
 	/**
 	 * @var ValueComparer
@@ -41,22 +41,26 @@ class MapDiffer implements Differ, MapDifferInterface {
 	private $valueComparer;
 
 	/**
-	 * Create differ for recursive diffs
+	 * The third argument ($comparer) was added in 3.0
 	 */
-	public static function createRecursive( ValueComparer $comparer = null, Differ $listDiffer = null ) {
-		$differ = new self( true, null, $comparer );
-		$differ->listDiffer = $listDiffer ?? $differ;
+	public function __construct( bool $recursively = false, Differ $elementDiffer = null,
+		ValueComparer $comparer = null ) {
 
-		return $differ;
+		$this->recursively = $recursively;
+		$this->elementDiffer = $elementDiffer ?? new ListDiffer();
+		$this->valueComparer = $comparer ?? new StrictComparer();
 	}
 
 	/**
-	 * The third argument ($comparer) was added in 3.0
+	 * Creates a recursive MapDiffer that by default uses itself to diff elements recursively
+	 *
+	 * @since 3.2
 	 */
-	public function __construct( bool $recursively = false, Differ $listDiffer = null, ValueComparer $comparer = null ) {
-		$this->recursively = $recursively;
-		$this->listDiffer = $listDiffer ?? new ListDiffer();
-		$this->valueComparer = $comparer ?? new StrictComparer();
+	public static function newRecursiveDiffer( ValueComparer $comparer = null, Differ $elementDiffer = null ) {
+		$differ = new self( true, null, $comparer );
+		$differ->elementDiffer = $elementDiffer ?? $differ;
+
+		return $differ;
 	}
 
 	/**
@@ -144,7 +148,10 @@ class MapDiffer implements Differ, MapDifferInterface {
 			return new Diff( $this->doDiff( $old, $new ), true );
 		}
 
-		return new Diff( $this->listDiffer->doDiff( $old, $new ), $this->listDiffer instanceof MapDifferInterface );
+		return new Diff(
+			$this->elementDiffer->doDiff( $old, $new ),
+			$this->elementDiffer instanceof MapDifferInterface
+		);
 	}
 
 	/**
