@@ -4,6 +4,7 @@ namespace Diff\Patcher;
 
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
+use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 
 /**
@@ -40,6 +41,16 @@ class ListPatcher extends ThrowingPatcher {
 
 		foreach ( $diff as $diffOp ) {
 			if ( $diffOp instanceof DiffOpAdd ) {
+				$base[] = $diffOp->getNewValue();
+			} elseif ( $diffOp instanceof DiffOpChange ) {
+				$key = array_search( $diffOp->getOldValue(), $base, true );
+
+				if ( $key === false ) {
+					$this->handleError( 'Cannot change an element in a list if it is not present' );
+					continue;
+				}
+
+				unset( $base[$key] );
 				$base[] = $diffOp->getNewValue();
 			} elseif ( $diffOp instanceof DiffOpRemove ) {
 				$needle = $diffOp->getOldValue();
