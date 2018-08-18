@@ -220,6 +220,6 @@ $newVersion = $patcher->patch( $oldVersion, $diff );
 ## Links
 
 * [Diff on Packagist](https://packagist.org/packages/diff/diff)
-* [Diff on Ohloh](https://www.ohloh.net/p/phpdiff)
+* [Diff on OpenHub](https://www.openhub.net/p/phpdiff)
 * [Diff on TravisCI](https://travis-ci.org/wmde/Diff)
 * [Diff on ScrutinizerCI](https://scrutinizer-ci.com/g/wmde/Diff/)
