@@ -147,14 +147,9 @@ class DiffTest extends DiffTestCase {
 	}
 
 	public function instanceProvider() {
-		$instances = array();
-
 		foreach ( $this->elementInstancesProvider() as $args ) {
-			$diffOps = $args[0];
-			$instances[] = array( new Diff( $diffOps ) );
+			yield [ new Diff( $args[0] ) ];
 		}
-
-		return $instances;
 	}
 
 	/**
