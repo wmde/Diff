@@ -10,4 +10,4 @@ if ( defined( 'Diff_VERSION' ) ) {
 /**
  * @deprecated Will be removed in 4.0
  */
-define( 'Diff_VERSION', '3.2 alpha' );
+define( 'Diff_VERSION', '3.2' );
