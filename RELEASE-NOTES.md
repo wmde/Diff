@@ -4,9 +4,10 @@ Latest release:
 [![Latest Stable Version](https://poser.pugx.org/diff/diff/version.png)](https://packagist.org/packages/diff/diff)
 
 
-## Version 3.2 (dev)
+## Version 3.2 (2018-09-11)
 
 * Deprecated constant `Diff_VERSION`
+* Switched License from GPL-2.0-or-later to BSD-3-Clause
 
 ## Version 3.1 (2018-04-17)
 
