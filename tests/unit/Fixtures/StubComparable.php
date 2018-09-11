@@ -5,7 +5,7 @@ declare( strict_types = 1 );
 namespace Diff\Tests\Fixtures;
 
 /**
- * @license GPL-2.0+
+ * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class StubComparable {

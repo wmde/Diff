@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Base class for unit tests in the Diff library.
  *
- * @license GPL-2.0+
+ * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 abstract class DiffTestCase extends TestCase {

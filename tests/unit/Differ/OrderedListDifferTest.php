@@ -19,7 +19,7 @@ use Diff\Tests\DiffTestCase;
  * @group Diff
  * @group Differ
  *
- * @license GPL-2.0+
+ * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */

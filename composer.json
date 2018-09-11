@@ -11,7 +11,7 @@
 		"wikidata"
 	],
 	"homepage": "https://github.com/wmde/Diff",
-	"license": "GPL-2.0-or-later",
+	"license": "BSD-3-Clause",
 	"authors": [
 		 {
 			 "name": "Jeroen De Dauw",

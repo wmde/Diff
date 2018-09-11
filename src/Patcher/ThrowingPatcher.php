@@ -15,7 +15,7 @@ use Diff\DiffOp\Diff\Diff;
  *
  * @since 0.4
  *
- * @license GPL-2.0+
+ * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 abstract class ThrowingPatcher implements PreviewablePatcher {

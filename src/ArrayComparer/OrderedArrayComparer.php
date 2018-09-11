@@ -15,7 +15,7 @@ use Diff\Comparer\ValueComparer;
  *
  * @since 0.9
  *
- * @license GPL-2.0+
+ * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
