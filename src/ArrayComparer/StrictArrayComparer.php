@@ -17,7 +17,7 @@ namespace Diff\ArrayComparer;
  *
  * @since 0.8
  *
- * @license GPL-2.0+
+ * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class StrictArrayComparer implements ArrayComparer {

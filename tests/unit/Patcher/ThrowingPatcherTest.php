@@ -14,7 +14,7 @@ use ReflectionClass;
  * @group Diff
  * @group DiffPatcher
  *
- * @license GPL-2.0+
+ * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class ThrowingPatcherTest extends DiffTestCase {

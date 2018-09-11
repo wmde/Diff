@@ -10,7 +10,7 @@ namespace Diff\DiffOp;
  *
  * @since 0.1
  *
- * @license GPL-2.0+
+ * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
