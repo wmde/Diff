@@ -18,45 +18,45 @@ use Diff\Tests\DiffTestCase;
  */
 class CallbackComparerTest extends DiffTestCase {
 
-	private function newComparerInstance() {
-		return new CallbackComparer( function( $firstValue, $secondValue ) {
-			return $firstValue === 1 || $firstValue === $secondValue;
+	public function testWhenCallbackReturnsTrue_valuesAreEqual() {
+		$comparer = new CallbackComparer( function() {
+			return true;
 		} );
+
+		$this->assertTrue( $comparer->valuesAreEqual( null, null ) );
 	}
 
-	/**
-	 * @dataProvider equalProvider
-	 */
-	public function testEqualValuesAreEqual( $firstValue, $secondValue ) {
-		$comparer = $this->newComparerInstance();
+	public function testWhenCallbackReturnsFalse_valuesAreNotEqual() {
+		$comparer = new CallbackComparer( function() {
+			return false;
+		} );
 
-		$this->assertTrue( $comparer->valuesAreEqual( $firstValue, $secondValue ) );
+		$this->assertFalse( $comparer->valuesAreEqual( null, null ) );
 	}
 
-	public function equalProvider() {
-		return array(
-			array( 1, 0 ),
-			array( 1, 1 ),
-			array( 1, 2 ),
-			array( 2, 2 ),
-		);
+	public function testWhenCallbackReturnsNonBoolean_exceptionIsThrown() {
+		$comparer = new CallbackComparer( function() {
+			return null;
+		} );
+
+		$this->expectException( \RuntimeException::class );
+		$comparer->valuesAreEqual( null, null );
 	}
 
-	/**
-	 * @dataProvider unequalProvider
-	 */
-	public function testDifferentValuesAreNotEqual( $firstValue, $secondValue ) {
-		$comparer = $this->newComparerInstance();
+	public function testCallbackIsGivenArguments() {
+		$firstArgument = null;
+		$secondArgument = null;
 
-		$this->assertFalse( $comparer->valuesAreEqual( $firstValue, $secondValue ) );
-	}
+		$comparer = new CallbackComparer( function( $a, $b ) use ( &$firstArgument, &$secondArgument ) {
+			$firstArgument = $a;
+			$secondArgument = $b;
+			return true;
+		} );
 
-	public function unequalProvider() {
-		return array(
-			array( 0, 1 ),
-			array( 0, 2 ),
-			array( 0, '0' ),
-		);
+		$comparer->valuesAreEqual( 42, 23 );
+
+		$this->assertSame( 42, $firstArgument );
+		$this->assertSame( 23, $secondArgument );
 	}
 
 }
