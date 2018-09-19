@@ -587,4 +587,26 @@ class DiffTest extends DiffTestCase {
 		);
 	}
 
+	public function testWhenThereAreNoChangeOperations_getChangesReturnsEmptyArray() {
+		$this->assertSame(
+			[],
+			( new Diff( [
+				new DiffOpAdd( 1 ),
+				new DiffOpRemove( 2 )
+			] ) )->getChanges()
+		);
+	}
+
+	public function testWhenThereAreChangeOperations_getChangesReturnsThem() {
+		$changeOperations = [
+			new DiffOpChange( 1, 2 ),
+			new DiffOpChange( 3, 4 )
+		];
+
+		$this->assertEquals(
+			$changeOperations,
+			( new Diff( $changeOperations ) )->getChanges()
+		);
+	}
+
 }
