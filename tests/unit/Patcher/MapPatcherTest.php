@@ -378,7 +378,7 @@ class MapPatcherTest extends DiffTestCase {
 	public function testSetValueComparerToAlwaysFalse() {
 		$patcher = new MapPatcher();
 
-		$patcher->setValueComparer( new CallbackComparer( function( $firstValue, $secondValue ) {
+		$patcher->setValueComparer( new CallbackComparer( function() {
 			return false;
 		} ) );
 
@@ -400,7 +400,7 @@ class MapPatcherTest extends DiffTestCase {
 	public function testSetValueComparerToAlwaysTrue() {
 		$patcher = new MapPatcher();
 
-		$patcher->setValueComparer( new CallbackComparer( function( $firstValue, $secondValue ) {
+		$patcher->setValueComparer( new CallbackComparer( function() {
 			return true;
 		} ) );
 

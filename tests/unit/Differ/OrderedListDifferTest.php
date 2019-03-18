@@ -242,7 +242,7 @@ class OrderedListDifferTest extends DiffTestCase {
 	}
 
 	public function testCallbackComparisonReturningFalse() {
-		$differ = new OrderedListDiffer( new CallbackComparer( function( $foo, $bar ) {
+		$differ = new OrderedListDiffer( new CallbackComparer( function() {
 			return false;
 		} ) );
 
@@ -263,7 +263,7 @@ class OrderedListDifferTest extends DiffTestCase {
 	}
 
 	public function testCallbackComparisonReturningTrue() {
-		$differ = new OrderedListDiffer( new CallbackComparer( function( $foo, $bar ) {
+		$differ = new OrderedListDiffer( new CallbackComparer( function() {
 			return true;
 		} ) );
 
@@ -278,7 +278,7 @@ class OrderedListDifferTest extends DiffTestCase {
 	}
 
 	public function testCallbackComparisonReturningNyanCat() {
-		$differ = new OrderedListDiffer( new CallbackComparer( function( $foo, $bar ) {
+		$differ = new OrderedListDiffer( new CallbackComparer( function() {
 			return '~=[,,_,,]:3';
 		} ) );
 
