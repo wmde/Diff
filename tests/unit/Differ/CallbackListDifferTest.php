@@ -173,7 +173,7 @@ class CallbackListDifferTest extends DiffTestCase {
 	}
 
 	public function testCallbackComparisonReturningFalse() {
-		$differ = new CallbackListDiffer( function( $foo, $bar ) {
+		$differ = new CallbackListDiffer( function() {
 			return false;
 		} );
 
@@ -194,7 +194,7 @@ class CallbackListDifferTest extends DiffTestCase {
 	}
 
 	public function testCallbackComparisonReturningTrue() {
-		$differ = new CallbackListDiffer( function( $foo, $bar ) {
+		$differ = new CallbackListDiffer( function() {
 			return true;
 		} );
 
@@ -209,7 +209,7 @@ class CallbackListDifferTest extends DiffTestCase {
 	}
 
 	public function testCallbackComparisonReturningNyanCat() {
-		$differ = new CallbackListDiffer( function( $foo, $bar ) {
+		$differ = new CallbackListDiffer( function() {
 			return '~=[,,_,,]:3';
 		} );
 
