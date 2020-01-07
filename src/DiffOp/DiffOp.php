@@ -11,7 +11,7 @@ use Serializable;
  * Interface for diff operations. A diff operation
  * represents a change to a single element.
  * In case the elements are maps or diffs, the resulting operation
- * can be a MapDiff or ListDiff, which contain their own list of DiffOp objects.
+ * can be a Diff which contains its own list of DiffOp objects.
  *
  * @since 0.1
  *
