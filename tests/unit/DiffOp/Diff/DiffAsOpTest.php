@@ -68,7 +68,7 @@ class DiffAsOpTest extends DiffOpTest {
 		$array = $diffOp->toArray();
 
 		$this->assertArrayHasKey( 'operations', $array );
-		$this->assertInternalType( 'array', $array['operations'] );
+		$this->assertIsArray( $array['operations'] );
 
 		$this->assertArrayHasKey( 'isassoc', $array );
 

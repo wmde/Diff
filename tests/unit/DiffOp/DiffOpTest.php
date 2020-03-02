@@ -93,14 +93,14 @@ abstract class DiffOpTest extends DiffTestCase {
 	 * @dataProvider instanceProvider
 	 */
 	public function testIsAtomic( DiffOp $diffOp ) {
-		$this->assertInternalType( 'boolean', $diffOp->isAtomic() );
+		$this->assertIsBool( $diffOp->isAtomic() );
 	}
 
 	/**
 	 * @dataProvider instanceProvider
 	 */
 	public function testGetType( DiffOp $diffOp ) {
-		$this->assertInternalType( 'string', $diffOp->getType() );
+		$this->assertIsString( $diffOp->getType() );
 	}
 
 	/**
@@ -140,9 +140,9 @@ abstract class DiffOpTest extends DiffTestCase {
 	public function testToArray( DiffOp $diffOp ) {
 		$array = $diffOp->toArray();
 
-		$this->assertInternalType( 'array', $array );
+		$this->assertIsArray( $array );
 		$this->assertArrayHasKey( 'type', $array );
-		$this->assertInternalType( 'string', $array['type'] );
+		$this->assertIsString( $array['type'] );
 		$this->assertEquals( $diffOp->getType(), $array['type'] );
 	}
 
@@ -154,7 +154,7 @@ abstract class DiffOpTest extends DiffTestCase {
 			return array( 'Nyan!' );
 		} );
 
-		$this->assertInternalType( 'array', $array );
+		$this->assertIsArray( $array );
 	}
 
 }

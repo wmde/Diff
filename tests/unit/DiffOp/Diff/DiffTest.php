@@ -92,7 +92,7 @@ class DiffTest extends DiffTestCase {
 
 	public function testGetType() {
 		$diff = new Diff();
-		$this->assertInternalType( 'string', $diff->getType() );
+		$this->assertIsString( $diff->getType() );
 	}
 
 	public function testPreSetElement() {
@@ -158,7 +158,7 @@ class DiffTest extends DiffTestCase {
 	public function testGetOperations( Diff $diff ) {
 		$ops = $diff->getOperations();
 
-		$this->assertInternalType( 'array', $ops );
+		$this->assertIsArray( $ops );
 		$this->assertContainsOnlyInstancesOf( 'Diff\DiffOp\DiffOp', $ops );
 		$this->assertArrayEquals( $ops, $diff->getOperations() );
 	}
@@ -370,7 +370,7 @@ class DiffTest extends DiffTestCase {
 
 		$addedValues = $diff->getAddedValues();
 
-		$this->assertInternalType( 'array', $addedValues );
+		$this->assertIsArray( $addedValues );
 
 		$this->assertArrayEquals( array( 0, 2, 4 ), $addedValues );
 
@@ -391,7 +391,7 @@ class DiffTest extends DiffTestCase {
 
 		$removedValues = $diff->getRemovedValues();
 
-		$this->assertInternalType( 'array', $removedValues );
+		$this->assertIsArray( $removedValues );
 
 		$this->assertArrayEquals( array( 1, 3 ), $removedValues );
 
