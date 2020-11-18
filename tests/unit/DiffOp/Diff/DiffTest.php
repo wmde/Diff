@@ -258,7 +258,7 @@ class DiffTest extends DiffTestCase {
 	public function testConstructor( array $elements ) {
 		$arrayObject = new Diff( $elements );
 
-		$this->assertEquals( count( $elements ), $arrayObject->count() );
+		$this->assertCount( $arrayObject->count(), $elements );
 	}
 
 	/**
