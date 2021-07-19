@@ -14,7 +14,7 @@ namespace Diff\DiffOp;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-abstract class AtomicDiffOp implements DiffOp {
+abstract class AbstractAtomicDiffOp implements DiffOpInterface {
 
 	/**
 	 * @see Countable::count
@@ -28,7 +28,7 @@ abstract class AtomicDiffOp implements DiffOp {
 	}
 
 	/**
-	 * @see DiffOp::isAtomic
+	 * @see DiffOpInterface::isAtomic
 	 *
 	 * @since 0.1
 	 *

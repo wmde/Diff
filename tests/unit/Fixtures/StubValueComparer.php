@@ -4,13 +4,13 @@ declare( strict_types = 1 );
 
 namespace Diff\Tests\Fixtures;
 
-use Diff\Comparer\ValueComparer;
+use Diff\Comparer\ValueComparerInterface;
 
 /**
  * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class StubValueComparer implements ValueComparer {
+class StubValueComparer implements ValueComparerInterface {
 
 	private $returnValue;
 

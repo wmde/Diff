@@ -13,13 +13,13 @@ namespace Diff\DiffOp;
  * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class DiffOpChange extends AtomicDiffOp {
+class DiffOpChange extends AbstractAtomicDiffOp {
 
 	private $newValue;
 	private $oldValue;
 
 	/**
-	 * @see DiffOp::getType
+	 * @see DiffOpInterface::getType
 	 *
 	 * @since 0.1
 	 *
@@ -81,7 +81,7 @@ class DiffOpChange extends AtomicDiffOp {
 	}
 
 	/**
-	 * @see DiffOp::toArray
+	 * @see DiffOpInterface::toArray
 	 *
 	 * @since 0.5
 	 *

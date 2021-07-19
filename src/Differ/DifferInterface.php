@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Diff\Differ;
 
-use Diff\DiffOp\DiffOp;
+use Diff\DiffOp\DiffOpInterface;
 use Exception;
 
 /**
@@ -15,7 +15,7 @@ use Exception;
  * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Differ {
+interface DifferInterface {
 
 	/**
 	 * Takes two arrays, computes the diff, and returns this diff as an array of DiffOp.
@@ -26,7 +26,7 @@ interface Differ {
 	 * @param array $newValues The second array
 	 *
 	 * @throws Exception
-	 * @return DiffOp[]
+	 * @return DiffOpInterface[]
 	 */
 	public function doDiff( array $oldValues, array $newValues ): array;
 

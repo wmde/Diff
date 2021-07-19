@@ -4,8 +4,8 @@ declare( strict_types = 1 );
 
 namespace Diff\Tests\DiffOp;
 
-use Diff\DiffOp\DiffOp;
-use Diff\Tests\DiffTestCase;
+use Diff\DiffOp\DiffOpInterface;
+use Diff\Tests\AbstractDiffTestCase;
 use ReflectionClass;
 
 /**
@@ -18,7 +18,7 @@ use ReflectionClass;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-abstract class DiffOpTest extends DiffTestCase {
+abstract class AbstractDiffOpTest extends AbstractDiffTestCase {
 
 	/**
 	 * Returns the name of the concrete class tested by this test.
@@ -92,21 +92,21 @@ abstract class DiffOpTest extends DiffTestCase {
 	/**
 	 * @dataProvider instanceProvider
 	 */
-	public function testIsAtomic( DiffOp $diffOp ) {
+	public function testIsAtomic( DiffOpInterface $diffOp ) {
 		$this->assertIsBool( $diffOp->isAtomic() );
 	}
 
 	/**
 	 * @dataProvider instanceProvider
 	 */
-	public function testGetType( DiffOp $diffOp ) {
+	public function testGetType( DiffOpInterface $diffOp ) {
 		$this->assertIsString( $diffOp->getType() );
 	}
 
 	/**
 	 * @dataProvider instanceProvider
 	 */
-	public function testSerialization( DiffOp $diffOp ) {
+	public function testSerialization( DiffOpInterface $diffOp ) {
 		$serialization = serialize( $diffOp );
 		$unserialization = unserialize( $serialization );
 		$this->assertEquals( $diffOp, $unserialization );
@@ -116,7 +116,7 @@ abstract class DiffOpTest extends DiffTestCase {
 	/**
 	 * @dataProvider instanceProvider
 	 */
-	public function testCount( DiffOp $diffOp ) {
+	public function testCount( DiffOpInterface $diffOp ) {
 		if ( $diffOp->isAtomic() ) {
 			$this->assertSame( 1, $diffOp->count() );
 		}
@@ -124,7 +124,7 @@ abstract class DiffOpTest extends DiffTestCase {
 			$count = 0;
 
 			/**
-			 * @var DiffOp $childOp
+			 * @var DiffOpInterface $childOp
 			 */
 			foreach ( $diffOp as $childOp ) {
 				$count += $childOp->count();
@@ -137,7 +137,7 @@ abstract class DiffOpTest extends DiffTestCase {
 	/**
 	 * @dataProvider instanceProvider
 	 */
-	public function testToArray( DiffOp $diffOp ) {
+	public function testToArray( DiffOpInterface $diffOp ) {
 		$array = $diffOp->toArray();
 
 		$this->assertIsArray( $array );
@@ -149,7 +149,7 @@ abstract class DiffOpTest extends DiffTestCase {
 	/**
 	 * @dataProvider instanceProvider
 	 */
-	public function testToArrayWithConversion( DiffOp $diffOp ) {
+	public function testToArrayWithConversion( DiffOpInterface $diffOp ) {
 		$array = $diffOp->toArray( function() {
 			return array( 'Nyan!' );
 		} );

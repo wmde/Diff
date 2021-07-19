@@ -6,7 +6,7 @@ namespace Diff\Differ;
 
 use Diff\ArrayComparer\StrategicArrayComparer;
 use Diff\Comparer\CallbackComparer;
-use Diff\DiffOp\DiffOp;
+use Diff\DiffOp\DiffOpInterface;
 
 /**
  * Differ that only looks at the values of the arrays (and thus ignores key differences).
@@ -19,7 +19,7 @@ use Diff\DiffOp\DiffOp;
  * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class CallbackListDiffer implements Differ {
+class CallbackListDiffer implements DifferInterface {
 
 	/**
 	 * @var ListDiffer
@@ -38,14 +38,14 @@ class CallbackListDiffer implements Differ {
 	}
 
 	/**
-	 * @see Differ::doDiff
+	 * @see DifferInterface::doDiff
 	 *
 	 * @since 0.5
 	 *
 	 * @param array $oldValues The first array
 	 * @param array $newValues The second array
 	 *
-	 * @return DiffOp[]
+	 * @return DiffOpInterface[]
 	 */
 	public function doDiff( array $oldValues, array $newValues ): array {
 		return $this->differ->doDiff( $oldValues, $newValues );

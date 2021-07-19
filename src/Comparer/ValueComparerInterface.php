@@ -12,7 +12,7 @@ namespace Diff\Comparer;
  * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface ValueComparer {
+interface ValueComparerInterface {
 
 	/**
 	 * @since 0.6

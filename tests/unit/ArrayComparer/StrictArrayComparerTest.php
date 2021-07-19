@@ -5,7 +5,7 @@ declare( strict_types = 1 );
 namespace Diff\Tests\ArrayComparer;
 
 use Diff\ArrayComparer\StrictArrayComparer;
-use Diff\Tests\DiffTestCase;
+use Diff\Tests\AbstractDiffTestCase;
 
 /**
  * @covers \Diff\ArrayComparer\StrictArrayComparer
@@ -15,7 +15,7 @@ use Diff\Tests\DiffTestCase;
  * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class StrictArrayComparerTest extends DiffTestCase {
+class StrictArrayComparerTest extends AbstractDiffTestCase {
 
 	public function testCanConstruct() {
 		new StrictArrayComparer();

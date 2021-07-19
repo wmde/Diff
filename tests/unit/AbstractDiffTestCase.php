@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
  * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class DiffTestCase extends TestCase {
+abstract class AbstractDiffTestCase extends TestCase {
 
 	/**
 	 * Utility method taking an array of elements and wrapping

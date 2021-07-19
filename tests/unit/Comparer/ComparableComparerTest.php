@@ -5,7 +5,7 @@ declare( strict_types = 1 );
 namespace Diff\Tests\Comparer;
 
 use Diff\Comparer\ComparableComparer;
-use Diff\Tests\DiffTestCase;
+use Diff\Tests\AbstractDiffTestCase;
 use Diff\Tests\Fixtures\StubComparable;
 
 /**
@@ -17,7 +17,7 @@ use Diff\Tests\Fixtures\StubComparable;
  * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ComparableComparerTest extends DiffTestCase {
+class ComparableComparerTest extends AbstractDiffTestCase {
 
 	/**
 	 * @dataProvider equalProvider

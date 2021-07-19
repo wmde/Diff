@@ -6,11 +6,11 @@ namespace Diff\Tests\Differ;
 
 use Diff\ArrayComparer\NativeArrayComparer;
 use Diff\ArrayComparer\StrictArrayComparer;
-use Diff\Differ\Differ;
+use Diff\Differ\DifferInterface;
 use Diff\Differ\ListDiffer;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
-use Diff\Tests\DiffTestCase;
+use Diff\Tests\AbstractDiffTestCase;
 
 /**
  * @covers \Diff\Differ\ListDiffer
@@ -21,7 +21,7 @@ use Diff\Tests\DiffTestCase;
  * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ListDifferTest extends DiffTestCase {
+class ListDifferTest extends AbstractDiffTestCase {
 
 	public function arrayComparerProvider() {
 		$add = array( new DiffOpAdd( 1 ) );
@@ -219,14 +219,14 @@ class ListDifferTest extends DiffTestCase {
 		$this->doTestDiff( new ListDiffer( new NativeArrayComparer() ), $old, $new, $expected, $message );
 	}
 
-	private function doTestDiff( Differ $differ, $old, $new, $expected, $message ) {
+	private function doTestDiff( DifferInterface $differ, $old, $new, $expected, $message ) {
 		$actual = $differ->doDiff( $old, $new );
 
 		$this->assertArrayEquals( $expected, $actual, false, false, $message );
 	}
 
 	public function testDiffCallsArrayComparatorCorrectly() {
-		$arrayComparer = $this->createMock( 'Diff\ArrayComparer\ArrayComparer' );
+		$arrayComparer = $this->createMock('Diff\ArrayComparer\ArrayComparerInterface');
 
 		$arrayComparer->expects( $this->exactly( 2 ) )
 			->method( 'diffArrays' )

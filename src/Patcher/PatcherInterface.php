@@ -14,7 +14,7 @@ use Diff\DiffOp\Diff\Diff;
  * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface Patcher {
+interface PatcherInterface {
 
 	/**
 	 * Applies the applicable operations from the provided diff to

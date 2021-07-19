@@ -5,7 +5,7 @@ declare( strict_types = 1 );
 namespace Diff\Tests\ArrayComparer;
 
 use Diff\ArrayComparer\NativeArrayComparer;
-use Diff\Tests\DiffTestCase;
+use Diff\Tests\AbstractDiffTestCase;
 
 /**
  * @covers \Diff\ArrayComparer\NativeArrayComparer
@@ -15,7 +15,7 @@ use Diff\Tests\DiffTestCase;
  * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class NativeArrayComparerTest extends DiffTestCase {
+class NativeArrayComparerTest extends AbstractDiffTestCase {
 
 	public function testCanConstruct() {
 		new NativeArrayComparer();

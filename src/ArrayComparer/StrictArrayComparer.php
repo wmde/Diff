@@ -20,10 +20,10 @@ namespace Diff\ArrayComparer;
  * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class StrictArrayComparer implements ArrayComparer {
+class StrictArrayComparer implements ArrayComparerInterface {
 
 	/**
-	 * @see ArrayComparer::diffArrays
+	 * @see ArrayComparerInterface::diffArrays
 	 *
 	 * @since 0.8
 	 *

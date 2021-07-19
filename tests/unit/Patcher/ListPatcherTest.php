@@ -8,13 +8,13 @@ use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
 use Diff\Patcher\ListPatcher;
-use Diff\Patcher\Patcher;
-use Diff\Tests\DiffTestCase;
+use Diff\Patcher\PatcherInterface;
+use Diff\Tests\AbstractDiffTestCase;
 use stdClass;
 
 /**
  * @covers \Diff\Patcher\ListPatcher
- * @covers \Diff\Patcher\ThrowingPatcher
+ * @covers \Diff\Patcher\AbstractThrowingPatcher
  *
  * @group Diff
  * @group DiffPatcher
@@ -22,7 +22,7 @@ use stdClass;
  * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ListPatcherTest extends DiffTestCase {
+class ListPatcherTest extends AbstractDiffTestCase {
 
 	public function patchProvider() {
 		$argLists = array();
@@ -117,12 +117,12 @@ class ListPatcherTest extends DiffTestCase {
 	/**
 	 * @dataProvider patchProvider
 	 *
-	 * @param Patcher $patcher
+	 * @param PatcherInterface $patcher
 	 * @param array $base
 	 * @param Diff $diff
 	 * @param array $expected
 	 */
-	public function testPatch( Patcher $patcher, array $base, Diff $diff, array $expected ) {
+	public function testPatch( PatcherInterface $patcher, array $base, Diff $diff, array $expected ) {
 		$actual = $patcher->patch( $base, $diff );
 
 		$this->assertArrayEquals( $expected, $actual );

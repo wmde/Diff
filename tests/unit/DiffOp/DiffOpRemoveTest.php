@@ -9,7 +9,7 @@ use Diff\DiffOp\DiffOpRemove;
 
 /**
  * @covers \Diff\DiffOp\DiffOpRemove
- * @covers \Diff\DiffOp\AtomicDiffOp
+ * @covers \Diff\DiffOp\AbstractAtomicDiffOp
  *
  * @group Diff
  * @group DiffOp
@@ -17,10 +17,10 @@ use Diff\DiffOp\DiffOpRemove;
  * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class DiffOpRemoveTest extends DiffOpTest {
+class DiffOpRemoveTest extends AbstractDiffOpTest {
 
 	/**
-	 * @see DiffOpTest::getClass
+	 * @see AbstractDiffOpTest::getClass
 	 *
 	 * @since 0.1
 	 *
@@ -31,7 +31,7 @@ class DiffOpRemoveTest extends DiffOpTest {
 	}
 
 	/**
-	 * @see DiffOpTest::constructorProvider
+	 * @see AbstractDiffOpTest::constructorProvider
 	 *
 	 * @since 0.1
 	 */

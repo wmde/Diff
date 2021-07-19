@@ -5,9 +5,9 @@ declare( strict_types = 1 );
 namespace Diff\Patcher;
 
 use Diff\Comparer\StrictComparer;
-use Diff\Comparer\ValueComparer;
+use Diff\Comparer\ValueComparerInterface;
 use Diff\DiffOp\Diff\Diff;
-use Diff\DiffOp\DiffOp;
+use Diff\DiffOp\DiffOpInterface;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
@@ -20,15 +20,15 @@ use Diff\DiffOp\DiffOpRemove;
  * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class MapPatcher extends ThrowingPatcher {
+class MapPatcher extends AbstractThrowingPatcher {
 
 	/**
-	 * @var Patcher
+	 * @var PatcherInterface
 	 */
 	private $listPatcher;
 
 	/**
-	 * @var ValueComparer|null
+	 * @var ValueComparerInterface|null
 	 */
 	private $comparer = null;
 
@@ -36,16 +36,16 @@ class MapPatcher extends ThrowingPatcher {
 	 * @since 0.4
 	 *
 	 * @param bool $throwErrors
-	 * @param Patcher|null $listPatcher The patcher that will be used for lists in the value
+	 * @param PatcherInterface|null $listPatcher The patcher that will be used for lists in the value
 	 */
-	public function __construct( bool $throwErrors = false, Patcher $listPatcher = null ) {
+	public function __construct( bool $throwErrors = false, PatcherInterface $listPatcher = null ) {
 		parent::__construct( $throwErrors );
 
 		$this->listPatcher = $listPatcher ?: new ListPatcher( $throwErrors );
 	}
 
 	/**
-	 * @see Patcher::patch
+	 * @see PatcherInterface::patch
 	 *
 	 * Applies the provided diff to the provided array and returns the result.
 	 * The array is treated as a map, ie keys are held into account.
@@ -73,11 +73,11 @@ class MapPatcher extends ThrowingPatcher {
 	/**
 	 * @param array &$base
 	 * @param int|string $key
-	 * @param DiffOp $diffOp
+	 * @param DiffOpInterface $diffOp
 	 *
 	 * @throws PatcherException
 	 */
-	private function applyOperation( array &$base, $key, DiffOp $diffOp ) {
+	private function applyOperation( array &$base, $key, DiffOpInterface $diffOp ) {
 		if ( $diffOp instanceof DiffOpAdd ) {
 			$this->applyDiffOpAdd( $base, $key, $diffOp );
 		}
@@ -218,9 +218,9 @@ class MapPatcher extends ThrowingPatcher {
 	 *
 	 * @since 0.6
 	 *
-	 * @param ValueComparer $comparer
+	 * @param ValueComparerInterface $comparer
 	 */
-	public function setValueComparer( ValueComparer $comparer ) {
+	public function setValueComparer( ValueComparerInterface $comparer ) {
 		$this->comparer = $comparer;
 	}
 

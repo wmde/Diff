@@ -12,7 +12,7 @@ namespace Diff\Comparer;
  * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class StrictComparer implements ValueComparer {
+class StrictComparer implements ValueComparerInterface {
 
 	/**
 	 * @param mixed $firstValue
