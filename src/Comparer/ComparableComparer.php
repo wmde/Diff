@@ -15,7 +15,7 @@ namespace Diff\Comparer;
 class ComparableComparer implements ValueComparer {
 
 	public function valuesAreEqual( $firstValue, $secondValue ): bool {
-		if ( method_exists( $firstValue, 'equals' ) ) {
+		if ( $firstValue && method_exists( $firstValue, 'equals' ) ) {
 			return $firstValue->equals( $secondValue );
 		}
 
