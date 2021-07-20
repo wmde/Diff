@@ -5,7 +5,7 @@ declare( strict_types = 1 );
 namespace Diff\Tests\Comparer;
 
 use Diff\Comparer\StrictComparer;
-use Diff\Tests\AbstractDiffTestCase;
+use Diff\Tests\DiffTestCase;
 
 /**
  * @covers \Diff\Comparer\StrictComparer
@@ -16,7 +16,7 @@ use Diff\Tests\AbstractDiffTestCase;
  * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class StrictComparerTest extends AbstractDiffTestCase {
+class StrictComparerTest extends DiffTestCase {
 
 	/**
 	 * @dataProvider equalProvider

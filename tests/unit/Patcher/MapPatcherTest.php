@@ -10,12 +10,12 @@ use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
 use Diff\Patcher\MapPatcher;
-use Diff\Patcher\PatcherInterface;
-use Diff\Tests\AbstractDiffTestCase;
+use Diff\Patcher\Patcher;
+use Diff\Tests\DiffTestCase;
 
 /**
  * @covers \Diff\Patcher\MapPatcher
- * @covers \Diff\Patcher\AbstractThrowingPatcher
+ * @covers \Diff\Patcher\ThrowingPatcher
  *
  * @group Diff
  * @group DiffPatcher
@@ -24,7 +24,7 @@ use Diff\Tests\AbstractDiffTestCase;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-class MapPatcherTest extends AbstractDiffTestCase {
+class MapPatcherTest extends DiffTestCase {
 
 	public function patchProvider() {
 		$argLists = array();
@@ -217,12 +217,12 @@ class MapPatcherTest extends AbstractDiffTestCase {
 	/**
 	 * @dataProvider patchProvider
 	 *
-	 * @param PatcherInterface $patcher
+	 * @param Patcher $patcher
 	 * @param array $base
 	 * @param Diff $diff
 	 * @param array $expected
 	 */
-	public function testPatch( PatcherInterface $patcher, array $base, Diff $diff, array $expected ) {
+	public function testPatch( Patcher $patcher, array $base, Diff $diff, array $expected ) {
 		$actual = $patcher->patch( $base, $diff );
 
 		$this->assertArrayEquals( $expected, $actual, true, true );
@@ -427,7 +427,7 @@ class MapPatcherTest extends AbstractDiffTestCase {
 	public function testErrorOnUnknownDiffOpType() {
 		$patcher = new MapPatcher();
 
-		$diffOp = $this->createMock('Diff\DiffOp\DiffOpInterface');
+		$diffOp = $this->createMock( 'Diff\DiffOp\DiffOp' );
 
 		$diffOp->expects( $this->any() )
 			->method( 'getType' )

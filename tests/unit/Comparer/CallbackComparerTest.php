@@ -5,7 +5,7 @@ declare( strict_types = 1 );
 namespace Diff\Tests\Comparer;
 
 use Diff\Comparer\CallbackComparer;
-use Diff\Tests\AbstractDiffTestCase;
+use Diff\Tests\DiffTestCase;
 
 /**
  * @covers \Diff\Comparer\CallbackComparer
@@ -16,7 +16,7 @@ use Diff\Tests\AbstractDiffTestCase;
  * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class CallbackComparerTest extends AbstractDiffTestCase {
+class CallbackComparerTest extends DiffTestCase {
 
 	public function testWhenCallbackReturnsTrue_valuesAreEqual() {
 		$comparer = new CallbackComparer( function() {

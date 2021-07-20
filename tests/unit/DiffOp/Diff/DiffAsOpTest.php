@@ -7,7 +7,7 @@ namespace Diff\Tests\DiffOp\Diff;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
-use Diff\Tests\DiffOp\AbstractDiffOpTest;
+use Diff\Tests\DiffOp\DiffOpTest;
 
 /**
  * @covers \Diff\DiffOp\Diff\Diff
@@ -18,10 +18,10 @@ use Diff\Tests\DiffOp\AbstractDiffOpTest;
  * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class DiffAsOpTest extends AbstractDiffOpTest {
+class DiffAsOpTest extends DiffOpTest {
 
 	/**
-	 * @see AbstractDiffOpTest::getClass
+	 * @see DiffOpTest::getClass
 	 *
 	 * @since 0.5
 	 *
@@ -32,7 +32,7 @@ class DiffAsOpTest extends AbstractDiffOpTest {
 	}
 
 	/**
-	 * @see AbstractDiffOpTest::constructorProvider
+	 * @see DiffOpTest::constructorProvider
 	 *
 	 * @since 0.5
 	 */

@@ -5,7 +5,7 @@ declare( strict_types = 1 );
 namespace Diff\Tests;
 
 use Diff\DiffOp\Diff\Diff;
-use Diff\DiffOp\DiffOpInterface;
+use Diff\DiffOp\DiffOp;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
@@ -20,7 +20,7 @@ use Diff\DiffOpFactory;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Daniel Kinzler
  */
-class DiffOpFactoryTest extends AbstractDiffTestCase {
+class DiffOpFactoryTest extends DiffTestCase {
 
 	public function diffOpProvider() {
 		$diffOps = array();
@@ -48,9 +48,9 @@ class DiffOpFactoryTest extends AbstractDiffTestCase {
 	/**
 	 * @dataProvider diffOpProvider
 	 *
-	 * @param DiffOpInterface $diffOp
+	 * @param DiffOp $diffOp
 	 */
-	public function testNewFromArray( DiffOpInterface $diffOp ) {
+	public function testNewFromArray( DiffOp $diffOp ) {
 		$factory = new DiffOpFactory();
 
 		// try without conversion callback
@@ -65,9 +65,9 @@ class DiffOpFactoryTest extends AbstractDiffTestCase {
 	/**
 	 * @dataProvider diffOpProvider
 	 *
-	 * @param DiffOpInterface $diffOp
+	 * @param DiffOp $diffOp
 	 */
-	public function testNewFromArrayWithConversion( DiffOpInterface $diffOp ) {
+	public function testNewFromArrayWithConversion( DiffOp $diffOp ) {
 		$unserializationFunction = function( $array ) {
 			if ( is_array( $array ) && isset( $array['type'] ) && $array['type'] === 'Change' ) {
 				return new DiffOpChange( $array['teh_old'], $array['teh_new'] );

@@ -11,7 +11,7 @@ use Diff\DiffOp\DiffOpRemove;
 use InvalidArgumentException;
 
 /**
- * Constructs a DiffOp from its array form (which can be obtained via @see DiffOpInterface::toArray).
+ * Constructs a DiffOp from its array form (which can be obtained via @see DiffOp::toArray).
  *
  * @since 0.5
  *
@@ -39,13 +39,13 @@ class DiffOpFactory {
 	/**
 	 * Returns an instance of DiffOp constructed from the provided array.
 	 *
-	 * This roundtrips with @see DiffOpInterface::toArray.
+	 * This roundtrips with @see DiffOp::toArray.
 	 *
 	 * @since 0.5
 	 *
 	 * @param array $diffOp
 	 *
-	 * @return DiffOp\DiffOpInterface
+	 * @return DiffOp\DiffOp
 	 * @throws InvalidArgumentException
 	 */
 	public function newFromArray( array $diffOp ) {

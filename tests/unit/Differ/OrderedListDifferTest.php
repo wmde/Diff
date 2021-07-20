@@ -5,11 +5,11 @@ declare( strict_types = 1 );
 namespace Diff\Tests\Differ;
 
 use Diff\Comparer\CallbackComparer;
-use Diff\Differ\DifferInterface;
+use Diff\Differ\Differ;
 use Diff\Differ\OrderedListDiffer;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
-use Diff\Tests\AbstractDiffTestCase;
+use Diff\Tests\DiffTestCase;
 
 /**
  * @covers \Diff\Differ\OrderedListDiffer
@@ -23,7 +23,7 @@ use Diff\Tests\AbstractDiffTestCase;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class OrderedListDifferTest extends AbstractDiffTestCase {
+class OrderedListDifferTest extends DiffTestCase {
 
 	/**
 	 * Returns those that both work for native and strict mode.
@@ -235,7 +235,7 @@ class OrderedListDifferTest extends AbstractDiffTestCase {
 		);
 	}
 
-	private function doTestDiff( DifferInterface $differ, $old, $new, $expected, $message ) {
+	private function doTestDiff( Differ $differ, $old, $new, $expected, $message ) {
 		$actual = $differ->doDiff( $old, $new );
 
 		$this->assertArrayEquals( $expected, $actual, false, false, $message );

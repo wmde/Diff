@@ -12,7 +12,7 @@ namespace Diff\Comparer;
  * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ComparableComparer implements ValueComparerInterface {
+class ComparableComparer implements ValueComparer {
 
 	public function valuesAreEqual( $firstValue, $secondValue ): bool {
 		if ( $firstValue && method_exists( $firstValue, 'equals' ) ) {

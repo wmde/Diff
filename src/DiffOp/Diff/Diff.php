@@ -5,7 +5,7 @@ declare( strict_types = 1 );
 namespace Diff\DiffOp\Diff;
 
 use ArrayObject;
-use Diff\DiffOp\DiffOpInterface;
+use Diff\DiffOp\DiffOp;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
@@ -22,7 +22,7 @@ use InvalidArgumentException;
  * @author Daniel Kinzler
  * @author Thiemo Kreuz
  */
-class Diff extends ArrayObject implements DiffOpInterface {
+class Diff extends ArrayObject implements DiffOp {
 
 	/**
 	 * @var bool|null
@@ -51,7 +51,7 @@ class Diff extends ArrayObject implements DiffOpInterface {
 	/**
 	 * @since 0.1
 	 *
-	 * @param DiffOpInterface[] $operations
+	 * @param DiffOp[] $operations
 	 * @param bool|null $isAssociative
 	 *
 	 * @throws InvalidArgumentException
@@ -64,7 +64,7 @@ class Diff extends ArrayObject implements DiffOpInterface {
 		parent::__construct( [] );
 
 		foreach ( $operations as $offset => $operation ) {
-			if ( !( $operation instanceof DiffOpInterface) ) {
+			if ( !( $operation instanceof DiffOp ) ) {
 				throw new InvalidArgumentException( 'All elements fed to the Diff constructor should be of type DiffOp' );
 			}
 
@@ -77,7 +77,7 @@ class Diff extends ArrayObject implements DiffOpInterface {
 	/**
 	 * @since 0.1
 	 *
-	 * @return DiffOpInterface[]
+	 * @return DiffOp[]
 	 */
 	public function getOperations(): array {
 		return $this->getArrayCopy();
@@ -88,7 +88,7 @@ class Diff extends ArrayObject implements DiffOpInterface {
 	 *
 	 * @param string $type
 	 *
-	 * @return DiffOpInterface[]
+	 * @return DiffOp[]
 	 */
 	public function getTypeOperations( string $type ): array {
 		return array_intersect_key(
@@ -100,7 +100,7 @@ class Diff extends ArrayObject implements DiffOpInterface {
 	/**
 	 * @since 0.1
 	 *
-	 * @param DiffOpInterface[] $operations
+	 * @param DiffOp[] $operations
 	 */
 	public function addOperations( array $operations ) {
 		foreach ( $operations as $operation ) {
@@ -118,12 +118,12 @@ class Diff extends ArrayObject implements DiffOpInterface {
 	 * does not get added to the ArrayObject.
 	 *
 	 * @param int|string $index
-	 * @param DiffOpInterface $value
+	 * @param DiffOp $value
 	 *
 	 * @return bool
 	 * @throws InvalidArgumentException
 	 */
-	private function preSetElement( $index, DiffOpInterface $value ): bool {
+	private function preSetElement( $index, DiffOp $value ): bool {
 		if ( $this->isAssociative === false && ( $value->getType() !== 'add' && $value->getType() !== 'remove' ) ) {
 			throw new InvalidArgumentException( 'Diff operation with invalid type "' . $value->getType() . '" provided.' );
 		}
@@ -219,7 +219,7 @@ class Diff extends ArrayObject implements DiffOpInterface {
 	}
 
 	/**
-	 * @see DiffOpInterface::isAtomic
+	 * @see DiffOp::isAtomic
 	 *
 	 * @since 0.1
 	 *
@@ -230,7 +230,7 @@ class Diff extends ArrayObject implements DiffOpInterface {
 	}
 
 	/**
-	 * @see DiffOpInterface::getType
+	 * @see DiffOp::getType
 	 *
 	 * @since 0.1
 	 *
@@ -256,7 +256,7 @@ class Diff extends ArrayObject implements DiffOpInterface {
 		$count = 0;
 
 		/**
-		 * @var DiffOpInterface $diffOp
+		 * @var DiffOp $diffOp
 		 */
 		foreach ( $this as $diffOp ) {
 			$count += $diffOp->count();
@@ -318,7 +318,7 @@ class Diff extends ArrayObject implements DiffOpInterface {
 	/**
 	 * Returns the Diff in array form where nested DiffOps are also turned into their array form.
 	 *
-	 * @see  DiffOpInterface::toArray
+	 * @see  DiffOp::toArray
 	 *
 	 * @since 0.5
 	 *
@@ -414,7 +414,7 @@ class Diff extends ArrayObject implements DiffOpInterface {
 	 * @throws InvalidArgumentException
 	 */
 	private function setElement( $index, $value ) {
-		if ( !( $value instanceof DiffOpInterface)) {
+		if ( !( $value instanceof DiffOp ) ) {
 			throw new InvalidArgumentException(
 				'Can only add DiffOp implementing objects to ' . get_called_class() . '.'
 			);
@@ -455,7 +455,7 @@ class Diff extends ArrayObject implements DiffOpInterface {
 	 * @return bool
 	 */
 	public function isEmpty(): bool {
-		/** @var DiffOpInterface $diffOp */
+		/** @var DiffOp $diffOp */
 		foreach ( $this as $diffOp ) {
 			if ( $diffOp->count() > 0 ) {
 				return false;

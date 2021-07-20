@@ -13,7 +13,7 @@ namespace Diff\Comparer;
  * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class CallbackComparer implements ValueComparerInterface {
+class CallbackComparer implements ValueComparer {
 
 	private $callback;
 

@@ -5,8 +5,8 @@ declare( strict_types = 1 );
 namespace Diff\Differ;
 
 use Diff\ArrayComparer\OrderedArrayComparer;
-use Diff\Comparer\ValueComparerInterface;
-use Diff\DiffOp\DiffOpInterface;
+use Diff\Comparer\ValueComparer;
+use Diff\DiffOp\DiffOp;
 
 /**
  * Differ that looks at the order of the values and the values of the arrays.
@@ -20,7 +20,7 @@ use Diff\DiffOp\DiffOpInterface;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class OrderedListDiffer implements DifferInterface {
+class OrderedListDiffer implements Differ {
 
 	/**
 	 * @var ListDiffer
@@ -30,21 +30,21 @@ class OrderedListDiffer implements DifferInterface {
 	/**
 	 * @since 0.9
 	 *
-	 * @param ValueComparerInterface $comparer
+	 * @param ValueComparer $comparer
 	 */
-	public function __construct( ValueComparerInterface $comparer ) {
+	public function __construct( ValueComparer $comparer ) {
 		$this->differ = new ListDiffer( new OrderedArrayComparer( $comparer ) );
 	}
 
 	/**
-	 * @see DifferInterface::doDiff
+	 * @see Differ::doDiff
 	 *
 	 * @since 0.9
 	 *
 	 * @param array $oldValues The first array
 	 * @param array $newValues The second array
 	 *
-	 * @return DiffOpInterface[]
+	 * @return DiffOp[]
 	 */
 	public function doDiff( array $oldValues, array $newValues ): array {
 		return $this->differ->doDiff( $oldValues, $newValues );

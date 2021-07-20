@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Diff\ArrayComparer;
 
-use Diff\Comparer\ValueComparerInterface;
+use Diff\Comparer\ValueComparer;
 
 /**
  * Computes the difference between two ordered arrays by comparing elements with
@@ -19,16 +19,16 @@ use Diff\Comparer\ValueComparerInterface;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Tobias Gritschacher < tobias.gritschacher@wikimedia.de >
  */
-class OrderedArrayComparer implements ArrayComparerInterface {
+class OrderedArrayComparer implements ArrayComparer {
 
 	private $valueComparer;
 
-	public function __construct( ValueComparerInterface $valueComparer ) {
+	public function __construct( ValueComparer $valueComparer ) {
 		$this->valueComparer = $valueComparer;
 	}
 
 	/**
-	 * @see ArrayComparerInterface::diffArrays
+	 * @see ArrayComparer::diffArrays
 	 *
 	 * @since 0.9
 	 *

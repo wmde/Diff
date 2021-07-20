@@ -14,10 +14,10 @@ use Diff\DiffOp\DiffOpRemove;
  * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ListPatcher extends AbstractThrowingPatcher {
+class ListPatcher extends ThrowingPatcher {
 
 	/**
-	 * @see PatcherInterface::patch
+	 * @see Patcher::patch
 	 *
 	 * Applies the provided diff to the provided array and returns the result.
 	 * The provided diff needs to be non-associative. In other words, calling

@@ -5,10 +5,10 @@ declare( strict_types = 1 );
 namespace Diff\Tests\Differ;
 
 use Diff\Differ\CallbackListDiffer;
-use Diff\Differ\DifferInterface;
+use Diff\Differ\Differ;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
-use Diff\Tests\AbstractDiffTestCase;
+use Diff\Tests\DiffTestCase;
 
 /**
  * @covers \Diff\Differ\CallbackListDiffer
@@ -19,7 +19,7 @@ use Diff\Tests\AbstractDiffTestCase;
  * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class CallbackListDifferTest extends AbstractDiffTestCase {
+class CallbackListDifferTest extends DiffTestCase {
 
 	/**
 	 * Returns those that both work for native and strict mode.
@@ -166,7 +166,7 @@ class CallbackListDifferTest extends AbstractDiffTestCase {
 		$this->doTestDiff( new CallbackListDiffer( $callback ), $old, $new, $expected, $message );
 	}
 
-	private function doTestDiff( DifferInterface $differ, $old, $new, $expected, $message ) {
+	private function doTestDiff( Differ $differ, $old, $new, $expected, $message ) {
 		$actual = $differ->doDiff( $old, $new );
 
 		$this->assertArrayEquals( $expected, $actual, false, false, $message );

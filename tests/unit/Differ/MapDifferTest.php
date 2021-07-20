@@ -5,14 +5,14 @@ declare( strict_types = 1 );
 namespace Diff\Tests\Differ;
 
 use Diff\ArrayComparer\NativeArrayComparer;
-use Diff\Differ\DifferInterface;
+use Diff\Differ\Differ;
 use Diff\Differ\ListDiffer;
 use Diff\Differ\MapDiffer;
 use Diff\DiffOp\Diff\Diff;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
-use Diff\Tests\AbstractDiffTestCase;
+use Diff\Tests\DiffTestCase;
 use Diff\Tests\Fixtures\StubValueComparer;
 
 /**
@@ -24,7 +24,7 @@ use Diff\Tests\Fixtures\StubValueComparer;
  * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class MapDifferTest extends AbstractDiffTestCase {
+class MapDifferTest extends DiffTestCase {
 
 	public function toDiffProvider() {
 		$argLists = array();
@@ -307,14 +307,7 @@ class MapDifferTest extends AbstractDiffTestCase {
 	/**
 	 * @dataProvider toDiffProvider
 	 */
-	public function testDoDiff(
-		$old,
-		$new,
-		$expected,
-		$message = '',
-		$recursively = false,
-		DifferInterface $listDiffer = null
-	) {
+	public function testDoDiff( $old, $new, $expected, $message = '', $recursively = false, Differ $listDiffer = null ) {
 		$differ = new MapDiffer( $recursively, $listDiffer );
 
 		$actual = $differ->doDiff( $old, $new );

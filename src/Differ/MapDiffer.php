@@ -5,9 +5,9 @@ declare( strict_types = 1 );
 namespace Diff\Differ;
 
 use Diff\Comparer\StrictComparer;
-use Diff\Comparer\ValueComparerInterface;
+use Diff\Comparer\ValueComparer;
 use Diff\DiffOp\Diff\Diff;
-use Diff\DiffOp\DiffOpInterface;
+use Diff\DiffOp\DiffOp;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
@@ -23,7 +23,7 @@ use LogicException;
  * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class MapDiffer implements DifferInterface {
+class MapDiffer implements Differ {
 
 	/**
 	 * @var bool
@@ -31,23 +31,19 @@ class MapDiffer implements DifferInterface {
 	private $recursively;
 
 	/**
-	 * @var DifferInterface
+	 * @var Differ
 	 */
 	private $listDiffer;
 
 	/**
-	 * @var ValueComparerInterface
+	 * @var ValueComparer
 	 */
 	private $valueComparer;
 
 	/**
 	 * The third argument ($comparer) was added in 3.0
 	 */
-	public function __construct(
-		bool $recursively = false,
-		DifferInterface $listDiffer = null,
-		ValueComparerInterface $comparer = null
-	) {
+	public function __construct( bool $recursively = false, Differ $listDiffer = null, ValueComparer $comparer = null ) {
 		$this->recursively = $recursively;
 		$this->listDiffer = $listDiffer ?? new ListDiffer();
 		$this->valueComparer = $comparer ?? new StrictComparer();
@@ -64,7 +60,7 @@ class MapDiffer implements DifferInterface {
 	 * @param array $newValues The second array
 	 *
 	 * @throws Exception
-	 * @return DiffOpInterface[]
+	 * @return DiffOp[]
 	 */
 	public function doDiff( array $oldValues, array $newValues ): array {
 		$newSet = $this->arrayDiffAssoc( $newValues, $oldValues );

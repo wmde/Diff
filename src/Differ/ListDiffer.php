@@ -4,9 +4,9 @@ declare( strict_types = 1 );
 
 namespace Diff\Differ;
 
-use Diff\ArrayComparer\ArrayComparerInterface;
+use Diff\ArrayComparer\ArrayComparer;
 use Diff\ArrayComparer\StrictArrayComparer;
-use Diff\DiffOp\DiffOpInterface;
+use Diff\DiffOp\DiffOp;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpRemove;
 
@@ -21,26 +21,26 @@ use Diff\DiffOp\DiffOpRemove;
  * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ListDiffer implements DifferInterface {
+class ListDiffer implements Differ {
 
 	/**
-	 * @var ArrayComparerInterface
+	 * @var ArrayComparer
 	 */
 	private $arrayComparer;
 
-	public function __construct( ArrayComparerInterface $arrayComparer = null ) {
+	public function __construct( ArrayComparer $arrayComparer = null ) {
 		$this->arrayComparer = $arrayComparer ?? new StrictArrayComparer();
 	}
 
 	/**
-	 * @see DifferInterface::doDiff
+	 * @see Differ::doDiff
 	 *
 	 * @since 0.4
 	 *
 	 * @param array $oldValues The first array
 	 * @param array $newValues The second array
 	 *
-	 * @return DiffOpInterface[]
+	 * @return DiffOp[]
 	 */
 	public function doDiff( array $oldValues, array $newValues ): array {
 		$operations = [];

@@ -18,7 +18,7 @@ use Diff\DiffOp\Diff\Diff;
  * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-abstract class AbstractThrowingPatcher implements PreviewablePatcherInterface {
+abstract class ThrowingPatcher implements PreviewablePatcher {
 
 	/**
 	 * @var bool

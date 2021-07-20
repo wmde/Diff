@@ -4,12 +4,12 @@ declare( strict_types = 1 );
 
 namespace Diff\Tests\Patcher;
 
-use Diff\Patcher\AbstractThrowingPatcher;
-use Diff\Tests\AbstractDiffTestCase;
+use Diff\Patcher\ThrowingPatcher;
+use Diff\Tests\DiffTestCase;
 use ReflectionClass;
 
 /**
- * @covers \Diff\Patcher\AbstractThrowingPatcher
+ * @covers \Diff\Patcher\ThrowingPatcher
  *
  * @group Diff
  * @group DiffPatcher
@@ -17,15 +17,15 @@ use ReflectionClass;
  * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class ThrowingPatcherTest extends AbstractDiffTestCase {
+class ThrowingPatcherTest extends DiffTestCase {
 
 	public function testChangeThrowErrors() {
 		/**
-		 * @var AbstractThrowingPatcher $patcher
+		 * @var ThrowingPatcher $patcher
 		 */
-		$patcher = $this->getMockForAbstractClass('Diff\Patcher\AbstractThrowingPatcher');
+		$patcher = $this->getMockForAbstractClass( 'Diff\Patcher\ThrowingPatcher' );
 
-		$class = new ReflectionClass('Diff\Patcher\AbstractThrowingPatcher');
+		$class = new ReflectionClass( 'Diff\Patcher\ThrowingPatcher' );
 		$method = $class->getMethod( 'handleError' );
 		$method->setAccessible( true );
 

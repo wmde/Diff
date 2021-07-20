@@ -17,7 +17,7 @@ use Diff\DiffOp\Diff\Diff;
  * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface PreviewablePatcherInterface extends PatcherInterface {
+interface PreviewablePatcher extends Patcher {
 
 	/**
 	 * Returns the operations that can be applied to the base.

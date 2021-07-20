@@ -8,7 +8,7 @@ use Diff\DiffOp\DiffOpAdd;
 
 /**
  * @covers \Diff\DiffOp\DiffOpAdd
- * @covers \Diff\DiffOp\AbstractAtomicDiffOp
+ * @covers \Diff\DiffOp\AtomicDiffOp
  *
  * @group Diff
  * @group DiffOp
@@ -16,10 +16,10 @@ use Diff\DiffOp\DiffOpAdd;
  * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class DiffOpAddTest extends AbstractDiffOpTest {
+class DiffOpAddTest extends DiffOpTest {
 
 	/**
-	 * @see AbstractDiffOpTest::getClass
+	 * @see DiffOpTest::getClass
 	 *
 	 * @since 0.1
 	 *
@@ -30,7 +30,7 @@ class DiffOpAddTest extends AbstractDiffOpTest {
 	}
 
 	/**
-	 * @see AbstractDiffOpTest::constructorProvider
+	 * @see DiffOpTest::constructorProvider
 	 *
 	 * @since 0.1
 	 */

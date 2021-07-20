@@ -6,11 +6,11 @@ namespace Diff\Tests\DiffOp\Diff;
 
 use Closure;
 use Diff\DiffOp\Diff\Diff;
-use Diff\DiffOp\DiffOpInterface;
+use Diff\DiffOp\DiffOp;
 use Diff\DiffOp\DiffOpAdd;
 use Diff\DiffOp\DiffOpChange;
 use Diff\DiffOp\DiffOpRemove;
-use Diff\Tests\AbstractDiffTestCase;
+use Diff\Tests\DiffTestCase;
 use stdClass;
 
 /**
@@ -23,7 +23,7 @@ use stdClass;
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  * @author Thiemo Kreuz
  */
-class DiffTest extends AbstractDiffTestCase {
+class DiffTest extends DiffTestCase {
 
 	public function elementInstancesProvider() {
 		return array(
@@ -56,7 +56,7 @@ class DiffTest extends AbstractDiffTestCase {
 
 	/**
 	 * @dataProvider elementInstancesProvider
-	 * @param DiffOpInterface[] $operations
+	 * @param DiffOp[] $operations
 	 */
 	public function testGetAdditions( array $operations ) {
 		$diff = new Diff( $operations, true );
@@ -74,7 +74,7 @@ class DiffTest extends AbstractDiffTestCase {
 
 	/**
 	 * @dataProvider elementInstancesProvider
-	 * @param DiffOpInterface[] $operations
+	 * @param DiffOp[] $operations
 	 */
 	public function testGetRemovals( array $operations ) {
 		$diff = new Diff( $operations, true );
@@ -104,7 +104,7 @@ class DiffTest extends AbstractDiffTestCase {
 
 	/**
 	 * @dataProvider elementInstancesProvider
-	 * @param DiffOpInterface[] $operations
+	 * @param DiffOp[] $operations
 	 */
 	public function testAddOperations( array $operations ) {
 		$diff = new Diff();
@@ -116,7 +116,7 @@ class DiffTest extends AbstractDiffTestCase {
 
 	/**
 	 * @dataProvider elementInstancesProvider
-	 * @param DiffOpInterface[] $operations
+	 * @param DiffOp[] $operations
 	 */
 	public function testStuff( array $operations ) {
 		$diff = new Diff( $operations );
@@ -126,10 +126,10 @@ class DiffTest extends AbstractDiffTestCase {
 
 		$types = array();
 
-		$this->assertContainsOnlyInstancesOf( 'Diff\DiffOp\DiffOpInterface', $diff );
+		$this->assertContainsOnlyInstancesOf( 'Diff\DiffOp\DiffOp', $diff );
 
 		/**
-		 * @var DiffOpInterface $operation
+		 * @var DiffOp $operation
 		 */
 		foreach ( $diff as $operation ) {
 			if ( !in_array( $operation->getType(), $types ) ) {
@@ -159,7 +159,7 @@ class DiffTest extends AbstractDiffTestCase {
 		$ops = $diff->getOperations();
 
 		$this->assertIsArray( $ops );
-		$this->assertContainsOnlyInstancesOf( 'Diff\DiffOp\DiffOpInterface', $ops );
+		$this->assertContainsOnlyInstancesOf( 'Diff\DiffOp\DiffOp', $ops );
 		$this->assertArrayEquals( $ops, $diff->getOperations() );
 	}
 
@@ -253,7 +253,7 @@ class DiffTest extends AbstractDiffTestCase {
 	 *
 	 * @since 0.6
 	 *
-	 * @param DiffOpInterface[] $elements
+	 * @param DiffOp[] $elements
 	 */
 	public function testConstructor( array $elements ) {
 		$arrayObject = new Diff( $elements );
@@ -266,7 +266,7 @@ class DiffTest extends AbstractDiffTestCase {
 	 *
 	 * @since 0.6
 	 *
-	 * @param DiffOpInterface[] $elements
+	 * @param DiffOp[] $elements
 	 */
 	public function testIsEmpty( array $elements ) {
 		$arrayObject = new Diff( $elements );
@@ -304,7 +304,7 @@ class DiffTest extends AbstractDiffTestCase {
 	 *
 	 * @since 0.6
 	 *
-	 * @param DiffOpInterface[] $elements
+	 * @param DiffOp[] $elements
 	 */
 	public function testAppend( array $elements ) {
 		$list = new Diff();
@@ -404,7 +404,7 @@ class DiffTest extends AbstractDiffTestCase {
 	 *
 	 * @since 0.6
 	 *
-	 * @param DiffOpInterface[] $elements
+	 * @param DiffOp[] $elements
 	 */
 	public function testOffsetSet( array $elements ) {
 		if ( $elements === array() ) {
@@ -479,7 +479,7 @@ class DiffTest extends AbstractDiffTestCase {
 	 * @param Diff $list
 	 */
 	public function testAddInvalidDiffOp( Diff $list ) {
-		$invalidDiffOp = $this->createMock( 'Diff\DiffOp\DiffOpInterface');
+		$invalidDiffOp = $this->createMock( 'Diff\DiffOp\DiffOp' );
 
 		$invalidDiffOp->expects( $this->atLeastOnce() )
 			->method( 'getType' )

@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace Diff\ArrayComparer;
 
-use Diff\Comparer\ValueComparerInterface;
+use Diff\Comparer\ValueComparer;
 
 /**
  * Computes the difference between two arrays by comparing elements with
@@ -17,16 +17,16 @@ use Diff\Comparer\ValueComparerInterface;
  * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class StrategicArrayComparer implements ArrayComparerInterface {
+class StrategicArrayComparer implements ArrayComparer {
 
 	private $valueComparer;
 
-	public function __construct( ValueComparerInterface $valueComparer ) {
+	public function __construct( ValueComparer $valueComparer ) {
 		$this->valueComparer = $valueComparer;
 	}
 
 	/**
-	 * @see ArrayComparerInterface::diffArrays
+	 * @see ArrayComparer::diffArrays
 	 *
 	 * @since 0.8
 	 *

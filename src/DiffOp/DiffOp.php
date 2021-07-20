@@ -18,7 +18,7 @@ use Serializable;
  * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface DiffOpInterface extends Serializable, Countable {
+interface DiffOp extends Serializable, Countable {
 
 	/**
 	 * Returns a string identifier for the operation type.

@@ -12,10 +12,10 @@ namespace Diff\ArrayComparer;
  * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class NativeArrayComparer implements ArrayComparerInterface {
+class NativeArrayComparer implements ArrayComparer {
 
 	/**
-	 * @see ArrayComparerInterface::diffArrays
+	 * @see ArrayComparer::diffArrays
 	 *
 	 * Uses @see array_diff.
 	 *

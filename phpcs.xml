@@ -42,7 +42,10 @@
         </properties>
     </rule>
 
-    <rule ref="Generic.NamingConventions" />
+    <rule ref="Generic.NamingConventions">
+        <exclude name="Generic.NamingConventions.AbstractClassNamePrefix"/>
+        <exclude name="Generic.NamingConventions.InterfaceNameSuffix"/>
+    </rule>
     <rule ref="Generic.NamingConventions.CamelCapsFunctionName.ScopeNotCamelCaps">
         <!-- Exclude test methods like "testGivenInvalidInput_methodThrowsException". -->
         <exclude-pattern>tests.unit*Test\.php</exclude-pattern>

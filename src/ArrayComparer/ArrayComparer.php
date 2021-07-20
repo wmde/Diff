@@ -13,7 +13,7 @@ namespace Diff\ArrayComparer;
  * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface ArrayComparerInterface {
+interface ArrayComparer {
 
 	/**
 	 * Returns an array containing all the entries from arrayOne that are not present in arrayTwo.
