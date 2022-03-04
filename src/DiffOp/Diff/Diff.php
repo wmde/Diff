@@ -145,27 +145,21 @@ class Diff extends ArrayObject implements DiffOp {
 	 *
 	 * @param string $serialization
 	 */
-	public function unserialize( $serialization ): void {
-		$this->__unserialize( $serialization );
-	}
+	public function unserialize( $serialization ) {
+		$serializationData = unserialize( $serialization );
 
-	/**
-	 * @param string $serialization
-	 */
-	public function __unserialize( $serialization ): void {
-		/** @var array $serialization */
-		foreach ( $serialization['data'] as $offset => $value ) {
+		foreach ( $serializationData['data'] as $offset => $value ) {
 			// Just set the element, bypassing checks and offset resolving,
 			// as these elements have already gone through this.
 			parent::offsetSet( $offset, $value );
 		}
 
-		$this->indexOffset = $serialization['index'];
+		$this->indexOffset = $serializationData['index'];
 
-		$this->typePointers = $serialization['typePointers'];
+		$this->typePointers = $serializationData['typePointers'];
 
-		if ( array_key_exists( 'assoc', $serialization ) ) {
-			$this->isAssociative = $serialization['assoc'] === 'n' ? null : $serialization['assoc'] === 't';
+		if ( array_key_exists( 'assoc', $serializationData ) ) {
+			$this->isAssociative = $serializationData['assoc'] === 'n' ? null : $serializationData['assoc'] === 't';
 		}
 	}
 
@@ -343,7 +337,7 @@ class Diff extends ArrayObject implements DiffOp {
 		return [
 			'type' => $this->getType(),
 			'isassoc' => $this->isAssociative,
-			'operations' => $operations,
+			'operations' => $operations
 		];
 	}
 
@@ -389,7 +383,7 @@ class Diff extends ArrayObject implements DiffOp {
 	 *
 	 * @param mixed $value
 	 */
-	public function append( $value ): void {
+	public function append( $value ) {
 		$this->setElement( null, $value );
 	}
 
@@ -401,7 +395,7 @@ class Diff extends ArrayObject implements DiffOp {
 	 * @param int|string $index
 	 * @param mixed $value
 	 */
-	public function offsetSet( $index, $value ): void {
+	public function offsetSet( $index, $value ) {
 		$this->setElement( $index, $value );
 	}
 
@@ -442,22 +436,17 @@ class Diff extends ArrayObject implements DiffOp {
 	 *
 	 * @return string
 	 */
-	public function serialize(): string {
-		return serialize( $this->__serialize() );
-	}
-
-	/**
-	 * @return array
-	 */
-	public function __serialize(): array {
+	public function serialize() {
 		$assoc = $this->isAssociative === null ? 'n' : ( $this->isAssociative ? 't' : 'f' );
 
-		return [
+		$data = [
 			'data' => $this->getArrayCopy(),
 			'index' => $this->indexOffset,
 			'typePointers' => $this->typePointers,
-			'assoc' => $assoc,
+			'assoc' => $assoc
 		];
+
+		return serialize( $data );
 	}
 
 	/**

@@ -66,11 +66,7 @@ class DiffOpChange extends AtomicDiffOp {
 	 * @return string|null
 	 */
 	public function serialize() {
-		return serialize( $this->__serialize() );
-	}
-
-	public function __serialize() {
-		return [ $this->newValue, $this->oldValue ];
+		return serialize( [ $this->newValue, $this->oldValue ] );
 	}
 
 	/**
@@ -80,15 +76,8 @@ class DiffOpChange extends AtomicDiffOp {
 	 *
 	 * @param string $serialization
 	 */
-	public function unserialize( $serialization ): void {
-		$this->__unserialize( $serialization );
-	}
-
-	/**
-	 * @param string $serialization
-	 */
-	public function __unserialize( $serialization ): void {
-		[ $this->newValue, $this->oldValue ] = $serialization;
+	public function unserialize( $serialization ) {
+		list( $this->newValue, $this->oldValue ) = unserialize( $serialization );
 	}
 
 	/**
