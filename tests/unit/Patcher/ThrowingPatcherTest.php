@@ -1,6 +1,6 @@
 <?php
 
-declare( strict_types = 1 );
+declare(strict_types=1);
 
 namespace Diff\Tests\Patcher;
 
@@ -9,39 +9,39 @@ use Diff\Tests\DiffTestCase;
 use ReflectionClass;
 
 /**
- * @covers \Diff\Patcher\ThrowingPatcher
+ * @covers  \Diff\Patcher\ThrowingPatcher
  *
- * @group Diff
- * @group DiffPatcher
+ * @group   Diff
+ * @group   DiffPatcher
  *
  * @license BSD-3-Clause
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author  Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class ThrowingPatcherTest extends DiffTestCase {
 
-	public function testChangeThrowErrors() {
+	public function testChangeThrowErrors(): void {
 		/**
 		 * @var ThrowingPatcher $patcher
 		 */
-		$patcher = $this->getMockForAbstractClass( 'Diff\Patcher\ThrowingPatcher' );
+		$patcher = $this->getMockForAbstractClass('Diff\Patcher\ThrowingPatcher');
 
-		$class = new ReflectionClass( 'Diff\Patcher\ThrowingPatcher' );
-		$method = $class->getMethod( 'handleError' );
-		$method->setAccessible( true );
+		$class = new ReflectionClass('Diff\Patcher\ThrowingPatcher');
+		$method = $class->getMethod('handleError');
+		$method->setAccessible(true);
 
 		$errorMessage = 'foo bar';
 
-		$method->invokeArgs( $patcher, array( $errorMessage ) );
+		$method->invokeArgs($patcher, [$errorMessage]);
 
 		$patcher->throwErrors();
 		$patcher->ignoreErrors();
 
-		$method->invokeArgs( $patcher, array( $errorMessage ) );
+		$method->invokeArgs($patcher, [$errorMessage]);
 
 		$patcher->throwErrors();
-		$this->expectException( 'Diff\Patcher\PatcherException' );
+		$this->expectException('Diff\Patcher\PatcherException');
 
-		$method->invokeArgs( $patcher, array( $errorMessage ) );
+		$method->invokeArgs($patcher, [$errorMessage]);
 	}
 
 }

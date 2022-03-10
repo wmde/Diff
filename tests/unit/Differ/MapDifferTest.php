@@ -1,6 +1,6 @@
 <?php
 
-declare( strict_types = 1 );
+declare(strict_types=1);
 
 namespace Diff\Tests\Differ;
 
@@ -16,290 +16,437 @@ use Diff\Tests\DiffTestCase;
 use Diff\Tests\Fixtures\StubValueComparer;
 
 /**
- * @covers \Diff\Differ\MapDiffer
+ * @covers  \Diff\Differ\MapDiffer
  *
- * @group Diff
- * @group Differ
+ * @group   Diff
+ * @group   Differ
  *
  * @license BSD-3-Clause
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author  Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class MapDifferTest extends DiffTestCase {
 
-	public function toDiffProvider() {
-		$argLists = array();
+	public function toDiffProvider(): array {
+		$argLists = [];
 
-		$old = array();
-		$new = array();
-		$expected = array();
+		$old = [];
+		$new = [];
+		$expected = [];
 
-		$argLists[] = array( $old, $new, $expected,
-			'There should be no difference between empty arrays' );
+		$argLists[] = [
+			$old,
+			$new,
+			$expected,
+			'There should be no difference between empty arrays',
+		];
 
-		$old = array( 42 );
-		$new = array( 42 );
-		$expected = array();
+		$old = [42];
+		$new = [42];
+		$expected = [];
 
-		$argLists[] = array( $old, $new, $expected,
-			'There should be no difference between two arrays with the same element' );
+		$argLists[] = [
+			$old,
+			$new,
+			$expected,
+			'There should be no difference between two arrays with the same element',
+		];
 
-		$old = array( 42, 10, 'ohi', false, null, array( '.', 4.2 ) );
-		$new = array( 42, 10, 'ohi', false, null, array( '.', 4.2 ) );
-		$expected = array();
+		$old = [42, 10, 'ohi', false, null, ['.', 4.2]];
+		$new = [42, 10, 'ohi', false, null, ['.', 4.2]];
+		$expected = [];
 
-		$argLists[] = array( $old, $new, $expected,
-			'There should be no difference between two arrays with the same elements' );
+		$argLists[] = [
+			$old,
+			$new,
+			$expected,
+			'There should be no difference between two arrays with the same elements',
+		];
 
-		$old = array( 42, 42, 42 );
-		$new = array( 42, 42, 42 );
-		$expected = array();
+		$old = [42, 42, 42];
+		$new = [42, 42, 42];
+		$expected = [];
 
-		$argLists[] = array( $old, $new, $expected,
-			'There should be no difference between two arrays with the same elements' );
+		$argLists[] = [
+			$old,
+			$new,
+			$expected,
+			'There should be no difference between two arrays with the same elements',
+		];
 
-		$old = array( 1, 2 );
-		$new = array( 2, 1 );
-		$expected = array( new DiffOpChange( 1, 2 ), new DiffOpChange( 2, 1 ) );
+		$old = [1, 2];
+		$new = [2, 1];
+		$expected = [new DiffOpChange(1, 2), new DiffOpChange(2, 1)];
 
-		$argLists[] = array( $old, $new, $expected,
-			'Switching position should cause a diff' );
+		$argLists[] = [
+			$old,
+			$new,
+			$expected,
+			'Switching position should cause a diff',
+		];
 
-		$old = array( 0, 1, 2, 3 );
-		$new = array( 0, 2, 1, 3 );
-		$expected = array( 1 => new DiffOpChange( 1, 2 ), 2 => new DiffOpChange( 2, 1 ) );
+		$old = [0, 1, 2, 3];
+		$new = [0, 2, 1, 3];
+		$expected = [1 => new DiffOpChange(1, 2), 2 => new DiffOpChange(2, 1)];
 
-		$argLists[] = array( $old, $new, $expected,
-			'Switching position should cause a diff' );
+		$argLists[] = [
+			$old,
+			$new,
+			$expected,
+			'Switching position should cause a diff',
+		];
 
-		$old = array( 'a' => 0, 'b' => 1, 'c' => 0 );
-		$new = array( 'a' => 42, 'b' => 1, 'c' => 42 );
-		$expected = array( 'a' => new DiffOpChange( 0, 42 ), 'c' => new DiffOpChange( 0, 42 ) );
+		$old = ['a' => 0, 'b' => 1, 'c' => 0];
+		$new = ['a' => 42, 'b' => 1, 'c' => 42];
+		$expected = ['a' => new DiffOpChange(0, 42), 'c' => new DiffOpChange(0, 42)];
 
-		$argLists[] = array( $old, $new, $expected,
-			'Doing the same change to two different elements should result in two identical change ops' );
+		$argLists[] = [
+			$old,
+			$new,
+			$expected,
+			'Doing the same change to two different elements should result in two identical change ops',
+		];
 
-		$old = array( 'a' => 0, 'b' => 1 );
-		$new = array( 'a' => 0, 'c' => 1 );
-		$expected = array( 'b' => new DiffOpRemove( 1 ), 'c' => new DiffOpAdd( 1 ) );
+		$old = ['a' => 0, 'b' => 1];
+		$new = ['a' => 0, 'c' => 1];
+		$expected = ['b' => new DiffOpRemove(1), 'c' => new DiffOpAdd(1)];
 
-		$argLists[] = array( $old, $new, $expected,
-			'Changing the key of an element should result in a remove and an add op' );
+		$argLists[] = [
+			$old,
+			$new,
+			$expected,
+			'Changing the key of an element should result in a remove and an add op',
+		];
 
-		$old = array( 'a' => 0, 'b' => 1 );
-		$new = array( 'b' => 1, 'a' => 0 );
-		$expected = array();
+		$old = ['a' => 0, 'b' => 1];
+		$new = ['b' => 1, 'a' => 0];
+		$expected = [];
 
-		$argLists[] = array( $old, $new, $expected,
-			'Changing the order of associative elements should have no effect.' );
+		$argLists[] = [
+			$old,
+			$new,
+			$expected,
+			'Changing the order of associative elements should have no effect.',
+		];
 
-		$old = array( 'a' => array( 'foo' ) );
-		$new = array( 'a' => array( 'foo' ) );
-		$expected = array();
+		$old = ['a' => ['foo']];
+		$new = ['a' => ['foo']];
+		$expected = [];
 
-		$argLists[] = array( $old, $new, $expected,
-			'Comparing equal substructures without recursion should return nothing.', false );
+		$argLists[] = [
+			$old,
+			$new,
+			$expected,
+			'Comparing equal substructures without recursion should return nothing.',
+			false,
+		];
 
-		$old = array( );
-		$new = array( 'a' => array( 'foo', 'bar' ) );
-		$expected = array( 'a' => new DiffOpAdd( array( 'foo', 'bar' ) ) );
+		$old = [];
+		$new = ['a' => ['foo', 'bar']];
+		$expected = ['a' => new DiffOpAdd(['foo', 'bar'])];
 
-		$argLists[] = array( $old, $new, $expected,
-			'Adding a substructure should result in a single add operation when not in recursive mode.', false );
+		$argLists[] = [
+			$old,
+			$new,
+			$expected,
+			'Adding a substructure should result in a single add operation when not in recursive mode.',
+			false,
+		];
 
-		$old = array( 'a' => array( 'b' => 42 ) );
-		$new = array( 'a' => array( 'b' => 7201010 ) );
-		$expected = array( 'a' => new Diff( array( 'b' => new DiffOpChange( 42, 7201010 ) ), true ) );
+		$old = ['a' => ['b' => 42]];
+		$new = ['a' => ['b' => 7201010]];
+		$expected = ['a' => new Diff(['b' => new DiffOpChange(42, 7201010)], true)];
 
-		$argLists[] = array( $old, $new, $expected,
-			'Recursion should work for nested associative diffs', true );
+		$argLists[] = [
+			$old,
+			$new,
+			$expected,
+			'Recursion should work for nested associative diffs',
+			true,
+		];
 
-		$old = array( 'a' => array( 'foo' ) );
-		$new = array( 'a' => array( 'foo' ) );
-		$expected = array();
+		$old = ['a' => ['foo']];
+		$new = ['a' => ['foo']];
+		$expected = [];
 
-		$argLists[] = array( $old, $new, $expected,
-			'Comparing equal sub-structures with recursion should return nothing.', true );
+		$argLists[] = [
+			$old,
+			$new,
+			$expected,
+			'Comparing equal sub-structures with recursion should return nothing.',
+			true,
+		];
 
-		$old = array( 'stuff' => array( 'a' => 0, 'b' => 1 ) );
-		$new = array( 'stuff' => array( 'b' => 1, 'a' => 0 ) );
-		$expected = array();
+		$old = ['stuff' => ['a' => 0, 'b' => 1]];
+		$new = ['stuff' => ['b' => 1, 'a' => 0]];
+		$expected = [];
 
-		$argLists[] = array( $old, $new, $expected,
-			'Changing the order of associative elements in a substructure should have no effect.', true );
+		$argLists[] = [
+			$old,
+			$new,
+			$expected,
+			'Changing the order of associative elements in a substructure should have no effect.',
+			true,
+		];
 
-		$old = array();
-		$new = array( 'stuff' => array( 'b' => 1, 'a' => 0 ) );
-		$expected = array( 'stuff' => new Diff( array( 'b' => new DiffOpAdd( 1 ), 'a' => new DiffOpAdd( 0 ) ) ) );
+		$old = [];
+		$new = ['stuff' => ['b' => 1, 'a' => 0]];
+		$expected = ['stuff' => new Diff(['b' => new DiffOpAdd(1), 'a' => new DiffOpAdd(0)])];
 
-		$argLists[] = array( $old, $new, $expected,
-			'Adding a substructure should be reported as adding *to* a substructure when in recursive mode.', true );
+		$argLists[] = [
+			$old,
+			$new,
+			$expected,
+			'Adding a substructure should be reported as adding *to* a substructure when in recursive mode.',
+			true,
+		];
 
-		$old = array( 'a' => array( 42, 9001 ), 1 );
-		$new = array( 'a' => array( 42, 7201010 ), 1 );
-		$expected = array( 'a' => new Diff( array( new DiffOpAdd( 7201010 ), new DiffOpRemove( 9001 ) ), false ) );
+		$old = ['a' => [42, 9001], 1];
+		$new = ['a' => [42, 7201010], 1];
+		$expected = ['a' => new Diff([new DiffOpAdd(7201010), new DiffOpRemove(9001)], false)];
 
-		$argLists[] = array( $old, $new, $expected,
-			'Recursion should work for nested non-associative diffs', true );
+		$argLists[] = [
+			$old,
+			$new,
+			$expected,
+			'Recursion should work for nested non-associative diffs',
+			true,
+		];
 
-		$old = array( array( 42 ), 1 );
-		$new = array( array( 42, 42 ), 1 );
-		$expected = array( new Diff( array( new DiffOpAdd( 42 ) ), false ) );
+		$old = [[42], 1];
+		$new = [[42, 42], 1];
+		$expected = [new Diff([new DiffOpAdd(42)], false)];
 
-		$argLists[] = array( $old, $new, $expected,
-			'Nested non-associative diffs should behave as the default ListDiffer', true );
+		$argLists[] = [
+			$old,
+			$new,
+			$expected,
+			'Nested non-associative diffs should behave as the default ListDiffer',
+			true,
+		];
 
-		$old = array( array( 42 ), 1 );
-		$new = array( array( 42, 42, 1 ), 1 );
-		$expected = array( new Diff( array( new DiffOpAdd( 1 ) ), false ) );
+		$old = [[42], 1];
+		$new = [[42, 42, 1], 1];
+		$expected = [new Diff([new DiffOpAdd(1)], false)];
 
-		$argLists[] = array( $old, $new, $expected,
+		$argLists[] = [
+			$old,
+			$new,
+			$expected,
 			'Setting a non-default Differ for non-associative diffs should work',
-			true, new ListDiffer( new NativeArrayComparer() ) );
+			true,
+			new ListDiffer(new NativeArrayComparer()),
+		];
 
-		$old = array( 'a' => array( 42 ), 1, array( 'a' => 'b', 5 ), 'bah' => array( 'foo' => 'bar' ) );
-		$new = array( 'a' => array( 42 ), 1, array( 'a' => 'b', 5 ), 'bah' => array( 'foo' => 'baz' ) );
-		$expected = array( 'bah' => new Diff( array( 'foo' => new DiffOpChange( 'bar', 'baz' ) ), true ) );
+		$old = ['a' => [42], 1, ['a' => 'b', 5], 'bah' => ['foo' => 'bar']];
+		$new = ['a' => [42], 1, ['a' => 'b', 5], 'bah' => ['foo' => 'baz']];
+		$expected = ['bah' => new Diff(['foo' => new DiffOpChange('bar', 'baz')], true)];
 
-		$argLists[] = array(
+		$argLists[] = [
 			$old,
 			$new,
 			$expected,
 			'Nested structures with no differences should not result '
-				. 'in nested empty diffs (these empty diffs should be omitted)',
-			true
-		);
+			. 'in nested empty diffs (these empty diffs should be omitted)',
+			true,
+		];
 
-		$old = array( 'links' => array(
-			'enwiki' => array(
-				'page' => 'Foo',
-				'badges' => array(),
-			)
-		) );
-		$new = array( 'links' => array(
-			'enwiki' => array(
-				'page' => 'Foo',
-				'badges' => array(),
-			)
-		) );
-		$expected = array();
+		$old = [
+			'links' => [
+				'enwiki' => [
+					'page' => 'Foo',
+					'badges' => [],
+				],
+			],
+		];
+		$new = [
+			'links' => [
+				'enwiki' => [
+					'page' => 'Foo',
+					'badges' => [],
+				],
+			],
+		];
+		$expected = [];
 
-		$argLists[] = array( $old, $new, $expected,
+		$argLists[] = [
+			$old,
+			$new,
+			$expected,
 			'Comparing identical nested structures should not result in diff operations',
-			true );
+			true,
+		];
 
-		$old = array( 'links' => array(
-		) );
-		$new = array( 'links' => array(
-			'enwiki' => array(
-				'page' => 'Foo',
-				'badges' => array(),
-			)
-		) );
-		$expected = array( 'links' => new Diff( array(
-			'enwiki' => new Diff( array(
-				'page' => new DiffOpAdd( 'Foo' )
-			) )
-		), true ) );
+		$old = [
+			'links' => [
+			],
+		];
+		$new = [
+			'links' => [
+				'enwiki' => [
+					'page' => 'Foo',
+					'badges' => [],
+				],
+			],
+		];
+		$expected = [
+			'links' => new Diff(
+				[
+					'enwiki' => new Diff([
+											 'page' => new DiffOpAdd('Foo'),
+										 ]),
+				],
+				true
+			),
+		];
 
-		$argLists[] = array( $old, $new, $expected,
+		$argLists[] = [
+			$old,
+			$new,
+			$expected,
 			'Adding a sitelink with no badges',
-			true );
+			true,
+		];
 
-		$old = array( 'links' => array(
-		) );
-		$new = array( 'links' => array(
-			'enwiki' => array(
-				'page' => 'Foo',
-				'badges' => array( 'Bar', 'Baz' ),
-			)
-		) );
-		$expected = array( 'links' => new Diff( array(
-			'enwiki' => new Diff( array(
-				'page' => new DiffOpAdd( 'Foo' ),
-				'badges' => new Diff( array(
-					new DiffOpAdd( 'Bar' ),
-					new DiffOpAdd( 'Baz' ),
-				), false )
-			), true )
-		), true ) );
+		$old = [
+			'links' => [
+			],
+		];
+		$new = [
+			'links' => [
+				'enwiki' => [
+					'page' => 'Foo',
+					'badges' => ['Bar', 'Baz'],
+				],
+			],
+		];
+		$expected = [
+			'links' => new Diff(
+				[
+					'enwiki' => new Diff(
+						[
+							'page' => new DiffOpAdd('Foo'),
+							'badges' => new Diff(
+								[
+									new DiffOpAdd('Bar'),
+									new DiffOpAdd('Baz'),
+								],
+								false
+							),
+						],
+						true
+					),
+				],
+				true
+			),
+		];
 
-		$argLists[] = array( $old, $new, $expected,
+		$argLists[] = [
+			$old,
+			$new,
+			$expected,
 			'Adding a sitelink with badges',
-			true );
+			true,
+		];
 
-		$old = array( 'links' => array(
-			'enwiki' => array(
-				'page' => 'Foo',
-				'badges' => array(),
-			)
-		) );
-		$new = array( 'links' => array(
-			'enwiki' => array(
-				'page' => 'Foo',
-				'badges' => array( 'Bar', 'Baz' ),
-			)
-		) );
-		$expected = array( 'links' => new Diff( array(
-			'enwiki' => new Diff( array(
-				'badges' => new Diff( array(
-					new DiffOpAdd( 'Bar' ),
-					new DiffOpAdd( 'Baz' ),
-				), false )
-			), true )
-		), true ) );
+		$old = [
+			'links' => [
+				'enwiki' => [
+					'page' => 'Foo',
+					'badges' => [],
+				],
+			],
+		];
+		$new = [
+			'links' => [
+				'enwiki' => [
+					'page' => 'Foo',
+					'badges' => ['Bar', 'Baz'],
+				],
+			],
+		];
+		$expected = [
+			'links' => new Diff(
+				[
+					'enwiki' => new Diff(
+						[
+							'badges' => new Diff(
+								[
+									new DiffOpAdd('Bar'),
+									new DiffOpAdd('Baz'),
+								],
+								false
+							),
+						], true
+					),
+				],
+				true
+			),
+		];
 
-		$argLists[] = array( $old, $new, $expected,
+		$argLists[] = [
+			$old,
+			$new,
+			$expected,
 			'Adding bagdes to a sitelink',
-			true );
+			true,
+		];
 
-		$old = array();
-		$new = array(
-			'enwiki' => array(
+		$old = [];
+		$new = [
+			'enwiki' => [
 				'page' => 'Foo',
-				'badges' => array( 'Bar', 'Baz' ),
-			)
-		);
-		$expected = array(
+				'badges' => ['Bar', 'Baz'],
+			],
+		];
+		$expected = [
 			'enwiki' => new DiffOpAdd(
-				array(
+				[
 					'page' => 'Foo',
-					'badges' => array( 'Bar', 'Baz' ),
-				)
-			)
-		);
+					'badges' => ['Bar', 'Baz'],
+				]
+			),
+		];
 
-		$argLists[] = array( $old, $new, $expected,
+		$argLists[] = [
+			$old,
+			$new,
+			$expected,
 			'Adding a sitelink with non-recursive mode',
-			false );
+			false,
+		];
 
-		$old = array(
-			'enwiki' => array(
+		$old = [
+			'enwiki' => [
 				'page' => 'Foo',
-				'badges' => array(),
-			)
-		);
-		$new = array(
-			'enwiki' => array(
+				'badges' => [],
+			],
+		];
+		$new = [
+			'enwiki' => [
 				'page' => 'Foo',
-				'badges' => array( 'Bar', 'Baz' ),
-			)
-		);
-		$expected = array(
+				'badges' => ['Bar', 'Baz'],
+			],
+		];
+		$expected = [
 			'enwiki' => new DiffOpChange(
-				array(
+				[
 					'page' => 'Foo',
-					'badges' => array(),
-				),
-				array(
+					'badges' => [],
+				],
+				[
 					'page' => 'Foo',
-					'badges' => array( 'Bar', 'Baz' ),
-				)
-			)
-		);
+					'badges' => ['Bar', 'Baz'],
+				]
+			),
+		];
 
-		$argLists[] = array( $old, $new, $expected,
+		$argLists[] = [
+			$old,
+			$new,
+			$expected,
 			'Adding badges to a sitelink with non-recursive mode',
-			false );
+			false,
+		];
 
 		return $argLists;
 	}
@@ -307,25 +454,32 @@ class MapDifferTest extends DiffTestCase {
 	/**
 	 * @dataProvider toDiffProvider
 	 */
-	public function testDoDiff( $old, $new, $expected, $message = '', $recursively = false, Differ $listDiffer = null ) {
-		$differ = new MapDiffer( $recursively, $listDiffer );
+	public function testDoDiff(
+		$old,
+		$new,
+		$expected,
+		$message = '',
+		$recursively = false,
+		Differ $listDiffer = null
+	): void {
+		$differ = new MapDiffer($recursively, $listDiffer);
 
-		$actual = $differ->doDiff( $old, $new );
+		$actual = $differ->doDiff($old, $new);
 
-		$this->assertArrayEquals( $expected, $actual, false, true, $message );
+		$this->assertArrayEquals($expected, $actual, false, true, $message);
 	}
 
-	public function testCallbackComparisonReturningFalse() {
-		$differ = new MapDiffer( false, null, new StubValueComparer( false ) );
+	public function testCallbackComparisonReturningFalse(): void {
+		$differ = new MapDiffer(false, null, new StubValueComparer(false));
 
-		$actual = $differ->doDiff( array( 1, '2', 3 ), array( 1, '2', 4, 'foo' ) );
+		$actual = $differ->doDiff([1, '2', 3], [1, '2', 4, 'foo']);
 
-		$expected = array(
-			new DiffOpChange( 1, 1 ),
-			new DiffOpChange( '2', '2' ),
-			new DiffOpChange( 3, 4 ),
-			new DiffOpAdd( 'foo' ),
-		);
+		$expected = [
+			new DiffOpChange(1, 1),
+			new DiffOpChange('2', '2'),
+			new DiffOpChange(3, 4),
+			new DiffOpAdd('foo'),
+		];
 
 		$this->assertArrayEquals(
 			$expected, $actual, false, true,
@@ -333,17 +487,17 @@ class MapDifferTest extends DiffTestCase {
 		);
 	}
 
-	public function testCallbackComparisonReturningTrue() {
-		$differ = new MapDiffer( false, null, new StubValueComparer( true ) );
+	public function testCallbackComparisonReturningTrue(): void {
+		$differ = new MapDiffer(false, null, new StubValueComparer(true));
 
-		$actual = $differ->doDiff( array( 1, '2', 'baz' ), array( 1, 'foo', '2' ) );
+		$actual = $differ->doDiff([1, '2', 'baz'], [1, 'foo', '2']);
 
-		$expected = array();
+		$expected = [];
 
 		$this->assertArrayEquals(
 			$expected, $actual, false, true,
 			'No change ops should be created when the arrays have '
-				. 'the same length and the comparison callback always returns true'
+			. 'the same length and the comparison callback always returns true'
 		);
 	}
 

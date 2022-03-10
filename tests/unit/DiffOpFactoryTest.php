@@ -1,6 +1,6 @@
 <?php
 
-declare( strict_types = 1 );
+declare(strict_types=1);
 
 namespace Diff\Tests;
 
@@ -12,37 +12,37 @@ use Diff\DiffOp\DiffOpRemove;
 use Diff\DiffOpFactory;
 
 /**
- * @covers \Diff\DiffOpFactory
+ * @covers  \Diff\DiffOpFactory
  *
- * @group Diff
+ * @group   Diff
  *
  * @license BSD-3-Clause
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
- * @author Daniel Kinzler
+ * @author  Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author  Daniel Kinzler
  */
 class DiffOpFactoryTest extends DiffTestCase {
 
-	public function diffOpProvider() {
-		$diffOps = array();
+	public function diffOpProvider(): array {
+		$diffOps = [];
 
-		$diffOps[] = new DiffOpAdd( 42 );
-		$diffOps['foo bar'] = new DiffOpAdd( '42' );
-		$diffOps[9001] = new DiffOpAdd( 4.2 );
-		$diffOps['42'] = new DiffOpAdd( array( 42, array( 9001 ) ) );
-		$diffOps[] = new DiffOpRemove( 42 );
-		$diffOps[] = new DiffOpAdd( new DiffOpChange( 'spam', 'moar spam' ) );
+		$diffOps[] = new DiffOpAdd(42);
+		$diffOps['foo bar'] = new DiffOpAdd('42');
+		$diffOps[9001] = new DiffOpAdd(4.2);
+		$diffOps['42'] = new DiffOpAdd([42, [9001]]);
+		$diffOps[] = new DiffOpRemove(42);
+		$diffOps[] = new DiffOpAdd(new DiffOpChange('spam', 'moar spam'));
 
 		$atomicDiffOps = $diffOps;
 
-		foreach ( array( true, false, null ) as $isAssoc ) {
-			$diffOps[] = new Diff( $atomicDiffOps, $isAssoc );
+		foreach ([true, false, null] as $isAssoc) {
+			$diffOps[] = new Diff($atomicDiffOps, $isAssoc);
 		}
 
-		$diffOps[] = new DiffOpChange( 42, '9001' );
+		$diffOps[] = new DiffOpChange(42, '9001');
 
-		$diffOps[] = new Diff( $diffOps );
+		$diffOps[] = new Diff($diffOps);
 
-		return $this->arrayWrap( $diffOps );
+		return $this->arrayWrap($diffOps);
 	}
 
 	/**
@@ -50,16 +50,16 @@ class DiffOpFactoryTest extends DiffTestCase {
 	 *
 	 * @param DiffOp $diffOp
 	 */
-	public function testNewFromArray( DiffOp $diffOp ) {
+	public function testNewFromArray(DiffOp $diffOp): void {
 		$factory = new DiffOpFactory();
 
 		// try without conversion callback
 		$array = $diffOp->toArray();
-		$newInstance = $factory->newFromArray( $array );
+		$newInstance = $factory->newFromArray($array);
 
 		// If an equality method is implemented in DiffOp, it should be used here
-		$this->assertEquals( $diffOp, $newInstance );
-		$this->assertEquals( $diffOp->getType(), $newInstance->getType() );
+		$this->assertEquals($diffOp, $newInstance);
+		$this->assertEquals($diffOp->getType(), $newInstance->getType());
 	}
 
 	/**
@@ -67,52 +67,52 @@ class DiffOpFactoryTest extends DiffTestCase {
 	 *
 	 * @param DiffOp $diffOp
 	 */
-	public function testNewFromArrayWithConversion( DiffOp $diffOp ) {
-		$unserializationFunction = function( $array ) {
-			if ( is_array( $array ) && isset( $array['type'] ) && $array['type'] === 'Change' ) {
-				return new DiffOpChange( $array['teh_old'], $array['teh_new'] );
+	public function testNewFromArrayWithConversion(DiffOp $diffOp): void {
+		$unserializationFunction = function ($array) {
+			if (is_array($array) && isset($array['type']) && $array['type'] === 'Change') {
+				return new DiffOpChange($array['teh_old'], $array['teh_new']);
 			}
 
 			return $array;
 		};
 
-		$factory = new DiffOpFactory( $unserializationFunction );
+		$factory = new DiffOpFactory($unserializationFunction);
 
-		$serializationFunction = function( $obj ) {
-			if ( $obj instanceof DiffOpChange ) {
-				return array(
+		$serializationFunction = function ($obj) {
+			if ($obj instanceof DiffOpChange) {
+				return [
 					'type' => 'Change',
 					'teh_old' => $obj->getOldValue(),
 					'teh_new' => $obj->getNewValue(),
-				);
+				];
 			}
 
 			return $obj;
 		};
 
 		// try with conversion callback
-		$array = $diffOp->toArray( $serializationFunction );
+		$array = $diffOp->toArray($serializationFunction);
 
-		$newInstance = $factory->newFromArray( $array );
+		$newInstance = $factory->newFromArray($array);
 
 		// If an equality method is implemented in DiffOp, it should be used here
-		$this->assertEquals( $diffOp, $newInstance );
-		$this->assertEquals( $diffOp->getType(), $newInstance->getType() );
+		$this->assertEquals($diffOp, $newInstance);
+		$this->assertEquals($diffOp->getType(), $newInstance->getType());
 	}
 
-	public function invalidArrayFromArrayProvider() {
-		return array(
-			array( array() ),
-			array( array( '~=[,,_,,]:3' ) ),
-			array( array( '~=[,,_,,]:3' => '~=[,,_,,]:3' ) ),
-			array( array( 'type' => '~=[,,_,,]:3' ) ),
-			array( array( 'type' => 'add', 'oldvalue' => 'foo' ) ),
-			array( array( 'type' => 'remove', 'newvalue' => 'foo' ) ),
-			array( array( 'type' => 'change', 'newvalue' => 'foo' ) ),
-			array( array( 'diff' => 'remove', 'newvalue' => 'foo' ) ),
-			array( array( 'diff' => 'remove', 'operations' => array() ) ),
-			array( array( 'diff' => 'remove', 'isassoc' => true ) ),
-		);
+	public function invalidArrayFromArrayProvider(): array {
+		return [
+			[[]],
+			[['~=[,,_,,]:3']],
+			[['~=[,,_,,]:3' => '~=[,,_,,]:3']],
+			[['type' => '~=[,,_,,]:3']],
+			[['type' => 'add', 'oldvalue' => 'foo']],
+			[['type' => 'remove', 'newvalue' => 'foo']],
+			[['type' => 'change', 'newvalue' => 'foo']],
+			[['diff' => 'remove', 'newvalue' => 'foo']],
+			[['diff' => 'remove', 'operations' => []]],
+			[['diff' => 'remove', 'isassoc' => true]],
+		];
 	}
 
 	/**
@@ -120,11 +120,11 @@ class DiffOpFactoryTest extends DiffTestCase {
 	 *
 	 * @param array $array
 	 */
-	public function testNewFromArrayInvalid( array $array ) {
-		$this->expectException( 'InvalidArgumentException' );
+	public function testNewFromArrayInvalid(array $array): void {
+		$this->expectException('InvalidArgumentException');
 
 		$factory = new DiffOpFactory();
-		$factory->newFromArray( $array );
+		$factory->newFromArray($array);
 	}
 
 }

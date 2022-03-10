@@ -41,7 +41,7 @@ abstract class ThrowingPatcher implements PreviewablePatcher {
 	 *
 	 * @throws PatcherException
 	 */
-	protected function handleError( string $message ) {
+	protected function handleError( string $message ): void {
 		if ( $this->throwErrors ) {
 			throw new PatcherException( $message );
 		}
@@ -52,7 +52,7 @@ abstract class ThrowingPatcher implements PreviewablePatcher {
 	 *
 	 * @since 0.4
 	 */
-	public function ignoreErrors() {
+	public function ignoreErrors(): void {
 		$this->throwErrors = false;
 	}
 
@@ -61,7 +61,7 @@ abstract class ThrowingPatcher implements PreviewablePatcher {
 	 *
 	 * @since 0.4
 	 */
-	public function throwErrors() {
+	public function throwErrors(): void {
 		$this->throwErrors = true;
 	}
 

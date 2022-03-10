@@ -32,7 +32,7 @@ class DiffOpFactory {
 	 * @param callable|null $valueConverter optional callback used to convert special
 	 *        array structures into objects used as values in atomic diff ops.
 	 */
-	public function __construct( $valueConverter = null ) {
+	public function __construct( ?callable $valueConverter = null ) {
 		$this->valueConverter = $valueConverter;
 	}
 
@@ -93,7 +93,7 @@ class DiffOpFactory {
 	 *
 	 * @throws InvalidArgumentException
 	 */
-	protected function assertHasKey( $key, array $diffOp ) {
+	protected function assertHasKey( string $key, array $diffOp ): void {
 		if ( !array_key_exists( $key, $diffOp ) ) {
 			throw new InvalidArgumentException( 'Invalid array provided. Missing key "' . $key . '"' );
 		}

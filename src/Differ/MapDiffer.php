@@ -25,25 +25,16 @@ use LogicException;
  */
 class MapDiffer implements Differ {
 
-	/**
-	 * @var bool
-	 */
-	private $recursively;
+	private bool $recursively;
 
-	/**
-	 * @var Differ
-	 */
-	private $listDiffer;
+	private Differ $listDiffer;
 
-	/**
-	 * @var ValueComparer
-	 */
-	private $valueComparer;
+	private ValueComparer $valueComparer;
 
 	/**
 	 * The third argument ($comparer) was added in 3.0
 	 */
-	public function __construct( bool $recursively = false, Differ $listDiffer = null, ValueComparer $comparer = null ) {
+	public function __construct( bool $recursively = false, ?Differ $listDiffer = null, ?ValueComparer $comparer = null ) {
 		$this->recursively = $recursively;
 		$this->listDiffer = $listDiffer ?? new ListDiffer();
 		$this->valueComparer = $comparer ?? new StrictComparer();
@@ -118,7 +109,7 @@ class MapDiffer implements Differ {
 		// @codeCoverageIgnoreEnd
 	}
 
-	private function getDiffOpForElementRecursively( $key, array $oldSet, array $newSet ) {
+	private function getDiffOpForElementRecursively( $key, array $oldSet, array $newSet ): ?Diff {
 		$old = array_key_exists( $key, $oldSet ) ? $oldSet[$key] : [];
 		$new = array_key_exists( $key, $newSet ) ? $newSet[$key] : [];
 

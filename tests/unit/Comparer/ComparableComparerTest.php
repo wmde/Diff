@@ -1,6 +1,6 @@
 <?php
 
-declare( strict_types = 1 );
+declare(strict_types=1);
 
 namespace Diff\Tests\Comparer;
 
@@ -9,74 +9,74 @@ use Diff\Tests\DiffTestCase;
 use Diff\Tests\Fixtures\StubComparable;
 
 /**
- * @covers \Diff\Comparer\ComparableComparer
+ * @covers  \Diff\Comparer\ComparableComparer
  *
- * @group Diff
- * @group Comparer
+ * @group   Diff
+ * @group   Comparer
  *
  * @license BSD-3-Clause
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author  Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class ComparableComparerTest extends DiffTestCase {
 
 	/**
 	 * @dataProvider equalProvider
 	 */
-	public function testEqualValuesAreEqual( $firstValue, $secondValue ) {
+	public function testEqualValuesAreEqual($firstValue, $secondValue): void {
 		$comparer = new ComparableComparer();
 
-		$this->assertTrue( $comparer->valuesAreEqual( $firstValue, $secondValue ) );
+		$this->assertTrue($comparer->valuesAreEqual($firstValue, $secondValue));
 	}
 
-	public function equalProvider() {
-		return array(
-			array(
-				new StubComparable( 100 ),
-				new StubComparable( 100 ),
-			),
-			array(
-				new StubComparable( 'abc' ),
-				new StubComparable( 'abc' ),
-			),
-			array(
-				new StubComparable( null ),
-				new StubComparable( null ),
-			),
-		);
+	public function equalProvider(): array {
+		return [
+			[
+				new StubComparable(100),
+				new StubComparable(100),
+			],
+			[
+				new StubComparable('abc'),
+				new StubComparable('abc'),
+			],
+			[
+				new StubComparable(null),
+				new StubComparable(null),
+			],
+		];
 	}
 
 	/**
 	 * @dataProvider unequalProvider
 	 */
-	public function testDifferentValuesAreNotEqual( $firstValue, $secondValue ) {
+	public function testDifferentValuesAreNotEqual($firstValue, $secondValue): void {
 		$comparer = new ComparableComparer();
 
-		$this->assertFalse( $comparer->valuesAreEqual( $firstValue, $secondValue ) );
+		$this->assertFalse($comparer->valuesAreEqual($firstValue, $secondValue));
 	}
 
-	public function unequalProvider() {
-		return array(
-			array(
+	public function unequalProvider(): array {
+		return [
+			[
 				null,
-				null
-			),
-			array(
-				new StubComparable( 1 ),
-				null
-			),
-			array(
-				new StubComparable( 1 ),
-				new StubComparable( 2 ),
-			),
-			array(
-				new StubComparable( 1 ),
-				new StubComparable( '1' ),
-			),
-			array(
-				new StubComparable( null ),
-				new StubComparable( false ),
-			),
-		);
+				null,
+			],
+			[
+				new StubComparable(1),
+				null,
+			],
+			[
+				new StubComparable(1),
+				new StubComparable(2),
+			],
+			[
+				new StubComparable(1),
+				new StubComparable('1'),
+			],
+			[
+				new StubComparable(null),
+				new StubComparable(false),
+			],
+		];
 	}
 
 }

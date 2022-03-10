@@ -21,10 +21,7 @@ use Diff\DiffOp\DiffOp;
  */
 class CallbackListDiffer implements Differ {
 
-	/**
-	 * @var ListDiffer
-	 */
-	private $differ;
+	private ListDiffer $differ;
 
 	/**
 	 * @since 0.5

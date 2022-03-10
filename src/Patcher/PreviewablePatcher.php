@@ -31,6 +31,6 @@ interface PreviewablePatcher extends Patcher {
 	 *
 	 * @return Diff
 	 */
-	public function getApplicableDiff( array $base, Diff $diffOps );
+	public function getApplicableDiff( array $base, Diff $diffOps ): Diff;
 
 }

@@ -5,7 +5,6 @@ declare( strict_types = 1 );
 namespace Diff\DiffOp;
 
 use Countable;
-use Serializable;
 
 /**
  * Interface for diff operations. A diff operation
@@ -18,7 +17,7 @@ use Serializable;
  * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-interface DiffOp extends Serializable, Countable {
+interface DiffOp extends Countable {
 
 	/**
 	 * Returns a string identifier for the operation type.
@@ -59,6 +58,6 @@ interface DiffOp extends Serializable, Countable {
 	 *
 	 * @return array
 	 */
-	public function toArray( callable $valueConverter = null ): array;
+	public function toArray( ?callable $valueConverter = null ): array;
 
 }

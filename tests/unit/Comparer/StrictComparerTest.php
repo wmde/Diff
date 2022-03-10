@@ -1,80 +1,81 @@
 <?php
 
-declare( strict_types = 1 );
+declare(strict_types=1);
 
 namespace Diff\Tests\Comparer;
 
 use Diff\Comparer\StrictComparer;
 use Diff\Tests\DiffTestCase;
+use stdClass;
 
 /**
- * @covers \Diff\Comparer\StrictComparer
+ * @covers  \Diff\Comparer\StrictComparer
  *
- * @group Diff
- * @group Comparer
+ * @group   Diff
+ * @group   Comparer
  *
  * @license BSD-3-Clause
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author  Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class StrictComparerTest extends DiffTestCase {
 
 	/**
 	 * @dataProvider equalProvider
 	 */
-	public function testEqualValuesAreEqual( $firstValue, $secondValue ) {
+	public function testEqualValuesAreEqual($firstValue, $secondValue): void {
 		$comparer = new StrictComparer();
 
-		$this->assertTrue( $comparer->valuesAreEqual( $firstValue, $secondValue ) );
+		$this->assertTrue($comparer->valuesAreEqual($firstValue, $secondValue));
 	}
 
-	public function equalProvider() {
-		return array(
-			array( 1, 1 ),
-			array( '', '' ),
-			array( '1', '1' ),
-			array( 'foo bar ', 'foo bar ' ),
-			array( 4.2, 4.2 ),
-			array( null, null ),
-			array( false, false ),
-			array( true, true ),
-			array( array(), array() ),
-			array( array( 1 ), array( 1 ) ),
-			array( array( 1, 2, 'a' ), array( 1, 2, 'a' ) ),
-			array( array( 'a' => 1, 'b' => 2, null ), array( 'a' => 1, 'b' => 2, null ) ),
-		);
+	public function equalProvider(): array {
+		return [
+			[1, 1],
+			['', ''],
+			['1', '1'],
+			['foo bar ', 'foo bar '],
+			[4.2, 4.2],
+			[null, null],
+			[false, false],
+			[true, true],
+			[[], []],
+			[[1], [1]],
+			[[1, 2, 'a'], [1, 2, 'a']],
+			[['a' => 1, 'b' => 2, null], ['a' => 1, 'b' => 2, null]],
+		];
 	}
 
 	/**
 	 * @dataProvider unequalProvider
 	 */
-	public function testDifferentValuesAreNotEqual( $firstValue, $secondValue ) {
+	public function testDifferentValuesAreNotEqual($firstValue, $secondValue): void {
 		$comparer = new StrictComparer();
 
-		$this->assertFalse( $comparer->valuesAreEqual( $firstValue, $secondValue ) );
+		$this->assertFalse($comparer->valuesAreEqual($firstValue, $secondValue));
 	}
 
-	public function unequalProvider() {
-		return array(
-			array( 1, 2 ),
-			array( '', '0' ),
-			array( '', ' ' ),
-			array( '', 0 ),
-			array( '', false ),
-			array( null, false ),
-			array( null, 0 ),
-			array( '1', '01' ),
-			array( 'foo bar', 'foo bar ' ),
-			array( 4, 4.0 ),
-			array( 4.2, 4.3 ),
-			array( false, true ),
-			array( true, '1' ),
-			array( array(), array( 1 ) ),
-			array( array( 1 ), array( 2 ) ),
-			array( array( 1, 2, 'b' ), array( 1, 2, 'c' ) ),
-			array( array( 'a' => 1, 'b' => 2 ), array( 'a' => 1, 'b' => 2, null ) ),
-			array( new \stdClass(), new \stdClass() ),
-			array( (object)array( 'a' => 1, 'b' => 2, null ), (object)array( 'a' => 1, 'b' => 3, null ) ),
-		);
+	public function unequalProvider(): array {
+		return [
+			[1, 2],
+			['', '0'],
+			['', ' '],
+			['', 0],
+			['', false],
+			[null, false],
+			[null, 0],
+			['1', '01'],
+			['foo bar', 'foo bar '],
+			[4, 4.0],
+			[4.2, 4.3],
+			[false, true],
+			[true, '1'],
+			[[], [1]],
+			[[1], [2]],
+			[[1, 2, 'b'], [1, 2, 'c']],
+			[['a' => 1, 'b' => 2], ['a' => 1, 'b' => 2, null]],
+			[new stdClass(), new stdClass()],
+			[(object) ['a' => 1, 'b' => 2, null], (object) ['a' => 1, 'b' => 3, null]],
+		];
 	}
 
 }

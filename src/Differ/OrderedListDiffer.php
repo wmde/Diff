@@ -22,10 +22,7 @@ use Diff\DiffOp\DiffOp;
  */
 class OrderedListDiffer implements Differ {
 
-	/**
-	 * @var ListDiffer
-	 */
-	private $differ;
+	private ListDiffer $differ;
 
 	/**
 	 * @since 0.9

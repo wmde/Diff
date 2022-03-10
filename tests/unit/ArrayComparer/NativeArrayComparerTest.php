@@ -1,6 +1,6 @@
 <?php
 
-declare( strict_types = 1 );
+declare(strict_types=1);
 
 namespace Diff\Tests\ArrayComparer;
 
@@ -8,59 +8,59 @@ use Diff\ArrayComparer\NativeArrayComparer;
 use Diff\Tests\DiffTestCase;
 
 /**
- * @covers \Diff\ArrayComparer\NativeArrayComparer
+ * @covers  \Diff\ArrayComparer\NativeArrayComparer
  *
- * @group Diff
+ * @group   Diff
  *
  * @license BSD-3-Clause
- * @author Jeroen De Dauw < jeroendedauw@gmail.com >
+ * @author  Jeroen De Dauw < jeroendedauw@gmail.com >
  */
 class NativeArrayComparerTest extends DiffTestCase {
 
-	public function testCanConstruct() {
+	public function testCanConstruct(): void {
 		new NativeArrayComparer();
-		$this->assertTrue( true );
+		$this->assertTrue(true);
 	}
 
 	/**
 	 * @dataProvider diffInputProvider
 	 */
-	public function testDiffArraysReturnsTheNativeValue( array $arrayOne, array $arrayTwo ) {
+	public function testDiffArraysReturnsTheNativeValue(array $arrayOne, array $arrayTwo): void {
 		$differ = new NativeArrayComparer();
 
 		$this->assertEquals(
-			array_diff( $arrayOne, $arrayTwo ),
-			$differ->diffArrays( $arrayOne, $arrayTwo )
+			array_diff($arrayOne, $arrayTwo),
+			$differ->diffArrays($arrayOne, $arrayTwo)
 		);
 	}
 
-	public function diffInputProvider() {
-		$argLists = array();
+	public function diffInputProvider(): array {
+		$argLists = [];
 
-		$argLists[] = array(
-			array(),
-			array(),
-		);
+		$argLists[] = [
+			[],
+			[],
+		];
 
-		$argLists[] = array(
-			array( 'foo', 1 ),
-			array( 'foo', 1 ),
-		);
+		$argLists[] = [
+			['foo', 1],
+			['foo', 1],
+		];
 
-		$argLists[] = array(
-			array( 'bar', 2 ),
-			array( 'foo', 1 ),
-		);
+		$argLists[] = [
+			['bar', 2],
+			['foo', 1],
+		];
 
-		$argLists[] = array(
-			array( 1, 'bar', 2, 1 ),
-			array( 'foo', 1, 3 ),
-		);
+		$argLists[] = [
+			[1, 'bar', 2, 1],
+			['foo', 1, 3],
+		];
 
-		$argLists[] = array(
-			array( '', null, 2, false , 0 ),
-			array( '0', true, 1, ' ', '' ),
-		);
+		$argLists[] = [
+			['', null, 2, false, 0],
+			['0', true, 1, ' ', ''],
+		];
 
 		return $argLists;
 	}

@@ -22,15 +22,9 @@ use Diff\DiffOp\DiffOpRemove;
  */
 class MapPatcher extends ThrowingPatcher {
 
-	/**
-	 * @var Patcher
-	 */
-	private $listPatcher;
+	private Patcher $listPatcher;
 
-	/**
-	 * @var ValueComparer|null
-	 */
-	private $comparer = null;
+	private ?ValueComparer $comparer = null;
 
 	/**
 	 * @since 0.4
@@ -38,7 +32,7 @@ class MapPatcher extends ThrowingPatcher {
 	 * @param bool $throwErrors
 	 * @param Patcher|null $listPatcher The patcher that will be used for lists in the value
 	 */
-	public function __construct( bool $throwErrors = false, Patcher $listPatcher = null ) {
+	public function __construct( bool $throwErrors = false, ?Patcher $listPatcher = null ) {
 		parent::__construct( $throwErrors );
 
 		$this->listPatcher = $listPatcher ?: new ListPatcher( $throwErrors );
@@ -77,7 +71,7 @@ class MapPatcher extends ThrowingPatcher {
 	 *
 	 * @throws PatcherException
 	 */
-	private function applyOperation( array &$base, $key, DiffOp $diffOp ) {
+	private function applyOperation( array &$base, $key, DiffOp $diffOp ): void {
 		if ( $diffOp instanceof DiffOpAdd ) {
 			$this->applyDiffOpAdd( $base, $key, $diffOp );
 		}
@@ -102,7 +96,7 @@ class MapPatcher extends ThrowingPatcher {
 	 *
 	 * @throws PatcherException
 	 */
-	private function applyDiffOpAdd( array &$base, $key, DiffOpAdd $diffOp ) {
+	private function applyDiffOpAdd( array &$base, $key, DiffOpAdd $diffOp ): void {
 		if ( array_key_exists( $key, $base ) ) {
 			$this->handleError( 'Cannot add an element already present in a map' );
 			return;
@@ -118,7 +112,7 @@ class MapPatcher extends ThrowingPatcher {
 	 *
 	 * @throws PatcherException
 	 */
-	private function applyDiffOpRemove( array &$base, $key, DiffOpRemove $diffOp ) {
+	private function applyDiffOpRemove( array &$base, $key, DiffOpRemove $diffOp ): void {
 		if ( !array_key_exists( $key, $base ) ) {
 			$this->handleError( 'Cannot do a non-add operation with an element not present in a map' );
 			return;
@@ -139,7 +133,7 @@ class MapPatcher extends ThrowingPatcher {
 	 *
 	 * @throws PatcherException
 	 */
-	private function applyDiffOpChange( array &$base, $key, DiffOpChange $diffOp ) {
+	private function applyDiffOpChange( array &$base, $key, DiffOpChange $diffOp ): void {
 		if ( !array_key_exists( $key, $base ) ) {
 			$this->handleError( 'Cannot do a non-add operation with an element not present in a map' );
 			return;
@@ -160,7 +154,7 @@ class MapPatcher extends ThrowingPatcher {
 	 *
 	 * @throws PatcherException
 	 */
-	private function applyDiff( &$base, $key, Diff $diffOp ) {
+	private function applyDiff( &$base, $key, Diff $diffOp ): void {
 		if ( $this->isAttemptToModifyNotExistingElement( $base, $key, $diffOp ) ) {
 			$this->handleError( 'Cannot apply a diff with non-add operations to an element not present in a map' );
 			return;
@@ -180,7 +174,7 @@ class MapPatcher extends ThrowingPatcher {
 	 *
 	 * @return bool
 	 */
-	private function isAttemptToModifyNotExistingElement( $base, $key, Diff $diffOp ): bool {
+	private function isAttemptToModifyNotExistingElement( array $base, $key, Diff $diffOp ): bool {
 		return !array_key_exists( $key, $base )
 			&& ( $diffOp->getChanges() !== [] || $diffOp->getRemovals() !== [] );
 	}
@@ -220,7 +214,7 @@ class MapPatcher extends ThrowingPatcher {
 	 *
 	 * @param ValueComparer $comparer
 	 */
-	public function setValueComparer( ValueComparer $comparer ) {
+	public function setValueComparer( ValueComparer $comparer ): void {
 		$this->comparer = $comparer;
 	}
 

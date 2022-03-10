@@ -51,7 +51,7 @@ abstract class AtomicDiffOp implements DiffOp {
 	 *
 	 * @return mixed The $value unchanged, or the return value of calling $valueConverter on $value.
 	 */
-	protected function objectToArray( $value, $valueConverter = null ) {
+	protected function objectToArray( $value, ?callable $valueConverter = null ) {
 		if ( $valueConverter !== null && is_object( $value ) ) {
 			$value = call_user_func( $valueConverter, $value );
 		}
