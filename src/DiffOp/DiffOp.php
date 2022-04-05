@@ -61,4 +61,8 @@ interface DiffOp extends Serializable, Countable {
 	 */
 	public function toArray( callable $valueConverter = null ): array;
 
+	public function __serialize(): array;
+
+	public function __unserialize( array $serialization ): void;
+
 }
