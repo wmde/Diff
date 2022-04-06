@@ -146,9 +146,16 @@ class Diff extends ArrayObject implements DiffOp {
 	 * @param string $serialization
 	 */
 	public function unserialize( $serialization ): void {
-		$this->__unserialize( unserialize ($serialization) );
+		$this->__unserialize( unserialize( $serialization) );
 	}
 
+	/**
+	 * @see Serializable::unserialize
+	 *
+	 * @since 3.3.0
+	 *
+	 * @param array $data
+	 */
 	public function __unserialize( array $data ): void {
 		foreach ( $data['data'] as $offset => $value ) {
 			// Just set the element, bypassing checks and offset resolving,
@@ -385,7 +392,7 @@ class Diff extends ArrayObject implements DiffOp {
 	 *
 	 * @param mixed $value
 	 */
-	public function append( $value ): void {
+	public function append( $value ) {
 		$this->setElement( null, $value );
 	}
 
@@ -443,6 +450,13 @@ class Diff extends ArrayObject implements DiffOp {
 		return serialize( $this->__serialize() );
 	}
 
+	/**
+	 * @see Serializable::serialize
+	 *
+	 * @since 3.3.0
+	 *
+	 * @return array
+	 */
 	public function __serialize(): array {
 		$assoc = $this->isAssociative === null ? 'n' : ( $this->isAssociative ? 't' : 'f' );
 
