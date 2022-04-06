@@ -88,7 +88,8 @@ class DiffOpChange extends AtomicDiffOp {
 	 *
 	 * @param string $serialization
 	 */
-	public function unserialize( $serialization ): void {
+	#[\ReturnTypeWillChange]
+	public function unserialize( $serialization ) {
 		$this->__unserialize( unserialize ($serialization) );
 	}
 
