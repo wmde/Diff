@@ -59,8 +59,6 @@ class DiffOpRemove extends AtomicDiffOp {
 	}
 
 	/**
-	 * @see Serializable::serialize
-	 *
 	 * @since 3.3.0
 	 *
 	 * @return array
@@ -82,8 +80,6 @@ class DiffOpRemove extends AtomicDiffOp {
 	}
 
 	/**
-	 * @see Serializable::unserialize
-	 *
 	 * @since 3.3.0
 	 *
 	 * @param array $data
