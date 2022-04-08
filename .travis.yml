@@ -26,7 +26,7 @@ notifications:
     on_failure: always
   irc:
     channels:
-      - "chat.freenode.net#wikidata-feed"
+      - "ircs://irc.libera.chat:6697#wikidata-feed"
     on_success: change
     on_failure: always
 
