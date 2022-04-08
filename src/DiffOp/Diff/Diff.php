@@ -393,7 +393,7 @@ class Diff extends ArrayObject implements DiffOp {
 	 *
 	 * @param mixed $value
 	 */
-    #[\ReturnTypeWillChange]
+	#[\ReturnTypeWillChange]
 	public function append( $value ) {
 		$this->setElement( null, $value );
 	}
@@ -406,7 +406,8 @@ class Diff extends ArrayObject implements DiffOp {
 	 * @param int|string $index
 	 * @param mixed $value
 	 */
-	public function offsetSet( $index, $value ): void {
+	#[\ReturnTypeWillChange]
+	public function offsetSet( $index, $value ) {
 		$this->setElement( $index, $value );
 	}
 
