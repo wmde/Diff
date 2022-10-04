@@ -19,7 +19,7 @@ A full history of the different versions of Diff can be found in the [release no
 
 **Diff 3.x:**
 
-* PHP 7.0 or later (tested with PHP 7.0 up to PHP 7.4)
+* PHP 7.2 or later (tested with PHP 7.2 up to PHP 8.1)
 
 **Diff 2.x:**
 
