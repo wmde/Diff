@@ -116,6 +116,19 @@ abstract class DiffOpTest extends DiffTestCase {
 	/**
 	 * @dataProvider instanceProvider
 	 */
+	public function testLegacySerializationCompatibility( DiffOp $diffOp ) {
+		$innerSerialization = $diffOp->serialize();
+		$legacySerialization = 'C:' . strlen( get_class( $diffOp ) ) . ':"' . get_class( $diffOp ) .
+			'":' . strlen( $innerSerialization ) . ':{' . $innerSerialization . '}';
+
+		$unserialization = unserialize( $legacySerialization );
+		$this->assertEquals( $diffOp, $unserialization );
+		$this->assertEquals( serialize( $diffOp ), serialize( $unserialization ) );
+	}
+
+	/**
+	 * @dataProvider instanceProvider
+	 */
 	public function testCount( DiffOp $diffOp ) {
 		if ( $diffOp->isAtomic() ) {
 			$this->assertSame( 1, $diffOp->count() );
