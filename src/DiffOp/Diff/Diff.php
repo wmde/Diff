@@ -145,21 +145,29 @@ class Diff extends ArrayObject implements DiffOp {
 	 *
 	 * @param string $serialization
 	 */
+	#[\ReturnTypeWillChange]
 	public function unserialize( $serialization ) {
-		$serializationData = unserialize( $serialization );
+		$this->__unserialize( unserialize( $serialization) );
+	}
 
-		foreach ( $serializationData['data'] as $offset => $value ) {
+	/**
+	 * @since 3.3.0
+	 *
+	 * @param array $data
+	 */
+	public function __unserialize( array $data ): void {
+		foreach ( $data['data'] as $offset => $value ) {
 			// Just set the element, bypassing checks and offset resolving,
 			// as these elements have already gone through this.
 			parent::offsetSet( $offset, $value );
 		}
 
-		$this->indexOffset = $serializationData['index'];
+		$this->indexOffset = $data['index'];
 
-		$this->typePointers = $serializationData['typePointers'];
+		$this->typePointers = $data['typePointers'];
 
-		if ( array_key_exists( 'assoc', $serializationData ) ) {
-			$this->isAssociative = $serializationData['assoc'] === 'n' ? null : $serializationData['assoc'] === 't';
+		if ( array_key_exists( 'assoc', $data ) ) {
+			$this->isAssociative = $data['assoc'] === 'n' ? null : $data['assoc'] === 't';
 		}
 	}
 
@@ -383,6 +391,7 @@ class Diff extends ArrayObject implements DiffOp {
 	 *
 	 * @param mixed $value
 	 */
+	#[\ReturnTypeWillChange]
 	public function append( $value ) {
 		$this->setElement( null, $value );
 	}
@@ -395,6 +404,7 @@ class Diff extends ArrayObject implements DiffOp {
 	 * @param int|string $index
 	 * @param mixed $value
 	 */
+	#[\ReturnTypeWillChange]
 	public function offsetSet( $index, $value ) {
 		$this->setElement( $index, $value );
 	}
@@ -436,17 +446,25 @@ class Diff extends ArrayObject implements DiffOp {
 	 *
 	 * @return string
 	 */
+	#[\ReturnTypeWillChange]
 	public function serialize() {
+		return serialize( $this->__serialize() );
+	}
+
+	/**
+	 * @since 3.3.0
+	 *
+	 * @return array
+	 */
+	public function __serialize(): array {
 		$assoc = $this->isAssociative === null ? 'n' : ( $this->isAssociative ? 't' : 'f' );
 
-		$data = [
+		return [
 			'data' => $this->getArrayCopy(),
 			'index' => $this->indexOffset,
 			'typePointers' => $this->typePointers,
 			'assoc' => $assoc
 		];
-
-		return serialize( $data );
 	}
 
 	/**
