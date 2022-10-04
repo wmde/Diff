@@ -14,8 +14,8 @@ install: travis_retry composer install --prefer-source
 script: composer ci
 
 after_success:
-  - if [[ "`phpenv version-name`" != "8.1" ]]; then exit 0; fi
-  - vendor/bin/phpunit --coverage-clover coverage.clover
+  - if [[ "`phpenv version-name`" != "7.4" ]]; then exit 0; fi
+  - XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-clover coverage.clover
   - wget https://scrutinizer-ci.com/ocular.phar
   - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
 
