@@ -479,7 +479,7 @@ class DiffTest extends DiffTestCase {
 	 * @param Diff $list
 	 */
 	public function testAddInvalidDiffOp( Diff $list ) {
-		$invalidDiffOp = $this->createMock( 'Diff\DiffOp\DiffOp' );
+		$invalidDiffOp = $this->createMock( DiffOpRemove::class );
 
 		$invalidDiffOp->expects( $this->atLeastOnce() )
 			->method( 'getType' )

@@ -427,7 +427,7 @@ class MapPatcherTest extends DiffTestCase {
 	public function testErrorOnUnknownDiffOpType() {
 		$patcher = new MapPatcher();
 
-		$diffOp = $this->createMock( 'Diff\DiffOp\DiffOp' );
+		$diffOp = $this->createMock( DiffOpRemove::class );
 
 		$diffOp->expects( $this->any() )
 			->method( 'getType' )
