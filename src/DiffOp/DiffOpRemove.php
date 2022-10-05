@@ -84,7 +84,7 @@ class DiffOpRemove extends AtomicDiffOp {
 	 *
 	 * @param array $data
 	 */
-	public function __unserialize( array $data ): void {
+	public function __unserialize( $data ): void {
 		[ $this->oldValue ] = $data;
 	}
 
