@@ -4,10 +4,10 @@ Latest release:
 [![Latest Stable Version](https://poser.pugx.org/diff/diff/version.png)](https://packagist.org/packages/diff/diff)
 
 
-## Version 3.3 (development)
+## Version 3.3 (2022-10-05)
 
 * Raised minimum PHP version from 7.0 to 7.2
-* Added testing with PHP 7.3 and 7.4
+* Added testing with PHP 7.3, 7.4, 8.0 and 8.1
 
 ## Version 3.2 (2018-09-11)
 
