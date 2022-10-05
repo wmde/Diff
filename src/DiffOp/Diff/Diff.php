@@ -155,6 +155,7 @@ class Diff extends ArrayObject implements DiffOp {
 	 *
 	 * @param array $data
 	 */
+	#[\ReturnTypeWillChange]
 	public function __unserialize( array $data ): void {
 		foreach ( $data['data'] as $offset => $value ) {
 			// Just set the element, bypassing checks and offset resolving,
