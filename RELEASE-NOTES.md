@@ -14,6 +14,8 @@ Latest release:
 
 ## Version 3.2 (2018-09-11)
 
+* Added ability to construct a recursive `MapDiffer` that uses itself to diff elements (via `MapDiffer::newRecursiveDiffer`)
+* You can now pass non-list-differs as the second constructor argument in `MapDiffer`
 * Deprecated constant `Diff_VERSION`
 * Switched License from GPL-2.0-or-later to BSD-3-Clause
 

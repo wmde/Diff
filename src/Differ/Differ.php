@@ -10,6 +10,8 @@ use Exception;
 /**
  * Interface for objects that can diff two arrays to an array of DiffOp.
  *
+ * If the diff is done associatively, the differ should implement MapDifferInterface.
+ *
  * @since 0.4
  *
  * @license BSD-3-Clause
