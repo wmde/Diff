@@ -144,7 +144,7 @@ class Diff extends ArrayObject implements DiffOp {
 	 * @since 0.1
 	 *
 	 * @param string $serialization
-	 * 
+	 *
 	 * @return void
 	 */
 	#[\ReturnTypeWillChange]
@@ -392,7 +392,7 @@ class Diff extends ArrayObject implements DiffOp {
 	 * @since 0.1
 	 *
 	 * @param mixed $value
-	 * 
+	 *
 	 * @return void
 	 */
 	#[\ReturnTypeWillChange]
@@ -407,7 +407,7 @@ class Diff extends ArrayObject implements DiffOp {
 	 *
 	 * @param int|string $index
 	 * @param mixed $value
-	 * 
+	 *
 	 * @return void
 	 */
 	#[\ReturnTypeWillChange]
