@@ -1,0 +1,31 @@
+name: Generate and upload test coverage
+on:
+  workflow_run:
+    workflows: ['Lint and Test']
+    types:
+      - completed
+
+jobs:
+  scrutinize:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+         php-version: '7.4'
+         coverage: xdebug
+      - name: Cache Composer packages
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
+      - name: Generate PHP tests coverage
+        run:  vendor/bin/phpunit --coverage-clover coverage.clover
+      - name: Upload Scrutinizer coverage
+        uses: sudo-bot/action-scrutinizer@latest
+        with:
+          cli-args: "--repository g/wmde/Diff --format=php-clover ./coverage.clover"
