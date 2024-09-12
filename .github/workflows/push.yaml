@@ -26,3 +26,17 @@ jobs:
         run: composer install --prefer-source --no-progress
       - name: Run test suite
         run: composer run-script ci
+      - name: Send mail on failure
+        if: ${{ failure() }}
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{secrets.CI_MAIL_USERNAME}}
+          password: ${{secrets.CI_MAIL_PASSWORD}}
+          to: wikidata-ci-status@wikimedia.de
+          from: ${{ github.repository }} CI
+          subject: CI job failed for ${{ github.repository }}
+          html_body: |
+            CI workflow ${{ github.workflow }} failed!
+            The failed job can be found in <a href="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}">here</a>
