@@ -14,6 +14,15 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php_version }}
+      - uses: nowactions/envsubst@v1
+        with:
+          input: ${{ github.workspace }}/.github/workflows/ci_failure_email.md.tmpl
+          output: ${{ github.workspace }}/.github/workflows/ci_failure_email.md
+        env:
+          WORKFLOW: ${{ github.workflow }}
+          SERVER_URL: ${{ github.server_url }}
+          REPOSITORY: ${{ github.repository }}
+          RUN_ID: ${{ github.run_id }}
       - name: Validate composer.json and composer.lock
         run: composer validate --strict
       - name: Cache Composer packages
@@ -26,3 +35,16 @@ jobs:
         run: composer install --prefer-source --no-progress
       - name: Run test suite
         run: composer run-script ci
+      - name: Send mail on failure
+        if: ${{ failure() }}
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{secrets.CI_MAIL_USERNAME}}
+          password: ${{secrets.CI_MAIL_PASSWORD}}
+          to: wikidata-ci-status@wikimedia.de
+          from: ${{ github.repository }} CI
+          subject: CI job failed for ${{ github.repository }}
+          convert_markdown: true
+          html_body: file://${{ github.workspace }}/.github/workflows/ci_failure_email.md
