@@ -23,7 +23,7 @@ use LogicException;
  * @license BSD-3-Clause
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-class MapDiffer implements Differ {
+class MapDiffer implements MapDifferInterface {
 
 	/**
 	 * @var bool
@@ -33,7 +33,7 @@ class MapDiffer implements Differ {
 	/**
 	 * @var Differ
 	 */
-	private $listDiffer;
+	private $elementDiffer;
 
 	/**
 	 * @var ValueComparer
@@ -43,10 +43,24 @@ class MapDiffer implements Differ {
 	/**
 	 * The third argument ($comparer) was added in 3.0
 	 */
-	public function __construct( bool $recursively = false, Differ $listDiffer = null, ValueComparer $comparer = null ) {
+	public function __construct( bool $recursively = false, Differ $elementDiffer = null,
+		ValueComparer $comparer = null ) {
+
 		$this->recursively = $recursively;
-		$this->listDiffer = $listDiffer ?? new ListDiffer();
+		$this->elementDiffer = $elementDiffer ?? new ListDiffer();
 		$this->valueComparer = $comparer ?? new StrictComparer();
+	}
+
+	/**
+	 * Creates a recursive MapDiffer that by default uses itself to diff elements recursively
+	 *
+	 * @since 3.2
+	 */
+	public static function newRecursiveDiffer( ValueComparer $comparer = null, Differ $elementDiffer = null ) {
+		$differ = new self( true, null, $comparer );
+		$differ->elementDiffer = $elementDiffer ?? $differ;
+
+		return $differ;
 	}
 
 	/**
@@ -134,7 +148,10 @@ class MapDiffer implements Differ {
 			return new Diff( $this->doDiff( $old, $new ), true );
 		}
 
-		return new Diff( $this->listDiffer->doDiff( $old, $new ), false );
+		return new Diff(
+			$this->elementDiffer->doDiff( $old, $new ),
+			$this->elementDiffer instanceof MapDifferInterface
+		);
 	}
 
 	/**
