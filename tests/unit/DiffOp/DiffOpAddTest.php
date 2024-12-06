@@ -35,13 +35,13 @@ class DiffOpAddTest extends DiffOpTest {
 	 * @since 0.1
 	 */
 	public function constructorProvider() {
-		return array(
-			array( true, 'foo' ),
-			array( true, array() ),
-			array( true, true ),
-			array( true, 42 ),
-			array( true, new DiffOpAdd( 'spam' ) ),
-		);
+		return [
+			[ true, 'foo' ],
+			[ true, [] ],
+			[ true, true ],
+			[ true, 42 ],
+			[ true, new DiffOpAdd( 'spam' ) ],
+		];
 	}
 
 	/**

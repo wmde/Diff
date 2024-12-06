@@ -31,17 +31,17 @@ class ThrowingPatcherTest extends DiffTestCase {
 
 		$errorMessage = 'foo bar';
 
-		$method->invokeArgs( $patcher, array( $errorMessage ) );
+		$method->invokeArgs( $patcher, [ $errorMessage ] );
 
 		$patcher->throwErrors();
 		$patcher->ignoreErrors();
 
-		$method->invokeArgs( $patcher, array( $errorMessage ) );
+		$method->invokeArgs( $patcher, [ $errorMessage ] );
 
 		$patcher->throwErrors();
 		$this->expectException( 'Diff\Patcher\PatcherException' );
 
-		$method->invokeArgs( $patcher, array( $errorMessage ) );
+		$method->invokeArgs( $patcher, [ $errorMessage ] );
 	}
 
 }

@@ -14,6 +14,11 @@ namespace Diff\Comparer;
  */
 class ComparableComparer implements ValueComparer {
 
+	/**
+	 * @param mixed $firstValue
+	 * @param mixed $secondValue
+	 * @return bool
+	 */
 	public function valuesAreEqual( $firstValue, $secondValue ): bool {
 		if ( $firstValue && method_exists( $firstValue, 'equals' ) ) {
 			return $firstValue->equals( $secondValue );
