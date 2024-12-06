@@ -27,7 +27,7 @@ abstract class DiffOpTest extends DiffTestCase {
 	 *
 	 * @return string
 	 */
-	public abstract function getClass();
+	abstract public function getClass();
 
 	/**
 	 * First element can be a boolean indication if the successive values are valid,
@@ -35,7 +35,7 @@ abstract class DiffOpTest extends DiffTestCase {
 	 *
 	 * @since 0.1
 	 */
-	public abstract function constructorProvider();
+	abstract public function constructorProvider();
 
 	/**
 	 * Creates and returns a new instance of the concrete class.
@@ -59,14 +59,14 @@ abstract class DiffOpTest extends DiffTestCase {
 		$self = $this;
 
 		return array_filter( array_map(
-			function( array $args ) use ( $self ) {
+			static function ( array $args ) use ( $self ) {
 				$isValid = array_shift( $args ) === true;
 
 				if ( !$isValid ) {
 					return false;
 				}
 
-				return array( call_user_func_array( array( $self, 'newInstance' ), $args ), $args );
+				return [ call_user_func_array( [ $self, 'newInstance' ], $args ), $args ];
 			},
 			$this->constructorProvider()
 		), 'is_array' );
@@ -85,7 +85,7 @@ abstract class DiffOpTest extends DiffTestCase {
 			$this->expectException( $valid ?: 'InvalidArgumentException' );
 		}
 
-		$dataItem = call_user_func_array( array( $this, 'newInstance' ), $args );
+		$dataItem = call_user_func_array( [ $this, 'newInstance' ], $args );
 		$this->assertInstanceOf( $this->getClass(), $dataItem );
 	}
 
@@ -132,8 +132,7 @@ abstract class DiffOpTest extends DiffTestCase {
 	public function testCount( DiffOp $diffOp ) {
 		if ( $diffOp->isAtomic() ) {
 			$this->assertSame( 1, $diffOp->count() );
-		}
-		else {
+		} else {
 			$count = 0;
 
 			/**
@@ -163,8 +162,8 @@ abstract class DiffOpTest extends DiffTestCase {
 	 * @dataProvider instanceProvider
 	 */
 	public function testToArrayWithConversion( DiffOp $diffOp ) {
-		$array = $diffOp->toArray( function() {
-			return array( 'Nyan!' );
+		$array = $diffOp->toArray( static function () {
+			return [ 'Nyan!' ];
 		} );
 
 		$this->assertIsArray( $array );

@@ -28,7 +28,7 @@ class ListDiffer implements Differ {
 	 */
 	private $arrayComparer;
 
-	public function __construct( ArrayComparer $arrayComparer = null ) {
+	public function __construct( ?ArrayComparer $arrayComparer = null ) {
 		$this->arrayComparer = $arrayComparer ?? new StrictArrayComparer();
 	}
 

@@ -15,6 +15,7 @@ namespace Diff\Comparer;
  */
 class CallbackComparer implements ValueComparer {
 
+	/** @var callable */
 	private $callback;
 
 	/**
@@ -26,7 +27,7 @@ class CallbackComparer implements ValueComparer {
 		$this->callback = $callback;
 	}
 
-	public function valuesAreEqual( $firstValue, $secondValue ): bool {
+	public function valuesAreEqual( mixed $firstValue, mixed $secondValue ): bool {
 		$valuesAreEqual = call_user_func_array( $this->callback, [ $firstValue, $secondValue ] );
 
 		if ( !is_bool( $valuesAreEqual ) ) {
