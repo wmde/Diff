@@ -27,8 +27,8 @@ abstract class DiffTestCase extends TestCase {
 	 */
 	protected function arrayWrap( array $elements ) {
 		return array_map(
-			function( $element ) {
-				return array( $element );
+			static function ( $element ) {
+				return [ $element ];
 			},
 			$elements
 		);
@@ -70,12 +70,12 @@ abstract class DiffTestCase extends TestCase {
 	/**
 	 * Does an associative sort that works for objects.
 	 *
-	 * @param array $array
+	 * @param array &$array
 	 */
 	private function objectAssociativeSort( array &$array ) {
 		uasort(
 			$array,
-			function ( $a, $b ) {
+			static function ( $a, $b ) {
 				return serialize( $a ) > serialize( $b ) ? 1 : -1;
 			}
 		);
