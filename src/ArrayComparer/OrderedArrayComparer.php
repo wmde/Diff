@@ -21,7 +21,7 @@ use Diff\Comparer\ValueComparer;
  */
 class OrderedArrayComparer implements ArrayComparer {
 
-	private $valueComparer;
+	private ValueComparer $valueComparer;
 
 	public function __construct( ValueComparer $valueComparer ) {
 		$this->valueComparer = $valueComparer;

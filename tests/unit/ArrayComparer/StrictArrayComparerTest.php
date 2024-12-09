@@ -36,77 +36,78 @@ class StrictArrayComparerTest extends DiffTestCase {
 	}
 
 	public function diffInputProvider() {
-		$argLists = array();
+		$argLists = [];
 
-		$argLists[] = array(
-			array(),
-			array(),
-			array(),
+		$argLists[] = [
+			[],
+			[],
+			[],
 			'The diff between empty arrays should be empty'
-		);
+		];
 
-		$argLists[] = array(
-			array( 1 ),
-			array( 1 ),
-			array(),
+		$argLists[] = [
+			[ 1 ],
+			[ 1 ],
+			[],
 			'The diff between identical arrays should be empty'
-		);
+		];
 
-		$argLists[] = array(
-			array( 1, 2 , 1 ),
-			array( 1, 1, 2 ),
-			array(),
+		$argLists[] = [
+			[ 1, 2, 1 ],
+			[ 1, 1, 2 ],
+			[],
 			'The diff between arrays with the same values but different orders should be empty'
-		);
+		];
 
-		$argLists[] = array(
-			array( 1, 1 ),
-			array( 1 ),
-			array( 1 ),
-			'The diff between an array with an element twice and an array that has it once should contain the element once'
-		);
+		$argLists[] = [
+			[ 1, 1 ],
+			[ 1 ],
+			[ 1 ],
+			'The diff between an array with an element twice and ' .
+				'an array that has it once should contain the element once'
+		];
 
-		$argLists[] = array(
-			array( '0' ),
-			array( 0 ),
-			array( '0' ),
+		$argLists[] = [
+			[ '0' ],
+			[ 0 ],
+			[ '0' ],
 			'Comparison should be strict'
-		);
+		];
 
-		$argLists[] = array(
-			array( false ),
-			array( null ),
-			array( false ),
+		$argLists[] = [
+			[ false ],
+			[ null ],
+			[ false ],
 			'Comparison should be strict'
-		);
+		];
 
-		$argLists[] = array(
-			array( array( 1 ) ),
-			array( array( 2 ) ),
-			array( array( 1 ) ),
+		$argLists[] = [
+			[ [ 1 ] ],
+			[ [ 2 ] ],
+			[ [ 1 ] ],
 			'Arrays are compared properly'
-		);
+		];
 
-		$argLists[] = array(
-			array( array( 1 ) ),
-			array( array( 1 ) ),
-			array(),
+		$argLists[] = [
+			[ [ 1 ] ],
+			[ [ 1 ] ],
+			[],
 			'Arrays are compared properly'
-		);
+		];
 
-		$argLists[] = array(
-			array( new \stdClass() ),
-			array( new \stdClass() ),
-			array(),
+		$argLists[] = [
+			[ new \stdClass() ],
+			[ new \stdClass() ],
+			[],
 			'Objects are compared based on value, not identity'
-		);
+		];
 
-		$argLists[] = array(
-			array( (object)array( 'foo' => 'bar' ) ),
-			array( (object)array( 'foo' => 'baz' ) ),
-			array( (object)array( 'foo' => 'bar' ) ),
+		$argLists[] = [
+			[ (object)[ 'foo' => 'bar' ] ],
+			[ (object)[ 'foo' => 'baz' ] ],
+			[ (object)[ 'foo' => 'bar' ] ],
 			'Differences between objects are detected'
-		);
+		];
 
 		return $argLists;
 	}
