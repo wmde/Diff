@@ -28,44 +28,44 @@ class StrategicArrayComparerTest extends DiffTestCase {
 
 		$valueComparer->expects( $this->any() )
 			->method( 'valuesAreEqual' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$arrayComparer = new StrategicArrayComparer( $valueComparer );
 
 		$this->assertNoDifference(
 			$arrayComparer,
-			array( 0, 2, 4 ),
-			array( 1, 2, 9 )
+			[ 0, 2, 4 ],
+			[ 1, 2, 9 ]
 		);
 
 		$this->assertNoDifference(
 			$arrayComparer,
-			array( 1, 2, 3 ),
-			array( 1, 2, 3 )
+			[ 1, 2, 3 ],
+			[ 1, 2, 3 ]
 		);
 
 		$this->assertNoDifference(
 			$arrayComparer,
-			array( 'bah' ),
-			array( 'foo', 'bar', 'baz' )
+			[ 'bah' ],
+			[ 'foo', 'bar', 'baz' ]
 		);
 
 		$this->assertNoDifference(
 			$arrayComparer,
-			array(),
-			array( 'foo', 'bar', 'baz' )
+			[],
+			[ 'foo', 'bar', 'baz' ]
 		);
 
 		$this->assertNoDifference(
 			$arrayComparer,
-			array(),
-			array()
+			[],
+			[]
 		);
 	}
 
 	private function assertNoDifference( ArrayComparer $arrayComparer, array $arrayOne, array $arrayTwo ) {
 		$this->assertEquals(
-			array(),
+			[],
 			$arrayComparer->diffArrays(
 				$arrayOne,
 				$arrayTwo
@@ -78,32 +78,32 @@ class StrategicArrayComparerTest extends DiffTestCase {
 
 		$valueComparer->expects( $this->any() )
 			->method( 'valuesAreEqual' )
-			->will( $this->returnValue( false ) );
+			->willReturn( false );
 
 		$arrayComparer = new StrategicArrayComparer( $valueComparer );
 
 		$this->assertAllDifferent(
 			$arrayComparer,
-			array(),
-			array()
+			[],
+			[]
 		);
 
 		$this->assertAllDifferent(
 			$arrayComparer,
-			array( 1, 2, 3 ),
-			array()
+			[ 1, 2, 3 ],
+			[]
 		);
 
 		$this->assertAllDifferent(
 			$arrayComparer,
-			array( 1, 2, 3 ),
-			array( 1, 2, 3 )
+			[ 1, 2, 3 ],
+			[ 1, 2, 3 ]
 		);
 
 		$this->assertAllDifferent(
 			$arrayComparer,
-			array(),
-			array( 1, 2, 3 )
+			[],
+			[ 1, 2, 3 ]
 		);
 	}
 
@@ -122,23 +122,23 @@ class StrategicArrayComparerTest extends DiffTestCase {
 
 		$valueComparer->expects( $this->any() )
 			->method( 'valuesAreEqual' )
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$arrayComparer = new StrategicArrayComparer( $valueComparer );
 
 		$this->assertEquals(
-			array( 1, 1, 1 ),
+			[ 1, 1, 1 ],
 			$arrayComparer->diffArrays(
-				array( 1, 1, 1, 1 ),
-				array( 1 )
+				[ 1, 1, 1, 1 ],
+				[ 1 ]
 			)
 		);
 
 		$this->assertEquals(
-			array( 1 ),
+			[ 1 ],
 			$arrayComparer->diffArrays(
-				array( 1, 1, 1, 1 ),
-				array( 1, 1, 1  )
+				[ 1, 1, 1, 1 ],
+				[ 1, 1, 1 ]
 			)
 		);
 	}
@@ -148,33 +148,33 @@ class StrategicArrayComparerTest extends DiffTestCase {
 
 		$valueComparer->expects( $this->any() )
 			->method( 'valuesAreEqual' )
-			->will( $this->returnCallback( function( $firstValue, $secondValue ) {
+			->willReturnCallback( static function ( $firstValue, $secondValue ) {
 				return $firstValue == $secondValue;
-			} ) );
+			} );
 
 		$arrayComparer = new StrategicArrayComparer( $valueComparer );
 
 		$this->assertEquals(
-			array( 1, 2, 5 ),
+			[ 1, 2, 5 ],
 			$arrayComparer->diffArrays(
-				array( 1, 1, 2, 3, 2, 5 ),
-				array( 1, 2, 3, 4  )
+				[ 1, 1, 2, 3, 2, 5 ],
+				[ 1, 2, 3, 4 ]
 			)
 		);
 
 		$this->assertEquals(
-			array( 1 ),
+			[ 1 ],
 			$arrayComparer->diffArrays(
-				array( 1, 1, 1, 2, 2, 3 ),
-				array( 1, 1, 2, 2, 3, 3, 3 )
+				[ 1, 1, 1, 2, 2, 3 ],
+				[ 1, 1, 2, 2, 3, 3, 3 ]
 			)
 		);
 
 		$this->assertEquals(
-			array( 1 ),
+			[ 1 ],
 			$arrayComparer->diffArrays(
-				array( 3, 1, 2, 1, 1, 2 ),
-				array( 1, 3, 3, 2, 2, 3, 1 )
+				[ 3, 1, 2, 1, 1, 2 ],
+				[ 1, 3, 3, 2, 2, 3, 1 ]
 			)
 		);
 	}
@@ -185,16 +185,16 @@ class StrategicArrayComparerTest extends DiffTestCase {
 		$valueComparer->expects( $this->once() )
 			->method( 'valuesAreEqual' )
 			->with(
-				$this->equalTo( 1 ),
-				$this->equalTo( 2 )
+				1,
+				2
 			)
-			->will( $this->returnValue( true ) );
+			->willReturn( true );
 
 		$arrayComparer = new StrategicArrayComparer( $valueComparer );
 
 		$arrayComparer->diffArrays(
-			array( 1 ),
-			array( 2 )
+			[ 1 ],
+			[ 2 ]
 		);
 	}
 

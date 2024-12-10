@@ -43,7 +43,11 @@ class MapDiffer implements Differ {
 	/**
 	 * The third argument ($comparer) was added in 3.0
 	 */
-	public function __construct( bool $recursively = false, Differ $listDiffer = null, ValueComparer $comparer = null ) {
+	public function __construct(
+		bool $recursively = false,
+		?Differ $listDiffer = null,
+		?ValueComparer $comparer = null
+	) {
 		$this->recursively = $recursively;
 		$this->listDiffer = $listDiffer ?? new ListDiffer();
 		$this->valueComparer = $comparer ?? new StrictComparer();
@@ -86,6 +90,12 @@ class MapDiffer implements Differ {
 		) );
 	}
 
+	/**
+	 * @param mixed $key
+	 * @param array $oldSet
+	 * @param mixed $newSet
+	 * @return DiffOp
+	 */
 	private function getDiffOpForElement( $key, array $oldSet, array $newSet ) {
 		if ( $this->recursively ) {
 			$diffOp = $this->getDiffOpForElementRecursively( $key, $oldSet, $newSet );
@@ -105,11 +115,9 @@ class MapDiffer implements Differ {
 
 		if ( $hasOld && $hasNew ) {
 			return new DiffOpChange( $oldSet[$key], $newSet[$key] );
-		}
-		elseif ( $hasOld ) {
+		} elseif ( $hasOld ) {
 			return new DiffOpRemove( $oldSet[$key] );
-		}
-		elseif ( $hasNew ) {
+		} elseif ( $hasNew ) {
 			return new DiffOpAdd( $newSet[$key] );
 		}
 
@@ -118,6 +126,12 @@ class MapDiffer implements Differ {
 		// @codeCoverageIgnoreEnd
 	}
 
+	/**
+	 * @param mixed $key
+	 * @param array $oldSet
+	 * @param mixed $newSet
+	 * @return ?Diff
+	 */
 	private function getDiffOpForElementRecursively( $key, array $oldSet, array $newSet ) {
 		$old = array_key_exists( $key, $oldSet ) ? $oldSet[$key] : [];
 		$new = array_key_exists( $key, $newSet ) ? $newSet[$key] : [];

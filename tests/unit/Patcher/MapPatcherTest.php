@@ -27,189 +27,190 @@ use Diff\Tests\DiffTestCase;
 class MapPatcherTest extends DiffTestCase {
 
 	public function patchProvider() {
-		$argLists = array();
+		$argLists = [];
 
 		$patcher = new MapPatcher();
-		$base = array();
+		$base = [];
 		$diff = new Diff();
-		$expected = array();
+		$expected = [];
 
-		$argLists['all empty'] = array( $patcher, $base, $diff, $expected );
+		$argLists['all empty'] = [ $patcher, $base, $diff, $expected ];
 
 		$patcher = new MapPatcher();
-		$base = array( 'foo', 'bar' => array( 'baz' ) );
+		$base = [ 'foo', 'bar' => [ 'baz' ] ];
 		$diff = new Diff();
-		$expected = array( 'foo', 'bar' => array( 'baz' ) );
+		$expected = [ 'foo', 'bar' => [ 'baz' ] ];
 
-		$argLists['empty patch'] = array( $patcher, $base, $diff, $expected );
-
-		$patcher = new MapPatcher();
-		$base = array( 'foo', 'bar' => array( 'baz' ) );
-		$diff = new Diff( array( 'bah' => new DiffOpAdd( 'blah' ) ) );
-		$expected = array( 'foo', 'bar' => array( 'baz' ), 'bah' => 'blah' );
-
-		$argLists['add'] = array( $patcher, $base, $diff, $expected );
+		$argLists['empty patch'] = [ $patcher, $base, $diff, $expected ];
 
 		$patcher = new MapPatcher();
-		$base = array( 'foo', 'bar' => array( 'baz' ) );
-		$diff = new Diff( array( 'bah' => new DiffOpAdd( 'blah' ) ) );
-		$expected = array( 'foo', 'bar' => array( 'baz' ), 'bah' => 'blah' );
+		$base = [ 'foo', 'bar' => [ 'baz' ] ];
+		$diff = new Diff( [ 'bah' => new DiffOpAdd( 'blah' ) ] );
+		$expected = [ 'foo', 'bar' => [ 'baz' ], 'bah' => 'blah' ];
 
-		$argLists['add2'] = array( $patcher, $base, $diff, $expected ); //FIXME: dupe?
+		$argLists['add'] = [ $patcher, $base, $diff, $expected ];
 
 		$patcher = new MapPatcher();
-		$base = array();
-		$diff = new Diff( array(
+		$base = [ 'foo', 'bar' => [ 'baz' ] ];
+		$diff = new Diff( [ 'bah' => new DiffOpAdd( 'blah' ) ] );
+		$expected = [ 'foo', 'bar' => [ 'baz' ], 'bah' => 'blah' ];
+
+		// FIXME: dupe?
+		$argLists['add2'] = [ $patcher, $base, $diff, $expected ];
+
+		$patcher = new MapPatcher();
+		$base = [];
+		$diff = new Diff( [
 			'foo' => new DiffOpAdd( 'bar' ),
 			'bah' => new DiffOpAdd( 'blah' )
-		) );
-		$expected = array(
+		] );
+		$expected = [
 			'foo' => 'bar',
 			'bah' => 'blah'
-		);
+		];
 
-		$argLists['add to empty base'] = array( $patcher, $base, $diff, $expected );
+		$argLists['add to empty base'] = [ $patcher, $base, $diff, $expected ];
 
 		$patcher = new MapPatcher();
-		$base = array(
-			'enwiki' => array(
+		$base = [
+			'enwiki' => [
 				'name'   => 'Nyan Cat',
-				'badges' => array( 'FA' )
-			)
-		);
-		$diff = new Diff( array(
-			'nlwiki' => new Diff( array(
+				'badges' => [ 'FA' ]
+			]
+		];
+		$diff = new Diff( [
+			'nlwiki' => new Diff( [
 				'name'   => new DiffOpAdd( 'Nyan Cat' ),
-				'badges' => new Diff( array(
+				'badges' => new Diff( [
 					new DiffOpAdd( 'J approves' ),
-				), false ),
-			), true ),
-		), true );
-		$expected = array(
-			'enwiki' => array(
+				], false ),
+			], true ),
+		], true );
+		$expected = [
+			'enwiki' => [
 				'name'   => 'Nyan Cat',
-				'badges' => array( 'FA' )
-			),
+				'badges' => [ 'FA' ]
+			],
 
-			'nlwiki' => array(
+			'nlwiki' => [
 				'name'   => 'Nyan Cat',
-				'badges' => array( 'J approves' )
-			)
-		);
+				'badges' => [ 'J approves' ]
+			]
+		];
 
-		$argLists['add to non-existent key'] = array( $patcher, $base, $diff, $expected );
+		$argLists['add to non-existent key'] = [ $patcher, $base, $diff, $expected ];
 
 		$patcher = new MapPatcher();
-		$base = array(
+		$base = [
 			'foo' => 'bar',
 			'nyan' => 'cat',
 			'bah' => 'blah',
-		);
-		$diff = new Diff( array(
+		];
+		$diff = new Diff( [
 			'foo' => new DiffOpRemove( 'bar' ),
 			'bah' => new DiffOpRemove( 'blah' ),
-		) );
-		$expected = array(
+		] );
+		$expected = [
 			'nyan' => 'cat'
-		);
+		];
 
-		$argLists['remove'] = array( $patcher, $base, $diff, $expected );
+		$argLists['remove'] = [ $patcher, $base, $diff, $expected ];
 
 		$patcher = new MapPatcher();
-		$base = array(
+		$base = [
 			'foo' => 'bar',
 			'nyan' => 'cat',
 			'spam' => 'blah',
 			'bah' => 'blah',
-		);
-		$diff = new Diff( array(
+		];
+		$diff = new Diff( [
 			'foo' => new DiffOpChange( 'bar', 'baz' ),
 			'bah' => new DiffOpRemove( 'blah' ),
 			'oh' => new DiffOpAdd( 'noez' ),
-		) );
-		$expected = array(
+		] );
+		$expected = [
 			'foo' => 'baz',
 			'nyan' => 'cat',
 			'spam' => 'blah',
 			'oh' => 'noez',
-		);
+		];
 
-		$argLists['change/add/remove'] = array( $patcher, $base, $diff, $expected );
+		$argLists['change/add/remove'] = [ $patcher, $base, $diff, $expected ];
 
 		$patcher = new MapPatcher();
-		$base = array(
+		$base = [
 			'foo' => 'bar',
-		);
-		$diff = new Diff( array(
-			'baz' => new Diff( array( new DiffOpAdd( 'ny' ), new DiffOpAdd( 'an' ) ), false ),
-		) );
-		$expected = array(
+		];
+		$diff = new Diff( [
+			'baz' => new Diff( [ new DiffOpAdd( 'ny' ), new DiffOpAdd( 'an' ) ], false ),
+		] );
+		$expected = [
 			'foo' => 'bar',
-			'baz' => array( 'ny', 'an' ),
-		);
+			'baz' => [ 'ny', 'an' ],
+		];
 
-		$argLists['add to substructure'] = array( $patcher, $base, $diff, $expected );
+		$argLists['add to substructure'] = [ $patcher, $base, $diff, $expected ];
 
 		// ---- conflicts ----
 
 		$patcher = new MapPatcher();
-		$base = array();
-		$diff = new Diff( array(
+		$base = [];
+		$diff = new Diff( [
 			'baz' => new DiffOpRemove( 'X' ),
-		) );
+		] );
 		$expected = $base;
 
-		$argLists['conflict: remove missing'] = array( $patcher, $base, $diff, $expected );
+		$argLists['conflict: remove missing'] = [ $patcher, $base, $diff, $expected ];
 
 		$patcher = new MapPatcher();
-		$base = array( 'baz' => 'Y' );
-		$diff = new Diff( array(
+		$base = [ 'baz' => 'Y' ];
+		$diff = new Diff( [
 			'baz' => new DiffOpRemove( 'X' ),
-		) );
+		] );
 		$expected = $base;
 
-		$argLists['conflict: remove mismatching value'] = array( $patcher, $base, $diff, $expected );
+		$argLists['conflict: remove mismatching value'] = [ $patcher, $base, $diff, $expected ];
 
 		$patcher = new MapPatcher();
-		$base = array( 'baz' => 'Y' );
-		$diff = new Diff( array(
+		$base = [ 'baz' => 'Y' ];
+		$diff = new Diff( [
 			'baz' => new DiffOpAdd( 'X' ),
-		) );
+		] );
 		$expected = $base;
 
-		$argLists['conflict: add existing'] = array( $patcher, $base, $diff, $expected );
+		$argLists['conflict: add existing'] = [ $patcher, $base, $diff, $expected ];
 
 		$patcher = new MapPatcher();
-		$base = array( 'baz' => 'Y' );
-		$diff = new Diff( array(
+		$base = [ 'baz' => 'Y' ];
+		$diff = new Diff( [
 			'baz' => new DiffOpChange( 'X', 'Z' ),
-		) );
+		] );
 		$expected = $base;
 
-		$argLists['conflict: change mismatching value'] = array( $patcher, $base, $diff, $expected );
+		$argLists['conflict: change mismatching value'] = [ $patcher, $base, $diff, $expected ];
 
 		$patcher = new MapPatcher();
-		$base = array(
+		$base = [
 			'foo' => 'bar',
 			'nyan' => 'cat',
 			'spam' => 'blah',
 			'bah' => 'blah',
-		);
-		$diff = new Diff( array(
+		];
+		$diff = new Diff( [
 			'foo' => new DiffOpChange( 'bar', 'var' ),
 			'nyan' => new DiffOpRemove( 'fat' ),
 			'bah' => new DiffOpChange( 'blubb', 'clubb' ),
 			'yea' => new DiffOpAdd( 'stuff' ),
-		) );
-		$expected = array(
+		] );
+		$expected = [
 			'foo' => 'var',
 			'nyan' => 'cat',
 			'spam' => 'blah',
 			'bah' => 'blah',
 			'yea' => 'stuff',
-		);
+		];
 
-		$argLists['some mixed conflicts'] = array( $patcher, $base, $diff, $expected );
+		$argLists['some mixed conflicts'] = [ $patcher, $base, $diff, $expected ];
 
 		return $argLists;
 	}
@@ -230,132 +231,132 @@ class MapPatcherTest extends DiffTestCase {
 
 	public function getApplicableDiffProvider() {
 		// Diff, current object, expected
-		$argLists = array();
+		$argLists = [];
 
-		$diff = new Diff( array(), true );
-		$currentObject = array();
+		$diff = new Diff( [], true );
+		$currentObject = [];
 		$expected = clone $diff;
 
-		$argLists[] = array( $diff, $currentObject, $expected, 'Empty diff should remain empty on empty base' );
+		$argLists[] = [ $diff, $currentObject, $expected, 'Empty diff should remain empty on empty base' ];
 
-		$diff = new Diff( array(), true );
+		$diff = new Diff( [], true );
 
-		$currentObject = array( 'foo' => 0, 'bar' => 1 );
-
-		$expected = clone $diff;
-
-		$argLists[] = array( $diff, $currentObject, $expected, 'Empty diff should remain empty on non-empty base' );
-
-		$diff = new Diff( array(
-			'foo' => new DiffOpChange( 0, 42 ),
-			'bar' => new DiffOpChange( 1, 9001 ),
-		), true );
-
-		$currentObject = array( 'foo' => 0, 'bar' => 1 );
+		$currentObject = [ 'foo' => 0, 'bar' => 1 ];
 
 		$expected = clone $diff;
 
-		$argLists[] = array( $diff, $currentObject, $expected, 'Diff should not be altered on matching base' );
+		$argLists[] = [ $diff, $currentObject, $expected, 'Empty diff should remain empty on non-empty base' ];
 
-		$diff = new Diff( array(
+		$diff = new Diff( [
 			'foo' => new DiffOpChange( 0, 42 ),
 			'bar' => new DiffOpChange( 1, 9001 ),
-		), true );
-		$currentObject = array();
+		], true );
 
-		$expected = new Diff( array(), true );
+		$currentObject = [ 'foo' => 0, 'bar' => 1 ];
 
-		$argLists[] = array( $diff, $currentObject, $expected, 'Diff with only change ops should be empty on empty base' );
+		$expected = clone $diff;
 
-		$diff = new Diff( array(
+		$argLists[] = [ $diff, $currentObject, $expected, 'Diff should not be altered on matching base' ];
+
+		$diff = new Diff( [
 			'foo' => new DiffOpChange( 0, 42 ),
 			'bar' => new DiffOpChange( 1, 9001 ),
-		), true );
+		], true );
+		$currentObject = [];
 
-		$currentObject = array( 'foo' => 'something else', 'bar' => 1, 'baz' => 'o_O' );
+		$expected = new Diff( [], true );
 
-		$expected = new Diff( array(
+		$argLists[] = [ $diff, $currentObject, $expected, 'Diff with only change ops should be empty on empty base' ];
+
+		$diff = new Diff( [
+			'foo' => new DiffOpChange( 0, 42 ),
 			'bar' => new DiffOpChange( 1, 9001 ),
-		), true );
+		], true );
 
-		$argLists[] = array( $diff, $currentObject, $expected, 'Only change ops present in the base should be retained' );
+		$currentObject = [ 'foo' => 'something else', 'bar' => 1, 'baz' => 'o_O' ];
 
-		$diff = new Diff( array(
+		$expected = new Diff( [
+			'bar' => new DiffOpChange( 1, 9001 ),
+		], true );
+
+		$argLists[] = [ $diff, $currentObject, $expected, 'Only change ops present in the base should be retained' ];
+
+		$diff = new Diff( [
 			'bar' => new DiffOpRemove( 9001 ),
-		), true );
+		], true );
 
-		$currentObject = array();
+		$currentObject = [];
 
-		$expected = new Diff( array(), true );
+		$expected = new Diff( [], true );
 
-		$argLists[] = array( $diff, $currentObject, $expected, 'Remove ops should be removed on empty base' );
+		$argLists[] = [ $diff, $currentObject, $expected, 'Remove ops should be removed on empty base' ];
 
-		$diff = new Diff( array(
+		$diff = new Diff( [
 			'foo' => new DiffOpAdd( 42 ),
 			'bar' => new DiffOpRemove( 9001 ),
-		), true );
+		], true );
 
-		$currentObject = array( 'foo' => 'bar' );
+		$currentObject = [ 'foo' => 'bar' ];
 
-		$expected = new Diff( array(), true );
+		$expected = new Diff( [], true );
 
-		$argLists[] = array(
+		$argLists[] = [
 			$diff,
 			$currentObject,
 			$expected,
 			'Mismatching add ops and remove ops not present in base should be removed'
-		);
+		];
 
-		$diff = new Diff( array(
+		$diff = new Diff( [
 			'foo' => new DiffOpAdd( 42 ),
 			'bar' => new DiffOpRemove( 9001 ),
-		), true );
+		], true );
 
-		$currentObject = array( 'foo' => 42, 'bar' => 9001 );
+		$currentObject = [ 'foo' => 42, 'bar' => 9001 ];
 
-		$expected = new Diff( array(
+		$expected = new Diff( [
 			'bar' => new DiffOpRemove( 9001 ),
-		), true );
+		], true );
 
-		$argLists[] = array( $diff, $currentObject, $expected, 'Remove ops present in base should be retained' );
+		$argLists[] = [ $diff, $currentObject, $expected, 'Remove ops present in base should be retained' ];
 
-		$diff = new Diff( array(
+		$diff = new Diff( [
 			'foo' => new DiffOpAdd( 42 ),
 			'bar' => new DiffOpRemove( 9001 ),
-		), true );
+		], true );
 
-		$currentObject = array();
+		$currentObject = [];
 
-		$expected = new Diff( array(
+		$expected = new Diff( [
 			'foo' => new DiffOpAdd( 42 ),
-		), true );
+		], true );
 
-		$argLists[] = array(
+		$argLists[] = [
 			$diff,
 			$currentObject,
 			$expected,
 			'Add ops not present in the base should be retained (MapDiff)'
-		);
+		];
 
-		$diff = new Diff( array(
-			'foo' => new Diff( array( 'bar' => new DiffOpChange( 0, 1 ) ), true ),
-			'le-non-existing-element' => new Diff( array( 'bar' => new DiffOpChange( 0, 1 ) ), true ),
-			'spam' => new Diff( array( new DiffOpAdd( 42 ) ), false ),
+		$diff = new Diff( [
+			'foo' => new Diff( [ 'bar' => new DiffOpChange( 0, 1 ) ], true ),
+			'le-non-existing-element' => new Diff( [ 'bar' => new DiffOpChange( 0, 1 ) ], true ),
+			'spam' => new Diff( [ new DiffOpAdd( 42 ) ], false ),
 			new DiffOpAdd( 9001 ),
-		), true );
+		], true );
 
-		$currentObject = array(
-			'foo' => array( 'bar' => 0, 'baz' => 'O_o' ),
-			'spam' => array( 23, 'ohi' )
-		);
+		$currentObject = [
+			'foo' => [ 'bar' => 0, 'baz' => 'O_o' ],
+			'spam' => [ 23, 'ohi' ]
+		];
 
-		$expected = new Diff( array(
-			'foo' => new Diff( array( 'bar' => new DiffOpChange( 0, 1 ) ), true ),
-			'spam' => new Diff( array( new DiffOpAdd( 42 ) ), false ),
+		$expected = new Diff( [
+			'foo' => new Diff( [ 'bar' => new DiffOpChange( 0, 1 ) ], true ),
+			'spam' => new Diff( [ new DiffOpAdd( 42 ) ], false ),
 			new DiffOpAdd( 9001 ),
-		), true );
+		], true );
 
-		$argLists[] = array( $diff, $currentObject, $expected, 'Recursion should work properly' );
+		$argLists[] = [ $diff, $currentObject, $expected, 'Recursion should work properly' ];
 
 		return $argLists;
 	}
@@ -378,19 +379,19 @@ class MapPatcherTest extends DiffTestCase {
 	public function testSetValueComparerToAlwaysFalse() {
 		$patcher = new MapPatcher();
 
-		$patcher->setValueComparer( new CallbackComparer( function() {
+		$patcher->setValueComparer( new CallbackComparer( static function () {
 			return false;
 		} ) );
 
-		$baseMap = array(
+		$baseMap = [
 			'foo' => 42,
 			'bar' => 9001,
-		);
+		];
 
-		$patch = new Diff( array(
+		$patch = new Diff( [
 			'foo' => new DiffOpChange( 42, 1337 ),
 			'bar' => new DiffOpChange( 9001, 1337 ),
-		) );
+		] );
 
 		$patchedMap = $patcher->patch( $baseMap, $patch );
 
@@ -400,24 +401,24 @@ class MapPatcherTest extends DiffTestCase {
 	public function testSetValueComparerToAlwaysTrue() {
 		$patcher = new MapPatcher();
 
-		$patcher->setValueComparer( new CallbackComparer( function() {
+		$patcher->setValueComparer( new CallbackComparer( static function () {
 			return true;
 		} ) );
 
-		$baseMap = array(
+		$baseMap = [
 			'foo' => 42,
 			'bar' => 9001,
-		);
+		];
 
-		$patch = new Diff( array(
+		$patch = new Diff( [
 			'foo' => new DiffOpChange( 3, 1337 ),
 			'bar' => new DiffOpChange( 3, 1337 ),
-		) );
+		] );
 
-		$expectedMap = array(
+		$expectedMap = [
 			'foo' => 1337,
 			'bar' => 1337,
-		);
+		];
 
 		$patchedMap = $patcher->patch( $baseMap, $patch );
 
@@ -431,16 +432,16 @@ class MapPatcherTest extends DiffTestCase {
 
 		$diffOp->expects( $this->any() )
 			->method( 'getType' )
-			->will( $this->returnValue( 'diff' ) );
+			->willReturn( 'diff' );
 
-		$diff = new Diff( array( $diffOp ), true );
+		$diff = new Diff( [ $diffOp ], true );
 
-		$patcher->patch( array(), $diff );
+		$patcher->patch( [], $diff );
 
 		$patcher->throwErrors();
 		$this->expectException( 'Diff\Patcher\PatcherException' );
 
-		$patcher->patch( array(), $diff );
+		$patcher->patch( [], $diff );
 	}
 
 }

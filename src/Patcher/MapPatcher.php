@@ -38,7 +38,7 @@ class MapPatcher extends ThrowingPatcher {
 	 * @param bool $throwErrors
 	 * @param Patcher|null $listPatcher The patcher that will be used for lists in the value
 	 */
-	public function __construct( bool $throwErrors = false, Patcher $listPatcher = null ) {
+	public function __construct( bool $throwErrors = false, ?Patcher $listPatcher = null ) {
 		parent::__construct( $throwErrors );
 
 		$this->listPatcher = $listPatcher ?: new ListPatcher( $throwErrors );
@@ -80,17 +80,13 @@ class MapPatcher extends ThrowingPatcher {
 	private function applyOperation( array &$base, $key, DiffOp $diffOp ) {
 		if ( $diffOp instanceof DiffOpAdd ) {
 			$this->applyDiffOpAdd( $base, $key, $diffOp );
-		}
-		elseif ( $diffOp instanceof DiffOpChange ) {
+		} elseif ( $diffOp instanceof DiffOpChange ) {
 			$this->applyDiffOpChange( $base, $key, $diffOp );
-		}
-		elseif ( $diffOp instanceof DiffOpRemove ) {
+		} elseif ( $diffOp instanceof DiffOpRemove ) {
 			$this->applyDiffOpRemove( $base, $key, $diffOp );
-		}
-		elseif ( $diffOp instanceof Diff ) {
+		} elseif ( $diffOp instanceof Diff ) {
 			$this->applyDiff( $base, $key, $diffOp );
-		}
-		else {
+		} else {
 			$this->handleError( 'Unknown diff operation cannot be applied to map element' );
 		}
 	}
@@ -174,7 +170,7 @@ class MapPatcher extends ThrowingPatcher {
 	}
 
 	/**
-	 * @param array &$base
+	 * @param array $base
 	 * @param int|string $key
 	 * @param Diff $diffOp
 	 *

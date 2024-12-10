@@ -19,7 +19,7 @@ use Diff\Comparer\ValueComparer;
  */
 class StrategicArrayComparer implements ArrayComparer {
 
-	private $valueComparer;
+	private ValueComparer $valueComparer;
 
 	public function __construct( ValueComparer $valueComparer ) {
 		$this->valueComparer = $valueComparer;

@@ -10,17 +10,27 @@ namespace Diff\Tests\Fixtures;
  */
 class StubComparable {
 
+	/** @var mixed */
 	private $field;
 
+	/**
+	 * @param mixed $field
+	 */
 	public function __construct( $field ) {
 		$this->field = $field;
 	}
 
-	public function equals( $otherComparable ) {
+	/**
+	 * @param mixed $otherComparable
+	 */
+	public function equals( $otherComparable ): bool {
 		return $otherComparable instanceof StubComparable
 		&& $otherComparable->getField() === $this->field;
 	}
 
+	/**
+	 * @return mixed
+	 */
 	public function getField() {
 		return $this->field;
 	}

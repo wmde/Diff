@@ -36,18 +36,18 @@ class DiffOpChangeTest extends DiffOpTest {
 	 * @since 0.1
 	 */
 	public function constructorProvider() {
-		return array(
-			array( true, 'foo', 'bar' ),
-			array( true, array( 9001 ), array( 4, 2 ) ),
-			array( true, true, false ),
-			array( true, true, true ),
-			array( true, 42, 4.2 ),
-			array( true, 42, 42 ),
-			array( true, 'foo', array( 'foo' ) ),
-			array( true, 'foo', null ),
-			array( true, new DiffOpAdd( 'ham' ), new DiffOpAdd( 'spam' ) ),
-			array( true, null, null ),
-		);
+		return [
+			[ true, 'foo', 'bar' ],
+			[ true, [ 9001 ], [ 4, 2 ] ],
+			[ true, true, false ],
+			[ true, true, true ],
+			[ true, 42, 4.2 ],
+			[ true, 42, 42 ],
+			[ true, 'foo', [ 'foo' ] ],
+			[ true, 'foo', null ],
+			[ true, new DiffOpAdd( 'ham' ), new DiffOpAdd( 'spam' ) ],
+			[ true, null, null ],
+		];
 	}
 
 	/**
