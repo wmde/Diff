@@ -29,20 +29,20 @@ class ComparableComparerTest extends DiffTestCase {
 	}
 
 	public function equalProvider() {
-		return array(
-			array(
+		return [
+			[
 				new StubComparable( 100 ),
 				new StubComparable( 100 ),
-			),
-			array(
+			],
+			[
 				new StubComparable( 'abc' ),
 				new StubComparable( 'abc' ),
-			),
-			array(
+			],
+			[
 				new StubComparable( null ),
 				new StubComparable( null ),
-			),
-		);
+			],
+		];
 	}
 
 	/**
@@ -55,28 +55,28 @@ class ComparableComparerTest extends DiffTestCase {
 	}
 
 	public function unequalProvider() {
-		return array(
-			array(
+		return [
+			[
 				null,
 				null
-			),
-			array(
+			],
+			[
 				new StubComparable( 1 ),
 				null
-			),
-			array(
+			],
+			[
 				new StubComparable( 1 ),
 				new StubComparable( 2 ),
-			),
-			array(
+			],
+			[
 				new StubComparable( 1 ),
 				new StubComparable( '1' ),
-			),
-			array(
+			],
+			[
 				new StubComparable( null ),
 				new StubComparable( false ),
-			),
-		);
+			],
+		];
 	}
 
 }

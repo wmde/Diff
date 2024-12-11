@@ -28,20 +28,20 @@ class StrictComparerTest extends DiffTestCase {
 	}
 
 	public function equalProvider() {
-		return array(
-			array( 1, 1 ),
-			array( '', '' ),
-			array( '1', '1' ),
-			array( 'foo bar ', 'foo bar ' ),
-			array( 4.2, 4.2 ),
-			array( null, null ),
-			array( false, false ),
-			array( true, true ),
-			array( array(), array() ),
-			array( array( 1 ), array( 1 ) ),
-			array( array( 1, 2, 'a' ), array( 1, 2, 'a' ) ),
-			array( array( 'a' => 1, 'b' => 2, null ), array( 'a' => 1, 'b' => 2, null ) ),
-		);
+		return [
+			[ 1, 1 ],
+			[ '', '' ],
+			[ '1', '1' ],
+			[ 'foo bar ', 'foo bar ' ],
+			[ 4.2, 4.2 ],
+			[ null, null ],
+			[ false, false ],
+			[ true, true ],
+			[ [], [] ],
+			[ [ 1 ], [ 1 ] ],
+			[ [ 1, 2, 'a' ], [ 1, 2, 'a' ] ],
+			[ [ 'a' => 1, 'b' => 2, null ], [ 'a' => 1, 'b' => 2, null ] ],
+		];
 	}
 
 	/**
@@ -54,27 +54,27 @@ class StrictComparerTest extends DiffTestCase {
 	}
 
 	public function unequalProvider() {
-		return array(
-			array( 1, 2 ),
-			array( '', '0' ),
-			array( '', ' ' ),
-			array( '', 0 ),
-			array( '', false ),
-			array( null, false ),
-			array( null, 0 ),
-			array( '1', '01' ),
-			array( 'foo bar', 'foo bar ' ),
-			array( 4, 4.0 ),
-			array( 4.2, 4.3 ),
-			array( false, true ),
-			array( true, '1' ),
-			array( array(), array( 1 ) ),
-			array( array( 1 ), array( 2 ) ),
-			array( array( 1, 2, 'b' ), array( 1, 2, 'c' ) ),
-			array( array( 'a' => 1, 'b' => 2 ), array( 'a' => 1, 'b' => 2, null ) ),
-			array( new \stdClass(), new \stdClass() ),
-			array( (object)array( 'a' => 1, 'b' => 2, null ), (object)array( 'a' => 1, 'b' => 3, null ) ),
-		);
+		return [
+			[ 1, 2 ],
+			[ '', '0' ],
+			[ '', ' ' ],
+			[ '', 0 ],
+			[ '', false ],
+			[ null, false ],
+			[ null, 0 ],
+			[ '1', '01' ],
+			[ 'foo bar', 'foo bar ' ],
+			[ 4, 4.0 ],
+			[ 4.2, 4.3 ],
+			[ false, true ],
+			[ true, '1' ],
+			[ [], [ 1 ] ],
+			[ [ 1 ], [ 2 ] ],
+			[ [ 1, 2, 'b' ], [ 1, 2, 'c' ] ],
+			[ [ 'a' => 1, 'b' => 2 ], [ 'a' => 1, 'b' => 2, null ] ],
+			[ new \stdClass(), new \stdClass() ],
+			[ (object)[ 'a' => 1, 'b' => 2, null ], (object)[ 'a' => 1, 'b' => 3, null ] ],
+		];
 	}
 
 }

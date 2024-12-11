@@ -23,18 +23,18 @@ use Diff\DiffOpFactory;
 class DiffOpFactoryTest extends DiffTestCase {
 
 	public function diffOpProvider() {
-		$diffOps = array();
+		$diffOps = [];
 
 		$diffOps[] = new DiffOpAdd( 42 );
 		$diffOps['foo bar'] = new DiffOpAdd( '42' );
 		$diffOps[9001] = new DiffOpAdd( 4.2 );
-		$diffOps['42'] = new DiffOpAdd( array( 42, array( 9001 ) ) );
+		$diffOps['42'] = new DiffOpAdd( [ 42, [ 9001 ] ] );
 		$diffOps[] = new DiffOpRemove( 42 );
 		$diffOps[] = new DiffOpAdd( new DiffOpChange( 'spam', 'moar spam' ) );
 
 		$atomicDiffOps = $diffOps;
 
-		foreach ( array( true, false, null ) as $isAssoc ) {
+		foreach ( [ true, false, null ] as $isAssoc ) {
 			$diffOps[] = new Diff( $atomicDiffOps, $isAssoc );
 		}
 
@@ -68,7 +68,7 @@ class DiffOpFactoryTest extends DiffTestCase {
 	 * @param DiffOp $diffOp
 	 */
 	public function testNewFromArrayWithConversion( DiffOp $diffOp ) {
-		$unserializationFunction = function( $array ) {
+		$unserializationFunction = static function ( $array ) {
 			if ( is_array( $array ) && isset( $array['type'] ) && $array['type'] === 'Change' ) {
 				return new DiffOpChange( $array['teh_old'], $array['teh_new'] );
 			}
@@ -78,13 +78,13 @@ class DiffOpFactoryTest extends DiffTestCase {
 
 		$factory = new DiffOpFactory( $unserializationFunction );
 
-		$serializationFunction = function( $obj ) {
+		$serializationFunction = static function ( $obj ) {
 			if ( $obj instanceof DiffOpChange ) {
-				return array(
+				return [
 					'type' => 'Change',
 					'teh_old' => $obj->getOldValue(),
 					'teh_new' => $obj->getNewValue(),
-				);
+				];
 			}
 
 			return $obj;
@@ -101,18 +101,18 @@ class DiffOpFactoryTest extends DiffTestCase {
 	}
 
 	public function invalidArrayFromArrayProvider() {
-		return array(
-			array( array() ),
-			array( array( '~=[,,_,,]:3' ) ),
-			array( array( '~=[,,_,,]:3' => '~=[,,_,,]:3' ) ),
-			array( array( 'type' => '~=[,,_,,]:3' ) ),
-			array( array( 'type' => 'add', 'oldvalue' => 'foo' ) ),
-			array( array( 'type' => 'remove', 'newvalue' => 'foo' ) ),
-			array( array( 'type' => 'change', 'newvalue' => 'foo' ) ),
-			array( array( 'diff' => 'remove', 'newvalue' => 'foo' ) ),
-			array( array( 'diff' => 'remove', 'operations' => array() ) ),
-			array( array( 'diff' => 'remove', 'isassoc' => true ) ),
-		);
+		return [
+			[ [] ],
+			[ [ '~=[,,_,,]:3' ] ],
+			[ [ '~=[,,_,,]:3' => '~=[,,_,,]:3' ] ],
+			[ [ 'type' => '~=[,,_,,]:3' ] ],
+			[ [ 'type' => 'add', 'oldvalue' => 'foo' ] ],
+			[ [ 'type' => 'remove', 'newvalue' => 'foo' ] ],
+			[ [ 'type' => 'change', 'newvalue' => 'foo' ] ],
+			[ [ 'diff' => 'remove', 'newvalue' => 'foo' ] ],
+			[ [ 'diff' => 'remove', 'operations' => [] ] ],
+			[ [ 'diff' => 'remove', 'isassoc' => true ] ],
+		];
 	}
 
 	/**

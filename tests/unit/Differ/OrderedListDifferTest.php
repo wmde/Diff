@@ -28,33 +28,33 @@ class OrderedListDifferTest extends DiffTestCase {
 	/**
 	 * Returns those that both work for native and strict mode.
 	 */
-	private function getCommonArgLists() {
-		$argLists = array();
+	private function getCommonArgLists(): array {
+		$argLists = [];
 
-		$old = array();
-		$new = array();
-		$expected = array();
+		$old = [];
+		$new = [];
+		$expected = [];
 
-		$argLists[] = array( $old, $new, $expected,
-			'There should be no difference between empty arrays' );
+		$argLists[] = [ $old, $new, $expected,
+			'There should be no difference between empty arrays' ];
 
-		$old = array( 42 );
-		$new = array( 42 );
-		$expected = array();
+		$old = [ 42 ];
+		$new = [ 42 ];
+		$expected = [];
 
-		$argLists[] = array( $old, $new, $expected,
-			'There should be no difference between arrays with the same element' );
+		$argLists[] = [ $old, $new, $expected,
+			'There should be no difference between arrays with the same element' ];
 
-		$old = array( 42, 'ohi', 4.2, false );
-		$new = array( 42, 'ohi', 4.2, false );
-		$expected = array();
+		$old = [ 42, 'ohi', 4.2, false ];
+		$new = [ 42, 'ohi', 4.2, false ];
+		$expected = [];
 
-		$argLists[] = array( $old, $new, $expected,
-			'There should be no difference between arrays with the same elements' );
+		$argLists[] = [ $old, $new, $expected,
+			'There should be no difference between arrays with the same elements' ];
 
-		$old = array( 42, 'ohi', 4.2, false );
-		$new = array( false, 4.2, 'ohi', 42 );
-		$expected = array(
+		$old = [ 42, 'ohi', 4.2, false ];
+		$new = [ false, 4.2, 'ohi', 42 ];
+		$expected = [
 			new DiffOpAdd( false ),
 			new DiffOpAdd( 4.2 ),
 			new DiffOpAdd( 'ohi' ),
@@ -63,93 +63,94 @@ class OrderedListDifferTest extends DiffTestCase {
 			new DiffOpRemove( 'ohi' ),
 			new DiffOpRemove( 4.2 ),
 			new DiffOpRemove( false )
-		);
+		];
 
-		$argLists[] = array( $old, $new, $expected,
-			'Changing the order of all four elements should result in four add operations and four remove operations' );
+		$argLists[] = [ $old, $new, $expected,
+			'Changing the order of all four elements should result in four add operations and four remove operations' ];
 
-		$old = array( 42, 'ohi', 4.2, false );
-		$new = array( 4.2, 'ohi', 42, false );
-		$expected = array(
+		$old = [ 42, 'ohi', 4.2, false ];
+		$new = [ 4.2, 'ohi', 42, false ];
+		$expected = [
 			new DiffOpAdd( 4.2 ),
 			new DiffOpAdd( 42 ),
 			new DiffOpRemove( 42 ),
 			new DiffOpRemove( 4.2 ),
-		);
+		];
 
-		$argLists[] = array( $old, $new, $expected,
-			'Changing the order of two of four elements should result in two add operations and two remove operations' );
+		$argLists[] = [ $old, $new, $expected,
+			'Changing the order of two of four elements should result in ' .
+			'two add operations and two remove operations' ];
 
-		$old = array();
-		$new = array( 42 );
-		$expected = array( new DiffOpAdd( 42 ) );
+		$old = [];
+		$new = [ 42 ];
+		$expected = [ new DiffOpAdd( 42 ) ];
 
-		$argLists[] = array( $old, $new, $expected,
-			'An array with a single element should be an add operation different from an empty array' );
+		$argLists[] = [ $old, $new, $expected,
+			'An array with a single element should be an add operation different from an empty array' ];
 
-		$old = array( 42 );
-		$new = array();
-		$expected = array( new DiffOpRemove( 42 ) );
+		$old = [ 42 ];
+		$new = [];
+		$expected = [ new DiffOpRemove( 42 ) ];
 
-		$argLists[] = array( $old, $new, $expected,
-			'An empty array should be a remove operation different from an array with one element' );
+		$argLists[] = [ $old, $new, $expected,
+			'An empty array should be a remove operation different from an array with one element' ];
 
-		$old = array( 1 );
-		$new = array( 2 );
-		$expected = array( new DiffOpRemove( 1 ), new DiffOpAdd( 2 ) );
+		$old = [ 1 ];
+		$new = [ 2 ];
+		$expected = [ new DiffOpRemove( 1 ), new DiffOpAdd( 2 ) ];
 
-		$argLists[] = array( $old, $new, $expected,
-			'Two arrays with a single different element should differ by an add and a remove op' );
+		$argLists[] = [ $old, $new, $expected,
+			'Two arrays with a single different element should differ by an add and a remove op' ];
 
-		$old = array( 9001, 42, 1, 0 );
-		$new = array( 9001, 42, 2, 0 );
-		$expected = array( new DiffOpRemove( 1 ), new DiffOpAdd( 2 ) );
+		$old = [ 9001, 42, 1, 0 ];
+		$new = [ 9001, 42, 2, 0 ];
+		$expected = [ new DiffOpRemove( 1 ), new DiffOpAdd( 2 ) ];
 
-		$argLists[] = array( $old, $new, $expected,
+		$argLists[] = [ $old, $new, $expected,
 			'Two arrays with a single different element should differ by an add and a remove op
-			 when the order of the identical elements stays the same' );
+			 when the order of the identical elements stays the same' ];
 
-		$old = array( 'a', 'b', 'c' );
-		$new = array( 'c', 'b', 'a', 'd' );
-		$expected = array(
+		$old = [ 'a', 'b', 'c' ];
+		$new = [ 'c', 'b', 'a', 'd' ];
+		$expected = [
 			new DiffOpRemove( 'a' ),
 			new DiffOpRemove( 'c' ),
 			new DiffOpAdd( 'c' ),
 			new DiffOpAdd( 'a' ),
 			new DiffOpAdd( 'd' )
-		);
+		];
 
-		$argLists[] = array( $old, $new, $expected,
+		$argLists[] = [ $old, $new, $expected,
 			'Changing the position of two elements and adding one new element should result
-			in two remove ops and three add ops' );
+			in two remove ops and three add ops' ];
 
-		$old = array( 'a', 'b', 'c', 'd' );
-		$new = array( 'b', 'a', 'c' );
-		$expected = array(
+		$old = [ 'a', 'b', 'c', 'd' ];
+		$new = [ 'b', 'a', 'c' ];
+		$expected = [
 			new DiffOpRemove( 'a' ),
 			new DiffOpRemove( 'b' ),
 			new DiffOpRemove( 'd' ),
 			new DiffOpAdd( 'b' ),
 			new DiffOpAdd( 'a' )
-		);
+		];
 
-		$argLists[] = array( $old, $new, $expected,
+		$argLists[] = [ $old, $new, $expected,
 			'Changing the position of two elements and removing the last element should result
-			in three remove ops and two add ops' );
+			in three remove ops and two add ops' ];
 
-		$old = array( 'a', 'b', 'c' );
-		$new = array( 'b', 'c' );
-		$expected = array(
+		$old = [ 'a', 'b', 'c' ];
+		$new = [ 'b', 'c' ];
+		$expected = [
 			new DiffOpRemove( 'a' ),
 			new DiffOpRemove( 'b' ),
 			new DiffOpRemove( 'c' ),
 			new DiffOpAdd( 'b' ),
 			new DiffOpAdd( 'c' )
-		);
+		];
 
-		$argLists[] = array( $old, $new, $expected,
+		$argLists[] = [ $old, $new, $expected,
 			'Removing the first element results in remove ops for all elements and add ops for the remaining elements,
-			 because the position of all remaining elements has changed' );
+			 because the position of all remaining elements has changed' ];
 
 		return $argLists;
 	}
@@ -157,40 +158,40 @@ class OrderedListDifferTest extends DiffTestCase {
 	public function toDiffProvider() {
 		$argLists = $this->getCommonArgLists();
 
-		$old = array( 42, 42 );
-		$new = array( 42 );
-		$expected = array( new DiffOpRemove( 42 ) );
+		$old = [ 42, 42 ];
+		$new = [ 42 ];
+		$expected = [ new DiffOpRemove( 42 ) ];
 
-		$argLists[] = array( $old, $new, $expected,
-			'[42, 42] to [42] should [rem(42)]' );
+		$argLists[] = [ $old, $new, $expected,
+			'[42, 42] to [42] should [rem(42)]' ];
 
-		$old = array( 42 );
-		$new = array( 42, 42 );
-		$expected = array( new DiffOpAdd( 42 ) );
+		$old = [ 42 ];
+		$new = [ 42, 42 ];
+		$expected = [ new DiffOpAdd( 42 ) ];
 
-		$argLists[] = array( $old, $new, $expected,
-			'[42] to [42, 42] should [add(42)]' );
+		$argLists[] = [ $old, $new, $expected,
+			'[42] to [42, 42] should [add(42)]' ];
 
-		$old = array( '42' );
-		$new = array( 42 );
-		$expected = array( new DiffOpRemove( '42' ), new DiffOpAdd( 42 ) );
+		$old = [ '42' ];
+		$new = [ 42 ];
+		$expected = [ new DiffOpRemove( '42' ), new DiffOpAdd( 42 ) ];
 
-		$argLists[] = array( $old, $new, $expected,
-			'["42"] to [42] should [rem("42"), add(42)]' );
+		$argLists[] = [ $old, $new, $expected,
+			'["42"] to [42] should [rem("42"), add(42)]' ];
 
-		$old = array( array( 1 ) );
-		$new = array( array( 2 ) );
-		$expected = array( new DiffOpRemove( array( 1 ) ), new DiffOpAdd( array( 2 ) ) );
+		$old = [ [ 1 ] ];
+		$new = [ [ 2 ] ];
+		$expected = [ new DiffOpRemove( [ 1 ] ), new DiffOpAdd( [ 2 ] ) ];
 
-		$argLists[] = array( $old, $new, $expected,
-			'[[1]] to [[2]] should [rem([1]), add([2])]' );
+		$argLists[] = [ $old, $new, $expected,
+			'[[1]] to [[2]] should [rem([1]), add([2])]' ];
 
-		$old = array( array( 2 ) );
-		$new = array( array( 2 ) );
-		$expected = array();
+		$old = [ [ 2 ] ];
+		$new = [ [ 2 ] ];
+		$expected = [];
 
-		$argLists[] = array( $old, $new, $expected,
-			'[[2]] to [[2]] should result in an empty diff' );
+		$argLists[] = [ $old, $new, $expected,
+			'[[2]] to [[2]] should result in an empty diff' ];
 
 		// test "soft" object comparison
 		$obj1 = new \stdClass();
@@ -201,19 +202,19 @@ class OrderedListDifferTest extends DiffTestCase {
 		$obj2->test = 'Test';
 		$objX->xest = 'Test';
 
-		$old = array( $obj1 );
-		$new = array( $obj2 );
-		$expected = array( );
+		$old = [ $obj1 ];
+		$new = [ $obj2 ];
+		$expected = [];
 
-		$argLists[] = array( $old, $new, $expected,
-			'Two arrays containing equivalent objects should result in an empty diff' );
+		$argLists[] = [ $old, $new, $expected,
+			'Two arrays containing equivalent objects should result in an empty diff' ];
 
-		$old = array( $obj1 );
-		$new = array( $objX );
-		$expected = array( new DiffOpRemove( $obj1 ), new DiffOpAdd( $objX )  );
+		$old = [ $obj1 ];
+		$new = [ $objX ];
+		$expected = [ new DiffOpRemove( $obj1 ), new DiffOpAdd( $objX ) ];
 
-		$argLists[] = array( $old, $new, $expected,
-			'Two arrays containing different objects of the same type should result in an add and a remove op.' );
+		$argLists[] = [ $old, $new, $expected,
+			'Two arrays containing different objects of the same type should result in an add and a remove op.' ];
 
 		return $argLists;
 	}
@@ -222,7 +223,7 @@ class OrderedListDifferTest extends DiffTestCase {
 	 * @dataProvider toDiffProvider
 	 */
 	public function testDoDiff( $old, $new, $expected, $message = '' ) {
-		$callback = function( $foo, $bar ) {
+		$callback = static function ( $foo, $bar ) {
 			return is_object( $foo ) ? $foo == $bar : $foo === $bar;
 		};
 
@@ -242,19 +243,19 @@ class OrderedListDifferTest extends DiffTestCase {
 	}
 
 	public function testCallbackComparisonReturningFalse() {
-		$differ = new OrderedListDiffer( new CallbackComparer( function() {
+		$differ = new OrderedListDiffer( new CallbackComparer( static function () {
 			return false;
 		} ) );
 
-		$actual = $differ->doDiff( array( 1, '2' ), array( 1, '2', 'foo' ) );
+		$actual = $differ->doDiff( [ 1, '2' ], [ 1, '2', 'foo' ] );
 
-		$expected = array(
+		$expected = [
 			new DiffOpAdd( 1 ),
 			new DiffOpAdd( '2' ),
 			new DiffOpAdd( 'foo' ),
 			new DiffOpRemove( 1 ),
 			new DiffOpRemove( '2' ),
-		);
+		];
 
 		$this->assertArrayEquals(
 			$expected, $actual, false, false,
@@ -263,13 +264,13 @@ class OrderedListDifferTest extends DiffTestCase {
 	}
 
 	public function testCallbackComparisonReturningTrue() {
-		$differ = new OrderedListDiffer( new CallbackComparer( function() {
+		$differ = new OrderedListDiffer( new CallbackComparer( static function () {
 			return true;
 		} ) );
 
-		$actual = $differ->doDiff( array( 1, '2', 'baz' ), array( 1, 'foo', '2' ) );
+		$actual = $differ->doDiff( [ 1, '2', 'baz' ], [ 1, 'foo', '2' ] );
 
-		$expected = array();
+		$expected = [];
 
 		$this->assertArrayEquals(
 			$expected, $actual, false, false,
@@ -278,13 +279,13 @@ class OrderedListDifferTest extends DiffTestCase {
 	}
 
 	public function testCallbackComparisonReturningNyanCat() {
-		$differ = new OrderedListDiffer( new CallbackComparer( function() {
+		$differ = new OrderedListDiffer( new CallbackComparer( static function () {
 			return '~=[,,_,,]:3';
 		} ) );
 
 		$this->expectException( 'RuntimeException' );
 
-		$differ->doDiff( array( 1, '2', 'baz' ), array( 1, 'foo', '2' ) );
+		$differ->doDiff( [ 1, '2', 'baz' ], [ 1, 'foo', '2' ] );
 	}
 
 }

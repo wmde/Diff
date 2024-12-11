@@ -12,7 +12,7 @@ use Diff\Comparer\ValueComparer;
  */
 class StubValueComparer implements ValueComparer {
 
-	private $returnValue;
+	private bool $returnValue;
 
 	public function __construct( bool $returnValue ) {
 		$this->returnValue = $returnValue;

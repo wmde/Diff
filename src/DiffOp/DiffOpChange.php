@@ -15,7 +15,9 @@ namespace Diff\DiffOp;
  */
 class DiffOpChange extends AtomicDiffOp {
 
+	/** @var mixed */
 	private $newValue;
+	/** @var mixed */
 	private $oldValue;
 
 	/**
@@ -88,7 +90,7 @@ class DiffOpChange extends AtomicDiffOp {
 	 */
 	#[\ReturnTypeWillChange]
 	public function unserialize( $serialization ) {
-		$this->__unserialize( unserialize ($serialization) );
+		$this->__unserialize( unserialize( $serialization ) );
 	}
 
 	/**
@@ -110,7 +112,7 @@ class DiffOpChange extends AtomicDiffOp {
 	 *
 	 * @return array
 	 */
-	public function toArray( callable $valueConverter = null ): array {
+	public function toArray( ?callable $valueConverter = null ): array {
 		return [
 			'type' => $this->getType(),
 			'newvalue' => $this->objectToArray( $this->newValue, $valueConverter ),

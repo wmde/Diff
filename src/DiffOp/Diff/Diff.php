@@ -65,7 +65,9 @@ class Diff extends ArrayObject implements DiffOp {
 
 		foreach ( $operations as $offset => $operation ) {
 			if ( !( $operation instanceof DiffOp ) ) {
-				throw new InvalidArgumentException( 'All elements fed to the Diff constructor should be of type DiffOp' );
+				throw new InvalidArgumentException(
+					'All elements fed to the Diff constructor should be of type DiffOp'
+				);
 			}
 
 			$this->offsetSet( $offset, $operation );
@@ -125,14 +127,17 @@ class Diff extends ArrayObject implements DiffOp {
 	 */
 	private function preSetElement( $index, DiffOp $value ): bool {
 		if ( $this->isAssociative === false && ( $value->getType() !== 'add' && $value->getType() !== 'remove' ) ) {
-			throw new InvalidArgumentException( 'Diff operation with invalid type "' . $value->getType() . '" provided.' );
+			throw new InvalidArgumentException(
+				'Diff operation with invalid type "' . $value->getType() . '" provided.'
+			);
 		}
 
 		if ( array_key_exists( $value->getType(), $this->typePointers ) ) {
 			$this->typePointers[$value->getType()][] = $index;
-		}
-		else {
-			throw new InvalidArgumentException( 'Diff operation with invalid type "' . $value->getType() . '" provided.' );
+		} else {
+			throw new InvalidArgumentException(
+				'Diff operation with invalid type "' . $value->getType() . '" provided.'
+			);
 		}
 
 		return true;
@@ -147,7 +152,7 @@ class Diff extends ArrayObject implements DiffOp {
 	 */
 	#[\ReturnTypeWillChange]
 	public function unserialize( $serialization ) {
-		$this->__unserialize( unserialize( $serialization) );
+		$this->__unserialize( unserialize( $serialization ) );
 	}
 
 	/**
@@ -205,7 +210,7 @@ class Diff extends ArrayObject implements DiffOp {
 	 */
 	public function getAddedValues(): array {
 		return array_map(
-			function( DiffOpAdd $addition ) {
+			static function ( DiffOpAdd $addition ) {
 				return $addition->getNewValue();
 			},
 			$this->getTypeOperations( 'add' )
@@ -219,7 +224,7 @@ class Diff extends ArrayObject implements DiffOp {
 	 */
 	public function getRemovedValues(): array {
 		return array_map(
-			function( DiffOpRemove $addition ) {
+			static function ( DiffOpRemove $addition ) {
 				return $addition->getOldValue();
 			},
 			$this->getTypeOperations( 'remove' )
@@ -335,7 +340,7 @@ class Diff extends ArrayObject implements DiffOp {
 	 *
 	 * @return array
 	 */
-	public function toArray( callable $valueConverter = null ): array {
+	public function toArray( ?callable $valueConverter = null ): array {
 		$operations = [];
 
 		foreach ( $this->getOperations() as $key => $diffOp ) {

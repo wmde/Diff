@@ -15,6 +15,7 @@ namespace Diff\DiffOp;
  */
 class DiffOpAdd extends AtomicDiffOp {
 
+	/** @var mixed */
 	private $newValue;
 
 	/**
@@ -98,7 +99,7 @@ class DiffOpAdd extends AtomicDiffOp {
 	 *
 	 * @return array
 	 */
-	public function toArray( callable $valueConverter = null ): array {
+	public function toArray( ?callable $valueConverter = null ): array {
 		return [
 			'type' => $this->getType(),
 			'newvalue' => $this->objectToArray( $this->newValue, $valueConverter ),

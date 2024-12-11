@@ -37,22 +37,22 @@ class DiffAsOpTest extends DiffOpTest {
 	 * @since 0.5
 	 */
 	public function constructorProvider() {
-		$argLists = array(
-			array( true, array() ),
-			array( true, array( new DiffOpAdd( 42 ) ) ),
-			array( true, array( new DiffOpRemove( new DiffOpRemove( 'spam' ) ) ) ),
-			array( true, array( new Diff( array( new DiffOpRemove( new DiffOpRemove( 'spam' ) ) ) ) ) ),
-			array( true, array( new DiffOpAdd( 42 ), new DiffOpAdd( 42 ) ) ),
-			array( true, array( 'a' => new DiffOpAdd( 42 ), 'b' => new DiffOpAdd( 42 ) ) ),
-			array( true, array( new DiffOpAdd( 42 ), 'foo bar baz' => new DiffOpAdd( 42 ) ) ),
-			array( true, array( 42 => new DiffOpRemove( 42 ), '9001' => new DiffOpAdd( 42 ) ) ),
-			array( true, array( 42 => new DiffOpRemove( new \stdClass() ), '9001' => new DiffOpAdd( new \stdClass() ) ) ),
-		);
+		$argLists = [
+			[ true, [] ],
+			[ true, [ new DiffOpAdd( 42 ) ] ],
+			[ true, [ new DiffOpRemove( new DiffOpRemove( 'spam' ) ) ] ],
+			[ true, [ new Diff( [ new DiffOpRemove( new DiffOpRemove( 'spam' ) ) ] ) ] ],
+			[ true, [ new DiffOpAdd( 42 ), new DiffOpAdd( 42 ) ] ],
+			[ true, [ 'a' => new DiffOpAdd( 42 ), 'b' => new DiffOpAdd( 42 ) ] ],
+			[ true, [ new DiffOpAdd( 42 ), 'foo bar baz' => new DiffOpAdd( 42 ) ] ],
+			[ true, [ 42 => new DiffOpRemove( 42 ), '9001' => new DiffOpAdd( 42 ) ] ],
+			[ true, [ 42 => new DiffOpRemove( new \stdClass() ), '9001' => new DiffOpAdd( new \stdClass() ) ] ],
+		];
 
 		$allArgLists = $argLists;
 
 		foreach ( $argLists as $argList ) {
-			foreach ( array( true, false, null ) as $isAssoc ) {
+			foreach ( [ true, false, null ] as $isAssoc ) {
 				$argList[] = $isAssoc;
 				$allArgLists[] = $argList;
 			}

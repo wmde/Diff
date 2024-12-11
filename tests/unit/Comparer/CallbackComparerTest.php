@@ -19,7 +19,7 @@ use Diff\Tests\DiffTestCase;
 class CallbackComparerTest extends DiffTestCase {
 
 	public function testWhenCallbackReturnsTrue_valuesAreEqual() {
-		$comparer = new CallbackComparer( function() {
+		$comparer = new CallbackComparer( static function () {
 			return true;
 		} );
 
@@ -27,7 +27,7 @@ class CallbackComparerTest extends DiffTestCase {
 	}
 
 	public function testWhenCallbackReturnsFalse_valuesAreNotEqual() {
-		$comparer = new CallbackComparer( function() {
+		$comparer = new CallbackComparer( static function () {
 			return false;
 		} );
 
@@ -35,7 +35,7 @@ class CallbackComparerTest extends DiffTestCase {
 	}
 
 	public function testWhenCallbackReturnsNonBoolean_exceptionIsThrown() {
-		$comparer = new CallbackComparer( function() {
+		$comparer = new CallbackComparer( static function () {
 			return null;
 		} );
 
@@ -47,7 +47,7 @@ class CallbackComparerTest extends DiffTestCase {
 		$firstArgument = null;
 		$secondArgument = null;
 
-		$comparer = new CallbackComparer( function( $a, $b ) use ( &$firstArgument, &$secondArgument ) {
+		$comparer = new CallbackComparer( static function ( $a, $b ) use ( &$firstArgument, &$secondArgument ) {
 			$firstArgument = $a;
 			$secondArgument = $b;
 			return true;
