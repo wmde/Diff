@@ -24,7 +24,7 @@ jobs:
           path: vendor
           key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
       - name: Generate PHP tests coverage
-        run:  vendor/bin/phpunit --coverage-clover coverage.clover
+        run: vendor/bin/phpunit --coverage-clover coverage.clover
       - name: Upload Scrutinizer coverage
         uses: sudo-bot/action-scrutinizer@latest
         with:
