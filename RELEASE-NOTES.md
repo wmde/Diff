@@ -3,6 +3,12 @@ These are the release notes for the [Diff library](README.md).
 Latest release:
 [![Latest Stable Version](https://poser.pugx.org/diff/diff/version.png)](https://packagist.org/packages/diff/diff)
 
+## Version 3.4.0 (2024-12-12)
+
+* Drop support for PHP 7.2, 7.3
+* Upgrade codesniffer rules to current `mediawiki/mediawiki-codesniffer` version (45.0.0)
+* Make nullable type parameter declarations explicit for compatibility with PHP 8.4
+
 ## Version 3.3.1 (2022-10-06)
 
 * Made our __unserialize declarations match PHP 7's, to avoid PHP warnings
