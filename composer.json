@@ -27,7 +27,7 @@
 		"php": ">=7.4"
 	},
 	"require-dev": {
-		"phpunit/phpunit": "~8.5.0",
+		"phpunit/phpunit": "~9.6.0",
 		"ockcyp/covers-validator": "~1.0",
 		"mediawiki/mediawiki-codesniffer": "^45"
 	},
